@@ -10,8 +10,9 @@ def main():
     layout_principal = [[sg.Text('Criptografias: Tela principal')],
                         [sg.Button('1- Criar mensagem criptografada.', key='1')],
                         [sg.Button('2- Traduzir mensagem criptografada.', key='2')],
-                        [sg.Button('3- Documentação.', key='3')],
-                        [sg.Button('4- Finalizar programa', key='4')]]
+                        [sg.Button('3- Documentação.', key='3')]
+                        [sg.Button('4- Testes automatizados')],
+                        [sg.Button('5- Finalizar programa', key='5')]]
     
     # Criar a interface principal do programa, utilizando o layout a cima.
     tela_principal = sg.Window('Criptografias: Tela principal',layout_principal)

@@ -26,3 +26,5 @@
   - [ ] Procurar próxima cifra para implementar.
   ***
   Ler a wiki para mais informações (disponível no repositório do GitHub).
+  
+  [Voltar](https://github.com/GregorioFornetti/Programa-criptografia#programa-criptografia)

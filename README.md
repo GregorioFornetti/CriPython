@@ -27,4 +27,11 @@
   ***
   Ler a wiki para mais informações (disponível no repositório do GitHub).
   
-  [Voltar](https://github.com/GregorioFornetti/Programa-criptografia#programa-criptografia)
+  [Prog. criptografia](https://github.com/GregorioFornetti/Programa-criptografia#programa-criptografia)
+  
+  [Resumo](https://github.com/GregorioFornetti/Programa-criptografia#resumo)
+  
+  [Cifras](https://github.com/GregorioFornetti/Programa-criptografia#cifras-implementadas)
+  
+  [TODO](https://github.com/GregorioFornetti/Programa-criptografia#todo)
+  

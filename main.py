@@ -1,7 +1,6 @@
 import PySimpleGUI as sg
 import cesar
 import subst_simples
-import Docs.documentacoes
 
 
 def main():
@@ -13,7 +12,7 @@ def main():
     layout_principal = [[sg.Text('Criptografias: Tela principal')],
                         [sg.Button('1- Criar mensagem criptografada.', key='1')],
                         [sg.Button('2- Traduzir mensagem criptografada.', key='2')],
-                        [sg.Button('3- Documentação.', key='3')],
+                        [sg.Button('3- Ajuda.', key='3')],
                         [sg.Button('4- Testes automatizados', key='4')],
                         [sg.Button('5- Finalizar programa', key='5')]]
     
@@ -112,27 +111,27 @@ def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do
 
 
 def menu_documentacao(tela_p, lista_cript):
-    # Interface do "Menu da documentação".
-    layout_documentacao = [[sg.Text('Menu de documentação: escolha a cifra que você deseja obter mais informações.')]]
-    for cifra in lista_cript:  # Adicionando todos os botões ao layout (todas cifras disponíveis).
-        layout_documentacao.append([sg.Button(cifra,key=cifra)])
-    layout_documentacao.append([sg.Text('OBS: visite o o repositório desse programa para uma documentação melhor: https://github.com/GregorioFornetti/Programa-criptografia/wiki')])
-    layout_documentacao.append([sg.Button('Retornar', key='retorno')])  # Adicionar o botão de retornar.
-    tela_documentacao = sg.Window('Menu Documentação', layout_documentacao)
+    # Layou do menu de ajuda.
+    layout_documentacao = [[sg.Text('        Menu de ajuda         ')],
+                          [sg.Text('Na opção 1 do menu principal, escolha uma cifra, uma mensagem')],
+                          [sg.Text('e uma chave, e caso a chave seja valida, será imprimido uma mensagem encriptada')],
+                          [sg.Text('Na opção 2 do menu principal, escolha uma cifra, uma mensagem encriptada')],
+                          [sg.Text('e uma chave, e caso a chave seja valida, será imprimido uma mensagem traduzida')],
+                          [sg.Text('Acesse o site abaixo para ter mais informações:')],
+                          [sg.Output()],
+                          [sg.Button('Retornar',key='retorno')]]
+    tela_doc = sg.Window('Menu ajuda', layout_documentacao)
+    ja_mostrou = False
     while True:
-        eventos, valores = tela_documentacao.read()
+        eventos, valores = tela_doc.read(timeout=1000)
+        if not ja_mostrou:  # Mostrar o link apenas uma vez.
+            print('https://github.com/GregorioFornetti/Programa-criptografia/wiki')
+            ja_mostrou = True
         if eventos in ('retorno', None):
-            # Usuário fechou a aba ou clicou em "retornar".
+            # Usuário clicou em retornar ou fechar.
             tela_p.UnHide()
-            tela_documentacao.close()
+            tela_doc.close()
             break
-        if eventos == lista_cript[0]:
-            # Usuário escolheu abrir a documentação da "cifra de cesar".
-            tela_documentacao.Hide()
-            Docs.documentacoes.documentacao_cifra_de_cesar(tela_documentacao)
-        if eventos == lista_cript[1]:
-            # Usuário escolheu abrir a documentção da "substituição simples".
-            tela_documentacao.Hide()
-
     
+
 main()

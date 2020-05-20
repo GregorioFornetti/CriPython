@@ -16,11 +16,9 @@
   * Cifra de césar(ainda não documentada).
   * Cifra de substituição simples(ainda não documentada).
   ### TODO
-  - [x] Interface da documentação.
+  - [x] Interface da "ajuda".
   - [ ] Interface dos testes automatizados.
   - [ ] Wiki do programa no GitHub.
-  - [x] Documentação da cifra de césar.
-  - [ ] Documentação da substituição simples.
   - [ ] Testes automatizados: cifra de césar.
   - [ ] Testes automatizados: substituição simples.
   - [ ] Procurar próxima cifra para implementar.

@@ -1,24 +1,27 @@
 import PySimpleGUI as sg
 import cesar
 import subst_simples
+import Docs.documentacoes
 
 
 def main():
+    # Lista de criptografias disponiveis:
     lista_criptografia = ['Cifra de cesar', 'Substituiçao simples']
+
     # Interface principal do programa.
     # Layout da interface principal do programa.
     layout_principal = [[sg.Text('Criptografias: Tela principal')],
                         [sg.Button('1- Criar mensagem criptografada.', key='1')],
                         [sg.Button('2- Traduzir mensagem criptografada.', key='2')],
-                        [sg.Button('3- Documentação.', key='3')]
-                        [sg.Button('4- Testes automatizados')],
+                        [sg.Button('3- Documentação.', key='3')],
+                        [sg.Button('4- Testes automatizados', key='4')],
                         [sg.Button('5- Finalizar programa', key='5')]]
     
     # Criar a interface principal do programa, utilizando o layout a cima.
     tela_principal = sg.Window('Criptografias: Tela principal',layout_principal)
     while True:  # Loop que verifica cada interação do usuário com o programa.
         eventos, valores = tela_principal.read()
-        if eventos in ('4', None):
+        if eventos in ('5', None):
             # Fechar o programa
             tela_principal.close()
             break
@@ -30,6 +33,10 @@ def main():
             # Esconder a tela principal e iniciar a interface "traduzir".
             tela_principal.Hide()
             menu_traducao(tela_principal, lista_criptografia)
+        if eventos == '3':
+            # Esconder a tela principal e iniciar a interface "documentação".
+            tela_principal.Hide()
+            menu_documentacao(tela_principal, lista_criptografia)
 
 
 def menu_encriptar(tela_p, lista_cript):
@@ -104,4 +111,28 @@ def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do
         subst_simples.traduz_subst_simples(chave, mensagem)
 
 
+def menu_documentacao(tela_p, lista_cript):
+    # Interface do "Menu da documentação".
+    layout_documentacao = [[sg.Text('Menu de documentação: escolha a cifra que você deseja obter mais informações.')]]
+    for cifra in lista_cript:  # Adicionando todos os botões ao layout (todas cifras disponíveis).
+        layout_documentacao.append([sg.Button(cifra,key=cifra)])
+    layout_documentacao.append([sg.Text('OBS: visite o o repositório desse programa para uma documentação melhor: https://github.com/GregorioFornetti/Programa-criptografia/wiki')])
+    layout_documentacao.append([sg.Button('Retornar', key='retorno')])  # Adicionar o botão de retornar.
+    tela_documentacao = sg.Window('Menu Documentação', layout_documentacao)
+    while True:
+        eventos, valores = tela_documentacao.read()
+        if eventos in ('retorno', None):
+            # Usuário fechou a aba ou clicou em "retornar".
+            tela_p.UnHide()
+            tela_documentacao.close()
+            break
+        if eventos == lista_cript[0]:
+            # Usuário escolheu abrir a documentação da "cifra de cesar".
+            tela_documentacao.Hide()
+            Docs.documentacoes.documentacao_cifra_de_cesar(tela_documentacao)
+        if eventos == lista_cript[1]:
+            # Usuário escolheu abrir a documentção da "substituição simples".
+            tela_documentacao.Hide()
+
+    
 main()

@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 import cesar
 import subst_simples
+import testes_simples
 
 
 def main():
@@ -122,6 +123,8 @@ def menu_documentacao(tela_p):
                           [sg.Text('e uma chave, e caso a chave seja valida, será imprimido uma mensagem encriptada')],
                           [sg.Text('Na opção 2 do menu principal, escolha uma cifra, uma mensagem encriptada')],
                           [sg.Text('e uma chave, e caso a chave seja valida, será imprimido uma mensagem traduzida')],
+                          [sg.Text('Na opção 4, é possível ver alguns testes, que podem ajudar no entendimento')],
+                          [sg.Text('das cifras disponiveis e suas funcionalidades.')],
                           [sg.Text('Acesse o site abaixo para ter mais informações:')],
                           [sg.Output()],
                           [sg.Button('Retornar',key='retorno')]]
@@ -142,7 +145,7 @@ def menu_documentacao(tela_p):
 def menu_testes(tela_p):
     layout_testes = [[sg.Text('Testes automatizados para verificar se o programa está funcionando corretamente.')],
                     [sg.Output(size=(120,40))],
-                    [sg.Button('Retornar',key='retorno')]]
+                    [sg.Button('Retornar',key='retorno'), sg.Button('Testar',key='testar')]]
 
     tela_testes = sg.Window('Menu testes automatizados', layout_testes)
     while True:
@@ -152,5 +155,8 @@ def menu_testes(tela_p):
             tela_p.UnHide()
             tela_testes.close()
             break
+        if eventos in ('testar'):
+            # O usuário clicou em "testar".
+            testes_simples.testar()
 
 main()

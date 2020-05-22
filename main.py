@@ -35,7 +35,12 @@ def main():
         if eventos == '3':
             # Esconder a tela principal e iniciar a interface "documentação".
             tela_principal.Hide()
-            menu_documentacao(tela_principal, lista_criptografia)
+            menu_documentacao(tela_principal)
+        if eventos == '4':
+            # Esconder a tela principal e iniciar a interface "testes automatizados".
+            tela_principal.Hide()
+            menu_testes(tela_principal)
+        
 
 
 def menu_encriptar(tela_p, lista_cript):
@@ -110,7 +115,7 @@ def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do
         subst_simples.traduz_subst_simples(chave, mensagem)
 
 
-def menu_documentacao(tela_p, lista_cript):
+def menu_documentacao(tela_p):
     # Layou do menu de ajuda.
     layout_documentacao = [[sg.Text('        Menu de ajuda         ')],
                           [sg.Text('Na opção 1 do menu principal, escolha uma cifra, uma mensagem')],
@@ -132,6 +137,20 @@ def menu_documentacao(tela_p, lista_cript):
             tela_p.UnHide()
             tela_doc.close()
             break
-    
+
+
+def menu_testes(tela_p):
+    layout_testes = [[sg.Text('Testes automatizados para verificar se o programa está funcionando corretamente.')],
+                    [sg.Output(size=(120,40))],
+                    [sg.Button('Retornar',key='retorno')]]
+
+    tela_testes = sg.Window('Menu testes automatizados', layout_testes)
+    while True:
+        eventos, valores = tela_testes.read()
+        if eventos in ('retorno', None):
+            # Usuário saiu do menu ou clicou em "retornar".
+            tela_p.UnHide()
+            tela_testes.close()
+            break
 
 main()

@@ -97,10 +97,11 @@ def executa_criptografia(dic_criptografia):  # Função que irá levar o input d
     chave = dic_criptografia['chave']
     if cript_escolhida == 'Cifra de cesar':
         # Usuário escolheu encriptar pela cifra de cesar.
-        cesar.cifra_de_cesar(chave, mensagem)
+        msg_encriptada = cesar.cifra_de_cesar(chave, mensagem)
     if cript_escolhida == 'Substituiçao simples':
         # Usuário escolheu encriptar pela substituiçao simples
-        subst_simples.subst_simples(chave, mensagem)
+        msg_encriptada = subst_simples.subst_simples(chave, mensagem)
+    print(msg_encriptada)
 
 
 def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do usuario para as funções que traduzem a mensagem.
@@ -110,10 +111,11 @@ def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do
     chave = dic_criptografia['chave']
     if cript_escolhida == 'Cifra de cesar':
         # Usuário escolheu traduzir a cifra de cesar.
-        cesar.traduz_cesar(chave, mensagem)
+        traducao = cesar.traduz_cesar(chave, mensagem)
     if cript_escolhida == 'Substituiçao simples':
         # Usuário escolheu traduzir a substituição simples.
-        subst_simples.traduz_subst_simples(chave, mensagem)
+        traducao = subst_simples.traduz_subst_simples(chave, mensagem)
+    print(traducao)
 
 
 def menu_documentacao(tela_p):

@@ -27,7 +27,7 @@ def subst_simples(chave, mensagem):  # Função que traduz/encripta através da 
                 mensagem_nova += chave[ascii_letra - valores.MIN_MINUSCULA].lower()  # Adicionar a nova letra encriptada ou traduzida para a mensagem final.
                 continue
             mensagem_nova += letra  # Se chegou até aqui, quer dizer que foi lido algo diferente que uma letra(ex:"!",".",","...).
-        print(mensagem_nova)
+        return mensagem_nova
     else:
         print('Chave Invalida')
 
@@ -44,9 +44,8 @@ def traduz_subst_simples(chave, mensagem):  # Função que irá adaptar a chave 
             posicao_alfabeto = ord(letra) % valores.MIN_MINUSCULA  # Tal equação irá retornar uma posição do alfabeto da letra atual (a = 0, b = 1, etc).
             lista_chave[posicao_alfabeto] = chr(letra_troca)  # Colocar a letra atual na posição correta da chave de tradução.
             letra_troca += 1  # Ir para a próxima letra da chave.
-        print(lista_chave)
         for valor in lista_chave:  # Repassar todos valores da lista para uma string.
             nova_chave += valor
-        subst_simples(nova_chave, mensagem)  # Traduzir a mensagem com a chave nova.
+        return subst_simples(nova_chave, mensagem)  # Traduzir a mensagem com a chave nova.
     else:
         print('Chave invalida')

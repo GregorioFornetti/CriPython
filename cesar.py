@@ -26,7 +26,7 @@ def cifra_de_cesar(chave, mensagem):  # Função que traduz e encripta com cifra
                 continue
             # Se chegou até aqui, quer dizer que não é letra, então simplesmente adicionar esse caracter.
             mensagem_nova += letra
-        print(mensagem_nova)
+        return mensagem_nova
     else:
         print('Chave Invalida!')
 
@@ -35,7 +35,7 @@ def traduz_cesar(chave, mensagem):
     if testa_chave_cesar(chave):
         # Tratamento da chave para a tradução.
         chave = valores.TAMANHO_ALFABETO - (int(chave) % valores.TAMANHO_ALFABETO)
-        cifra_de_cesar(str(chave), mensagem)
+        return cifra_de_cesar(str(chave), mensagem)
     else:
         print('Chave Invalida!')
             

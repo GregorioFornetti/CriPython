@@ -7,9 +7,9 @@
   
   2- Traduzir mensagem criptografada: abre outra interface que possibilita o usuário traduzir mensagens encriptadas, basta ter uma mensagem criptografada, sua cifra e sua chave.
   
-  3- Documentação: abrirá uma interface com a documentação do programa, explicando a sobre implementação do programa e o funcionamento das cifras (ainda não foi implementado essa função).
+  3- Ajuda: abrirá uma interface com algumas informações basicas do programa, indicando o site da wiki desse programa para mais informações.
   
-  4- Testes automatizados: realizará uma série de testes para verificar se o programa está funcionando corretamente (ainda não implementado).
+  4- Testes automatizados: realizará uma série de testes para verificar se o programa está funcionando corretamente.
   
   5- Finalizar programa: ao selecionar essa opção, o programa fecha.
   ## Cifras implementadas
@@ -24,14 +24,4 @@
   - [ ] Procurar próxima cifra para implementar.
   ***
   Ler a wiki para mais informações (disponível no repositório do GitHub).
-
-  ### testes.
-  
-  [Prog. criptografia](https://github.com/GregorioFornetti/Programa-criptografia#programa-criptografia)
-  
-  [Resumo](https://github.com/GregorioFornetti/Programa-criptografia#resumo)
-  
-  [Cifras](https://github.com/GregorioFornetti/Programa-criptografia#cifras-implementadas)
-  
-  [TODO](https://github.com/GregorioFornetti/Programa-criptografia#todo)
   

@@ -19,8 +19,8 @@
   - [x] Interface da "ajuda".
   - [x] Interface dos testes automatizados.
   - [ ] Wiki do programa no GitHub.
-  - [ ] Testes automatizados: cifra de césar.
-  - [ ] Testes automatizados: substituição simples.
+  - [x] Testes automatizados: cifra de césar.
+  - [x] Testes automatizados: substituição simples.
   - [ ] Procurar próxima cifra para implementar.
   ***
   Ler a wiki para mais informações (disponível no repositório do GitHub).

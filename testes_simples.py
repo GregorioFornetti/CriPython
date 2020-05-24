@@ -6,6 +6,7 @@ def testar():  # Função que chamará todos os testes de cifras disponiveis.
     print('Iniciando os testes automatizados...')
     print('Aqui serão feitos alguns testes simples...')
     todos_erros = testa_cesar()
+    todos_erros += testa_subst_simples()
 
 
 def testa_cesar():  # Função que testa a cifra de césar.
@@ -31,6 +32,34 @@ def testa_cesar():  # Função que testa a cifra de césar.
                              'Ivt kph, Ivh ahykl, Ivh uvpal!',
                              'Bom dia, Boa tarde, Boa noite!',
                              cesar.traduz_cesar('7', 'Ivt kph, Ivh ahykl, Ivh uvpal!'))
+    return erros
+
+
+def testa_subst_simples():
+    erros = 0
+    separacoes('Substituição simples')
+    print('Teste 1:')
+    erros += imprimir_testes('fhizdlmnavgewptubxjrqocsky',
+                             'Tudo bem com voce ?',
+                             'Rqzt hdw itw otid ?',
+                              subst_simples.subst_simples('fhizdlmnavgewptubxjrqocsky', 'Tudo bem com voce ?'))
+    print('Teste 2:')
+    erros += imprimir_testes('fhizdlmnavgewptubxjrqocsky (tradução)',
+                             'Rqzt hdw itw otid ?',
+                             'Tudo bem com voce ?',
+                              subst_simples.traduz_subst_simples('fhizdlmnavgewptubxjrqocsky', 'Rqzt hdw itw otid ?'))
+    print('Teste 3:')
+    erros += imprimir_testes('neruzjxpgfabcowvdqyihtslmk',
+                             'Por favor, me responda !',
+                             'Vwq jntwq, cz qzyvwoun !',
+                              subst_simples.subst_simples('neruzjxpgfabcowvdqyihtslmk', 'Por favor, me responda !'))
+    print('Teste 4:')
+    erros += imprimir_testes('neruzjxpgfabcowvdqyihtslmk (tradução)',
+                             'Vwq jntwq, cz qzyvwoun !',
+                             'Por favor, me responda !',
+                             subst_simples.traduz_subst_simples('neruzjxpgfabcowvdqyihtslmk', 'Vwq jntwq, cz qzyvwoun !'))
+
+    return erros
 
 
 def separacoes(cifra):  # Cria uma separação no output gerado.

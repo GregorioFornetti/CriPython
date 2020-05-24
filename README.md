@@ -15,7 +15,7 @@
   ## Cifras implementadas
   * Cifra de césar(ainda não documentada).
   * Cifra de substituição simples(ainda não documentada).
-  ### TODO
+  ### TODO.
   - [x] Interface da "ajuda".
   - [x] Interface dos testes automatizados.
   - [ ] Wiki do programa no GitHub.

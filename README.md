@@ -25,7 +25,7 @@
   ***
   Ler a wiki para mais informações (disponível no repositório do GitHub).
 
-  ### testes
+  ### testes.
   
   [Prog. criptografia](https://github.com/GregorioFornetti/Programa-criptografia#programa-criptografia)
   

@@ -16,6 +16,8 @@ def teste_chave_substSimples(chave):  # Verifica se a chave é valida.
 
 def subst_simples(chave, mensagem):  # Função que traduz/encripta através da "substituição simples".
     chave_valida = teste_chave_substSimples(chave)
+    if not mensagem:
+        return 'Mensagem Invalida !'
     mensagem_nova = ''
     if chave_valida:
         for letra in mensagem:
@@ -29,7 +31,7 @@ def subst_simples(chave, mensagem):  # Função que traduz/encripta através da 
             mensagem_nova += letra  # Se chegou até aqui, quer dizer que foi lido algo diferente que uma letra(ex:"!",".",","...).
         return mensagem_nova
     else:
-        print('Chave Invalida')
+        return 'Chave Invalida !'
 
 
 def traduz_subst_simples(chave, mensagem):  # Função que irá adaptar a chave fornecida para a tradução.
@@ -48,4 +50,4 @@ def traduz_subst_simples(chave, mensagem):  # Função que irá adaptar a chave 
             nova_chave += valor
         return subst_simples(nova_chave, mensagem)  # Traduzir a mensagem com a chave nova.
     else:
-        print('Chave invalida')
+        return 'Chave invalida !'

@@ -8,6 +8,8 @@ def testa_chave_cesar(chave):  # Função validadora da chave.
 
 def cifra_de_cesar(chave, mensagem):  # Função que traduz e encripta com cifra de cesar.
     chave_valida = testa_chave_cesar(chave)
+    if not mensagem:
+        return 'Mensagem invalida !'
     if chave_valida:
         mensagem_nova = ''
         chave = int(chave) % valores.TAMANHO_ALFABETO  # Diminuir o valor da chave para o número de letras existentes no alfabeto.
@@ -28,7 +30,7 @@ def cifra_de_cesar(chave, mensagem):  # Função que traduz e encripta com cifra
             mensagem_nova += letra
         return mensagem_nova
     else:
-        print('Chave Invalida!')
+        return 'Chave Invalida !'
 
 
 def traduz_cesar(chave, mensagem):
@@ -37,5 +39,5 @@ def traduz_cesar(chave, mensagem):
         chave = valores.TAMANHO_ALFABETO - (int(chave) % valores.TAMANHO_ALFABETO)
         return cifra_de_cesar(str(chave), mensagem)
     else:
-        print('Chave Invalida!')
+        return 'Chave Invalida !'
             

@@ -95,6 +95,7 @@ def executa_criptografia(dic_criptografia):  # Função que irá levar o input d
     cript_escolhida = dic_criptografia['cifra']
     mensagem = dic_criptografia['mensagem']
     chave = dic_criptografia['chave']
+    msg_encriptada = 'Por favor, selecione uma cifra!'
     if cript_escolhida == 'Cifra de cesar':
         # Usuário escolheu encriptar pela cifra de cesar.
         msg_encriptada = cesar.cifra_de_cesar(chave, mensagem)
@@ -109,6 +110,7 @@ def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do
     cript_escolhida = dic_criptografia['cifra']
     mensagem = dic_criptografia['mensagem']
     chave = dic_criptografia['chave']
+    traducao = 'Por favor, selecione uma cifra!'
     if cript_escolhida == 'Cifra de cesar':
         # Usuário escolheu traduzir a cifra de cesar.
         traducao = cesar.traduz_cesar(chave, mensagem)

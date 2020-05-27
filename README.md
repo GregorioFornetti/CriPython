@@ -18,10 +18,11 @@
   ### TODO.
   - [x] Interface da "ajuda".
   - [x] Interface dos testes automatizados.
-  - [ ] Wiki do programa no GitHub.
+  - [x] Wiki do programa no GitHub.
   - [x] Testes automatizados: cifra de césar.
   - [x] Testes automatizados: substituição simples.
   - [ ] Procurar próxima cifra para implementar.
+  - [ ] Fazer uma revisão na wiki
   ***
-  Ler a wiki para mais informações (disponível no repositório do GitHub).
+  [Ler a wiki](https://github.com/GregorioFornetti/Programa-criptografia/wiki) para mais informações (disponível no repositório do GitHub).
   

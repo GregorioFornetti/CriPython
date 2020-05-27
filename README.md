@@ -24,5 +24,5 @@
   - [ ] Procurar próxima cifra para implementar.
   - [ ] Fazer uma revisão na wiki
   ***
-  Ler a wiki para mais informações (disponível no repositório do GitHub).
+  [Ler a wiki](https://github.com/GregorioFornetti/Programa-criptografia/wiki) para mais informações (disponível no repositório do GitHub).
   

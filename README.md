@@ -1,7 +1,7 @@
 # Programa criptografia
 ## Conceito do projeto
 
-O programa criptografia tem o intuíto de traduzir ou encriptar mensagens, dando a liberdade para o usuário escolher uma das [criptografias disponíveis]() que deseja usar para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, outro objetivo desse projeto é explicar um pouco sobre o assunto criptografia e explicar sobre algumas cifras de criptografia.
+O programa criptografia tem o intuíto de traduzir ou encriptar mensagens, dando a liberdade para o usuário escolher uma das [criptografias disponíveis](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifras-disponiveis.) que deseja usar para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, outro objetivo desse projeto é explicar um pouco sobre o assunto criptografia e explicar sobre algumas cifras de criptografia.
 
 ## Pré-requisitos e recursos utilizados
 Para o desenvolvimento desse projeto foi utilizado a linguagem Python e algumas bibliotecas, citadas logo abaixo:

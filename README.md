@@ -9,10 +9,15 @@ Para o desenvolvimento desse projeto foi utilizado a linguagem Python e algumas 
 
 ## Passo a passo
 1- Aprendi um pouco sobre a biblioteca PySimpleGUI e suas funções/métodos através da [documentação da biblioteca](https://pysimplegui.readthedocs.io/en/latest/) e por um [vídeo](https://www.youtube.com/watch?v=Et0fYeA2XxY)
+
 2- Com os conhecimentos adquiridos através do passo anterior, comecei a criar a interface gráfica do programa.
+
 3- Depois de criar uma interface básica, comecei a estudar mais sobre cifras, nos links a seguir:
+
 * [Cifra de César](https://pt.wikipedia.org/wiki/Cifra_de_C%C3%A9sar)
+
 * [Substituição simples](https://pt.wikipedia.org/wiki/Cifra_de_substitui%C3%A7%C3%A3o)
+
 4- Com um pouco de conhecimento de programção e sobre cifras, implementei a lógica das cifras disponíveis no programa até agora.
 
 ## Instalação
@@ -30,5 +35,17 @@ Nesse mesmo repositório, há uma wiki que explica sobre a implementação das c
 
 ## Screenshots
 Abaixo terão algumas imagens da interface gráfica deste programa:
+Tela principal:
+
+![Screenshot tela principal](https://github.com/GregorioFornetti/Programa-criptografia/blob/master/Screenshots/Tela%20principal.png)
+
+Tela do menu encriptar:
+
+![Screenshot tela encriptar](https://github.com/GregorioFornetti/Programa-criptografia/blob/master/Screenshots/Encriptar.png)
+
+Tela do menu traduzir:
+
+![Screenshot tela traduzir](https://github.com/GregorioFornetti/Programa-criptografia/blob/master/Screenshots/Traduzir.png)
+
 
   

@@ -2,11 +2,12 @@ import PySimpleGUI as sg
 import cesar
 import subst_simples
 import testes_simples
+import vigenere
 
 
 def main():
     # Lista de criptografias disponiveis:
-    lista_criptografia = ['Cifra de cesar', 'Substituiçao simples']
+    lista_criptografia = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
 
     # Interface principal do programa.
     # Layout da interface principal do programa.
@@ -96,12 +97,15 @@ def executa_criptografia(dic_criptografia):  # Função que irá levar o input d
     mensagem = dic_criptografia['mensagem']
     chave = dic_criptografia['chave']
     msg_encriptada = 'Por favor, selecione uma cifra!'
-    if cript_escolhida == 'Cifra de cesar':
+    if cript_escolhida == 'Cifra de César':
         # Usuário escolheu encriptar pela cifra de cesar.
         msg_encriptada = cesar.cifra_de_cesar(chave, mensagem)
-    if cript_escolhida == 'Substituiçao simples':
-        # Usuário escolheu encriptar pela substituiçao simples
+    if cript_escolhida == 'Substituição simples':
+        # Usuário escolheu encriptar pela substituiçao simples.
         msg_encriptada = subst_simples.subst_simples(chave, mensagem)
+    if cript_escolhida == 'Cifra de Vigenère':
+        # Usuário escolheu encriptar pela cifra de vigenere.
+        msg_encriptada = vigenere.vigenere(chave, mensagem)
     print(msg_encriptada)
 
 
@@ -111,12 +115,15 @@ def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do
     mensagem = dic_criptografia['mensagem']
     chave = dic_criptografia['chave']
     traducao = 'Por favor, selecione uma cifra!'
-    if cript_escolhida == 'Cifra de cesar':
+    if cript_escolhida == 'Cifra de César':
         # Usuário escolheu traduzir a cifra de cesar.
         traducao = cesar.traduz_cesar(chave, mensagem)
-    if cript_escolhida == 'Substituiçao simples':
+    if cript_escolhida == 'Substituição simples':
         # Usuário escolheu traduzir a substituição simples.
         traducao = subst_simples.traduz_subst_simples(chave, mensagem)
+    if cript_escolhida == 'Cifra de Vigenère':
+        # Usuário escolheu traduzir a Cifra de Vigenère.
+        traducao = vigenere.traduz_vigenere(chave, mensagem)
     print(traducao)
 
 

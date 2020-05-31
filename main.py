@@ -3,6 +3,7 @@ import cesar
 import subst_simples
 import testes_simples
 import vigenere
+sg.theme('DarkGrey5')
 
 
 def main():
@@ -11,7 +12,7 @@ def main():
 
     # Interface principal do programa.
     # Layout da interface principal do programa.
-    layout_principal = [[sg.Text('Criptografias: Tela principal')],
+    layout_principal =  [[sg.Text('Criptografias: Tela principal')],
                         [sg.Button('1- Criar mensagem criptografada.', key='1')],
                         [sg.Button('2- Traduzir mensagem criptografada.', key='2')],
                         [sg.Button('3- Ajuda.', key='3')],
@@ -123,7 +124,7 @@ def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do
         traducao = subst_simples.traduz_subst_simples(chave, mensagem)
     if cript_escolhida == 'Cifra de Vigenère':
         # Usuário escolheu traduzir a Cifra de Vigenère.
-        traducao = vigenere.traduz_vigenere(chave, mensagem)
+        traducao = vigenere.traduc_chave(chave, mensagem)
     print(traducao)
 
 

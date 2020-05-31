@@ -48,7 +48,6 @@ def traduz_subst_simples(chave, mensagem):  # Função que irá adaptar a chave 
             letra_troca += 1  # Ir para a próxima letra da chave.
         for valor in lista_chave:  # Repassar todos valores da lista para uma string.
             nova_chave += valor
-        print(nova_chave)
         return subst_simples(nova_chave, mensagem)  # Traduzir a mensagem com a chave nova.
     else:
         return 'Chave invalida !'

@@ -1,5 +1,6 @@
 import subst_simples
 import cesar
+import vigenere
 
 
 def testar():  # Função que chamará todos os testes de cifras disponiveis.
@@ -7,6 +8,11 @@ def testar():  # Função que chamará todos os testes de cifras disponiveis.
     print('Aqui serão feitos alguns testes simples...')
     todos_erros = testa_cesar()
     todos_erros += testa_subst_simples()
+    todos_erros += testa_vigenere()
+    if todos_erros == 0:
+        separacoes('Nenhum erro encontrado !')
+    else:
+        separacoes('Total de erros encontrados foi:' + str(todos_erros))
 
 
 def testa_cesar():  # Função que testa a cifra de césar.
@@ -62,11 +68,38 @@ def testa_subst_simples():
     return erros
 
 
+def testa_vigenere():
+    erros = 0
+    separacoes('Cifra de Vigenère')
+    print('Teste 1:')
+    erros += imprimir_testes('ataque',
+                             'Vamos invadir a base deles amanhã !',
+                             'Vtmem igvqxmr a vesx typel qgenaã !',
+                             vigenere.vigenere('ataque', 'Vamos invadir a base deles amanhã !'))
+    print('Teste 2:')
+    erros += imprimir_testes('ataque (tradução)',
+                             'Vtmem igvqxmr a vesx typel qgenaã !',
+                             'Vamos invadir a base deles amanhã !',
+                             vigenere.traduz_vigenere('ataque', 'Vtmem igvqxmr a vesx typel qgenaã !'))
+    print('Teste 3:')
+    erros += imprimir_testes('covid',
+                             'Cuidado para não se contaminar !',
+                             'Eidldfc xdto vãq nm ecibdowiiu !',
+                             vigenere.vigenere('covid', 'Cuidado para não se contaminar !'))
+    print('Teste 4:')
+    erros += imprimir_testes('covid (tradução)',
+                             'Eidldfc xdto vãq nm ecibdowiiu !',
+                             'Cuidado para não se contaminar !',
+                             vigenere.traduz_vigenere('covid', 'Eidldfc xdto vãq nm ecibdowiiu !'))
+    return erros
+
+
+
+
 def separacoes(cifra):  # Cria uma separação no output gerado.
-    titulo = 'Tentando: ' + cifra
     print()
     print('----' * 15)
-    print('{:^45}'.format(titulo))
+    print('{:^45}'.format(cifra))
     print('----' * 15)
     print()
 

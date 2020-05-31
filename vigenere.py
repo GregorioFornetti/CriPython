@@ -66,6 +66,24 @@ def traduz_vigenere(chave, mensagem):
     return mensagem_traduzida
 
 
+def traduc_chave(chave, mensagem):
+    chave = testa_chave_vigenere(chave)
+    if chave:
+        if len(chave) >= 100:
+            traduz_vigenere(chave, mensagem)
+        else:
+            chave_traduc = ''
+            for letra in chave:
+                letra_ASCII = ord(letra) - valores.MIN_MINUSCULA
+                if letra_ASCII == 0:
+                    chave_traduc += valores.ALFABETO_MINUSCULO[0]
+                    continue
+                letra_atual = 26 - letra_ASCII
+                chave_traduc += valores.ALFABETO_MINUSCULO[letra_atual]
+            return vigenere(chave_traduc, mensagem)
+    else:
+        return 'Chave inválida !'
+
 
 
 

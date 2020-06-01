@@ -24,12 +24,13 @@ def vigenere(chave, mensagem):  # Função que traduz/encripta a mensagem pela c
                 letra_ASCII -= valores.MIN_MINUSCULA
                 index_alfabeto = (letra_ASCII + chave_ASCII) % 26  # Juntar os valores da letra da chave e da mensagem. (OBS: não pode passar de 26, que é o mesmo que dar uma volta no alfabeto).
                 letra_cifrada = valores.ALFABETO_MINUSCULO[index_alfabeto]  # Pegar a letra com o valor alfabético calculado pelo index_alfabeto.
+                valor_atual_chave += 1  # Mover a letra da chave em uma casa.
             elif letra_ASCII >= valores.MIN_MAIUSCULA and letra_ASCII <= valores.MAX_MAIUSCULA:  # Casos de letras maiusculas.
                 letra_ASCII -= valores.MIN_MAIUSCULA
                 index_alfabeto = (letra_ASCII + chave_ASCII) % 26
                 letra_cifrada = valores.ALFABETO_MAIUSCULO[index_alfabeto]
+                valor_atual_chave += 1  # Mover a letra da chave em uma casa.
             mensagem_encriptada += letra_cifrada
-            valor_atual_chave += 1  # Mover a letra da chave em uma casa.
             if valor_atual_chave >= tamanho_chave:  # Se a chave chegou ao final, voltar para o início.
                 valor_atual_chave = 0
     else:  # Se a chave é inválida, retornar uma mensagem de erro.
@@ -57,12 +58,13 @@ def traduz_vigenere(chave, mensagem):  # Função muito parecida com a anterior,
                 letra_ASCII -= valores.MIN_MINUSCULA
                 index_alfabeto = (letra_ASCII - chave_ASCII + 26) % 26  # Algoritmo de troca para a tradução
                 letra_cifrada = valores.ALFABETO_MINUSCULO[index_alfabeto]
+                valor_atual_chave += 1
             elif letra_ASCII >= valores.MIN_MAIUSCULA and letra_ASCII <= valores.MAX_MAIUSCULA:
                 letra_ASCII -= valores.MIN_MAIUSCULA
                 index_alfabeto = (letra_ASCII - chave_ASCII + 26) % 26  # Algoritmo de troca para a tradução.
                 letra_cifrada = valores.ALFABETO_MAIUSCULO[index_alfabeto]
+                valor_atual_chave += 1
             mensagem_traduzida += letra_cifrada
-            valor_atual_chave += 1
             if valor_atual_chave >= tamanho_chave:
                 valor_atual_chave = 0
     else:

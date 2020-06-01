@@ -41,7 +41,7 @@ def testa_cesar():  # Função que testa a cifra de césar.
     return erros
 
 
-def testa_subst_simples():
+def testa_subst_simples():  # Função que testa a cifra de substituição simples.
     erros = 0
     separacoes('Substituição simples')
     print('Teste 1:')
@@ -68,7 +68,7 @@ def testa_subst_simples():
     return erros
 
 
-def testa_vigenere():
+def testa_vigenere():  # Função que testa a cifra de Vigenère.
     erros = 0
     separacoes('Cifra de Vigenère')
     print('Teste 1:')
@@ -104,7 +104,12 @@ def separacoes(cifra):  # Cria uma separação no output gerado.
     print()
 
 
-def imprimir_testes(chave, mensagem, mensagem_esperada, mensagem_recebida):  # Impressões automaticas.
+def imprimir_testes(chave, mensagem, mensagem_esperada, mensagem_recebida):  # Impressões automaticas e testes.
+    '''
+    Função que recebe como parâmetros a chave que será usada para o teste, a mensagem que será encriptada/traduzida, a mensagem esperada
+    que o programa deve retornar, e a mensagem recebida pelo próprio programa. Se a mensagem esperada for igual a mensagem recebida,
+    quer dizer que o programa passou no teste.
+    '''
     print(f'chave = {chave}')
     print(f'Mensagem = {mensagem}')
     print(f'Mensagem esperada: {mensagem_esperada}')

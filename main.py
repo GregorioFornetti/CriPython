@@ -53,8 +53,11 @@ def main():
 
 def menu_encriptar(tela_p, lista_cript):
     # Interface "criar mensagem encriptada" do programa.
+    lista_opcoes = cria_botoes()
     layout_encriptar =  [[sg.Text('Criptografia: encriptar.')],
-                        [sg.Text('Tipo de criptografia:'), sg.Combo(lista_cript, key='cifra')],
+                        [sg.Text('Tipo de criptografia:'), sg.Combo(lista_cript, key='cifra', enable_events=True)],
+                        [sg.Text('Opções:')],
+                        lista_opcoes,
                         [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
                         [sg.Text('Chave:'), sg.InputText(key='chave')],
                         [sg.Text('Mensagem encriptada:')],
@@ -66,18 +69,23 @@ def menu_encriptar(tela_p, lista_cript):
         eventos, valores = tela_encriptar.read()
         if eventos in ('2', None):
             # Fechar tela atual e voltar para a tela principal.
-            tela_encriptar.close()
+            tela_encriptar.Close()
             tela_p.UnHide()
             break
         if eventos == '1':
             # Encriptar a mensagem.
             executa_criptografia(valores)
+        atualiza_tela(tela_encriptar, valores)
+        
 
 
 def menu_traducao(tela_p, lista_cript):
     # Interface "traduzir mensagem encriptada" do programa.
+    lista_opcoes = cria_botoes()
     layout_traduzir =   [[sg.Text('Criptografia: traduzir.')],
-                        [sg.Text('Tipo de criptografia:'), sg.Combo(lista_cript, key='cifra')],
+                        [sg.Text('Tipo de criptografia:'), sg.Combo(lista_cript, key='cifra', enable_events=True)],
+                        [sg.Text('Opção:')],
+                        lista_opcoes,
                         [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
                         [sg.Text('Chave:'), sg.InputText(key='chave')],
                         [sg.Text('Mensagem traduzida:')],
@@ -95,6 +103,7 @@ def menu_traducao(tela_p, lista_cript):
         if eventos == '1':
             # Traduzir mensagem encriptada.
             traduz_criptografia(valores)
+        atualiza_tela(tela_traduzir, valores)
 
 
 def executa_criptografia(dic_criptografia):  # Função que irá levar o input do user para funções que fazem a criptografia.
@@ -195,6 +204,29 @@ def menu_forca_bruta(tela_p):
         if eventos == 'testar':
             # Efetuar teste.
             forca_bruta.forca_bruta_cesar(valores['mensagem'])
+
+
+def cria_botoes():
+    return  [sg.Radio('Cifra de César (apenas letras)     ', "Cesar", default=True, visible=False, key='Cifra de César1'),
+            sg.Radio('Cifra de César (todos caracteres)', "Cesar", visible=False, key='Cifra de César2'),
+            sg.Radio('Substituição simples', "Subst_simples", default=True, visible=False, key='Substituição simples1'),
+            sg.Radio('Cifra de Vigenère (apenas letras)    ', "Vigenere", default=True, visible=False, key='Cifra de Vigenère1'),
+            sg.Radio('Cifra de Vigenère (todos caracteres)', "Vigenere", visible=False, key='Cifra de Vigenère2')]
+
+
+def atualiza_tela(tela, valores):
+    cifra_selecionada = valores['cifra']
+    valores_visiveis = ['mensagem', 'chave', 'cifra']
+    for key in valores.keys():
+        if key in valores_visiveis:
+            continue
+        elemento_atual = tela[key]
+        if cifra_selecionada in key:
+            elemento_atual.Update(visible=True)
+        else:
+            elemento_atual.Update(visible=False)
+            
+
 
 
 main()

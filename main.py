@@ -3,6 +3,7 @@ import cesar
 import subst_simples
 import testes_simples
 import vigenere
+import forca_bruta
 sg.theme('DarkGrey5')
 
 
@@ -17,13 +18,14 @@ def main():
                         [sg.Button('2- Traduzir mensagem criptografada.', key='2')],
                         [sg.Button('3- Ajuda.', key='3')],
                         [sg.Button('4- Testes automatizados', key='4')],
-                        [sg.Button('5- Finalizar programa', key='5')]]
+                        [sg.Button('5- Força bruta: Cifra de César.', key='5')],
+                        [sg.Button('6- Finalizar programa', key='6')]]
     
     # Criar a interface principal do programa, utilizando o layout a cima.
     tela_principal = sg.Window('Criptografias: Tela principal',layout_principal)
     while True:  # Loop que verifica cada interação do usuário com o programa.
         eventos, valores = tela_principal.read()
-        if eventos in ('5', None):
+        if eventos in ('6', None):
             # Fechar o programa
             tela_principal.close()
             break
@@ -43,8 +45,11 @@ def main():
             # Esconder a tela principal e iniciar a interface "testes automatizados".
             tela_principal.Hide()
             menu_testes(tela_principal)
+        if eventos == '5':
+            # Esconder a tela principal e inicar a interface "força bruta".
+            tela_principal.Hide()
+            menu_forca_bruta(tela_principal)
         
-
 
 def menu_encriptar(tela_p, lista_cript):
     # Interface "criar mensagem encriptada" do programa.
@@ -124,7 +129,7 @@ def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do
         traducao = subst_simples.traduz_subst_simples(chave, mensagem)
     if cript_escolhida == 'Cifra de Vigenère':
         # Usuário escolheu traduzir a Cifra de Vigenère.
-        traducao = vigenere.traduc_chave(chave, mensagem)
+        traducao = vigenere.cria_chave_traducao(chave, mensagem)
     print(traducao)
 
 
@@ -170,5 +175,26 @@ def menu_testes(tela_p):
         if eventos in ('testar'):
             # O usuário clicou em "testar".
             testes_simples.testar()
+
+
+def menu_forca_bruta(tela_p):
+    layout_forca_bruta = [[sg.Text('             Força bruta: Cifra de César')],
+                          [sg.Text('Escreva uma mensagem encriptada. Clique em testar e todas as chaves')],
+                          [sg.Text('da cifra de césar serão testadas na força bruta.')],
+                          [sg.Text('Mensagem encriptada:'), sg.Input(key='mensagem')],
+                          [sg.Output(size=(100,35))],
+                          [sg.Button('Testar', key='testar'), sg.Button('Retornar', key='retorno')]]
+    tela_forca_bruta = sg.Window('Menu força bruta', layout_forca_bruta)
+    while True:
+        eventos, valores = tela_forca_bruta.read()
+        if eventos in ('retorno', None):
+            # Fechar a tela atual e abrir a tela principal.
+            tela_p.UnHide()
+            tela_forca_bruta.close()
+            break
+        if eventos == 'testar':
+            # Efetuar teste.
+            forca_bruta.forca_bruta_cesar(valores['mensagem'])
+
 
 main()

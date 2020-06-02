@@ -72,7 +72,7 @@ def traduz_vigenere(chave, mensagem):  # Função muito parecida com a anterior,
     return mensagem_traduzida
 
 
-def traduc_chave(chave, mensagem):  # Função que adapta a chave para a tradução.
+def cria_chave_traducao(chave, mensagem):  # Função que adapta a chave para a tradução.
     chave = testa_chave_vigenere(chave)
     if chave:
         if len(chave) >= 100:  # Só fazer a adaptação da chave para chaves menores de 100 letras.

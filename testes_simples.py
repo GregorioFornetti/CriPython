@@ -74,23 +74,23 @@ def testa_vigenere():  # Função que testa a cifra de Vigenère.
     print('Teste 1:')
     erros += imprimir_testes('ataque',
                              'Vamos invadir a base deles amanhã !',
-                             'Vtmem igvqxmr a vesx typel qgenaã !',
+                             'Vtmem mnoatcv a uaiy heeei uqaghã !',
                              vigenere.vigenere('ataque', 'Vamos invadir a base deles amanhã !'))
     print('Teste 2:')
     erros += imprimir_testes('ataque (tradução)',
-                             'Vtmem igvqxmr a vesx typel qgenaã !',
+                             'Vtmem mnoatcv a uaiy heeei uqaghã !',
                              'Vamos invadir a base deles amanhã !',
-                             vigenere.traduz_vigenere('ataque', 'Vtmem igvqxmr a vesx typel qgenaã !'))
+                             vigenere.traduz_vigenere('ataque', 'Vtmem mnoatcv a uaiy heeei uqaghã !'))
     print('Teste 3:')
     erros += imprimir_testes('covid',
                              'Cuidado para não se contaminar !',
-                             'Eidldfc xdto vãq nm ecibdowiiu !',
+                             'Eidldfc kiuc bãj ah ecibdowiiu !',
                              vigenere.vigenere('covid', 'Cuidado para não se contaminar !'))
     print('Teste 4:')
     erros += imprimir_testes('covid (tradução)',
-                             'Eidldfc xdto vãq nm ecibdowiiu !',
+                             'Eidldfc kiuc bãj ah ecibdowiiu !',
                              'Cuidado para não se contaminar !',
-                             vigenere.traduz_vigenere('covid', 'Eidldfc xdto vãq nm ecibdowiiu !'))
+                             vigenere.traduz_vigenere('covid', 'Eidldfc kiuc bãj ah ecibdowiiu !'))
     return erros
 
 

@@ -102,44 +102,32 @@ def menu_traducao(tela_p, lista_cript):
             break
         if eventos == '1':
             # Traduzir mensagem encriptada.
-            traduz_criptografia(valores)
+            executa_criptografia(valores, modo=True)
         atualiza_tela(tela_traduzir, valores)
 
 
-def executa_criptografia(dic_criptografia):  # Função que irá levar o input do user para funções que fazem a criptografia.
+def executa_criptografia(dic_criptografia, modo=False):  # Função que irá levar o input do user para funções que fazem a criptografia.
     # Extrair todas informações fornecidas pelo usuário.
     cript_escolhida = dic_criptografia['cifra']
     mensagem = dic_criptografia['mensagem']
     chave = dic_criptografia['chave']
-    msg_encriptada = 'Por favor, selecione uma cifra!'
+    mensagem_nova = 'Por favor, selecione uma cifra!'
     if cript_escolhida == 'Cifra de César':
-        # Usuário escolheu encriptar pela cifra de cesar.
-        msg_encriptada = cesar.cifra_de_cesar(chave, mensagem)
+        # Usuário escolheu encriptar/traduzir pela cifra de cesar.
+        if dic_criptografia['Cifra de César1']:
+            mensagem_nova = cesar.cifra_de_cesar(chave, mensagem, modo_traducao=modo)
+        else:
+            mensagem_nova = "TODO"
     if cript_escolhida == 'Substituição simples':
-        # Usuário escolheu encriptar pela substituiçao simples.
-        msg_encriptada = subst_simples.subst_simples(chave, mensagem)
+        # Usuário escolheu encriptar/traduzir pela substituiçao simples.
+        mensagem_nova = subst_simples.subst_simples(chave, mensagem, modo_traducao=modo)
     if cript_escolhida == 'Cifra de Vigenère':
-        # Usuário escolheu encriptar pela cifra de vigenere.
-        msg_encriptada = vigenere.vigenere(chave, mensagem)
-    print(msg_encriptada)
-
-
-def traduz_criptografia(dic_criptografia):  # Função que irá levar o input do usuario para as funções que traduzem a mensagem.
-    # Extrair os inputs do usuário.
-    cript_escolhida = dic_criptografia['cifra']
-    mensagem = dic_criptografia['mensagem']
-    chave = dic_criptografia['chave']
-    traducao = 'Por favor, selecione uma cifra!'
-    if cript_escolhida == 'Cifra de César':
-        # Usuário escolheu traduzir a cifra de cesar.
-        traducao = cesar.traduz_cesar(chave, mensagem)
-    if cript_escolhida == 'Substituição simples':
-        # Usuário escolheu traduzir a substituição simples.
-        traducao = subst_simples.traduz_subst_simples(chave, mensagem)
-    if cript_escolhida == 'Cifra de Vigenère':
-        # Usuário escolheu traduzir a Cifra de Vigenère.
-        traducao = vigenere.cria_chave_traducao(chave, mensagem)
-    print(traducao)
+        # Usuário escolheu encriptar/traduzir pela cifra de vigenere.
+        if dic_criptografia['Cifra de Vigenère1']:
+            mensagem_nova = vigenere.vigenere(chave, mensagem, modo_traducao=modo)
+        else:
+            mensagem_nova = "TODO"
+    print(mensagem_nova)
 
 
 def menu_documentacao(tela_p):
@@ -206,7 +194,7 @@ def menu_forca_bruta(tela_p):
             forca_bruta.forca_bruta_cesar(valores['mensagem'])
 
 
-def cria_botoes():
+def cria_botoes():  # Função que retorna os "botões" de seleção de opção de cifra.
     return  [sg.Radio('Cifra de César (apenas letras)     ', "Cesar", default=True, visible=False, key='Cifra de César1'),
             sg.Radio('Cifra de César (todos caracteres)', "Cesar", visible=False, key='Cifra de César2'),
             sg.Radio('Substituição simples', "Subst_simples", default=True, visible=False, key='Substituição simples1'),
@@ -214,19 +202,21 @@ def cria_botoes():
             sg.Radio('Cifra de Vigenère (todos caracteres)', "Vigenere", visible=False, key='Cifra de Vigenère2')]
 
 
-def atualiza_tela(tela, valores):
+def atualiza_tela(tela, valores):  # Função que atualiza a tela toda vez que o usuário escolher uma criptografia diferente.
+    '''
+    Função que atualiza a tela toda vez que o usuário escolher uma criptografia diferente. Com isso, as opções de cifra ficarão atualizadas para
+    a cifra atual selecionada.
+    '''
     cifra_selecionada = valores['cifra']
     valores_visiveis = ['mensagem', 'chave', 'cifra']
     for key in valores.keys():
-        if key in valores_visiveis:
+        if key in valores_visiveis:  # Valores que não devem ter mudanças.
             continue
         elemento_atual = tela[key]
-        if cifra_selecionada in key:
+        if cifra_selecionada in key:  # Valores que precisam aparecer (as opções da cifra selecionada).
             elemento_atual.Update(visible=True)
-        else:
+        else:  # Todas as outras opções devem voltar a ficar "Invisiveis".
             elemento_atual.Update(visible=False)
-            
-
 
 
 main()

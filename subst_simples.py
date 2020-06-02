@@ -11,15 +11,18 @@ def teste_chave_substSimples(chave):  # Verifica se a chave é valida.
             return False
         if not(ascii_letra >= valores.MIN_MINUSCULA and ascii_letra <= valores.MAX_MINUSCULA):  # E nem caracteres especiais.
             return False
-    return True
+    return chave
 
 
-def subst_simples(chave, mensagem):  # Função que traduz/encripta através da "substituição simples".
-    chave_valida = teste_chave_substSimples(chave)
+def subst_simples(chave, mensagem, modo_traducao=False):  # Função que traduz/encripta através da "substituição simples".
+    if modo_traducao:
+        chave = traduz_subst_simples(chave)
+    else:
+        chave = teste_chave_substSimples(chave)
     if not mensagem:
         return 'Mensagem Invalida !'
     mensagem_nova = ''
-    if chave_valida:
+    if chave:
         for letra in mensagem:
             ascii_letra = ord(letra)  # Pega o valor ASCII da letra atual da mensagem.
             if ascii_letra >= valores.MIN_MAIUSCULA and ascii_letra <= valores.MAX_MAIUSCULA:  # A letra atual é maiuscula.
@@ -34,7 +37,7 @@ def subst_simples(chave, mensagem):  # Função que traduz/encripta através da 
         return 'Chave Invalida !'
 
 
-def traduz_subst_simples(chave, mensagem):  # Função que irá adaptar a chave fornecida para a tradução.
+def traduz_subst_simples(chave):  # Função que irá adaptar a chave fornecida para a tradução.
     if teste_chave_substSimples(chave):
         letra_troca = valores.MIN_MINUSCULA
         chave = chave.lower()
@@ -48,6 +51,6 @@ def traduz_subst_simples(chave, mensagem):  # Função que irá adaptar a chave 
             letra_troca += 1  # Ir para a próxima letra da chave.
         for valor in lista_chave:  # Repassar todos valores da lista para uma string.
             nova_chave += valor
-        return subst_simples(nova_chave, mensagem)  # Traduzir a mensagem com a chave nova.
+        return nova_chave  # Retornar a nova chave.
     else:
-        return 'Chave invalida !'
+        return False

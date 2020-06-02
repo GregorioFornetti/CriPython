@@ -37,7 +37,7 @@ def testa_cesar():  # Função que testa a cifra de césar.
     erros += imprimir_testes('7 (tradução)',
                              'Ivt kph, Ivh ahykl, Ivh uvpal!',
                              'Bom dia, Boa tarde, Boa noite!',
-                             cesar.traduz_cesar('7', 'Ivt kph, Ivh ahykl, Ivh uvpal!'))
+                             cesar.cifra_de_cesar('7', 'Ivt kph, Ivh ahykl, Ivh uvpal!', modo_traducao=True))
     return erros
 
 
@@ -53,7 +53,7 @@ def testa_subst_simples():  # Função que testa a cifra de substituição simpl
     erros += imprimir_testes('fhizdlmnavgewptubxjrqocsky (tradução)',
                              'Rqzt hdw itw otid ?',
                              'Tudo bem com voce ?',
-                              subst_simples.traduz_subst_simples('fhizdlmnavgewptubxjrqocsky', 'Rqzt hdw itw otid ?'))
+                              subst_simples.subst_simples('fhizdlmnavgewptubxjrqocsky', 'Rqzt hdw itw otid ?', modo_traducao=True))
     print('Teste 3:')
     erros += imprimir_testes('neruzjxpgfabcowvdqyihtslmk',
                              'Por favor, me responda !',
@@ -63,7 +63,7 @@ def testa_subst_simples():  # Função que testa a cifra de substituição simpl
     erros += imprimir_testes('neruzjxpgfabcowvdqyihtslmk (tradução)',
                              'Vwq jntwq, cz qzyvwoun !',
                              'Por favor, me responda !',
-                             subst_simples.traduz_subst_simples('neruzjxpgfabcowvdqyihtslmk', 'Vwq jntwq, cz qzyvwoun !'))
+                             subst_simples.subst_simples('neruzjxpgfabcowvdqyihtslmk', 'Vwq jntwq, cz qzyvwoun !', modo_traducao=True))
 
     return erros
 
@@ -80,7 +80,7 @@ def testa_vigenere():  # Função que testa a cifra de Vigenère.
     erros += imprimir_testes('ataque (tradução)',
                              'Vtmem mnoatcv a uaiy heeei uqaghã !',
                              'Vamos invadir a base deles amanhã !',
-                             vigenere.traduz_vigenere('ataque', 'Vtmem mnoatcv a uaiy heeei uqaghã !'))
+                             vigenere.vigenere('ataque', 'Vtmem mnoatcv a uaiy heeei uqaghã !', modo_traducao=True))
     print('Teste 3:')
     erros += imprimir_testes('covid',
                              'Cuidado para não se contaminar !',
@@ -90,7 +90,7 @@ def testa_vigenere():  # Função que testa a cifra de Vigenère.
     erros += imprimir_testes('covid (tradução)',
                              'Eidldfc kiuc bãj ah ecibdowiiu !',
                              'Cuidado para não se contaminar !',
-                             vigenere.traduz_vigenere('covid', 'Eidldfc kiuc bãj ah ecibdowiiu !'))
+                             vigenere.vigenere('covid', 'Eidldfc kiuc bãj ah ecibdowiiu !', modo_traducao=True))
     return erros
 
 

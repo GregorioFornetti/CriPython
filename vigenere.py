@@ -44,18 +44,15 @@ def vigenere(chave, mensagem, modo_traducao=False):  # Função que traduz/encri
 def cria_chave_traducao(chave):  # Função que adapta a chave para a tradução.
     chave = testa_chave_vigenere(chave)
     if chave:
-        if len(chave) >= 100:  # Só fazer a adaptação da chave para chaves menores de 100 letras.
-            traduz_vigenere(chave, mensagem)
-        else:
-            chave_traduc = ''
-            for letra in chave:
-                letra_ASCII = ord(letra) - valores.MIN_MINUSCULA
-                if letra_ASCII == 0:
-                    chave_traduc += valores.ALFABETO_MINUSCULO[0]
-                    continue
-                letra_atual = 26 - letra_ASCII  # Para transformar a chave, basta subtrair 26 com o antigo valor da chave (isso fará com que a mensagem de uma "volta" e volte ao normal).
-                chave_traduc += valores.ALFABETO_MINUSCULO[letra_atual]
-            return chave_traduc
+        chave_traduc = ''
+        for letra in chave:
+            letra_ASCII = ord(letra) - valores.MIN_MINUSCULA
+            if letra_ASCII == 0:
+                chave_traduc += valores.ALFABETO_MINUSCULO[0]
+                continue
+            letra_atual = 26 - letra_ASCII  # Para transformar a chave, basta subtrair 26 com o antigo valor da chave (isso fará com que a mensagem de uma "volta" e volte ao normal).
+            chave_traduc += valores.ALFABETO_MINUSCULO[letra_atual]
+        return chave_traduc
     else:
         return 'Chave inválida !'
 

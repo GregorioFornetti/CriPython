@@ -61,10 +61,10 @@ def cesar_todos_caracteres(chave, mensagem, modo_traducao=False):
         chave = int(chave) % valores.TAMANHO_ASCII
         for letra in mensagem:
             letra_ASCII = ord(letra) + chave
-            if letra_ASCII >= 127:  # Caractere não imprimivel (del), desconsidera-lo da lista ASCII.
-                letra_ASCII += 34
-            if letra_ASCII > valores.FINAL_ASCII:
-                letra_ASCII -= (223)
+            if modo_traducao and letra_ASCII >= 127:
+                letra_ASCII -= 34
+            if letra_ASCII > valores.FINAL_ASCII - 34:
+                letra_ASCII -= (224 - 34)
             if letra_ASCII >= 127:  # Caractere não imprimivel (del), desconsidera-lo da lista ASCII.
                 letra_ASCII += 34
             nova_mensagem += chr(letra_ASCII)
@@ -72,4 +72,7 @@ def cesar_todos_caracteres(chave, mensagem, modo_traducao=False):
     else:
         return 'Chave inválida !'
 
-            
+
+for i in range(256, 501):
+    print(i)
+    print(chr(i))

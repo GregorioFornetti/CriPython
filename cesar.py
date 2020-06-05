@@ -36,14 +36,40 @@ def cifra_de_cesar(chave, mensagem, modo_traducao=False):  # Função que traduz
         return 'Chave Invalida !'
 
 
-def traduz_cesar(chave):
+def traduz_cesar(chave, todos_caracteres=False):
     if testa_chave_cesar(chave):
         # Tratamento da chave para a tradução.
-        chave = valores.TAMANHO_ALFABETO - (int(chave) % valores.TAMANHO_ALFABETO)
+        if todos_caracteres:
+            chave = valores.TAMANHO_ASCII - (int(chave) % valores.TAMANHO_ASCII)
+            print(chave)
+        else:    
+            chave = valores.TAMANHO_ALFABETO - (int(chave) % valores.TAMANHO_ALFABETO)
         return chave
     else:
         return False
 
 
+def cesar_todos_caracteres(chave, mensagem, modo_traducao=False):
+    if not mensagem:
+        return 'Mensagem inválida !'
+    if modo_traducao:
+        chave = traduz_cesar(chave, todos_caracteres=True)
+    else:
+        chave = testa_chave_cesar(chave)
+    if chave:
+        nova_mensagem = ''
+        chave = int(chave) % valores.TAMANHO_ASCII
+        for letra in mensagem:
+            letra_ASCII = ord(letra) + chave
+            if letra_ASCII >= 127:  # Caractere não imprimivel (del), desconsidera-lo da lista ASCII.
+                letra_ASCII += 34
+            if letra_ASCII > valores.FINAL_ASCII:
+                letra_ASCII -= (223)
+            if letra_ASCII >= 127:  # Caractere não imprimivel (del), desconsidera-lo da lista ASCII.
+                letra_ASCII += 34
+            nova_mensagem += chr(letra_ASCII)
+        return nova_mensagem
+    else:
+        return 'Chave inválida !'
 
             

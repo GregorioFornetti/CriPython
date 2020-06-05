@@ -59,3 +59,4 @@ def cria_chave_traducao(chave):  # Função que adapta a chave para a tradução
 
 
 
+

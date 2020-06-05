@@ -75,7 +75,8 @@ def menu_encriptar(tela_p, lista_cript):
         if eventos == '1':
             # Encriptar a mensagem.
             executa_criptografia(valores)
-        atualiza_tela(tela_encriptar, valores)
+        if valores['cifra']:
+            atualiza_tela(tela_encriptar, valores)
         
 
 
@@ -103,7 +104,8 @@ def menu_traducao(tela_p, lista_cript):
         if eventos == '1':
             # Traduzir mensagem encriptada.
             executa_criptografia(valores, modo=True)
-        atualiza_tela(tela_traduzir, valores)
+        if valores['cifra']:
+            atualiza_tela(tela_traduzir, valores)
 
 
 def executa_criptografia(dic_criptografia, modo=False):  # Função que irá levar o input do user para funções que fazem a criptografia.
@@ -117,7 +119,7 @@ def executa_criptografia(dic_criptografia, modo=False):  # Função que irá lev
         if dic_criptografia['Cifra de César1']:
             mensagem_nova = cesar.cifra_de_cesar(chave, mensagem, modo_traducao=modo)
         else:
-            mensagem_nova = "TODO"
+            mensagem_nova = cesar.cesar_todos_caracteres(chave, mensagem, modo_traducao=modo)
     if cript_escolhida == 'Substituição simples':
         # Usuário escolheu encriptar/traduzir pela substituiçao simples.
         mensagem_nova = subst_simples.subst_simples(chave, mensagem, modo_traducao=modo)

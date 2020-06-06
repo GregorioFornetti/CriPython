@@ -53,7 +53,10 @@ def cesar_todos_caracteres(chave, mensagem, modo_traducao=False):
     if not mensagem:
         return 'Mensagem inválida !'
     if modo_traducao:
-        chave = traduz_cesar(chave, todos_caracteres=True)
+        chave_antiga = chave
+        print(chave_antiga)
+        chave = traduz_cesar(chave, todos_caracteres=True) % valores.TAMANHO_ASCII
+        return traduz_cesar_todos_caracteres(chave_antiga, chave, mensagem)
     else:
         chave = testa_chave_cesar(chave)
     if chave:
@@ -61,10 +64,8 @@ def cesar_todos_caracteres(chave, mensagem, modo_traducao=False):
         chave = int(chave) % valores.TAMANHO_ASCII
         for letra in mensagem:
             letra_ASCII = ord(letra) + chave
-            if modo_traducao and letra_ASCII >= 127:
-                letra_ASCII -= 34
             if letra_ASCII > valores.FINAL_ASCII - 34:
-                letra_ASCII -= (224 - 34)
+                letra_ASCII -= ((224 + 245 + 267) - 34)
             if letra_ASCII >= 127:  # Caractere não imprimivel (del), desconsidera-lo da lista ASCII.
                 letra_ASCII += 34
             nova_mensagem += chr(letra_ASCII)
@@ -73,6 +74,14 @@ def cesar_todos_caracteres(chave, mensagem, modo_traducao=False):
         return 'Chave inválida !'
 
 
-for i in range(256, 501):
-    print(i)
-    print(chr(i))
+def traduz_cesar_todos_caracteres(chave_antiga, chave_traduc, mensagem):
+    mensagem_traduzida = ''
+    for letra in mensagem:
+        letra_ASCII = ord(letra) + chave_traduc
+        if ord(letra) > 127 and ord(letra) - int(chave_antiga) - 34 < 32:
+            print('AOI')
+            letra_ASCII -= 34
+        if letra_ASCII > valores.FINAL_ASCII:
+            letra_ASCII -= (224 + 245 + 267)
+        mensagem_traduzida += chr(letra_ASCII)
+    return mensagem_traduzida

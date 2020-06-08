@@ -116,6 +116,7 @@ def executa_criptografia(dic_criptografia, modo=False):  # Função que irá lev
     mensagem_nova = 'Por favor, selecione uma cifra!'
     if cript_escolhida == 'Cifra de César':
         # Usuário escolheu encriptar/traduzir pela cifra de cesar.
+        print('oii')
         if dic_criptografia['Cifra de César1']:
             mensagem_nova = cesar.cifra_de_cesar(chave, mensagem, modo_traducao=modo)
         else:
@@ -128,7 +129,7 @@ def executa_criptografia(dic_criptografia, modo=False):  # Função que irá lev
         if dic_criptografia['Cifra de Vigenère1']:
             mensagem_nova = vigenere.vigenere(chave, mensagem, modo_traducao=modo)
         else:
-            mensagem_nova = "TODO"
+            mensagem_nova = vigenere.vigenere_varias_letras(chave, mensagem, modo_traducao=modo)
     print(mensagem_nova)
 
 

@@ -56,7 +56,7 @@ def cesar_todos_caracteres(chave, mensagem, modo_traducao=False):
         chave_antiga = chave
         print(chave_antiga)
         chave = traduz_cesar(chave, todos_caracteres=True) % valores.TAMANHO_ASCII
-        return traduz_cesar_todos_caracteres(chave_antiga, chave, mensagem)
+        return traduz_todos_caracteres(chave_antiga, chave, mensagem)
     else:
         chave = testa_chave_cesar(chave)
     if chave:
@@ -64,24 +64,23 @@ def cesar_todos_caracteres(chave, mensagem, modo_traducao=False):
         chave = int(chave) % valores.TAMANHO_ASCII
         for letra in mensagem:
             letra_ASCII = ord(letra) + chave
-            if letra_ASCII > valores.FINAL_ASCII - 34:
-                letra_ASCII -= ((224 + 245 + 267) - 34)
-            if letra_ASCII >= 127:  # Caractere não imprimivel (del), desconsidera-lo da lista ASCII.
-                letra_ASCII += 34
+            if letra_ASCII > valores.FINAL_ASCII - valores.TAMANHO_ESPAÇO_VAZIO:
+                letra_ASCII -= (valores.VOLTAR_PARA_INICIO - valores.TAMANHO_ESPAÇO_VAZIO)
+            if letra_ASCII >= valores.INICIO_VAZIO:  # Caractere não imprimivel (del), desconsidera-lo da lista ASCII.
+                letra_ASCII += valores.TAMANHO_ESPAÇO_VAZIO
             nova_mensagem += chr(letra_ASCII)
         return nova_mensagem
     else:
         return 'Chave inválida !'
 
 
-def traduz_cesar_todos_caracteres(chave_antiga, chave_traduc, mensagem):
+def traduz_todos_caracteres(chave_antiga, chave_traduc, mensagem):
     mensagem_traduzida = ''
     for letra in mensagem:
         letra_ASCII = ord(letra) + chave_traduc
-        if ord(letra) > 127 and ord(letra) - int(chave_antiga) - 34 < 32:
-            print('AOI')
-            letra_ASCII -= 34
+        if ord(letra) > valores.INICIO_VAZIO and ord(letra) - int(chave_antiga) - valores.TAMANHO_ESPAÇO_VAZIO < valores.INICIO_ASCII:
+            letra_ASCII -= valores.TAMANHO_ESPAÇO_VAZIO
         if letra_ASCII > valores.FINAL_ASCII:
-            letra_ASCII -= (224 + 245 + 267)
+            letra_ASCII -= valores.VOLTAR_PARA_INICIO
         mensagem_traduzida += chr(letra_ASCII)
     return mensagem_traduzida

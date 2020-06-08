@@ -58,35 +58,41 @@ def cria_chave_traducao(chave):  # Função que adapta a chave para a tradução
 
 
 def cria_chave_traducao_varias_letras(chave):
+    '''
+    Função que cria a chave de tradução de vigenere para várias letras.
+    A função recebe como parâmetro uma chave, que será adaptada para a tradução.
+    '''
     chave_traduc = []
-    for letra in chave:
+    for letra in chave:  # Adaptando a chave.
+        # Cada letra da nova chave tem um código que completa o valor da chave antiga até chegar a dar uma volta.
         ASCII_atual = ord(letra)
-        novo_valor = (valores.TAMANHO_ASCII - ASCII_atual)
-        print(novo_valor)
+        novo_valor = (valores.TAMANHO_ASCII - (ASCII_atual % valores.TAMANHO_ASCII))
         chave_traduc.append(novo_valor)
     return chave_traduc
 
 
 def vigenere_varias_letras(chave, mensagem, modo_traducao=False):
+    '''
+    Função que encriptará a mensagem com a cifra de vigenere no modo várias letras.
+    Recebe como parâmetros uma chave (string), mensagem(string) e modo_traducao(bool).
+    '''
     if not mensagem:
         return 'Mensagem inválida !'
     chave_atual = 0
     if chave:
         tamanho_chave = len(chave)
-        if modo_traducao:
+        if modo_traducao:  # A mensagem deve ser traduzida, então encaminhar todas as informaçôes para a função de tradução.
            return traduz_vigenere_varia_letras(chave, mensagem, tamanho_chave, chave_atual)
         mensagem_nova = ''
         for letra in mensagem:
-            chave_ASCII = ord(chave[chave_atual])
-            print(chave_ASCII)
+            chave_ASCII = ord(chave[chave_atual]) % valores.TAMANHO_ASCII
             letra_ASCII = ord(letra) + chave_ASCII
-            if letra_ASCII > valores.FINAL_ASCII - valores.TAMANHO_ESPAÇO_VAZIO:
+            if letra_ASCII > valores.FINAL_ASCII - valores.TAMANHO_ESPAÇO_VAZIO:  # Valor passou do valor final, então é hora de voltar para o início da tabela.
                 letra_ASCII -= (valores.VOLTAR_PARA_INICIO - valores.TAMANHO_ESPAÇO_VAZIO)
-            if letra_ASCII >= valores.INICIO_VAZIO:
+            if letra_ASCII >= valores.INICIO_VAZIO:  # Passou da região vazia, então deve receber 34 ao seu valor final.
                 letra_ASCII += valores.TAMANHO_ESPAÇO_VAZIO
-            chave_atual += 1
-            print(letra_ASCII)
-            if chave_atual >= tamanho_chave:
+            chave_atual += 1  # Atualizar index da chave.
+            if chave_atual >= tamanho_chave:  # Voltar ao inicio da chave caso a chave passe de seu valor máximo.
                 chave_atual = 0
             mensagem_nova += chr(letra_ASCII)
         return mensagem_nova
@@ -95,17 +101,24 @@ def vigenere_varias_letras(chave, mensagem, modo_traducao=False):
 
 
 def traduz_vigenere_varia_letras(chave, mensagem, tamanho_chave, valor_atual):
-    chave_traduc = cria_chave_traducao_varias_letras(chave)
+    '''
+    Função que traduzirá a cifra de vigenere no moodo várias letras.
+    Recebe como parâmetro "chave" a antiga chave utilizada para encriptar.
+    Mensagem é uma string contendo um texto encriptado.
+    Tamanho da chave é a quantidade de caracteres presente na chave.
+    Valor atual é um int = 0.
+    '''
+    chave_traduc = cria_chave_traducao_varias_letras(chave)  # Coletar a chave de tradução.
     mensagem_traduzida = ''
     for letra in mensagem:
         letra_ASCII = ord(letra) + chave_traduc[valor_atual]
         if ord(letra) > valores.INICIO_VAZIO and ord(letra) - ord(chave[valor_atual]) - valores.TAMANHO_ESPAÇO_VAZIO < valores.INICIO_ASCII:
+            # Antiga letra na mensagem recebeu 34 a mais para sua pontuação, então precisa corrigir agora para a tradução.
             letra_ASCII -= valores.TAMANHO_ESPAÇO_VAZIO
-        if letra_ASCII > valores.FINAL_ASCII:
+        if letra_ASCII > valores.FINAL_ASCII:  # Chegou ao valor final da tabela, então é hora de voltar ao início da tabela.
             letra_ASCII -= valores.VOLTAR_PARA_INICIO
-        valor_atual += 1
-        print(letra_ASCII)
-        if valor_atual >= tamanho_chave:
+        valor_atual += 1  # Atualizar index da chave.
+        if valor_atual >= tamanho_chave:  # Voltar ao inicio da chave caso a chave passe de seu valor máximo.
             valor_atual = 0
         mensagem_traduzida += chr(letra_ASCII)
     return mensagem_traduzida

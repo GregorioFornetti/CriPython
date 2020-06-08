@@ -7,8 +7,10 @@ def testar():  # Função que chamará todos os testes de cifras disponiveis.
     print('Iniciando os testes automatizados...')
     print('Aqui serão feitos alguns testes simples...')
     todos_erros = testa_cesar()
+    todos_erros += testa_cesar_varios_caracteres()
     todos_erros += testa_subst_simples()
     todos_erros += testa_vigenere()
+    todos_erros += testa_vigenere_varios_caracteres()
     if todos_erros == 0:
         separacoes('Nenhum erro encontrado !')
     else:
@@ -17,7 +19,7 @@ def testar():  # Função que chamará todos os testes de cifras disponiveis.
 
 def testa_cesar():  # Função que testa a cifra de césar.
     erros = 0
-    separacoes('Cifra de César')
+    separacoes('Cifra de César(apenas letras)')
     print('Teste 1:')
     erros += imprimir_testes('1',
                              'abcdefghijklmnopqrstuvwxyz',
@@ -39,6 +41,33 @@ def testa_cesar():  # Função que testa a cifra de césar.
                              'Bom dia, Boa tarde, Boa noite!',
                              cesar.cifra_de_cesar('7', 'Ivt kph, Ivh ahykl, Ivh uvpal!', modo_traducao=True))
     return erros
+
+
+def testa_cesar_varios_caracteres():
+    erros = 0
+    separacoes('Cifra de César(vários caracteres)')
+    print('Teste 1:')
+    erros += imprimir_testes('123',
+                             'Olá ! Será que troca letras com acentos também ? E espaços ? Vamos testar agora !',
+                             'ìĉž½¾½ðĂďž½ĎĒĂ½đďČĀþ½ĉĂđďþĐ½ĀČĊ½þĀĂċđČĐ½đþĊÿƆĊ½Ü½â½ĂĐčþƄČĐ½Ü½óþĊČĐ½đĂĐđþď½þĄČďþ½¾',
+                             cesar.cesar_todos_caracteres('123', 'Olá ! Será que troca letras com acentos também ? E espaços ? Vamos testar agora !'))
+    print('Teste 2:')
+    erros += imprimir_testes('123 (tradução)',
+                             'ìĉž½¾½ðĂďž½ĎĒĂ½đďČĀþ½ĉĂđďþĐ½ĀČĊ½þĀĂċđČĐ½đþĊÿƆĊ½Ü½â½ĂĐčþƄČĐ½Ü½óþĊČĐ½đĂĐđþď½þĄČďþ½¾',
+                             'Olá ! Será que troca letras com acentos também ? E espaços ? Vamos testar agora !',
+                             cesar.cesar_todos_caracteres('123', 'ìĉž½¾½ðĂďž½ĎĒĂ½đďČĀþ½ĉĂđďþĐ½ĀČĊ½þĀĂċđČĐ½đþĊÿƆĊ½Ü½â½ĂĐčþƄČĐ½Ü½óþĊČĐ½đĂĐđþď½þĄČďþ½¾', modo_traducao=True))
+    print('Teste 3:')
+    erros += imprimir_testes('321',
+                             'Legal ! Parece que está tudo funcionando corretamente, vamos ver como o texto fica movendo mais ainda !!!',
+                             'ƯǈǊǄǏƃƄƃƳǄǕǈǆǈƃǔǘǈƃǈǖǗɄƃǗǘǇǒƃǉǘǑǆǌǒǑǄǑǇǒƃǆǒǕǕǈǗǄǐǈǑǗǈƏƃǙǄǐǒǖƃǙǈǕƃǆǒǐǒƃǒƃǗǈǛǗǒƃǉǌǆǄƃǐǒǙǈǑǇǒƃǐǄǌǖƃǄǌǑǇǄƃƄƄƄ',
+                             cesar.cesar_todos_caracteres('321', 'Legal ! Parece que está tudo funcionando corretamente, vamos ver como o texto fica movendo mais ainda !!!'))
+    print('Teste 4:')
+    erros += imprimir_testes('321 (tradução)',
+                             'ƯǈǊǄǏƃƄƃƳǄǕǈǆǈƃǔǘǈƃǈǖǗɄƃǗǘǇǒƃǉǘǑǆǌǒǑǄǑǇǒƃǆǒǕǕǈǗǄǐǈǑǗǈƏƃǙǄǐǒǖƃǙǈǕƃǆǒǐǒƃǒƃǗǈǛǗǒƃǉǌǆǄƃǐǒǙǈǑǇǒƃǐǄǌǖƃǄǌǑǇǄƃƄƄƄ',
+                             'Legal ! Parece que está tudo funcionando corretamente, vamos ver como o texto fica movendo mais ainda !!!',
+                             cesar.cesar_todos_caracteres('321', 'ƯǈǊǄǏƃƄƃƳǄǕǈǆǈƃǔǘǈƃǈǖǗɄƃǗǘǇǒƃǉǘǑǆǌǒǑǄǑǇǒƃǆǒǕǕǈǗǄǐǈǑǗǈƏƃǙǄǐǒǖƃǙǈǕƃǆǒǐǒƃǒƃǗǈǛǗǒƃǉǌǆǄƃǐǒǙǈǑǇǒƃǐǄǌǖƃǄǌǑǇǄƃƄƄƄ', modo_traducao=True))
+    return erros
+    
 
 
 def testa_subst_simples():  # Função que testa a cifra de substituição simples.
@@ -94,6 +123,30 @@ def testa_vigenere():  # Função que testa a cifra de Vigenère.
     return erros
 
 
+def testa_vigenere_varios_caracteres():
+    erros = 0
+    separacoes('Cifra de Vigenère (vários caracteres)')
+    print('Teste 1:')
+    erros += imprimir_testes('testando',
+                             'Vamos ver como que essa cifra está funcionando ! Será que está trocando tudo ?',
+                             'ìèĂąö°üöĈ§øąðÿ¦Ăċìµûöăç±ùðûĈä°ëĄĊŨµüøþéúąõöĄçÿ¦²¶ÚúĈŤ°÷Ćû§úĉ÷ű¦ąĈöø÷ñôõ±Ċüùą£Ï',
+                             vigenere.vigenere_varias_letras('testando', 'Vamos ver como que essa cifra está funcionando ! Será que está trocando tudo ?'))
+    print('Teste 2:')
+    erros += imprimir_testes('testando (tradução)',
+                             'ìèĂąö°üöĈ§øąðÿ¦Ăċìµûöăç±ùðûĈä°ëĄĊŨµüøþéúąõöĄçÿ¦²¶ÚúĈŤ°÷Ćû§úĉ÷ű¦ąĈöø÷ñôõ±Ċüùą£Ï',
+                             'Vamos ver como que essa cifra está funcionando ! Será que está trocando tudo ?',
+                             vigenere.vigenere_varias_letras('testando', 'ìèĂąö°üöĈ§øąðÿ¦Ăċìµûöăç±ùðûĈä°ëĄĊŨµüøþéúąõöĄçÿ¦²¶ÚúĈŤ°÷Ćû§úĉ÷ű¦ąĈöø÷ñôõ±Ċüùą£Ï', modo_traducao=True))
+    print('Teste 3:')
+    erros += imprimir_testes('cháves diférentes!',
+                             'Vamos testar agora com uma chave diferente, com espaços e acentos.',
+                             'ÛëŰćúµ¶ëþüŬĆ§ñýöć¤¥íŲą§Ċ¯ç«ëųõýõ¶ëþ©êüŨĆûúL¦î÷Ÿ´ìăĆèż²øªŨ¸èø§ôÿ÷žÂ',
+                             vigenere.vigenere_varias_letras('cháves diférentes!', 'Vamos testar agora com uma chave diferente, com espaços e acentos.'))
+    print('Teste 4:')
+    erros += imprimir_testes('cháves diférentes! (tradução)',
+                             'ÛëŰćúµ¶ëþüŬĆ§ñýöć¤¥íŲą§Ċ¯ç«ëųõýõ¶ëþ©êüŨĆûúL¦î÷Ÿ´ìăĆèż²øªŨ¸èø§ôÿ÷žÂ',
+                             'Vamos testar agora com uma chave diferente, com espaços e acentos.',
+                             vigenere.vigenere_varias_letras('cháves diférentes!', 'ÛëŰćúµ¶ëþüŬĆ§ñýöć¤¥íŲą§Ċ¯ç«ëųõýõ¶ëþ©êüŨĆûúL¦î÷Ÿ´ìăĆèż²øªŨ¸èø§ôÿ÷žÂ', modo_traducao=True))
+    return erros
 
 
 def separacoes(cifra):  # Cria uma separação no output gerado.
@@ -120,3 +173,12 @@ def imprimir_testes(chave, mensagem, mensagem_esperada, mensagem_recebida):  # I
     else:
         print('Não passou!')
         return 1
+
+
+print(ord('˪'))
+print(ord('c'))
+print(ord('V'))
+print(ord(','))
+print(ord('d'))
+print(chr(ord(',') + ord('d') + 34))
+print(chr((ord('c') + ord('V') + 34)))

@@ -87,17 +87,11 @@ def vigenere_varias_letras(chave, mensagem, modo_traducao=False):
         for letra in mensagem:
             chave_ASCII = ord(chave[chave_atual]) % valores.TAMANHO_ASCII
             letra_ASCII = ord(letra) + chave_ASCII
-            print(letra)
-            print(ord(letra))
-            print(ord(chave[chave_atual]))
             if letra_ASCII > valores.FINAL_ASCII - valores.TAMANHO_ESPAÇO_VAZIO:  # Valor passou do valor final, então é hora de voltar para o início da tabela.
                 letra_ASCII -= (valores.VOLTAR_PARA_INICIO - valores.TAMANHO_ESPAÇO_VAZIO)
             if letra_ASCII >= valores.INICIO_VAZIO:  # Passou da região vazia, então deve receber 34 ao seu valor final.
                 letra_ASCII += valores.TAMANHO_ESPAÇO_VAZIO
             chave_atual += 1  # Atualizar index da chave.
-            print(chave_ASCII)
-            print(letra_ASCII)
-            print(chr(letra_ASCII))
             if chave_atual >= tamanho_chave:  # Voltar ao inicio da chave caso a chave passe de seu valor máximo.
                 chave_atual = 0
             mensagem_nova += chr(letra_ASCII)
@@ -117,12 +111,14 @@ def traduz_vigenere_varia_letras(chave, mensagem, tamanho_chave, valor_atual):
     chave_traduc = cria_chave_traducao_varias_letras(chave)  # Coletar a chave de tradução.
     mensagem_traduzida = ''
     for letra in mensagem:
-        letra_ASCII = ord(letra) + chave_traduc[valor_atual]
-        print(letra)
-        print(chave_traduc[valor_atual])
-        if ord(letra) > valores.INICIO_VAZIO and ord(letra) - ord(chave[valor_atual]) - valores.TAMANHO_ESPAÇO_VAZIO < valores.INICIO_ASCII:
+        letra_msg_atual = ord(letra)
+        letra_ASCII = letra_msg_atual + chave_traduc[valor_atual]
+        verificar_volta = letra_msg_atual - ord(chave[valor_atual])
+        if letra_msg_atual > valores.INICIO_VAZIO and verificar_volta - valores.TAMANHO_ESPAÇO_VAZIO < valores.INICIO_ASCII:
             # Antiga letra na mensagem recebeu 34 a mais para sua pontuação, então precisa corrigir agora para a tradução.
             letra_ASCII -= valores.TAMANHO_ESPAÇO_VAZIO
+        if letra_msg_atual < valores.INICIO_VAZIO and verificar_volta > valores.INICIO_ASCII:
+            letra_ASCII += valores.TAMANHO_ESPAÇO_VAZIO
         if letra_ASCII > valores.FINAL_ASCII:  # Chegou ao valor final da tabela, então é hora de voltar ao início da tabela.
             letra_ASCII -= valores.VOLTAR_PARA_INICIO
         valor_atual += 1  # Atualizar index da chave.

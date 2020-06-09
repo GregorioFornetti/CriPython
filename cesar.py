@@ -91,10 +91,14 @@ def traduz_todos_caracteres(chave_antiga, chave_traduc, mensagem):
     '''
     mensagem_traduzida = ''
     for letra in mensagem:
-        letra_ASCII = ord(letra) + chave_traduc
-        if ord(letra) > valores.INICIO_VAZIO and ord(letra) - int(chave_antiga) - valores.TAMANHO_ESPAÇO_VAZIO < valores.INICIO_ASCII:
+        letra_msg_atual = ord(letra)
+        letra_ASCII = letra_msg_atual + chave_traduc
+        verificar_volta = letra_msg_atual - int(chave_antiga)
+        if letra_msg_atual > valores.INICIO_VAZIO and verificar_volta - valores.TAMANHO_ESPAÇO_VAZIO < valores.INICIO_ASCII:
             # Se a letra recebeu 2 vezes o número 34, é preciso voltar 34 na chave de tradução para não traduzir errado.
             letra_ASCII -= valores.TAMANHO_ESPAÇO_VAZIO
+        if letra_msg_atual < valores.INICIO_VAZIO and verificar_volta > valores.INICIO_ASCII:
+            letra_ASCII += valores.TAMANHO_ESPAÇO_VAZIO    
         if letra_ASCII > valores.FINAL_ASCII:  # O valor da letra atual a ser traduzida passou do valor final, hora de voltar para o ínicio.
             letra_ASCII -= valores.VOLTAR_PARA_INICIO
         mensagem_traduzida += chr(letra_ASCII)

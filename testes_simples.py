@@ -173,12 +173,3 @@ def imprimir_testes(chave, mensagem, mensagem_esperada, mensagem_recebida):  # I
     else:
         print('Não passou!')
         return 1
-
-
-print(ord('˪'))
-print(ord('c'))
-print(ord('V'))
-print(ord(','))
-print(ord('d'))
-print(chr(ord(',') + ord('d') + 34))
-print(chr((ord('c') + ord('V') + 34)))

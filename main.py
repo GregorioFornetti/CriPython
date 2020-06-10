@@ -197,8 +197,8 @@ def menu_forca_bruta(tela_p):
 
 
 def cria_botoes():  # Função que retorna os "botões" de seleção de opção de cifra.
-    return  [sg.Radio('Cifra de César (vários caracteres)     ', "Cesar", default=True, visible=False, key='Cifra de César1'),
-            sg.Radio('Cifra de César (todos caracteres)', "Cesar", visible=False, key='Cifra de César2'),
+    return  [sg.Radio('Cifra de César (vários caracteres)    ', "Cesar", default=True, visible=False, key='Cifra de César1'),
+            sg.Radio('Cifra de César (todos caracteres)       ', "Cesar", visible=False, key='Cifra de César2'),
             sg.Radio('Substituição simples', "Subst_simples", default=True, visible=False, key='Substituição simples1'),
             sg.Radio('Cifra de Vigenère (apenas letras)    ', "Vigenere", default=True, visible=False, key='Cifra de Vigenère1'),
             sg.Radio('Cifra de Vigenère (vários caracteres)', "Vigenere", visible=False, key='Cifra de Vigenère2')]

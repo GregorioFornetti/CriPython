@@ -24,6 +24,8 @@ Para o desenvolvimento desse projeto foi utilizado a linguagem Python e algumas 
 ## Instalação
 Todos os arquivos desse projeto estão disponiveis nesse mesmo repositório, ou seja, clique em "Clone or download" e baixe os arquivos para instalar esse programa em sua maquina.
 
+Para poder rodar o projeto é preciso instalar a biblioteca PySimpleGui, que foi utilizada para a criação da interface. Para instalar, basta executar o comando `pip3 install pysimplegui`.
+
 ## Execução
 Para executar esse programa, até agora, é necessário que você abra seu terminal, vá até o arquivo pelo terminal, e execute o comando:
 `python main.py`

@@ -4,7 +4,7 @@ import vigenere
 
 
 def testar():  # Função que chamará todos os testes de cifras disponiveis.
-    print('Iniciando os testes automatizados...')
+    print('\33[0;31mIniciando os testes automatizados...')
     print('Aqui serão feitos alguns testes simples...')
     todos_erros = testa_cesar()
     todos_erros += testa_cesar_varios_caracteres()

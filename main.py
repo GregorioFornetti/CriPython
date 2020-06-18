@@ -74,7 +74,7 @@ def menu_encriptar(tela_p, lista_cript):
             break
         if eventos == '1':
             # Encriptar a mensagem.
-            executa_criptografia(valores)
+            emprimir_criptografia(valores)
         if valores['cifra']:
             atualiza_tela(tela_encriptar, valores)
         
@@ -103,12 +103,12 @@ def menu_traducao(tela_p, lista_cript):
             break
         if eventos == '1':
             # Traduzir mensagem encriptada.
-            executa_criptografia(valores, modo=True)
+            emprimir_criptografia(valores, modo=True)
         if valores['cifra']:
             atualiza_tela(tela_traduzir, valores)
 
 
-def executa_criptografia(dic_criptografia, modo=False):  # Função que irá levar o input do user para funções que fazem a criptografia.
+def emprimir_criptografia(dic_criptografia, modo=False):  # Função que irá levar o input do user para funções que fazem a criptografia.
     # Extrair todas informações fornecidas pelo usuário.
     cript_escolhida = dic_criptografia['cifra']
     mensagem = dic_criptografia['mensagem']

@@ -1,9 +1,6 @@
 import PySimpleGUI as sg
-import cesar
-import subst_simples
-import testes_simples
-import vigenere
 import forca_bruta
+import Cifras.executar
 sg.theme('DarkGrey5')
 
 
@@ -108,27 +105,14 @@ def menu_traducao(tela_p, lista_cript):
             atualiza_tela(tela_traduzir, valores)
 
 
-def emprimir_criptografia(dic_criptografia, modo=False):  # Função que irá levar o input do user para funções que fazem a criptografia.
-    # Extrair todas informações fornecidas pelo usuário.
-    cript_escolhida = dic_criptografia['cifra']
-    mensagem = dic_criptografia['mensagem']
-    chave = dic_criptografia['chave']
-    mensagem_nova = 'Por favor, selecione uma cifra!'
-    if cript_escolhida == 'Cifra de César':
-        # Usuário escolheu encriptar/traduzir pela cifra de cesar.
-        if dic_criptografia['Cifra de César1']:
-            mensagem_nova = cesar.cifra_de_cesar(chave, mensagem, modo_traducao=modo)
-        else:
-            mensagem_nova = cesar.cesar_todos_caracteres(chave, mensagem, modo_traducao=modo)
-    if cript_escolhida == 'Substituição simples':
-        # Usuário escolheu encriptar/traduzir pela substituiçao simples.
-        mensagem_nova = subst_simples.subst_simples(chave, mensagem, modo_traducao=modo)
-    if cript_escolhida == 'Cifra de Vigenère':
-        # Usuário escolheu encriptar/traduzir pela cifra de vigenere.
-        if dic_criptografia['Cifra de Vigenère1']:
-            mensagem_nova = vigenere.vigenere(chave, mensagem, modo_traducao=modo)
-        else:
-            mensagem_nova = vigenere.vigenere_varias_letras(chave, mensagem, modo_traducao=modo)
+def emprimir_criptografia(dic_criptografia, modo=False):
+    '''
+    Função que imprimirá a nova mensagem (encriptada ou traduzida) na interface.
+    param dic_criptografia: contém algumas informações fornecidads pelo usuário,
+    que serão interpretadas pela função "executa_cifra".
+    param modo: Falso: encriptará | Verdadeiro: traduzirá.
+    '''
+    mensagem_nova = Cifras.executar.executa_cifra(dic_criptografia, modo_traducao=modo)
     print(mensagem_nova)
 
 
@@ -197,11 +181,11 @@ def menu_forca_bruta(tela_p):
 
 
 def cria_botoes():  # Função que retorna os "botões" de seleção de opção de cifra.
-    return  [sg.Radio('Cifra de César (apenas letras)            ', "Cesar", default=True, visible=False, key='Cifra de César1'),
-            sg.Radio('Cifra de César (vários caracteres)       ', "Cesar", visible=False, key='Cifra de César2'),
-            sg.Radio('Substituição simples', "Subst_simples", default=True, visible=False, key='Substituição simples1'),
-            sg.Radio('Cifra de Vigenère (apenas letras)       ', "Vigenere", default=True, visible=False, key='Cifra de Vigenère1'),
-            sg.Radio('Cifra de Vigenère (vários caracteres)  ', "Vigenere", visible=False, key='Cifra de Vigenère2')]
+    return  [sg.Radio('Cifra de César (apenas letras)            ', "Cesar", default=True, visible=False, key='Cifra de César(apenas letras)'),
+            sg.Radio('Cifra de César (vários caracteres)       ', "Cesar", visible=False, key='Cifra de César(várias letras)'),
+            sg.Radio('Substituição simples', "Subst_simples", default=True, visible=False, key='Substituição simples(apenas letras)'),
+            sg.Radio('Cifra de Vigenère (apenas letras)       ', "Vigenere", default=True, visible=False, key='Cifra de Vigenère(apenas letras)'),
+            sg.Radio('Cifra de Vigenère (vários caracteres)  ', "Vigenere", visible=False, key='Cifra de Vigenère(várias letras)')]
 
 
 def atualiza_tela(tela, valores):  # Função que atualiza a tela toda vez que o usuário escolher uma criptografia diferente.

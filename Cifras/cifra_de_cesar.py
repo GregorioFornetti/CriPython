@@ -6,7 +6,7 @@ def testa_chave_cesar(chave):  # Função validadora da chave.
         return chave
     return False
 
-def cifra_de_cesar(chave, mensagem, modo_traducao=False):  # Função que traduz e encripta com cifra de cesar.
+def apenas_letras(chave, mensagem, modo_traducao=False):  # Função que traduz e encripta com cifra de cesar.
     if modo_traducao:
         chave = traduz_cesar(chave)
     else:
@@ -52,7 +52,7 @@ def traduz_cesar(chave, todos_caracteres=False):
         return False
 
 
-def cesar_todos_caracteres(chave, mensagem, modo_traducao=False):
+def varios_caracteres(chave, mensagem, modo_traducao=False):
     '''
     Função que encripta a cifra de césar no modo vários caracteres.
     Recebe como chave um número inteiro não negativo.

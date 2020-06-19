@@ -14,7 +14,7 @@ def teste_chave_substSimples(chave):  # Verifica se a chave é valida.
     return chave
 
 
-def apenas_letras(chave, mensagem, modo_traducao=False):  # Função que traduz/encripta através da "substituição simples".
+def executar_modo_apenas_letras(chave, mensagem, modo_traducao=False):  # Função que traduz/encripta através da "substituição simples".
     if modo_traducao:
         chave = traduz_subst_simples(chave)
     else:

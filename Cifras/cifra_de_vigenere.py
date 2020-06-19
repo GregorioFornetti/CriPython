@@ -8,7 +8,7 @@ def testa_chave_vigenere(chave):  # Função que testa se a chave fornecida pelo
     return False
     
 
-def apenas_letras(chave, mensagem, modo_traducao=False):  # Função que traduz/encripta a mensagem pela cifra de Vigenère.
+def executar_modo_apenas_letras(chave, mensagem, modo_traducao=False):  # Função que traduz/encripta a mensagem pela cifra de Vigenère.
     if not mensagem:  # Se o usuário não escreveu uma mensagem, retornar uma mensagem de erro !
         return 'Mensagem inválida !'
     if modo_traducao:
@@ -71,7 +71,7 @@ def cria_chave_traducao_varias_letras(chave):
     return chave_traduc
 
 
-def varias_letras(chave, mensagem, modo_traducao=False):
+def executar_modo_varias_letras(chave, mensagem, modo_traducao=False):
     '''
     Função que encriptará a mensagem com a cifra de vigenere no modo várias letras.
     Recebe como parâmetros uma chave (string), mensagem(string) e modo_traducao(bool).

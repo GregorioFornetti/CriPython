@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 import forca_bruta
 import Cifras.executar
+import testes_simples
 sg.theme('DarkGrey5')
 
 

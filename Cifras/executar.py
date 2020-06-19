@@ -16,15 +16,15 @@ def executa_cifra(dic_criptografia, modo_traducao):
     chave = dic_criptografia['chave']
     if cript_escolhida == 'Cifra de César':
         if dic_criptografia['Cifra de César(apenas letras)']:
-            return Cifras.cifra_de_cesar.apenas_letras(chave, mensagem, modo_traducao=modo_traducao)
+            return Cifras.cifra_de_cesar.executar_modo_apenas_letras(chave, mensagem, modo_traducao=modo_traducao)
         else:
-            return Cifras.cifra_de_cesar.varios_caracteres(chave, mensagem, modo_traducao=modo_traducao)
+            return Cifras.cifra_de_cesar.executar_modo_varios_caracteres(chave, mensagem, modo_traducao=modo_traducao)
     if cript_escolhida == 'Substituição simples':
         # Usuário escolheu encriptar/traduzir pela substituiçao simples.
-        return Cifras.subst_simples.apenas_letras(chave, mensagem, modo_traducao=modo_traducao)
+        return Cifras.subst_simples.executar_modo_apenas_letras(chave, mensagem, modo_traducao=modo_traducao)
     if cript_escolhida == 'Cifra de Vigenère':
         if dic_criptografia['Cifra de Vigenère(apenas letras)']:
-            return Cifras.cifra_de_vigenere.apenas_letras(chave, mensagem, modo_traducao=modo_traducao)
+            return Cifras.cifra_de_vigenere.executar_modo_apenas_letras(chave, mensagem, modo_traducao=modo_traducao)
         else:
-            return Cifras.cifra_de_vigenere.varias_letras(chave, mensagem, modo_traducao=modo_traducao)
+            return Cifras.cifra_de_vigenere.executar_modo_varias_letras(chave, mensagem, modo_traducao=modo_traducao)
     return 'Por favor, selecione uma cifra !'

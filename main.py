@@ -1,15 +1,17 @@
 import PySimpleGUI as sg
 import forca_bruta
-import Cifras.executar
 import testes_simples
+import Cifras.cifra_de_cesar
+import Cifras.cifra_de_vigenere
+import Cifras.subst_simples
 sg.theme('DarkGrey5')
+lista_criptografias_disponiveis = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
+dic_opçoes_disponiveis = {'Cifra de César': ['apenas letras', 'vários caracteres'],
+                            'Substituição simples:':['apenas letras'],
+                            'Cifra de Vigenère:':['apenas letras', 'vários caracteres']}
 
 
 def main():
-    # Lista de criptografias disponiveis:
-    lista_criptografia = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
-
-    # Interface principal do programa.
     # Layout da interface principal do programa.
     layout_principal =  [[sg.Text('Criptografias: Tela principal')],
                         [sg.Button('1- Criar mensagem criptografada.', key='1')],
@@ -18,7 +20,6 @@ def main():
                         [sg.Button('4- Testes automatizados', key='4')],
                         [sg.Button('5- Força bruta: Cifra de César.', key='5')],
                         [sg.Button('6- Finalizar programa', key='6')]]
-    
     # Criar a interface principal do programa, utilizando o layout a cima.
     tela_principal = sg.Window('Criptografias: Tela principal',layout_principal)
     while True:  # Loop que verifica cada interação do usuário com o programa.
@@ -30,11 +31,11 @@ def main():
         if eventos == '1':
             # Esconder a tela principal e iniciar a interface "encriptar".
             tela_principal.Hide()
-            menu_encriptar(tela_principal, lista_criptografia)
+            menu_encriptar(tela_principal)
         if eventos == '2':
             # Esconder a tela principal e iniciar a interface "traduzir".
             tela_principal.Hide()
-            menu_traducao(tela_principal, lista_criptografia)
+            menu_traducao(tela_principal)
         if eventos == '3':
             # Esconder a tela principal e iniciar a interface "documentação".
             tela_principal.Hide()
@@ -47,50 +48,73 @@ def main():
             # Esconder a tela principal e inicar a interface "força bruta".
             tela_principal.Hide()
             menu_forca_bruta(tela_principal)
-        
 
-def menu_encriptar(tela_p, lista_cript):
-    # Interface "criar mensagem encriptada" do programa.
-    lista_opcoes = cria_botoes()
-    layout_encriptar =  [[sg.Text('Criptografia: encriptar.')],
-                        [sg.Text('Tipo de criptografia:'), sg.Combo(lista_cript, key='cifra', enable_events=True)],
-                        [sg.Text('Opções:')],
-                        lista_opcoes,
-                        [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
-                        [sg.Text('Chave:'), sg.InputText(key='chave')],
-                        [sg.Text('Mensagem encriptada:')],
-                        [sg.Output(size=(70,20))],
-                        [sg.Button('Encriptar', key='1'), sg.Button('Retornar', key='2')]]
 
+def cria_layout_traduçao_e_encriptaçao(titulo):
+    layout = [[sg.Text(titulo)]]
+    for n, criptografia in enumerate(lista_criptografias_disponiveis):
+        layout.append([sg.Button(f'{n + 1} - {criptografia}', key=criptografia)])
+    layout.append([sg.Button('Retornar', key='retornar')])
+    return layout
+
+
+def retorna_layout_opçoes(criptografia):
+    layout_opçoes = []
+    for opçao in dic_opçoes_disponiveis[criptografia]:
+        if not layout_opçoes:  # Definir a primeira opção como "default".
+            layout_opçoes.append(sg.Radio(opçao, criptografia, key=opçao, default=True))
+        else:
+            layout_opçoes.append(sg.Radio(opçao, criptografia, key=opçao, default=False))
+    return layout_opçoes
+
+
+def retorna_layout_padrao_traduçao(titulo, criptografia):
+    layout = [[sg.Text(titulo)],
+             [sg.Text('Opções:')],
+             retorna_layout_opçoes(criptografia),
+             [sg.Text('Mensagem encriptada:'), sg.InputText(key='mensagem')],
+             [sg.Text('Chave:'), sg.InputText(key='chave')],
+             [sg.Text('Mensagem traduzida:')],
+             [sg.Output(size=(80,30))],
+             [sg.Button('Traduzir', key='traduzir'), sg.Button('Retornar', key='retornar')]]
+    return layout
+
+
+def retorna_layout_padrao_encriptaçao(titulo, criptografia):
+    layout = [[sg.Text(titulo)],
+             [sg.Text('Opções:')],
+             retorna_layout_opçoes(criptografia),
+             [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
+             [sg.Text('Chave:'), sg.InputText(key='chave')],
+             [sg.Text('Mensagem encriptada:')],
+             [sg.Output(size=(80,30))],
+             [sg.Button('Encriptar', key='traduzir'), sg.Button('Retornar', key='retornar')]]
+    return layout
+
+
+def menu_encriptar(tela_p):
+    # Menu de encriptação: contém alguns botões redirecionadores para menu das cifras.
+    layout_encriptar = cria_layout_traduçao_e_encriptaçao('Pythografia: encriptar')
     tela_encriptar = sg.Window('Criptografias: encriptar', layout_encriptar)
     while True:
         eventos, valores = tela_encriptar.read()
-        if eventos in ('2', None):
+        if eventos in ('retornar', None):
             # Fechar tela atual e voltar para a tela principal.
             tela_encriptar.Close()
             tela_p.UnHide()
             break
-        if eventos == '1':
-            # Encriptar a mensagem.
-            emprimir_criptografia(valores)
-        if valores['cifra']:
-            atualiza_tela(tela_encriptar, valores)
+        tela_encriptar.Hide()
+        if eventos == 'Cifra de César':
+            menu_cesar_encriptar(tela_encriptar)
+        elif eventos == 'Substituição simples':
+            menu_subst_simples_encriptar(tela_encriptar)
+        else:
+            menu_vigenere_encriptar(tela_encriptar)
+        
         
 
-
-def menu_traducao(tela_p, lista_cript):
-    # Interface "traduzir mensagem encriptada" do programa.
-    lista_opcoes = cria_botoes()
-    layout_traduzir =   [[sg.Text('Criptografia: traduzir.')],
-                        [sg.Text('Tipo de criptografia:'), sg.Combo(lista_cript, key='cifra', enable_events=True)],
-                        [sg.Text('Opção:')],
-                        lista_opcoes,
-                        [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
-                        [sg.Text('Chave:'), sg.InputText(key='chave')],
-                        [sg.Text('Mensagem traduzida:')],
-                        [sg.Output(size=(70,20))],
-                        [sg.Button('Traduzir', key='1'), sg.Button('Retornar', key='2')]]
-
+def menu_traducao(tela_p):
+    layout_traduzir = cria_layout_traduçao_e_encriptaçao('PythonGrafia: traduzir')
     tela_traduzir = sg.Window('Criptografias: traduzir', layout_traduzir)
     while True:
         eventos, valores = tela_traduzir.read()
@@ -99,11 +123,64 @@ def menu_traducao(tela_p, lista_cript):
             tela_p.UnHide()
             tela_traduzir.close()
             break
-        if eventos == '1':
-            # Traduzir mensagem encriptada.
-            emprimir_criptografia(valores, modo=True)
-        if valores['cifra']:
-            atualiza_tela(tela_traduzir, valores)
+        tela_traduzir.Hide()
+        if eventos == 'Cifra de César':
+            menu_cesar_traduzir(tela_traduzir)
+        elif eventos == 'Substituição simples':
+            menu_subst_simples_traduzir(tela_traduzir)
+        else:
+            menu_vigenere_traduzir(tela_traduzir)
+
+
+def menu_cesar_encriptar(tela_anterior):
+    layout_cesar_encript = retorna_layout_padrao_encriptaçao('PythonGrafia: Cifra de César (encriptação)', 'Cifra de César')
+    tela_cesar_encript = sg.Window('PythonGrafia: Cifra de César', layout_cesar_encript)
+    while True:
+        eventos, valores = tela_cesar_encript.read()
+        if eventos in ('retornar', None):
+            print('oxi')
+            tela_anterior.UnHide()
+            tela_cesar_encript.Close()
+            break
+        if valores['apenas letras']:
+            print(Cifras.cifra_de_cesar.executar_modo_apenas_letras(valores['chave'], valores['mensagem']))
+        else:
+            print(Cifras.cifra_de_cesar.executar_modo_varios_caracteres(valores['chave'], valores['mensagem']))
+
+
+def menu_cesar_traduzir(tela_anterior):
+    layout_cesar_traduc = retorna_layout_padrao_traduçao('PythonGrafia: Cifra de César (tradução)', 'Cifra de César')
+    tela_cesar_traduc = sg.Window('PythonGrafia: Cifra de César', layout_cesar_traduc)
+    while True:
+        eventos, opçao = tela_cesar_traduc.read()
+
+
+def menu_subst_simples_encriptar(tela_anterior):
+    layout_subst_encript = retorna_layout_padrao_encriptaçao('PythonGrafia: Substituição simples (encriptação)', 'Substituição simples')
+    tela_subst_encript = sg.Window('PythonGrafia: Substituição simples', layout_subst_encript)
+    while True:
+        eventos, opçao = tela_subst_encript.read()
+
+
+def menu_subst_simples_traduzir(tela_anterior):
+    layout_subst_traduc = retorna_layout_padrao_traduçao('PythonGrafia: Substituição simples (tradução)', 'Substituição simples')
+    tela_subst_traduc = sg.Window('PythonGrafia: substituição simples', layout_subst_traduc)
+    while True:
+        eventos, opçao = tela_subst_traduc.read()
+
+
+def menu_vigenere_encriptar(tela_anterior):
+    layout_vigenere_encript = retorna_layout_padrao_encriptaçao('PythonGrafia: Cifra de Vigenère (encriptação)')
+    tela_vigenere_encript = sg.Window('PythonGrafia: Cifra de Vigenère', layout_vigenere_encript)
+    while True:
+        eventos, opçao = tela_vigenere_encript.read()
+
+
+def menu_vigenere_traduzir(tela_anterior):
+    layout_vigenere_traduc = retorna_layout_padrao_traduçao('PythonGrafia: Cifra de Vigenère (tradução)')
+    tela_vigenere_traduc = sg.Window('PythonGrafia: Cifra de Vigenère', layout_vigenere_traduc)
+    while True:
+        eventos, opçao = tela_vigenere_traduc.read()
 
 
 def emprimir_criptografia(dic_criptografia, modo=False):
@@ -179,31 +256,6 @@ def menu_forca_bruta(tela_p):
         if eventos == 'testar':
             # Efetuar teste.
             forca_bruta.forca_bruta_cesar(valores['mensagem'])
-
-
-def cria_botoes():  # Função que retorna os "botões" de seleção de opção de cifra.
-    return  [sg.Radio('Cifra de César (apenas letras)            ', "Cesar", default=True, visible=False, key='Cifra de César(apenas letras)'),
-            sg.Radio('Cifra de César (vários caracteres)       ', "Cesar", visible=False, key='Cifra de César(várias letras)'),
-            sg.Radio('Substituição simples', "Subst_simples", default=True, visible=False, key='Substituição simples(apenas letras)'),
-            sg.Radio('Cifra de Vigenère (apenas letras)       ', "Vigenere", default=True, visible=False, key='Cifra de Vigenère(apenas letras)'),
-            sg.Radio('Cifra de Vigenère (vários caracteres)  ', "Vigenere", visible=False, key='Cifra de Vigenère(várias letras)')]
-
-
-def atualiza_tela(tela, valores):  # Função que atualiza a tela toda vez que o usuário escolher uma criptografia diferente.
-    '''
-    Função que atualiza a tela toda vez que o usuário escolher uma criptografia diferente. Com isso, as opções de cifra ficarão atualizadas para
-    a cifra atual selecionada.
-    '''
-    cifra_selecionada = valores['cifra']
-    valores_visiveis = ['mensagem', 'chave', 'cifra']
-    for key in valores.keys():
-        if key in valores_visiveis:  # Valores que não devem ter mudanças.
-            continue
-        elemento_atual = tela[key]
-        if cifra_selecionada in key:  # Valores que precisam aparecer (as opções da cifra selecionada).
-            elemento_atual.Update(visible=True)
-        else:  # Todas as outras opções devem voltar a ficar "Invisiveis".
-            elemento_atual.Update(visible=False)
 
 
 main()

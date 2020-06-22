@@ -7,8 +7,8 @@ import Cifras.subst_simples
 sg.theme('DarkGrey5')
 lista_criptografias_disponiveis = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
 dic_opçoes_disponiveis = {'Cifra de César': ['apenas letras', 'vários caracteres'],
-                            'Substituição simples:':['apenas letras'],
-                            'Cifra de Vigenère:':['apenas letras', 'vários caracteres']}
+                            'Substituição simples':['apenas letras'],
+                            'Cifra de Vigenère':['apenas letras', 'vários caracteres']}
 
 
 def main():
@@ -167,21 +167,29 @@ def menu_subst_simples_traduzir(tela_anterior):
 
 
 def menu_vigenere_encriptar(tela_anterior):
-    layout_vigenere_encript = retorna_layout_padrao_encriptaçao('PythonGrafia: Cifra de Vigenère (encriptação)')
+    layout_vigenere_encript = retorna_layout_padrao_encriptaçao('PythonGrafia: Cifra de Vigenère (encriptação)', 'Cifra de Vigenère')
     tela_vigenere_encript = sg.Window('PythonGrafia: Cifra de Vigenère', layout_vigenere_encript)
     while True:
         evento, valores = tela_vigenere_encript.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_vigenere_encript):
             break
+        if valores['apenas letras']:
+            print(Cifras.cifra_de_vigenere.encriptar_modo_apenas_letras(valores['chave'], valores['mensagem']))
+        else:
+            print(Cifras.cifra_de_vigenere.encriptar_modo_varios_caracteres(valores['chave'], valores['mensagem']))
 
 
 def menu_vigenere_traduzir(tela_anterior):
-    layout_vigenere_traduc = retorna_layout_padrao_traduçao('PythonGrafia: Cifra de Vigenère (tradução)')
+    layout_vigenere_traduc = retorna_layout_padrao_traduçao('PythonGrafia: Cifra de Vigenère (tradução)', 'Cifra de Vigenère')
     tela_vigenere_traduc = sg.Window('PythonGrafia: Cifra de Vigenère', layout_vigenere_traduc)
     while True:
         evento, valores = tela_vigenere_traduc.read()
-        if voltou_para_tela_anterior(evento, tela_anterior, tela_vigenere_traduzir):
+        if voltou_para_tela_anterior(evento, tela_anterior, tela_vigenere_traduc):
             break
+        if valores['apenas letras']:
+            print(Cifras.cifra_de_vigenere.traduzir_modo_apenas_letras(valores['chave'], valores['mensagem']))
+        else:
+            print(Cifras.cifra_de_vigenere.traduzir_modo_varios_caracteres(valores['chave'], valores['mensagem']))
 
 
 def menu_documentacao(tela_anterior):

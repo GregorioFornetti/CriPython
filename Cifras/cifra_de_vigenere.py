@@ -6,42 +6,52 @@ def testa_chave_vigenere(chave):  # Função que testa se a chave fornecida pelo
     if chave.isalpha():  # Depois de retirar todos os espaços, verificar se o usuário digitou apenas letras.
         return chave
     return False
-    
 
-def executar_modo_apenas_letras(chave, mensagem, modo_traducao=False):  # Função que traduz/encripta a mensagem pela cifra de Vigenère.
-    if not mensagem:  # Se o usuário não escreveu uma mensagem, retornar uma mensagem de erro !
+
+def encriptar_modo_apenas_letras(chave, mensagem):  # Função que traduz/encripta a mensagem pela cifra de Vigenère.
+    chave = testa_chave_vigenere(chave)
+    return mensagem_nova_modo_apenas_letras(chave, mensagem)  
+
+
+def traduzir_modo_apenas_letras(chave, mensagem):
+    chave = adaptar_chave_para_traducao_apenas_letras(chave)
+    return mensagem_nova_modo_apenas_letras(chave, mensagem)
+
+
+def mensagem_nova_modo_apenas_letras(chave, mensagem):
+    if not mensagem:
         return 'Mensagem inválida !'
-    if modo_traducao:
-        chave = cria_chave_traducao(chave)
-    else:
-        chave = testa_chave_vigenere(chave)
     if chave:
-        tamanho_chave = len(chave)
-        valor_atual_chave = 0
-        mensagem_encriptada = ''
-        for letra in mensagem:
-            letra_cifrada = letra
-            letra_ASCII = ord(letra)  # Valor ASCII da letra atual da mensagem.
-            chave_ASCII = ord(chave[valor_atual_chave]) - valores.MIN_MINUSCULA  # Valor alfabético (0-25, A=0, B=1,...) da letra da chave atual. 
-            if letra_ASCII >= valores.MIN_MINUSCULA and letra_ASCII <= valores.MAX_MINUSCULA:  # Casos de letras minusculas.
-                letra_ASCII -= valores.MIN_MINUSCULA
-                index_alfabeto = (letra_ASCII + chave_ASCII) % 26  # Juntar os valores da letra da chave e da mensagem. (OBS: não pode passar de 26, que é o mesmo que dar uma volta no alfabeto).
-                letra_cifrada = valores.ALFABETO_MINUSCULO[index_alfabeto]  # Pegar a letra com o valor alfabético calculado pelo index_alfabeto.
-                valor_atual_chave += 1  # Mover a letra da chave em uma casa.
-            elif letra_ASCII >= valores.MIN_MAIUSCULA and letra_ASCII <= valores.MAX_MAIUSCULA:  # Casos de letras maiusculas.
-                letra_ASCII -= valores.MIN_MAIUSCULA
-                index_alfabeto = (letra_ASCII + chave_ASCII) % 26
-                letra_cifrada = valores.ALFABETO_MAIUSCULO[index_alfabeto]
-                valor_atual_chave += 1  # Mover a letra da chave em uma casa.
-            mensagem_encriptada += letra_cifrada
-            if valor_atual_chave >= tamanho_chave:  # Se a chave chegou ao final, voltar para o início.
-                valor_atual_chave = 0
-    else:  # Se a chave é inválida, retornar uma mensagem de erro.
-        return 'Chave inválida !'
-    return mensagem_encriptada         
+        return vigenere_troca_apenas_letras(chave, mensagem)
+    else:
+        return 'Chave Invalida !'
 
 
-def cria_chave_traducao(chave):  # Função que adapta a chave para a tradução.
+def vigenere_troca_apenas_letras(chave, mensagem):
+    tamanho_chave = len(chave)
+    valor_atual_chave = 0
+    mensagem_nova = ''
+    for letra in mensagem:
+        letra_cifrada = letra
+        letra_ASCII = ord(letra)  # Valor ASCII da letra atual da mensagem.
+        chave_ASCII = ord(chave[valor_atual_chave]) - valores.MIN_MINUSCULA  # Valor alfabético (0-25, A=0, B=1,...) da letra da chave atual. 
+        if letra_ASCII >= valores.MIN_MINUSCULA and letra_ASCII <= valores.MAX_MINUSCULA:  # Casos de letras minusculas.
+            letra_ASCII -= valores.MIN_MINUSCULA
+            index_alfabeto = (letra_ASCII + chave_ASCII) % 26  # Juntar os valores da letra da chave e da mensagem. (OBS: não pode passar de 26, que é o mesmo que dar uma volta no alfabeto).
+            letra_cifrada = valores.ALFABETO_MINUSCULO[index_alfabeto]  # Pegar a letra com o valor alfabético calculado pelo index_alfabeto.
+            valor_atual_chave += 1  # Mover a letra da chave em uma casa.
+        elif letra_ASCII >= valores.MIN_MAIUSCULA and letra_ASCII <= valores.MAX_MAIUSCULA:  # Casos de letras maiusculas.
+            letra_ASCII -= valores.MIN_MAIUSCULA
+            index_alfabeto = (letra_ASCII + chave_ASCII) % 26
+            letra_cifrada = valores.ALFABETO_MAIUSCULO[index_alfabeto]
+            valor_atual_chave += 1  # Mover a letra da chave em uma casa.
+        mensagem_nova += letra_cifrada
+        if valor_atual_chave >= tamanho_chave:  # Se a chave chegou ao final, voltar para o início.
+            valor_atual_chave = 0
+    return mensagem_nova
+
+
+def adaptar_chave_para_traducao_apenas_letras(chave):  # Função que adapta a chave para a tradução.
     chave = testa_chave_vigenere(chave)
     if chave:
         chave_traduc = ''
@@ -57,7 +67,7 @@ def cria_chave_traducao(chave):  # Função que adapta a chave para a tradução
         return False
 
 
-def cria_chave_traducao_varias_letras(chave):
+def adaptar_chave_para_traducao_varias_letras(chave):
     '''
     Função que cria a chave de tradução de vigenere para várias letras.
     A função recebe como parâmetro uma chave, que será adaptada para a tradução.
@@ -71,7 +81,7 @@ def cria_chave_traducao_varias_letras(chave):
     return chave_traduc
 
 
-def executar_modo_varias_letras(chave, mensagem, modo_traducao=False):
+def encriptar_modo_varios_caracteres(chave, mensagem):
     '''
     Função que encriptará a mensagem com a cifra de vigenere no modo várias letras.
     Recebe como parâmetros uma chave (string), mensagem(string) e modo_traducao(bool).
@@ -81,8 +91,6 @@ def executar_modo_varias_letras(chave, mensagem, modo_traducao=False):
     chave_atual = 0
     if chave:
         tamanho_chave = len(chave)
-        if modo_traducao:  # A mensagem deve ser traduzida, então encaminhar todas as informaçôes para a função de tradução.
-           return traduz_vigenere_varia_letras(chave, mensagem, tamanho_chave, chave_atual)
         mensagem_nova = ''
         for letra in mensagem:
             chave_ASCII = ord(chave[chave_atual]) % valores.TAMANHO_ASCII
@@ -100,15 +108,10 @@ def executar_modo_varias_letras(chave, mensagem, modo_traducao=False):
         return 'Chave inválida !'
 
 
-def traduz_vigenere_varia_letras(chave, mensagem, tamanho_chave, valor_atual):
-    '''
-    Função que traduzirá a cifra de vigenere no moodo várias letras.
-    Recebe como parâmetro "chave" a antiga chave utilizada para encriptar.
-    Mensagem é uma string contendo um texto encriptado.
-    Tamanho da chave é a quantidade de caracteres presente na chave.
-    Valor atual é um int = 0.
-    '''
-    chave_traduc = cria_chave_traducao_varias_letras(chave)  # Coletar a chave de tradução.
+def traduzir_modo_varios_caracteres(chave, mensagem):
+    valor_atual = 0
+    chave_traduc = adaptar_chave_para_traducao_varias_letras(chave)
+    tamanho_chave = len(chave)
     mensagem_traduzida = ''
     for letra in mensagem:
         letra_msg_atual = ord(letra)

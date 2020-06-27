@@ -138,6 +138,7 @@ def menu_cesar_encriptar(tela_anterior):
 def menu_cesar_traduzir(tela_anterior):
     layout_cesar_traduc = retorna_layout_padrao_traduçao('PythonGrafia: Cifra de César (tradução)', 'Cifra de César')
     tela_cesar_traduc = sg.Window('PythonGrafia: Cifra de César', layout_cesar_traduc)
+
     while True:
         evento, valores = tela_cesar_traduc.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_cesar_traduc):
@@ -149,8 +150,13 @@ def menu_cesar_traduzir(tela_anterior):
 
 
 def menu_subst_simples_encriptar(tela_anterior):
+    # Criando o layout da substituição simples.
     layout_subst_encript = retorna_layout_padrao_encriptaçao('PythonGrafia: Substituição simples (encriptação)', 'Substituição simples')
+    del layout_subst_encript[4]
+    layout_subst_encript.insert(4, [sg.Text('Letras mensagem comum:    '), sg.Input(key='letras_comum')])
+    layout_subst_encript.insert(5, [sg.Text('Letras mensagem encriptada:'), sg.Input(key='letras_encript')])
     tela_subst_encript = sg.Window('PythonGrafia: Substituição simples', layout_subst_encript)
+
     while True:
         evento, valores = tela_subst_encript.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_subst_encript):

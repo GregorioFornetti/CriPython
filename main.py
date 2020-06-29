@@ -7,7 +7,7 @@ import Cifras.subst_simples
 sg.theme('DarkGrey5')
 lista_criptografias_disponiveis = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
 dic_opçoes_disponiveis = {'Cifra de César': ['apenas letras', 'vários caracteres'],
-                            'Substituição simples':['apenas letras'],
+                            'Substituição simples':['apenas letras', 'vários caracteres'],
                             'Cifra de Vigenère':['apenas letras', 'vários caracteres']}
 
 
@@ -99,6 +99,7 @@ def menu_encriptar(tela_anterior):
         evento, valores = tela_encriptar.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_encriptar):
             break
+        tela_encriptar.Hide()
         if evento == 'Cifra de César':
             menu_cesar_encriptar(tela_encriptar)
         elif evento == 'Substituição simples':
@@ -114,6 +115,7 @@ def menu_traducao(tela_anterior):
         evento, valores = tela_traduzir.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_traduzir):
             break
+        tela_traduzir.Hide()
         if evento == 'Cifra de César':
             menu_cesar_traduzir(tela_traduzir)
         elif evento == 'Substituição simples':
@@ -152,24 +154,38 @@ def menu_cesar_traduzir(tela_anterior):
 def menu_subst_simples_encriptar(tela_anterior):
     # Criando o layout da substituição simples.
     layout_subst_encript = retorna_layout_padrao_encriptaçao('PythonGrafia: Substituição simples (encriptação)', 'Substituição simples')
-    del layout_subst_encript[4]
-    layout_subst_encript.insert(4, [sg.Text('Letras mensagem comum:    '), sg.Input(key='letras_comum')])
-    layout_subst_encript.insert(5, [sg.Text('Letras mensagem encriptada:'), sg.Input(key='letras_encript')])
-    tela_subst_encript = sg.Window('PythonGrafia: Substituição simples', layout_subst_encript)
-
+    layout_subst_encript = organiza_layout_subst_simples(layout_subst_encript)
+    tela_subst_encript = sg.Window('PythonGrafia: substituição simples', layout_subst_encript)
     while True:
         evento, valores = tela_subst_encript.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_subst_encript):
             break
+        if valores['apenas letras']:
+            print(Cifras.subst_simples.executar_modo_apenas_letras(valores['chave_1'], valores['chave_2'], valores['mensagem']))
+        if valores['vários caracteres']:
+            print(Cifras.subst_simples.executar_modo_varios_caracteres(valores['chave_1'], valores['chave_2'], valores['mensagem']))
 
 
 def menu_subst_simples_traduzir(tela_anterior):
     layout_subst_traduc = retorna_layout_padrao_traduçao('PythonGrafia: Substituição simples (tradução)', 'Substituição simples')
+    layout_subst_traduc = organiza_layout_subst_simples(layout_subst_traduc)
     tela_subst_traduc = sg.Window('PythonGrafia: substituição simples', layout_subst_traduc)
     while True:
         evento, valores = tela_subst_traduc.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_subst_traduc):
             break
+        if valores['apenas letras']:
+            print(Cifras.subst_simples.executar_modo_apenas_letras(valores['chave_2'], valores['chave_1'], valores['mensagem']))
+        if valores['vários caracteres']:
+            print(Cifras.subst_simples.executar_modo_varios_caracteres(valores['chave_2'], valores['chave_1'], valores['mensagem']))
+
+
+def organiza_layout_subst_simples(layout):
+    # Trocará o nome do que era "chave" para "letras mensagem encriptada" e adicionará outro local para digitar chamado "letras mensagem comum".
+    del layout[4]
+    layout.insert(4, [sg.Text('Letras mensagem comum:    '), sg.Input('abcdefghijklmnopqrstuvwxyz', key='chave_1')])
+    layout.insert(5, [sg.Text('Letras mensagem encriptada:'), sg.Input(key='chave_2')])
+    return layout
 
 
 def menu_vigenere_encriptar(tela_anterior):

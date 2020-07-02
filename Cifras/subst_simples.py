@@ -56,5 +56,3 @@ def cria_chave_dicionario(chave_1, chave_2):
     for index in range(len(chave_1)):
         dicionario_chave[chave_1[index]] = chave_2[index]
     return dicionario_chave
-
-

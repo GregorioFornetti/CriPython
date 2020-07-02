@@ -240,7 +240,7 @@ def menu_documentacao(tela_anterior):
 def menu_testes(tela_anterior):
     layout_testes = [[sg.Text('Testes automatizados para verificar se o programa está funcionando corretamente.')],
                     [sg.Output(size=(120,40))],
-                    [sg.Button('Retornar',key='retorno'), sg.Button('Testar',key='testar')]]
+                    [sg.Button('Retornar',key='retornar'), sg.Button('Testar',key='testar')]]
 
     tela_testes = sg.Window('Menu testes automatizados', layout_testes)
     while True:

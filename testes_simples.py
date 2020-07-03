@@ -1,6 +1,6 @@
-import Cifras.cifra_de_cesar
-import Cifras.cifra_de_vigenere
-import Cifras.subst_simples
+import Cifras.cifra_de_cesar as cifra_de_cesar
+import Cifras.cifra_de_vigenere as cifra_de_vigenere
+import Cifras.subst_simples as subst_simples
 
 soma_erros = 0
 
@@ -11,12 +11,13 @@ def testar():  # Função que chamará todos os testes de cifras disponiveis.
     testa_cesar_apenas_letras()
     testa_cesar_varios_caracteres()
     testa_subst_simples_apenas_letras()
+    testa_subst_simples_varios_caracteres()
     testa_vigenere_apenas_letras()
     testa_vigenere_varios_caracteres()
     if soma_erros == 0:
         separacoes('Nenhum erro encontrado !')
     else:
-        separacoes('Total de erros encontrados foi:' + str(todos_erros))
+        separacoes('Total de erros encontrados foi:' + str(soma_erros))
 
 
 def testa_cesar_apenas_letras():  # Função que testa a cifra de césar.
@@ -26,25 +27,25 @@ def testa_cesar_apenas_letras():  # Função que testa a cifra de césar.
     testes['chave'] = '1'
     testes['mensagem'] = 'abcdefghijklmnopqrstuvwxyz'
     testes['mensagem esperada'] = 'bcdefghijklmnopqrstuvwxyza'
-    testes['mensagem computada'] = Cifras.cifra_de_cesar.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_cesar.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(1, testes)
     # Segundo teste:
     testes['chave'] = '5'
     testes['mensagem'] = 'abcdefghijklmnopqrstuvwxyz'
     testes['mensagem esperada'] = 'fghijklmnopqrstuvwxyzabcde'
-    testes['mensagem computada'] = Cifras.cifra_de_cesar.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_cesar.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(2, testes)
     # Terceiro teste:
     testes['chave'] = '7'
     testes['mensagem'] = 'Bom dia, Boa tarde, Boa noite!'
     testes['mensagem esperada'] = 'Ivt kph, Ivh ahykl, Ivh uvpal!'
-    testes['mensagem computada'] = Cifras.cifra_de_cesar.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_cesar.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(3, testes)
     # Quarto teste:
     testes['chave'] = '7'
     testes['mensagem'] = 'Ivt kph, Ivh ahykl, Ivh uvpal!'
     testes['mensagem esperada'] = 'Bom dia, Boa tarde, Boa noite!'
-    testes['mensagem computada'] = Cifras.cifra_de_cesar.traduzir_modo_apenas_letras(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_cesar.traduzir_modo_apenas_letras(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(4, testes, modo_traduc=True)
 
 
@@ -55,25 +56,25 @@ def testa_cesar_varios_caracteres():
     testes['chave'] = '123'
     testes['mensagem'] = 'Olá ! Será que troca letras com acentos também ? E espaços ? Vamos testar agora !'
     testes['mensagem esperada'] = 'ìĉž½¾½ðĂďž½ĎĒĂ½đďČĀþ½ĉĂđďþĐ½ĀČĊ½þĀĂċđČĐ½đþĊÿƆĊ½Ü½â½ĂĐčþƄČĐ½Ü½óþĊČĐ½đĂĐđþď½þĄČďþ½¾'
-    testes['mensagem computada'] = Cifras.cifra_de_cesar.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_cesar.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(1, testes)
     # Segundo teste:
     testes['chave'] = '123'
     testes['mensagem'] = 'ìĉž½¾½ðĂďž½ĎĒĂ½đďČĀþ½ĉĂđďþĐ½ĀČĊ½þĀĂċđČĐ½đþĊÿƆĊ½Ü½â½ĂĐčþƄČĐ½Ü½óþĊČĐ½đĂĐđþď½þĄČďþ½¾'
     testes['mensagem esperada'] = 'Olá ! Será que troca letras com acentos também ? E espaços ? Vamos testar agora !'
-    testes['mensagem computada'] = Cifras.cifra_de_cesar.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_cesar.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(2, testes, modo_traduc=True)
     # Terceiro teste:
     testes['chave'] = '321'
     testes['mensagem'] = 'Legal ! Parece que está tudo funcionando corretamente, vamos ver como o texto fica movendo mais ainda !!!'
     testes['mensagem esperada'] = 'ƯǈǊǄǏƃƄƃƳǄǕǈǆǈƃǔǘǈƃǈǖǗɄƃǗǘǇǒƃǉǘǑǆǌǒǑǄǑǇǒƃǆǒǕǕǈǗǄǐǈǑǗǈƏƃǙǄǐǒǖƃǙǈǕƃǆǒǐǒƃǒƃǗǈǛǗǒƃǉǌǆǄƃǐǒǙǈǑǇǒƃǐǄǌǖƃǄǌǑǇǄƃƄƄƄ'
-    testes['mensagem computada'] = Cifras.cifra_de_cesar.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_cesar.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(3, testes)
     # Quarto teste:
     testes['chave'] = '321'
     testes['mensagem'] = 'ƯǈǊǄǏƃƄƃƳǄǕǈǆǈƃǔǘǈƃǈǖǗɄƃǗǘǇǒƃǉǘǑǆǌǒǑǄǑǇǒƃǆǒǕǕǈǗǄǐǈǑǗǈƏƃǙǄǐǒǖƃǙǈǕƃǆǒǐǒƃǒƃǗǈǛǗǒƃǉǌǆǄƃǐǒǙǈǑǇǒƃǐǄǌǖƃǄǌǑǇǄƃƄƄƄ'
     testes['mensagem esperada'] = 'Legal ! Parece que está tudo funcionando corretamente, vamos ver como o texto fica movendo mais ainda !!!'
-    testes['mensagem computada'] = Cifras.cifra_de_cesar.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_cesar.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(4, testes, modo_traduc=True)
 
 
@@ -85,61 +86,70 @@ def testa_subst_simples_apenas_letras():  # Função que testa a cifra de substi
     testes['letras mensagem encriptada'] = 'fhizdlmnavgewptubxjrqocsky'
     testes['mensagem'] = 'Tudo bem com voce ?'
     testes['mensagem esperada'] = 'Rqzt hdw itw otid ?'
-    testes['mensagem computada'] = Cifras.subst_simples.executar_modo_apenas_letras(testes['letras mensagem comum'],
-                                                                                    testes['letras mensagem encriptada'], testes['mensagem'])
+    testes['mensagem computada'] = subst_simples.executar_modo_apenas_letras(testes['letras mensagem comum'],
+                                                                             testes['letras mensagem encriptada'], testes['mensagem'])
     verificar_e_imprimir_testes(1, testes)
     # Segundo teste:
     testes['letras mensagem comum'] = 'abcdefghijklmnopqrstuvwxyz'
     testes['letras mensagem encriptada'] = 'fhizdlmnavgewptubxjrqocsky'
     testes['mensagem'] = 'Rqzt hdw itw otid ?'
     testes['mensagem esperada'] = 'Tudo bem com voce ?'
-    testes['mensagem computada'] = Cifras.subst_simples.executar_modo_apenas_letras(testes['letras mensagem encriptada'],
-                                                                                    testes['letras mensagem comum'], testes['mensagem'])
+    testes['mensagem computada'] = subst_simples.executar_modo_apenas_letras(testes['letras mensagem encriptada'],
+                                                                             testes['letras mensagem comum'], testes['mensagem'])
     verificar_e_imprimir_testes(2, testes, modo_traduc=True)
     # Terceiro teste:
     testes['letras mensagem comum'] = 'abcdefghijklmnopqrstuvwxyz'
     testes['letras mensagem encriptada'] = 'neruzjxpgfabcowvdqyihtslmk'
     testes['mensagem'] = 'Por favor, me responda !'
     testes['mensagem esperada'] = 'Vwq jntwq, cz qzyvwoun !'
-    testes['mensagem computada'] = Cifras.subst_simples.executar_modo_apenas_letras(testes['letras mensagem comum'],
-                                                                                    testes['letras mensagem encriptada'], testes['mensagem'])
+    testes['mensagem computada'] = subst_simples.executar_modo_apenas_letras(testes['letras mensagem comum'],
+                                                                             testes['letras mensagem encriptada'], testes['mensagem'])
     verificar_e_imprimir_testes(3, testes)
     # Quarto teste:
     testes['letras mensagem comum'] = 'abcdefghijklmnopqrstuvwxyz'
     testes['letras mensagem encriptada'] = 'neruzjxpgfabcowvdqyihtslmk'
     testes['mensagem'] = 'Vwq jntwq, cz qzyvwoun !'
     testes['mensagem esperada'] = 'Por favor, me responda !' 
-    testes['mensagem computada'] = Cifras.subst_simples.executar_modo_apenas_letras(testes['letras mensagem encriptada'],
-                                                                                    testes['letras mensagem comum'], testes['mensagem'])
+    testes['mensagem computada'] = subst_simples.executar_modo_apenas_letras(testes['letras mensagem encriptada'],
+                                                                             testes['letras mensagem comum'], testes['mensagem'])
     verificar_e_imprimir_testes(4, testes, modo_traduc=True)
 
 
 def testa_subst_simples_varios_caracteres():
     separacoes('Substituição simples(vários caracteres)')
+    testes = {}
     # Primeiro teste:
-    testes['letra mensagem comum'] =
-    testes['letras mensagem encriptada'] = 
-    testes['mensagem'] =
-    testes['mensagem esperada'] =
-    testes['mensagem computada'] =
+    testes['letras mensagem comum'] = 'abcdefghijklmnopqrstuvwxyz'
+    testes['letras mensagem encriptada'] = 'fhizdlmnavgewptubxjrqocsky'
+    testes['mensagem'] = 'Ué ? Esse exemplo não é igual ao da cifra de substituição simples no modo apenas letras ? Não, as maiusculas não serão trocadas se você não pedir!'
+    testes['mensagem esperada'] = 'Ué ? Ejjd dsdwuet pãt é amqfe ft zf ialxf zd jqhjrarqaçãt jawuedj pt wtzt fudpfj edrxfj ? Nãt, fj wfaqjiqefj pãt jdxãt rxtifzfj jd otiê pãt udzax!'
+    testes['mensagem computada'] = subst_simples.executar_modo_varios_caracteres(testes['letras mensagem comum'],
+                                                                                 testes['letras mensagem encriptada'], testes['mensagem'])
+    verificar_e_imprimir_testes(1, testes)
     # Segundo teste:
-    testes['letras mensagem comum'] = 
-    testes['letras mensagem encriptada'] = 
-    testes['mensagem'] =
-    testes['mensagem esperada'] =
-    testes['mensagem computada'] =
+    testes['letras mensagem comum'] = 'abcdefghijklmnopqrstuvwxyz'
+    testes['letras mensagem encriptada'] = 'fhizdlmnavgewptubxjrqocsky'
+    testes['mensagem'] = 'Ué ? Ejjd dsdwuet pãt é amqfe ft zf ialxf zd jqhjrarqaçãt jawuedj pt wtzt fudpfj edrxfj ? Nãt, fj wfaqjiqefj pãt jdxãt rxtifzfj jd otiê pãt udzax!'
+    testes['mensagem esperada'] = 'Ué ? Esse exemplo não é igual ao da cifra de substituição simples no modo apenas letras ? Não, as maiusculas não serão trocadas se você não pedir!'
+    testes['mensagem computada'] = subst_simples.executar_modo_varios_caracteres(testes['letras mensagem encriptada'],
+                                                                                 testes['letras mensagem comum'], testes['mensagem'])
+    verificar_e_imprimir_testes(2, testes, modo_traduc=True)
     # Terceiro teste:
-    testes['letras mensagem comum'] = 
-    testes['letras mensagem encriptada'] = 
-    testes['mensagem'] =
-    testes['mensagem esperada'] =
-    testes['mensagem computada'] =
+    testes['letras mensagem comum'] = 'abcdefghijklmnopqrstuvwxyz !?.,'
+    testes['letras mensagem encriptada'] = 'qwertyuiopasdfghjklzxcvbnm@#$%*'
+    testes['mensagem'] = 'Vamos trocar outros caracteres agora ! Testando, 1, 2, 3 ... Funcionou ?'
+    testes['mensagem esperada'] = 'Vqdgl@zkgeqk@gxzkgl@eqkqeztktl@qugkq@#@Ttlzqfrg*@1*@2*@3@%%%@Fxfeogfgx@$'
+    testes['mensagem computada'] = subst_simples.executar_modo_varios_caracteres(testes['letras mensagem comum'],
+                                                                                 testes['letras mensagem encriptada'], testes['mensagem'])
+    verificar_e_imprimir_testes(3, testes)
     # Quarto teste:
-    testes['letras mensagem comum'] = 
-    testes['letras mensagem encriptada'] = 
-    testes['mensagem'] =
-    testes['mensagem esperada'] =
-    testes['mensagem computada'] =
+    testes['letras mensagem comum'] = 'abcdefghijklmnopqrstuvwxyz !?.,'
+    testes['letras mensagem encriptada'] = 'qwertyuiopasdfghjklzxcvbnm@#$%*'
+    testes['mensagem'] = 'Vqdgl@zkgeqk@gxzkgl@eqkqeztktl@qugkq@#@Ttlzqfrg*@1*@2*@3@%%%@Fxfeogfgx@$'
+    testes['mensagem esperada'] = 'Vamos trocar outros caracteres agora ! Testando, 1, 2, 3 ... Funcionou ?'
+    testes['mensagem computada'] = subst_simples.executar_modo_varios_caracteres(testes['letras mensagem encriptada'],
+                                                                                 testes['letras mensagem comum'], testes['mensagem'])
+    verificar_e_imprimir_testes(4, testes, modo_traduc=True)
 
 
 def testa_vigenere_apenas_letras():  # Função que testa a cifra de Vigenère.
@@ -149,25 +159,25 @@ def testa_vigenere_apenas_letras():  # Função que testa a cifra de Vigenère.
     testes['chave'] = 'ataque'
     testes['mensagem'] = 'Vamos invadir a base deles amanhã !'
     testes['mensagem esperada'] = 'Vtmem mnoatcv a uaiy heeei uqaghã !'
-    testes['mensagem computada'] = Cifras.cifra_de_vigenere.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_vigenere.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(1, testes)
     # Segundo teste:
     testes['chave'] = 'ataque'
     testes['mensagem'] = 'Vtmem mnoatcv a uaiy heeei uqaghã !'
     testes['mensagem esperada'] = 'Vamos invadir a base deles amanhã !'
-    testes['mensagem computada'] = Cifras.cifra_de_vigenere.traduzir_modo_apenas_letras(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_vigenere.traduzir_modo_apenas_letras(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(2, testes, modo_traduc=True)
     # Terceiro teste:
     testes['chave'] = 'covid'
     testes['mensagem'] = 'Cuidado para não se contaminar !'
     testes['mensagem esperada'] = 'Eidldfc kiuc bãj ah ecibdowiiu !'
-    testes['mensagem computada'] = Cifras.cifra_de_vigenere.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_vigenere.encriptar_modo_apenas_letras(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(3, testes)
     # Quarto teste:
     testes['chave'] = 'covid'
     testes['mensagem'] = 'Eidldfc kiuc bãj ah ecibdowiiu !'
     testes['mensagem esperada'] = 'Cuidado para não se contaminar !'
-    testes['mensagem computada'] = Cifras.cifra_de_vigenere.traduzir_modo_apenas_letras(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_vigenere.traduzir_modo_apenas_letras(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(4, testes, modo_traduc=True)
 
 
@@ -178,25 +188,25 @@ def testa_vigenere_varios_caracteres():
     testes['chave'] = 'testando'
     testes['mensagem'] = 'Vamos ver como que essa cifra está funcionando ! Será que está trocando tudo ?'
     testes['mensagem esperada'] = 'ìèĂąö°üöĈ§øąðÿ¦Ăċìµûöăç±ùðûĈä°ëĄĊŨµüøþéúąõöĄçÿ¦²¶ÚúĈŤ°÷Ćû§úĉ÷ű¦ąĈöø÷ñôõ±Ċüùą£Ï'
-    testes['mensagem computada'] = Cifras.cifra_de_vigenere.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_vigenere.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(1, testes)
     # Segundo teste:
     testes['chave'] = 'testando'
     testes['mensagem'] = 'ìèĂąö°üöĈ§øąðÿ¦Ăċìµûöăç±ùðûĈä°ëĄĊŨµüøþéúąõöĄçÿ¦²¶ÚúĈŤ°÷Ćû§úĉ÷ű¦ąĈöø÷ñôõ±Ċüùą£Ï'
     testes['mensagem esperada'] = 'Vamos ver como que essa cifra está funcionando ! Será que está trocando tudo ?'
-    testes['mensagem computada'] = Cifras.cifra_de_vigenere.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_vigenere.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(2, testes, modo_traduc=True)
     # Terceiro teste:
     testes['chave'] = 'cháves diférentes!'
     testes['mensagem'] = 'Vamos testar agora com uma chave diferente, com espaços e acentos.'
     testes['mensagem esperada'] = 'ÛëŰćúµ¶ëþüŬĆ§ñýöć¤¥íŲą§Ċ¯ç«ëųõýõ¶ëþ©êüŨĆûúL¦î÷Ÿ´ìăĆèż²øªŨ¸èø§ôÿ÷žÂ'
-    testes['mensagem computada'] = Cifras.cifra_de_vigenere.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_vigenere.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(3, testes)
     # Quarto teste:
     testes['chave'] = 'cháves diférentes!'
     testes['mensagem'] = 'ÛëŰćúµ¶ëþüŬĆ§ñýöć¤¥íŲą§Ċ¯ç«ëųõýõ¶ëþ©êüŨĆûúL¦î÷Ÿ´ìăĆèż²øªŨ¸èø§ôÿ÷žÂ'
     testes['mensagem esperada'] = 'Vamos testar agora com uma chave diferente, com espaços e acentos.'
-    testes['mensagem computada'] = Cifras.cifra_de_vigenere.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
+    testes['mensagem computada'] = cifra_de_vigenere.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(4, testes, modo_traduc=True)
 
 

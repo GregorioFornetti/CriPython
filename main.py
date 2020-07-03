@@ -1,15 +1,18 @@
 import PySimpleGUI as sg
+import webbrowser
 import forca_bruta
 import testes_simples
-import Cifras.cifra_de_cesar
-import Cifras.cifra_de_vigenere
-import Cifras.subst_simples
+import Cifras.cifra_de_cesar as cifra_de_cesar
+import Cifras.cifra_de_vigenere as cifra_de_vigenere
+import Cifras.subst_simples as subst_simples
 sg.theme('DarkGrey5')
 lista_criptografias_disponiveis = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
 dic_opçoes_disponiveis = {'Cifra de César': ['apenas letras', 'vários caracteres'],
-                            'Substituição simples':['apenas letras', 'vários caracteres'],
-                            'Cifra de Vigenère':['apenas letras', 'vários caracteres']}
-
+                          'Substituição simples':['apenas letras', 'vários caracteres'],
+                          'Cifra de Vigenère':['apenas letras', 'vários caracteres']}
+dic_link_cifras = {'Cifra de César':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-cesar.',
+                   'Substituição simples':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-substitui%C3%A7%C3%A3o-simples.',
+                   'Cifra de Vigenère':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-Vigen%C3%A8re'}
 
 def main():
     # Layout da interface principal do programa.
@@ -74,6 +77,7 @@ def retorna_layout_padrao_traduçao(titulo, criptografia):
              retorna_layout_opçoes(criptografia),
              [sg.Text('Mensagem encriptada:'), sg.InputText(key='mensagem')],
              [sg.Text('Chave:'), sg.InputText(key='chave')],
+             [sg.Text('Caso tenha alguma duvida, clique nesse texto para acessar a wiki', key='link', enable_events=True, text_color="red")],
              [sg.Text('Mensagem traduzida:')],
              [sg.Output(size=(80,30))],
              [sg.Button('Traduzir', key='traduzir'), sg.Button('Retornar', key='retornar')]]
@@ -86,6 +90,7 @@ def retorna_layout_padrao_encriptaçao(titulo, criptografia):
              retorna_layout_opçoes(criptografia),
              [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
              [sg.Text('Chave:'), sg.InputText(key='chave')],
+             [sg.Text('Caso tenha alguma duvida, clique nesse texto para acessar a wiki', key='link', enable_events=True, text_color="red")],
              [sg.Text('Mensagem encriptada:')],
              [sg.Output(size=(80,30))],
              [sg.Button('Encriptar', key='traduzir'), sg.Button('Retornar', key='retornar')]]
@@ -131,10 +136,12 @@ def menu_cesar_encriptar(tela_anterior):
         evento, valores = tela_cesar_encript.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_cesar_encript):
             break
-        if valores['apenas letras']:
-            print(Cifras.cifra_de_cesar.encriptar_modo_apenas_letras(valores['chave'], valores['mensagem']))
+        if evento == 'link':
+            webbrowser.open(dic_link_cifras['Cifra de César'])
+        elif valores['apenas letras']:
+            print(cifra_de_cesar.encriptar_modo_apenas_letras(valores['chave'], valores['mensagem']))
         else:
-            print(Cifras.cifra_de_cesar.encriptar_modo_varios_caracteres(valores['chave'], valores['mensagem']))
+            print(cifra_de_cesar.encriptar_modo_varios_caracteres(valores['chave'], valores['mensagem']))
 
 
 def menu_cesar_traduzir(tela_anterior):
@@ -145,10 +152,12 @@ def menu_cesar_traduzir(tela_anterior):
         evento, valores = tela_cesar_traduc.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_cesar_traduc):
             break
-        if valores['apenas letras']:
-            print(Cifras.cifra_de_cesar.traduzir_modo_apenas_letras(valores['chave'], valores['mensagem']))
+        if evento == 'link':
+            webbrowser.open(dic_link_cifras['Cifra de César'])
+        elif valores['apenas letras']:
+            print(cifra_de_cesar.traduzir_modo_apenas_letras(valores['chave'], valores['mensagem']))
         else:
-            print(Cifras.cifra_de_cesar.traduzir_modo_varios_caracteres(valores['chave'], valores['mensagem']))
+            print(cifra_de_cesar.traduzir_modo_varios_caracteres(valores['chave'], valores['mensagem']))
 
 
 def menu_subst_simples_encriptar(tela_anterior):
@@ -160,10 +169,12 @@ def menu_subst_simples_encriptar(tela_anterior):
         evento, valores = tela_subst_encript.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_subst_encript):
             break
-        if valores['apenas letras']:
-            print(Cifras.subst_simples.executar_modo_apenas_letras(valores['chave_1'], valores['chave_2'], valores['mensagem']))
-        if valores['vários caracteres']:
-            print(Cifras.subst_simples.executar_modo_varios_caracteres(valores['chave_1'], valores['chave_2'], valores['mensagem']))
+        if evento == 'link':
+            webbrowser.open(dic_link_cifras['Substituição simples'])
+        elif valores['apenas letras']:
+            print(subst_simples.executar_modo_apenas_letras(valores['chave_1'], valores['chave_2'], valores['mensagem']))
+        else:
+            print(subst_simples.executar_modo_varios_caracteres(valores['chave_1'], valores['chave_2'], valores['mensagem']))
 
 
 def menu_subst_simples_traduzir(tela_anterior):
@@ -174,10 +185,12 @@ def menu_subst_simples_traduzir(tela_anterior):
         evento, valores = tela_subst_traduc.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_subst_traduc):
             break
+        if evento == 'link':
+            webbrowser.open(dic_link_cifras['Substituição simples'])
         if valores['apenas letras']:
-            print(Cifras.subst_simples.executar_modo_apenas_letras(valores['chave_2'], valores['chave_1'], valores['mensagem']))
+            print(subst_simples.executar_modo_apenas_letras(valores['chave_2'], valores['chave_1'], valores['mensagem']))
         if valores['vários caracteres']:
-            print(Cifras.subst_simples.executar_modo_varios_caracteres(valores['chave_2'], valores['chave_1'], valores['mensagem']))
+            print(subst_simples.executar_modo_varios_caracteres(valores['chave_2'], valores['chave_1'], valores['mensagem']))
 
 
 def organiza_layout_subst_simples(layout):
@@ -195,10 +208,12 @@ def menu_vigenere_encriptar(tela_anterior):
         evento, valores = tela_vigenere_encript.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_vigenere_encript):
             break
+        if evento == 'link':
+            webbrowser.open(dic_link_cifras['Cifra de Vigenère'])
         if valores['apenas letras']:
-            print(Cifras.cifra_de_vigenere.encriptar_modo_apenas_letras(valores['chave'], valores['mensagem']))
+            print(cifra_de_vigenere.encriptar_modo_apenas_letras(valores['chave'], valores['mensagem']))
         else:
-            print(Cifras.cifra_de_vigenere.encriptar_modo_varios_caracteres(valores['chave'], valores['mensagem']))
+            print(cifra_de_vigenere.encriptar_modo_varios_caracteres(valores['chave'], valores['mensagem']))
 
 
 def menu_vigenere_traduzir(tela_anterior):
@@ -208,10 +223,12 @@ def menu_vigenere_traduzir(tela_anterior):
         evento, valores = tela_vigenere_traduc.read()
         if voltou_para_tela_anterior(evento, tela_anterior, tela_vigenere_traduc):
             break
+        if evento == 'link':
+            webbrowser.open(dic_link_cifras['Cifra de Vigenère'])
         if valores['apenas letras']:
-            print(Cifras.cifra_de_vigenere.traduzir_modo_apenas_letras(valores['chave'], valores['mensagem']))
+            print(cifra_de_vigenere.traduzir_modo_apenas_letras(valores['chave'], valores['mensagem']))
         else:
-            print(Cifras.cifra_de_vigenere.traduzir_modo_varios_caracteres(valores['chave'], valores['mensagem']))
+            print(cifra_de_vigenere.traduzir_modo_varios_caracteres(valores['chave'], valores['mensagem']))
 
 
 def menu_documentacao(tela_anterior):

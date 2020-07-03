@@ -1,4 +1,4 @@
-import valores
+import Cifras.valores as valores
 
 
 def retorna_chave_se_for_valida(chave):  # Função validadora da chave.

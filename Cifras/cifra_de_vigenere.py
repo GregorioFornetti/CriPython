@@ -1,4 +1,4 @@
-import valores
+import Cifras.valores as valores
 
 
 def testa_chave_vigenere(chave):  # Função que testa se a chave fornecida pelo usuário é válida.

@@ -40,15 +40,15 @@ Nesse mesmo repositório, há uma wiki que explica sobre a implementação das c
 Abaixo terão algumas imagens da interface gráfica deste programa:
 Tela principal:
 
-![Screenshot tela principal](https://github.com/GregorioFornetti/Programa-criptografia/blob/master/Screenshots/Tela%20principal.png)
+TODO
 
 Tela do menu encriptar:
 
-![Screenshot tela encriptar](https://github.com/GregorioFornetti/Programa-criptografia/blob/master/Screenshots/Encriptar.png)
+TODO
 
 Tela do menu traduzir:
 
-![Screenshot tela traduzir](https://github.com/GregorioFornetti/Programa-criptografia/blob/master/Screenshots/Traduzir.png)
+TODO
 
 
   

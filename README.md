@@ -1,7 +1,7 @@
 # Programa criptografia
 ## Conceito do projeto
 
-O programa criptografia tem o intuíto de traduzir ou encriptar mensagens, dando a liberdade para o usuário escolher uma das [criptografias disponíveis](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifras-disponiveis.) que deseja usar para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, outro objetivo desse projeto é explicar um pouco sobre o assunto criptografia e algumas cifras de criptografia.
+O programa criptografia tem o intuíto de traduzir ou encriptar mensagens, dando a liberdade para o usuário escolher uma das [cifras disponiveis](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifras-dispon%C3%ADveis) que deseja usar para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, outro objetivo desse projeto é explicar um pouco sobre o assunto criptografia e algumas cifras de criptografia.
 
 ## Pré-requisitos e recursos utilizados
 Para o desenvolvimento desse projeto foi utilizado a linguagem Python e algumas bibliotecas, citadas logo abaixo:
@@ -9,15 +9,15 @@ Para o desenvolvimento desse projeto foi utilizado a linguagem Python e algumas 
 1- PySimpleGUI, utilizado para criar a interface gráfica do programa. A biblioteca está disponível [aqui](https://pysimplegui.readthedocs.io/en/latest/)
 
 ## Passo a passo
-1- Aprendi um pouco sobre a biblioteca PySimpleGUI e suas funções/métodos através da [documentação da biblioteca](https://pysimplegui.readthedocs.io/en/latest/) e por um [vídeo](https://www.youtube.com/watch?v=Et0fYeA2XxY)
+1- Aprendi um pouco sobre a biblioteca PySimpleGUI e suas funções, métodos e objetos através da [documentação da biblioteca](https://pysimplegui.readthedocs.io/en/latest/) e por um [vídeo](https://www.youtube.com/watch?v=Et0fYeA2XxY)
 
 2- Com os conhecimentos adquiridos através do passo anterior, comecei a criar a interface gráfica do programa.
 
 3- Depois de criar uma interface básica, comecei a estudar mais sobre cifras, nos links a seguir:
 
-* [Cifra de César](https://pt.wikipedia.org/wiki/Cifra_de_C%C3%A9sar)
+* [Cifra de César](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-C%C3%A9sar)
 
-* [Substituição simples](https://pt.wikipedia.org/wiki/Cifra_de_substitui%C3%A7%C3%A3o)
+* [Substituição simples](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-substitui%C3%A7%C3%A3o-simples)
 
 4- Com um pouco de conhecimento de programção e sobre cifras, implementei a lógica das cifras disponíveis no programa até agora.
 

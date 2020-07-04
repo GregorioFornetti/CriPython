@@ -79,7 +79,7 @@ def retorna_layout_padrao_traduçao(titulo, criptografia):
              [sg.Text('Chave:'), sg.InputText(key='chave')],
              [sg.Text('Caso tenha alguma duvida, clique nesse texto para acessar a wiki', key='link', enable_events=True, text_color="red")],
              [sg.Text('Mensagem traduzida:')],
-             [sg.Output(size=(80,30))],
+             [sg.Output(size=(75,25))],
              [sg.Button('Traduzir', key='traduzir'), sg.Button('Retornar', key='retornar')]]
     return layout
 
@@ -92,7 +92,7 @@ def retorna_layout_padrao_encriptaçao(titulo, criptografia):
              [sg.Text('Chave:'), sg.InputText(key='chave')],
              [sg.Text('Caso tenha alguma duvida, clique nesse texto para acessar a wiki', key='link', enable_events=True, text_color="red")],
              [sg.Text('Mensagem encriptada:')],
-             [sg.Output(size=(80,30))],
+             [sg.Output(size=(75,25))],
              [sg.Button('Encriptar', key='traduzir'), sg.Button('Retornar', key='retornar')]]
     return layout
 

@@ -11,7 +11,7 @@ dic_opçoes_disponiveis = {'Cifra de César': ['apenas letras', 'vários caracte
                           'Substituição simples':['apenas letras', 'vários caracteres'],
                           'Cifra de Vigenère':['apenas letras', 'vários caracteres']}
 dic_link_cifras = {'Cifra de César':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-cesar.',
-                   'Substituição simples':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-substitui%C3%A7%C3%A3o-simples.',
+                   'Substituição simples':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-substitui%C3%A7%C3%A3o-simples',
                    'Cifra de Vigenère':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-Vigen%C3%A8re'}
 
 def main():
@@ -77,10 +77,9 @@ def retorna_layout_padrao_traduçao(titulo, criptografia):
              retorna_layout_opçoes(criptografia),
              [sg.Text('Mensagem encriptada:'), sg.InputText(key='mensagem')],
              [sg.Text('Chave:'), sg.InputText(key='chave')],
-             [sg.Text('Caso tenha alguma duvida, clique nesse texto para acessar a wiki', key='link', enable_events=True, text_color="red")],
              [sg.Text('Mensagem traduzida:')],
              [sg.Output(size=(75,25))],
-             [sg.Button('Traduzir', key='traduzir'), sg.Button('Retornar', key='retornar')]]
+             [sg.Button('Traduzir', key='traduzir'), sg.Button('Retornar', key='retornar'), sg.Button('Abrir guia da cifra', key='link')]]
     return layout
 
 
@@ -90,10 +89,9 @@ def retorna_layout_padrao_encriptaçao(titulo, criptografia):
              retorna_layout_opçoes(criptografia),
              [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
              [sg.Text('Chave:'), sg.InputText(key='chave')],
-             [sg.Text('Caso tenha alguma duvida, clique nesse texto para acessar a wiki', key='link', enable_events=True, text_color="red")],
              [sg.Text('Mensagem encriptada:')],
              [sg.Output(size=(75,25))],
-             [sg.Button('Encriptar', key='traduzir'), sg.Button('Retornar', key='retornar')]]
+             [sg.Button('Encriptar', key='traduzir'), sg.Button('Retornar', key='retornar'), sg.Button('Abrir guia da cifra', key='link')]]
     return layout
 
 
@@ -134,6 +132,7 @@ def menu_cesar_encriptar(tela_anterior):
     tela_cesar_encript = sg.Window('PythonGrafia: Cifra de César', layout_cesar_encript)
     while True:
         evento, valores = tela_cesar_encript.read()
+        print(evento)
         if voltou_para_tela_anterior(evento, tela_anterior, tela_cesar_encript):
             break
         if evento == 'link':
@@ -187,9 +186,9 @@ def menu_subst_simples_traduzir(tela_anterior):
             break
         if evento == 'link':
             webbrowser.open(dic_link_cifras['Substituição simples'])
-        if valores['apenas letras']:
+        elif valores['apenas letras']:
             print(subst_simples.executar_modo_apenas_letras(valores['chave_2'], valores['chave_1'], valores['mensagem']))
-        if valores['vários caracteres']:
+        else:
             print(subst_simples.executar_modo_varios_caracteres(valores['chave_2'], valores['chave_1'], valores['mensagem']))
 
 
@@ -210,7 +209,7 @@ def menu_vigenere_encriptar(tela_anterior):
             break
         if evento == 'link':
             webbrowser.open(dic_link_cifras['Cifra de Vigenère'])
-        if valores['apenas letras']:
+        elif valores['apenas letras']:
             print(cifra_de_vigenere.encriptar_modo_apenas_letras(valores['chave'], valores['mensagem']))
         else:
             print(cifra_de_vigenere.encriptar_modo_varios_caracteres(valores['chave'], valores['mensagem']))
@@ -225,7 +224,7 @@ def menu_vigenere_traduzir(tela_anterior):
             break
         if evento == 'link':
             webbrowser.open(dic_link_cifras['Cifra de Vigenère'])
-        if valores['apenas letras']:
+        elif valores['apenas letras']:
             print(cifra_de_vigenere.traduzir_modo_apenas_letras(valores['chave'], valores['mensagem']))
         else:
             print(cifra_de_vigenere.traduzir_modo_varios_caracteres(valores['chave'], valores['mensagem']))

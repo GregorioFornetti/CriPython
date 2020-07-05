@@ -10,9 +10,9 @@ lista_criptografias_disponiveis = ['Cifra de César', 'Substituição simples', 
 dic_opçoes_disponiveis = {'Cifra de César': ['apenas letras', 'vários caracteres'],
                           'Substituição simples':['apenas letras', 'vários caracteres'],
                           'Cifra de Vigenère':['apenas letras', 'vários caracteres']}
-dic_link_cifras = {'Cifra de César':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-cesar.',
-                   'Substituição simples':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-substitui%C3%A7%C3%A3o-simples',
-                   'Cifra de Vigenère':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Guia-do-programa-criptografia:-Cifra-de-Vigen%C3%A8re'}
+dic_link_cifras = {'Cifra de César':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-C%C3%A9sar',
+                   'Substituição simples':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-substitui%C3%A7%C3%A3o-simples',
+                   'Cifra de Vigenère':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-Vigen%C3%A8re'}
 
 def main():
     # Layout da interface principal do programa.
@@ -132,7 +132,6 @@ def menu_cesar_encriptar(tela_anterior):
     tela_cesar_encript = sg.Window('PythonGrafia: Cifra de César', layout_cesar_encript)
     while True:
         evento, valores = tela_cesar_encript.read()
-        print(evento)
         if voltou_para_tela_anterior(evento, tela_anterior, tela_cesar_encript):
             break
         if evento == 'link':

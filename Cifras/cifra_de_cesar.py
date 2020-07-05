@@ -39,17 +39,17 @@ def cesar_troca_apenas_letras(chave, mensagem):
     for letra in mensagem:
         ascii_letra = ord(letra)
         ascii_soma = ascii_letra + chave
-        if letra.islower():
+        if ascii_letra >= valores.MIN_MINUSCULA and ascii_letra <= valores.MAX_MINUSCULA:
             if ascii_soma > valores.MAX_MINUSCULA:
                 ascii_soma = 96 + (ascii_soma - valores.MAX_MINUSCULA)  # O codigo ascii passou de 'z', então deve voltar ao inicio.
             mensagem_nova += chr(ascii_soma)
             continue
-        if letra.isupper():  # Criptografia para letras maiusculas.
+        if ascii_letra >= valores.MIN_MAIUSCULA and ascii_letra <= valores.MAX_MAIUSCULA:  # Criptografia para letras maiusculas.
             if ascii_soma > valores.MAX_MAIUSCULA:
                 ascii_soma = 64 + (ascii_soma - valores.MAX_MAIUSCULA)  # O codigo ascii passou de 'Z', então deve voltar ao inicio.
             mensagem_nova += chr(ascii_soma)
             continue
-        mensagem_nova += letra  # Caso a mensagem tenha caracteres especiais, eles serão adicionados sem mudanças.
+        mensagem_nova += letra  # Caso a mensagem tenha caracteres especiais ou caracteres com acentos, eles serão adicionados sem mudanças.
     return mensagem_nova
 
 

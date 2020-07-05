@@ -1,11 +1,13 @@
 import Cifras.valores as valores
 
 
-def testa_chave_vigenere(chave):  # Função que testa se a chave fornecida pelo usuário é válida.
-    chave = chave.lower().replace(' ', '')  # Apagar todos os espaços da chave.
-    if chave.isalpha():  # Depois de retirar todos os espaços, verificar se o usuário digitou apenas letras.
-        return chave
-    return False
+def testa_chave_vigenere(chave):
+    # Chave válida: texto com apenas letras sem acentos (espaçoes são ignorados).
+    chave = chave.lower().replace(' ', '')
+    for caractere in chave:
+        if ord(caractere) < valores.MIN_MINUSCULA or ord(caractere) > valores.MAX_MINUSCULA:
+            return False
+    return chave
 
 
 def encriptar_modo_apenas_letras(chave, mensagem):  # Função que traduz/encripta a mensagem pela cifra de Vigenère.

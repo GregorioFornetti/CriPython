@@ -12,17 +12,13 @@ ALFABETO_MAIUSCULO = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 ALFABETO_MINUSCULO = 'abcdefghijklmnopqrstuvwxyz'
 
-INICIO_ASCII = 32
+INICIO_UNICODE = 32
 
-FINAL_ASCII = 767
+FINAL_UNICODE = 733
 
-TAMANHO_ASCII = 702
+TAMANHO_UNICODE = 670
 
 TAMANHO_ESPAÇO_VAZIO = 34
-
-VOLTAR_PARA_INICIO = 736
-
-INICIO_VAZIO = 127
 
 frequencia_alfabeto_pt = {'a': 14.63, 'e':12.57, 'o':10.73, 's':7.81, 'r':6.53, 'i':6.18, 'n':5.05, 'd':4.99,
                           'm':4.74, 'u':4.63, 't':4.34, 'c':3.88, 'l':2.78, 'p':2.52, 'v':1.67, 'g':1.3,

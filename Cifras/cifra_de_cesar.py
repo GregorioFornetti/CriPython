@@ -54,62 +54,67 @@ def cesar_troca_apenas_letras(chave, mensagem):
 
 
 def encriptar_modo_varios_caracteres(chave, mensagem):
-    '''
-    Função que encripta a cifra de césar no modo vários caracteres.
-    Recebe como chave um número inteiro não negativo.
-    Recebe como mensagem uma string com um texto para ser encriptado ou traduzido.
-    Parâmetro opcional define se será para fazer a tradução ou não.
-    '''
     if not mensagem:
-        return 'Mensagem inválida !'
+        return "Mensagem Inválida !"
     chave = retorna_chave_se_for_valida(chave)
     if chave:
         nova_mensagem = ''
-        chave = int(chave) % valores.TAMANHO_ASCII
+        chave = int(chave) % valores.TAMANHO_UNICODE
         for letra in mensagem:
-            letra_ASCII = ord(letra) + chave
-            if letra_ASCII > valores.FINAL_ASCII - valores.TAMANHO_ESPAÇO_VAZIO:  # Chegou ao final da tabela, portanto é hora de voltar ao início.
-                letra_ASCII -= (valores.VOLTAR_PARA_INICIO - valores.TAMANHO_ESPAÇO_VAZIO)
-            if letra_ASCII >= valores.INICIO_VAZIO:  # O caractere atual já passou da "região vazia", portanto deve aumentar em 34 o seu código.
-                letra_ASCII += valores.TAMANHO_ESPAÇO_VAZIO
-            nova_mensagem += chr(letra_ASCII)
+            letra_UNICODE = ord(letra) + chave
+            if letra_UNICODE > valores.FINAL_UNICODE:  # Chegou ao final da tabela, portanto é hora de voltar ao início.
+                letra_UNICODE -= valores.TAMANHO_UNICODE
+            if not chr(letra_UNICODE).isprintable():
+                letra_UNICODE += valores.TAMANHO_ESPAÇO_VAZIO
+            nova_mensagem += chr(letra_UNICODE)
         return nova_mensagem
     else:
-        return 'Chave inválida !'
+        return "Chave Inválida !"
 
 
 def traduzir_modo_varios_caracteres(chave, mensagem):
-    '''
-    Função que traduzirá a cifra de césar no modo de todos os caracteres.
-    Chave antiga recebe o valor da chave antiga (a chave que não passou pela transformação para a tradução).
-    Chave traduc. recebe a chave adaptada para a tradução.
-    Mensagem recebe o valor da mensagem encriptada, que precisa ser traduzida.
-    '''
     if not mensagem:
-        return 'Mensagem inválida !'
+        return "Mensagem Inválida !"
     chave_traduc = adaptar_chave_para_traduçao_varios_caracteres(chave)
-    if chave:
-        mensagem_traduzida = ''
+    if chave_traduc:
+        nova_mensagem = ''
+        chave = int(chave) % valores.TAMANHO_UNICODE
         for letra in mensagem:
-            letra_msg_atual = ord(letra)
-            letra_ASCII = letra_msg_atual + chave_traduc
-            verificar_volta = letra_msg_atual - int(chave)
-            if letra_msg_atual > valores.INICIO_VAZIO and verificar_volta < valores.INICIO_ASCII:
-                # Se a letra recebeu 2 vezes o número 34, é preciso voltar 34 na chave de tradução para não traduzir errado.
-                letra_ASCII -= valores.TAMANHO_ESPAÇO_VAZIO
-            if letra_msg_atual < valores.INICIO_VAZIO and verificar_volta > valores.INICIO_ASCII:
-                # Se a letra não passou da "região não imprimível" é preciso somar mais 34 no caractere traduzido para sair certo.
-                letra_ASCII += valores.TAMANHO_ESPAÇO_VAZIO    
-            if letra_ASCII > valores.FINAL_ASCII:  # O valor da letra atual a ser traduzida passou do valor final, hora de voltar para o ínicio.
-                letra_ASCII -= valores.VOLTAR_PARA_INICIO
-            mensagem_traduzida += chr(letra_ASCII)
-        return mensagem_traduzida
+            letra_UNICODE = ord(letra) + chave_traduc
+            if letra_UNICODE > valores.FINAL_UNICODE:  # Chegou ao final da tabela, portanto é hora de voltar ao início.
+                letra_UNICODE -= valores.TAMANHO_UNICODE
+            if not chr(ord(letra) - valores.TAMANHO_UNICODE).isprintable() and ord(letra) - chave < 161:
+                letra_UNICODE -= valores.TAMANHO_ESPAÇO_VAZIO
+            nova_mensagem += chr(letra_UNICODE)
+        return nova_mensagem
     else:
-        return 'Chave inválida !'
+        return "Chave Inválida !"
+
+
+def mensagem_nova_modo_varios_caracteres(chave, mensagem):
+    if not mensagem:
+        return "Mensagem inválida !"
+    if chave:
+        return cesar_troca_varios_caracteres(chave, mensagem)
+    else:
+        return "Chave inválida !"
+
+
+def cesar_troca_varios_caracteres_encript(chave, mensagem):
+    nova_mensagem = ''
+    chave = int(chave) % valores.TAMANHO_UNICODE
+    for letra in mensagem:
+        letra_UNICODE = ord(letra) + chave
+        if letra_UNICODE > valores.FINAL_UNICODE:  # Chegou ao final da tabela, portanto é hora de voltar ao início.
+            letra_UNICODE -= valores.TAMANHO_UNICODE
+        if not chr(letra_UNICODE).isprintable():
+            letra_UNICODE += valores.TAMANHO_ESPAÇO_VAZIO
+        nova_mensagem += chr(letra_UNICODE)
+    return nova_mensagem
 
 
 def adaptar_chave_para_traduçao_varios_caracteres(chave):
     chave = retorna_chave_se_for_valida(chave)
     if chave:
-        chave = valores.TAMANHO_ASCII - (int(chave) % (valores.TAMANHO_ASCII))
+        chave = valores.TAMANHO_UNICODE - (int(chave) % valores.TAMANHO_UNICODE)
     return chave

@@ -94,7 +94,7 @@ def traduzir_modo_varios_caracteres(chave, mensagem):
             letra_msg_atual = ord(letra)
             letra_ASCII = letra_msg_atual + chave_traduc
             verificar_volta = letra_msg_atual - int(chave)
-            if letra_msg_atual > valores.INICIO_VAZIO and verificar_volta - valores.TAMANHO_ESPAÇO_VAZIO < valores.INICIO_ASCII:
+            if letra_msg_atual > valores.INICIO_VAZIO and verificar_volta < valores.INICIO_ASCII:
                 # Se a letra recebeu 2 vezes o número 34, é preciso voltar 34 na chave de tradução para não traduzir errado.
                 letra_ASCII -= valores.TAMANHO_ESPAÇO_VAZIO
             if letra_msg_atual < valores.INICIO_VAZIO and verificar_volta > valores.INICIO_ASCII:
@@ -111,5 +111,5 @@ def traduzir_modo_varios_caracteres(chave, mensagem):
 def adaptar_chave_para_traduçao_varios_caracteres(chave):
     chave = retorna_chave_se_for_valida(chave)
     if chave:
-        chave = valores.TAMANHO_ASCII - (int(chave) % valores.TAMANHO_ASCII)
+        chave = valores.TAMANHO_ASCII - (int(chave) % (valores.TAMANHO_ASCII))
     return chave

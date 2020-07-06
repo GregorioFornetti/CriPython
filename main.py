@@ -1,12 +1,13 @@
 import PySimpleGUI as sg
 import webbrowser
-import forca_bruta
 import testes_simples
 import Cifras.cifra_de_cesar as cifra_de_cesar
 import Cifras.cifra_de_vigenere as cifra_de_vigenere
 import Cifras.subst_simples as subst_simples
+import Menus.menus_adivinhadores as menus_adivinhadores
 sg.theme('DarkGrey5')
 lista_criptografias_disponiveis = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
+lista_adivinhadores_disponiveis = ['Força bruta César', 'Adivinhador César']
 dic_opçoes_disponiveis = {'Cifra de César': ['apenas letras', 'vários caracteres'],
                           'Substituição simples':['apenas letras', 'vários caracteres'],
                           'Cifra de Vigenère':['apenas letras', 'vários caracteres']}
@@ -21,7 +22,7 @@ def main():
                         [sg.Button('2- Traduzir mensagem criptografada.', key='2')],
                         [sg.Button('3- Ajuda.', key='3')],
                         [sg.Button('4- Testes automatizados', key='4')],
-                        [sg.Button('5- Força bruta: Cifra de César.', key='5')],
+                        [sg.Button('5- Adivinhadores', key='5')],
                         [sg.Button('6- Finalizar programa', key='6')]]
     # Criar a interface principal do programa, utilizando o layout a cima.
     tela_principal = sg.Window('Criptografias: Tela principal',layout_principal)
@@ -50,13 +51,13 @@ def main():
         if evento == '5':
             # Esconder a tela principal e inicar a interface "força bruta".
             tela_principal.Hide()
-            menu_forca_bruta(tela_principal)
+            menu_adivinhador(tela_principal)
 
 
-def cria_layout_traduçao_e_encriptaçao(titulo):
+def cria_layout_opcoes_enumeradas(titulo, lista_opcoes):
     layout = [[sg.Text(titulo)]]
-    for n, criptografia in enumerate(lista_criptografias_disponiveis):
-        layout.append([sg.Button(f'{n + 1} - {criptografia}', key=criptografia)])
+    for n, opcao in enumerate(lista_opcoes):
+        layout.append([sg.Button(f'{n + 1} - {opcao}', key=opcao)])
     layout.append([sg.Button('Retornar', key='retornar')])
     return layout
 
@@ -98,7 +99,7 @@ def retorna_layout_padrao_encriptaçao(titulo, criptografia):
 
 
 def menu_encriptar(tela_anterior):
-    layout_encriptar = cria_layout_traduçao_e_encriptaçao('Pythografia: encriptar')
+    layout_encriptar = cria_layout_opcoes_enumeradas('Cripythografia: encriptar', lista_criptografias_disponiveis)
     tela_encriptar = sg.Window('Criptografias: encriptar', layout_encriptar)
     while True:
         evento, valores = tela_encriptar.read()
@@ -115,7 +116,7 @@ def menu_encriptar(tela_anterior):
 
 
 def menu_traducao(tela_anterior):
-    layout_traduzir = cria_layout_traduçao_e_encriptaçao('PythonGrafia: traduzir')
+    layout_traduzir = cria_layout_opcoes_enumeradas('CripythonGrafia: traduzir', lista_criptografias_disponiveis)
     tela_traduzir = sg.Window('Criptografias: traduzir', layout_traduzir)
     while True:
         evento, valores = tela_traduzir.read()
@@ -278,22 +279,19 @@ def menu_testes(tela_anterior):
             testes_simples.testar()
 
 
-def menu_forca_bruta(tela_anterior):
-    layout_forca_bruta = [[sg.Text('             Força bruta: Cifra de César')],
-                          [sg.Text('Escreva uma mensagem encriptada. Clique em testar e todas as chaves')],
-                          [sg.Text('da cifra de césar serão testadas na força bruta.')],
-                          [sg.Text('Mensagem encriptada:'), sg.Input(key='mensagem')],
-                          [sg.Output(size=(100,35))],
-                          [sg.Button('Testar', key='testar'), sg.Button('Retornar', key='retornar')]]
-    tela_forca_bruta = sg.Window('Menu força bruta', layout_forca_bruta)
+def menu_adivinhador(tela_anterior):
+    layout_adivinhador = cria_layout_opcoes_enumeradas('Cripythongrafia: Adivinhadores', lista_adivinhadores_disponiveis)
+    tela_adivinhador = sg.Window('Cripythongrafia: Adivinhadores', layout_adivinhador)
     while True:
-        evento, valores = tela_forca_bruta.read()
+        evento, valores = tela_adivinhador.read()
         if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_forca_bruta)
+            voltar_para_tela_anterior(tela_anterior, tela_adivinhador)
             break
-        if evento == 'testar':
-            # Efetuar teste.
-            forca_bruta.forca_bruta_cesar(valores['mensagem'])
+        tela_adivinhador.Hide()
+        if evento == 'Força bruta César':
+            menus_adivinhadores.menu_forca_bruta_cesar(tela_adivinhador)
+        else:
+            pass
 
 
 def voltar_para_tela_anterior(tela_anterior, tela_atual):  # Volta para a tela anterior se usuário escolheu botão "retornar".

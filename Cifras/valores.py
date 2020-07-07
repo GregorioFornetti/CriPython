@@ -16,8 +16,6 @@ INICIO_UNICODE = 32
 
 FINAL_UNICODE = 733
 
-TAMANHO_UNICODE = 670
-
 TAMANHO_ESPAÇO_VAZIO = 34
 
 frequencia_alfabeto_pt = {'a': 14.63, 'e':12.57, 'o':10.73, 's':7.81, 'r':6.53, 'i':6.18, 'n':5.05, 'd':4.99,

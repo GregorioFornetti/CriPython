@@ -1,4 +1,5 @@
 import Cifras.cifra_de_cesar as cifra_de_cesar
+import Cifras.cifra_de_vigenere as cifra_de_vigenere
 
 
 def apenas_letras(mensagem):  # Testa as 26 chaves possiveis da cifra de cesar em uma determinada mensagem.
@@ -8,7 +9,7 @@ def apenas_letras(mensagem):  # Testa as 26 chaves possiveis da cifra de cesar e
 
 
 def varios_caracteres(mensagem):
-    for chave in range(1, 704):
+    for chave in range(1, 668):
         mensagem_traduzida = cifra_de_cesar.traduzir_modo_varios_caracteres(str(chave), mensagem)
         imprimir_traduc_atual(chave, mensagem_traduzida)
 

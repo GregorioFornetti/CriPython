@@ -1,5 +1,3 @@
-import Cifras.valores as valores
-
 
 def executar_modo_varios_caracteres(chave_1, chave_2, mensagem):
     chave = adaptar_chave_modo_varios_caracteres(chave_1, chave_2)

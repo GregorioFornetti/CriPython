@@ -55,24 +55,24 @@ def testa_cesar_varios_caracteres():
     # Primeiro teste:
     testes['chave'] = '123'
     testes['mensagem'] = 'Olá ! Será que troca letras com acentos também ? E espaços ? Vamos testar agora !'
-    testes['mensagem esperada'] = 'ìĉž½¾½ðĂďž½ĎĒĂ½đďČĀþ½ĉĂđďþĐ½ĀČĊ½þĀĂċđČĐ½đþĊÿƆĊ½Ü½â½ĂĐčþƄČĐ½Ü½óþĊČĐ½đĂĐđþď½þĄČďþ½¾'
+    testes['mensagem esperada'] = 'íĊŜ¾¿¾ñăĐŜ¾ďēă¾ĒĐčāÿ¾ĊăĒĐÿđ¾āčċ¾ÿāăČĒčđ¾ĒÿċĀŤċ¾Ý¾ã¾ăđĎÿŢčđ¾Ý¾ôÿċčđ¾ĒăđĒÿĐ¾ÿąčĐÿ¾¿'
     testes['mensagem computada'] = cifra_de_cesar.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(1, testes)
     # Segundo teste:
     testes['chave'] = '123'
-    testes['mensagem'] = 'ìĉž½¾½ðĂďž½ĎĒĂ½đďČĀþ½ĉĂđďþĐ½ĀČĊ½þĀĂċđČĐ½đþĊÿƆĊ½Ü½â½ĂĐčþƄČĐ½Ü½óþĊČĐ½đĂĐđþď½þĄČďþ½¾'
+    testes['mensagem'] = 'íĊŜ¾¿¾ñăĐŜ¾ďēă¾ĒĐčāÿ¾ĊăĒĐÿđ¾āčċ¾ÿāăČĒčđ¾ĒÿċĀŤċ¾Ý¾ã¾ăđĎÿŢčđ¾Ý¾ôÿċčđ¾ĒăđĒÿĐ¾ÿąčĐÿ¾¿'
     testes['mensagem esperada'] = 'Olá ! Será que troca letras com acentos também ? E espaços ? Vamos testar agora !'
     testes['mensagem computada'] = cifra_de_cesar.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(2, testes, modo_traduc=True)
     # Terceiro teste:
     testes['chave'] = '321'
     testes['mensagem'] = 'Legal ! Parece que está tudo funcionando corretamente, vamos ver como o texto fica movendo mais ainda !!!'
-    testes['mensagem esperada'] = 'ƯǈǊǄǏƃƄƃƳǄǕǈǆǈƃǔǘǈƃǈǖǗɄƃǗǘǇǒƃǉǘǑǆǌǒǑǄǑǇǒƃǆǒǕǕǈǗǄǐǈǑǗǈƏƃǙǄǐǒǖƃǙǈǕƃǆǒǐǒƃǒƃǗǈǛǗǒƃǉǌǆǄƃǐǒǙǈǑǇǒƃǐǄǌǖƃǄǌǑǇǄƃƄƄƄ'
+    testes['mensagem esperada'] = 'ưǉǋǅǐƄƅƄƴǅǖǉǇǉƄǕǙǉƄǉǗǘȢƄǘǙǈǓƄǊǙǒǇǍǓǒǅǒǈǓƄǇǓǖǖǉǘǅǑǉǒǘǉƐƄǚǅǑǓǗƄǚǉǖƄǇǓǑǓƄǓƄǘǉǜǘǓƄǊǍǇǅƄǑǓǚǉǒǈǓƄǑǅǍǗƄǅǍǒǈǅƄƅƅƅ'
     testes['mensagem computada'] = cifra_de_cesar.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(3, testes)
     # Quarto teste:
     testes['chave'] = '321'
-    testes['mensagem'] = 'ƯǈǊǄǏƃƄƃƳǄǕǈǆǈƃǔǘǈƃǈǖǗɄƃǗǘǇǒƃǉǘǑǆǌǒǑǄǑǇǒƃǆǒǕǕǈǗǄǐǈǑǗǈƏƃǙǄǐǒǖƃǙǈǕƃǆǒǐǒƃǒƃǗǈǛǗǒƃǉǌǆǄƃǐǒǙǈǑǇǒƃǐǄǌǖƃǄǌǑǇǄƃƄƄƄ'
+    testes['mensagem'] = 'ưǉǋǅǐƄƅƄƴǅǖǉǇǉƄǕǙǉƄǉǗǘȢƄǘǙǈǓƄǊǙǒǇǍǓǒǅǒǈǓƄǇǓǖǖǉǘǅǑǉǒǘǉƐƄǚǅǑǓǗƄǚǉǖƄǇǓǑǓƄǓƄǘǉǜǘǓƄǊǍǇǅƄǑǓǚǉǒǈǓƄǑǅǍǗƄǅǍǒǈǅƄƅƅƅ'
     testes['mensagem esperada'] = 'Legal ! Parece que está tudo funcionando corretamente, vamos ver como o texto fica movendo mais ainda !!!'
     testes['mensagem computada'] = cifra_de_cesar.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(4, testes, modo_traduc=True)

@@ -187,24 +187,24 @@ def testa_vigenere_varios_caracteres():
     # Primeiro teste:
     testes['chave'] = 'testando'
     testes['mensagem'] = 'Vamos ver como que essa cifra está funcionando ! Será que está trocando tudo ?'
-    testes['mensagem esperada'] = 'ìèĂąö°üöĈ§øąðÿ¦Ăċìµûöăç±ùðûĈä°ëĄĊŨµüøþéúąõöĄçÿ¦²¶ÚúĈŤ°÷Ćû§úĉ÷ű¦ąĈöø÷ñôõ±Ċüùą£Ï'
+    testes['mensagem esperada'] = 'ÍÉãæ×nÝ×éeÙæÑàdãìÍsÜ×äÈoÚÑÜéÅnÌåëĦsÝÙßÊÛæÖ×åÈàdpt»ÛéĢnØçÜeÛêØįdæé×ÙØÒÕÖoëÝÚæa°'
     testes['mensagem computada'] = cifra_de_vigenere.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(1, testes)
     # Segundo teste:
     testes['chave'] = 'testando'
-    testes['mensagem'] = 'ìèĂąö°üöĈ§øąðÿ¦Ăċìµûöăç±ùðûĈä°ëĄĊŨµüøþéúąõöĄçÿ¦²¶ÚúĈŤ°÷Ćû§úĉ÷ű¦ąĈöø÷ñôõ±Ċüùą£Ï'
+    testes['mensagem'] = 'ÍÉãæ×nÝ×éeÙæÑàdãìÍsÜ×äÈoÚÑÜéÅnÌåëĦsÝÙßÊÛæÖ×åÈàdpt»ÛéĢnØçÜeÛêØįdæé×ÙØÒÕÖoëÝÚæa°'
     testes['mensagem esperada'] = 'Vamos ver como que essa cifra está funcionando ! Será que está trocando tudo ?'
     testes['mensagem computada'] = cifra_de_vigenere.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(2, testes, modo_traduc=True)
     # Terceiro teste:
     testes['chave'] = 'cháves diférentes!'
     testes['mensagem'] = 'Vamos testar agora com uma chave diferente, com espaços e acentos.'
-    testes['mensagem esperada'] = 'ÛëŰćúµ¶ëþüŬĆ§ñýöć¤¥íŲą§Ċ¯ç«ëųõýõ¶ëþ©êüŨĆûúL¦î÷Ÿ´ìăĆèż²øªŨ¸èø§ôÿ÷žÂ'
+    testes['mensagem esperada'] = '¼ÌĮèÛstÌßÝĪçeÒÞ×èbcÎİæeëmÈiÌıÖÞÖtÌßgËÝĦçÜÛ,dÏØĶrÍäçÉĺpÙhĦvÉÙeÕàØļ¢'
     testes['mensagem computada'] = cifra_de_vigenere.encriptar_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(3, testes)
     # Quarto teste:
     testes['chave'] = 'cháves diférentes!'
-    testes['mensagem'] = 'ÛëŰćúµ¶ëþüŬĆ§ñýöć¤¥íŲą§Ċ¯ç«ëųõýõ¶ëþ©êüŨĆûúL¦î÷Ÿ´ìăĆèż²øªŨ¸èø§ôÿ÷žÂ'
+    testes['mensagem'] = '¼ÌĮèÛstÌßÝĪçeÒÞ×èbcÎİæeëmÈiÌıÖÞÖtÌßgËÝĦçÜÛ,dÏØĶrÍäçÉĺpÙhĦvÉÙeÕàØļ¢'
     testes['mensagem esperada'] = 'Vamos testar agora com uma chave diferente, com espaços e acentos.'
     testes['mensagem computada'] = cifra_de_vigenere.traduzir_modo_varios_caracteres(testes['chave'], testes['mensagem'])
     verificar_e_imprimir_testes(4, testes, modo_traduc=True)

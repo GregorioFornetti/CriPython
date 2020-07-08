@@ -290,9 +290,8 @@ def menu_adivinhador(tela_anterior):
         tela_adivinhador.Hide()
         if evento == 'Força bruta César':
             menus_adivinhadores.menu_forca_bruta_cesar(tela_adivinhador)
-        else:
-            pass
-
+        if evento == 'Adivinhador César':
+            menus_adivinhadores.menu_adivinhador_cesar(tela_adivinhador)
 
 def voltar_para_tela_anterior(tela_anterior, tela_atual):  # Volta para a tela anterior se usuário escolheu botão "retornar".
     tela_anterior.UnHide()

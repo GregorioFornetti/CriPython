@@ -1,8 +1,9 @@
 import Cifras.cifra_de_cesar as cifra_de_cesar
-import Cifras.valores as valores
+import Cifras.utilidades_cifras as utilidades
 
 
-def advinhador_cesar(mensagem):
+def adivinhar_cesar(mensagem):
+    print("to aqui")
     lista_mensagem = []
     lista_pontuacao = []
     for chave in range(1, 27):
@@ -10,8 +11,12 @@ def advinhador_cesar(mensagem):
         lista_mensagem.append(nova_mensagem)
         lista_pontuacao.append(calcula_pontuacao(nova_mensagem))
     index_melhor_possibilidade = lista_pontuacao.index(min(lista_pontuacao))
+
+    print("Após alguns calculos, a mensagem traduzida com maior probabilidade é: ")
     print(lista_mensagem[index_melhor_possibilidade])
-        
+    print("E a chave utilizada foi: ")
+    print(index_melhor_possibilidade + 1)
+
 
 def calcula_pontuacao(mensagem):
     dicionario_pontuacao_letras = {'a':0, 'b':0, 'c':0, 'd':0, 'e':0, 'f':0, 'g':0, 'h':0, 'i':0, 'j':0, 'k':0,
@@ -21,13 +26,10 @@ def calcula_pontuacao(mensagem):
     total_letras_validas = 0
     pontuacao_mensagem = 0
     for caractere in mensagem:
-        if ord(caractere) > valores.MIN_MINUSCULA and ord(caractere) < valores.MAX_MINUSCULA:  # Verificar se o caractere atual é uma letra sem acento.
+        if ord(caractere) > utilidades.MIN_MINUSCULA and ord(caractere) < utilidades.MAX_MINUSCULA:  # Verificar se o caractere atual é uma letra sem acento.
             dicionario_pontuacao_letras[caractere] += 1
             total_letras_validas += 1
     for letra, frequencia in dicionario_pontuacao_letras.items():
         frequencia_perc_atual = dicionario_pontuacao_letras[letra] / total_letras_validas * 100
-        pontuacao_mensagem += abs(frequencia_perc_atual - valores.frequencia_alfabeto_pt[letra])
+        pontuacao_mensagem += abs(frequencia_perc_atual - utilidades.frequencia_alfabeto_pt[letra])
     return pontuacao_mensagem
-
-
-advinhador_cesar("Vp abkv ilt jvt cj ? Chtvz alzahy h klzpujypwahçãv. Lih Mbujpvuvb !!! Jhyhtih xbl slnhs !!")

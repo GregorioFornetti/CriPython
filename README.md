@@ -1,7 +1,7 @@
-# Programa criptografia
+# Cripythongrafia
 ## Conceito do projeto
 
-O programa criptografia tem o intuíto de traduzir ou encriptar mensagens, dando a liberdade para o usuário escolher uma das [cifras disponiveis](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifras-dispon%C3%ADveis) que deseja usar para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, outro objetivo desse projeto é explicar um pouco sobre o assunto criptografia e algumas cifras de criptografia.
+O projeto cripythongrafia tem o intuíto de traduzir ou encriptar mensagens, dando a liberdade para o usuário escolher uma das [cifras disponiveis](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifras-dispon%C3%ADveis) que deseja usar para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, outro objetivo desse projeto é explicar um pouco sobre o assunto criptografia e algumas cifras de criptografia.
 
 ## Pré-requisitos e recursos utilizados
 Para o desenvolvimento desse projeto foi utilizado a linguagem Python e algumas bibliotecas, citadas logo abaixo:
@@ -13,18 +13,15 @@ Para o desenvolvimento desse projeto foi utilizado a linguagem Python e algumas 
 
 2- Com os conhecimentos adquiridos através do passo anterior, comecei a criar a interface gráfica do programa.
 
-3- Depois de criar uma interface básica, comecei a estudar mais sobre cifras, nos links a seguir:
-
-* [Cifra de César](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-C%C3%A9sar)
-
-* [Substituição simples](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-substitui%C3%A7%C3%A3o-simples)
+3- Depois de criar uma interface básica, comecei a estudar mais sobre algumas cifras básicas.
 
 4- Com um pouco de conhecimento de programção e sobre cifras, implementei a lógica das cifras disponíveis no programa até agora.
 
 ## Instalação
 Todos os arquivos desse projeto estão disponiveis nesse mesmo repositório, ou seja, clique em "Clone or download" e baixe os arquivos para instalar esse programa em sua maquina.
 
-Para poder rodar o projeto é preciso instalar a biblioteca PySimpleGui, que foi utilizada para a criação da interface. Para instalar, basta executar o comando `pip3 install pysimplegui`.
+
+Para poder rodar o projeto, é preciso instalar o Python e a biblioteca PySimpleGui, que foi utilizada para a criação da interface. Para instalar a biblioteca basta executar o comando `pip3 install pysimplegui`.
 
 ## Execução
 Para executar esse programa, até agora, é necessário que você abra seu terminal, vá até o arquivo pelo terminal, e execute o comando:

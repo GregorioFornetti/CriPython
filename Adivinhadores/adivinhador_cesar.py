@@ -3,7 +3,6 @@ import Cifras.utilidades_cifras as utilidades
 
 
 def adivinhar_cesar(mensagem):
-    print("to aqui")
     lista_mensagem = []
     lista_pontuacao = []
     for chave in range(1, 27):
@@ -13,7 +12,7 @@ def adivinhar_cesar(mensagem):
     index_melhor_possibilidade = lista_pontuacao.index(min(lista_pontuacao))
 
     print("Após alguns calculos, a mensagem traduzida com maior probabilidade é: ")
-    print(lista_mensagem[index_melhor_possibilidade])
+    print(f"{lista_mensagem[index_melhor_possibilidade]}\n")
     print("E a chave utilizada foi: ")
     print(index_melhor_possibilidade + 1)
 

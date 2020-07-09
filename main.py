@@ -12,9 +12,10 @@ dic_opçoes_disponiveis = {'Cifra de César': ['apenas letras', 'vários caracte
                           'Substituição simples':['apenas letras', 'vários caracteres'],
                           'Cifra de Vigenère':['apenas letras', 'vários caracteres']}
 dic_links = {'Cifra de César':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-C%C3%A9sar',
-                   'Substituição simples':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-substitui%C3%A7%C3%A3o-simples',
-                   'Cifra de Vigenère':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-Vigen%C3%A8re',
-                   'Wiki':'https://github.com/GregorioFornetti/Cripythongrafia/wiki'}
+            'Substituição simples':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-substitui%C3%A7%C3%A3o-simples',
+            'Cifra de Vigenère':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-Vigen%C3%A8re',
+            'Wiki':'https://github.com/GregorioFornetti/Cripythongrafia/wiki',
+            'Testes':'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Op%C3%A7%C3%B5es-do-menu#4--testes-automatizados'}
 
 def main():
     # Layout da interface principal do programa.

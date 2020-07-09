@@ -40,7 +40,7 @@ def calcula_pontuacao(mensagem):
 
 def imprimir_resultados(lista_mensagens, lista_pontuacoes):
     index_melhor_possibilidade = lista_pontuacoes.index(min(lista_pontuacoes))
-    print("Após alguns calculos, a mensagem traduzida com maior probabilidade de ser correta é: ")
+    print("Após alguns cálculos, a mensagem traduzida com maior probabilidade de ser correta é: ")
     print(f"{lista_mensagens[index_melhor_possibilidade]}\n")
     print("E a chave utilizada para essa tradução foi: ")
     print(index_melhor_possibilidade + 1)

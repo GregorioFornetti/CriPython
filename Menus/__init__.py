@@ -7,7 +7,7 @@ dic_opcoes = {'Cifra de César': ['apenas letras', 'vários caracteres'],
               'Substituição simples': ['apenas letras', 'vários caracteres'],
               'Cifra de Vigenère': ['apenas letras', 'vários caracteres'],
               'Força bruta César': ['apenas letras', 'vários caracteres'],
-              'Adivinhador César': ['apenas letras']}
+              'Adivinhador César': ['apenas letras', 'vários caracteres']}
 
 def voltar_para_tela_anterior(tela_anterior, tela_atual):  # Volta para a tela anterior se usuário escolheu botão "retornar".
     tela_anterior.UnHide()

@@ -5,9 +5,7 @@ import Cifras.subst_simples as subst_simples
 soma_erros = 0
 
 def testar():  # Função que chamará todos os testes de cifras disponiveis.
-    print('Iniciando os testes automatizados...')
-    print('Aqui serão feitos alguns testes simples...')
-    print('Utilize esses testes para entender melhor sobre o funcionamento das cifras disponíveis.')
+    print('Iniciando testes...')
     testa_cesar_apenas_letras()
     testa_cesar_varios_caracteres()
     testa_subst_simples_apenas_letras()
@@ -212,9 +210,9 @@ def testa_vigenere_varios_caracteres():
 
 def separacoes(cifra):  # Cria uma separação no output gerado.
     print()
-    print('-' * 210)
-    print('{:^190}'.format(cifra))
-    print('-' * 210)
+    print('-' * 131)
+    print('{:^110}'.format(cifra))
+    print('-' * 131)
     print()
 
 

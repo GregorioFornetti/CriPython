@@ -42,7 +42,7 @@ def menu_adivinhador_cesar(tela_anterior):
     OBS: dependendo do texto, esse processo pode levar bastante tempo !
     '''
     layout_adivinha_cesar = criar_layout_padrao_advinhador(mensagem_inicial, 'Adivinhador César')
-    tela_adivinha_cesar = sg.Window('Adivinhador César', layout_adivinha_cesar)
+    tela_adivinha_cesar = sg.Window('Cripythongrafia: Adivinhador César', layout_adivinha_cesar)
     while True:
         evento, valores = tela_adivinha_cesar.read()
         if evento in ('retornar', None):
@@ -50,4 +50,7 @@ def menu_adivinhador_cesar(tela_anterior):
             break
         Menus.verificar_eventos_gerais('Cifra de César', evento, tela_adivinha_cesar)
         if evento == 'executar':
-            adivinhador_cesar.adivinhar_cesar(valores['mensagem'])
+            if valores['apenas letras']:
+                adivinhador_cesar.adivinhar_cesar_apenas_letras(valores['mensagem'])
+            else:
+                adivinhador_cesar.adivinhar_cesar_varios_caracteres(valores['mensagem'])

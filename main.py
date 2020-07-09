@@ -240,14 +240,14 @@ def menu_vigenere_traduzir(tela_anterior):
 
 
 def menu_testes(tela_anterior):
-    layout_testes = [[sg.Text(f"{'Cripythongrafia: Exemplos de funcionalidade e testes':^110}")],
+    layout_testes = [[sg.Text(f"{'Cripythongrafia: Testes automatizados':^110}")],
                     [sg.Text('Clique em "testar" para iniciar alguns testes nas cifras disponíveis no programa.')],
                     [sg.Text('Além disso, você pode utilizar esses testes como exemplos para entender melhor\nsobre o funcionamento das cifras.')],
                     [sg.Output(size=(75,25), key='output')],
                     [sg.Button('Testar',key='testar'), sg.Button('Limpar tela', key='limpar'),
                      sg.Button('Acessar guia', key='link'), sg.Button('Retornar',key='retornar')]]
 
-    tela_testes = sg.Window('Cripythongrafia: Exemplos de funcionalidade e testes', layout_testes)
+    tela_testes = sg.Window('Cripythongrafia: Testes automatizados', layout_testes)
     while True:
         evento, valores = tela_testes.read()
         if evento in ('retornar', None):

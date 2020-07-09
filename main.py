@@ -4,10 +4,10 @@ import testes_simples
 import Cifras.cifra_de_cesar as cifra_de_cesar
 import Cifras.cifra_de_vigenere as cifra_de_vigenere
 import Cifras.subst_simples as subst_simples
-import Menus.menus_adivinhadores as menus_adivinhadores
+import Menus.menus_utilitarios as menus_utilitarios
 sg.theme('DarkGrey5')
 lista_criptografias_disponiveis = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
-lista_adivinhadores_disponiveis = ['Força bruta César', 'Adivinhador César']
+lista_utilitarios_disponiveis = ['Força bruta César', 'Adivinhador César']
 dic_opçoes_disponiveis = {'Cifra de César': ['apenas letras', 'vários caracteres'],
                           'Substituição simples':['apenas letras', 'vários caracteres'],
                           'Cifra de Vigenère':['apenas letras', 'vários caracteres']}
@@ -22,7 +22,7 @@ def main():
     layout_principal =  [[sg.Text('       Cripythongrafia: Tela principal')],
                         [sg.Button('1- Criar mensagem criptografada', key='1')],
                         [sg.Button('2- Traduzir mensagem criptografada', key='2')],
-                        [sg.Button('3- Adivinhadores', key='3')],
+                        [sg.Button('3- Utilitários', key='3')],
                         [sg.Button('4- Exemplos de funcionalidades e testes', key='4')],
                         [sg.Button('5- Ajuda', key='5')],
                         [sg.Button('6- Finalizar programa', key='6')]]
@@ -43,9 +43,9 @@ def main():
             tela_principal.Hide()
             menu_traducao(tela_principal)
         if evento == '3':
-            # Inicar interface "adivinhador"
+            # Inicar interface "utilitários"
             tela_principal.Hide()
-            menu_adivinhador(tela_principal)
+            menu_utilitarios(tela_principal)
         if evento == '4':
             # Iniciar a interface "testes automatizados".
             tela_principal.Hide()
@@ -260,19 +260,19 @@ def menu_testes(tela_anterior):
             testes_simples.testar()
 
 
-def menu_adivinhador(tela_anterior):
-    layout_adivinhador = cria_layout_opcoes_enumeradas('Cripythongrafia: Menu adivinhadores', lista_adivinhadores_disponiveis)
-    tela_adivinhador = sg.Window('Cripythongrafia: Menu adivinhadores', layout_adivinhador)
+def menu_utilitarios(tela_anterior):
+    layout_utilitarios = cria_layout_opcoes_enumeradas('Cripythongrafia: Menu utilitários', lista_utilitarios_disponiveis)
+    tela_utilitarios = sg.Window('Cripythongrafia: Menu utilitários', layout_utilitarios)
     while True:
-        evento, valores = tela_adivinhador.read()
+        evento, valores = tela_utilitarios.read()
         if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_adivinhador)
+            voltar_para_tela_anterior(tela_anterior, tela_utilitarios)
             break
-        tela_adivinhador.Hide()
+        tela_utilitarios.Hide()
         if evento == 'Força bruta César':
-            menus_adivinhadores.menu_forca_bruta_cesar(tela_adivinhador)
+            menus_utilitarios.menu_forca_bruta_cesar(tela_utilitarios)
         if evento == 'Adivinhador César':
-            menus_adivinhadores.menu_adivinhador_cesar(tela_adivinhador)
+            menus_utilitarios.menu_adivinhador_cesar(tela_utilitarios)
 
 
 def voltar_para_tela_anterior(tela_anterior, tela_atual):  # Volta para a tela anterior se usuário escolheu botão "retornar".

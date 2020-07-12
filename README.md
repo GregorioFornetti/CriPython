@@ -1,7 +1,7 @@
 # Cripythongrafia
 ## Conceito do projeto
 
-Cripythongrafia é um projeto sobre criptografias que tem o intuíto de traduzir ou encriptar mensagens. O usuário que estiver usando o programa tem liberdade para escolher uma das [cifras disponiveis](https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifras-dispon%C3%ADveis) e utiliza-la para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, outro objetivo desse projeto é explicar um pouco sobre o assunto criptografia e cifras.
+Cripythongrafia é um projeto sobre criptografia que tem o intuito de traduzir ou encriptar mensagens. O usuário que estiver usando o programa tem liberdade para escolher uma das cifras disponíveis e utiliza-la para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, nesse programa existem os utilitários, que são implementações que tentam desvendar uma mensagem encriptada sem a sua chave de tradução. E para finalizar, outro objetivo desse projeto é explicar um pouco sobre o assunto cifras de criptografia.
 
 ## Pré-requisitos e recursos utilizados
 Para o desenvolvimento desse projeto foi utilizado a linguagem __Python__ e algumas bibliotecas, citadas logo abaixo:
@@ -17,11 +17,13 @@ Para o desenvolvimento desse projeto foi utilizado a linguagem __Python__ e algu
 
 4- Com um pouco de conhecimento sobre programção e criptografia, implementei a lógica das cifras disponíveis no programa até agora.
 
+5- Com algumas cifras implementadas, comecei a implementar os utilitários desse programa (força bruta César e Adivinhador César).
+
 ## Instalação
 Todos os arquivos desse projeto estão disponiveis nesse mesmo repositório, ou seja, clique em "Clone or download" e baixe os arquivos para instalar esse programa em sua maquina.
 
 
-Para poder rodar o projeto, é preciso instalar o Python e a biblioteca PySimpleGui, que foi utilizada para a criação da interface. Para instalar a biblioteca basta executar o comando `pip3 install pysimplegui`.
+Para poder rodar o projeto, é preciso instalar o Python e a biblioteca PySimpleGui. Para instalar a biblioteca basta executar o comando `pip3 install pysimplegui`.
 
 ## Execução
 Para executar esse programa, até agora, é necessário que você abra seu terminal, vá até o arquivo pelo terminal, e execute o comando:

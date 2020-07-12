@@ -21,13 +21,13 @@ def menu_forca_bruta_cesar(tela_anterior):
     OBS: dependendo do texto colocado, esse processo pode ser demorado
     '''
     layout_forca_bruta_cesar = criar_layout_padrao_advinhador(mensagem_inicial, 'Força bruta César')
-    tela_forca_bruta_cesar = sg.Window('Cripythongrafia: força bruta César', layout_forca_bruta_cesar)
+    tela_forca_bruta_cesar = sg.Window('Cripythongrafia: Força bruta César', layout_forca_bruta_cesar)
     while True:
         evento, valores = tela_forca_bruta_cesar.read()
         if evento in ('retornar', None):
             Menus.voltar_para_tela_anterior(tela_anterior, tela_forca_bruta_cesar)
             break
-        Menus.verificar_eventos_gerais('Cifra de César', evento, tela_forca_bruta_cesar)
+        Menus.verificar_eventos_gerais('Força bruta César', evento, tela_forca_bruta_cesar)
         if evento == 'executar':
             if valores['apenas letras']:
                 forca_bruta_cesar.apenas_letras(valores['mensagem'])
@@ -48,7 +48,7 @@ def menu_adivinhador_cesar(tela_anterior):
         if evento in ('retornar', None):
             Menus.voltar_para_tela_anterior(tela_anterior, tela_adivinha_cesar)
             break
-        Menus.verificar_eventos_gerais('Cifra de César', evento, tela_adivinha_cesar)
+        Menus.verificar_eventos_gerais('Adivinhador César', evento, tela_adivinha_cesar)
         if evento == 'executar':
             if valores['apenas letras']:
                 adivinhador_cesar.adivinhar_cesar_apenas_letras(valores['mensagem'])

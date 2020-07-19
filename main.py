@@ -5,6 +5,8 @@ import Cifras.cifra_de_cesar as cifra_de_cesar
 import Cifras.cifra_de_vigenere as cifra_de_vigenere
 import Cifras.subst_simples as subst_simples
 import Menus.menus_utilitarios as menus_utilitarios
+import Menus.menus_cifras as menus_cifras
+
 sg.theme('DarkGrey5')
 lista_criptografias_disponiveis = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
 lista_utilitarios_disponiveis = ['Força bruta César', 'Adivinhador César']
@@ -109,7 +111,8 @@ def menu_encriptar(tela_anterior):
             break
         tela_encriptar.Hide()
         if evento == 'Cifra de César':
-            menu_cesar_encriptar(tela_encriptar)
+            menus_cifras.menu_cifra_de_cesar_encriptação(tela_encriptar)
+            #menu_cesar_encriptar(tela_encriptar)
         elif evento == 'Substituição simples':
             menu_subst_simples_encriptar(tela_encriptar)
         else:

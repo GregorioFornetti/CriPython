@@ -112,11 +112,10 @@ def menu_encriptar(tela_anterior):
         tela_encriptar.Hide()
         if evento == 'Cifra de César':
             menus_cifras.menu_cifra_de_cesar_encriptação(tela_encriptar)
-            #menu_cesar_encriptar(tela_encriptar)
         elif evento == 'Substituição simples':
-            menu_subst_simples_encriptar(tela_encriptar)
+            menus_cifras.menu_subst_simples_encriptação(tela_encriptar)
         else:
-            menu_vigenere_encriptar(tela_encriptar)
+            menus_cifras.menu_cifra_de_vigenere_encriptação(tela_encriptar)
 
 
 def menu_traducao(tela_anterior):
@@ -129,118 +128,11 @@ def menu_traducao(tela_anterior):
             break
         tela_traduzir.Hide()
         if evento == 'Cifra de César':
-            menu_cesar_traduzir(tela_traduzir)
+            menus_cifras.menu_cifra_de_cesar_tradução(tela_traduzir)
         elif evento == 'Substituição simples':
-            menu_subst_simples_traduzir(tela_traduzir)
+            menus_cifras.menu_subst_simples_tradução(tela_traduzir)
         else:
-            menu_vigenere_traduzir(tela_traduzir)
-
-
-def menu_cesar_encriptar(tela_anterior):
-    layout_cesar_encript = retorna_layout_padrao_encriptaçao(f"{'Cripythongrafia: Cifra de César (encriptação)':^110}", 'Cifra de César')
-    tela_cesar_encript = sg.Window('Cripythongrafia: Cifra de César', layout_cesar_encript)
-    while True:
-        evento, valores = tela_cesar_encript.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_cesar_encript)
-            break
-        verificar_eventos_gerais('Cifra de César', evento, tela_cesar_encript)
-        if evento == 'encriptar':
-            if valores['apenas letras']:
-                print(cifra_de_cesar.encriptar_modo_apenas_letras(valores['chave'], valores['mensagem']))
-            else:
-                print(cifra_de_cesar.encriptar_modo_varios_caracteres(valores['chave'], valores['mensagem']))
-
-
-def menu_cesar_traduzir(tela_anterior):
-    layout_cesar_traduc = retorna_layout_padrao_traduçao(f"{'Cripythongrafia: Cifra de César (tradução)':^110}", 'Cifra de César')
-    tela_cesar_traduc = sg.Window('Cripythongrafia: Cifra de César', layout_cesar_traduc)
-    while True:
-        evento, valores = tela_cesar_traduc.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_cesar_traduc)
-            break
-        verificar_eventos_gerais('Cifra de César', evento, tela_cesar_traduc)
-        if evento == 'traduzir':
-            if valores['apenas letras']:
-                print(cifra_de_cesar.traduzir_modo_apenas_letras(valores['chave'], valores['mensagem']))
-            else:
-                print(cifra_de_cesar.traduzir_modo_varios_caracteres(valores['chave'], valores['mensagem']))
-
-
-def menu_subst_simples_encriptar(tela_anterior):
-    # Criando o layout da substituição simples.
-    layout_subst_encript = retorna_layout_padrao_encriptaçao(f"{'Cripythongrafia: Substituição simples (encriptação)':^110}", 'Substituição simples')
-    layout_subst_encript = organiza_layout_subst_simples(layout_subst_encript)
-    tela_subst_encript = sg.Window('Cripythongrafia: substituição simples', layout_subst_encript)
-    while True:
-        evento, valores = tela_subst_encript.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_subst_encript)
-            break
-        verificar_eventos_gerais('Substituição simples', evento, tela_subst_encript)
-        if evento == 'encriptar':
-            if valores['apenas letras']:
-                print(subst_simples.executar_modo_apenas_letras(valores['chave_1'], valores['chave_2'], valores['mensagem']))
-            else:
-                print(subst_simples.executar_modo_varios_caracteres(valores['chave_1'], valores['chave_2'], valores['mensagem']))
-
-
-def menu_subst_simples_traduzir(tela_anterior):
-    layout_subst_traduc = retorna_layout_padrao_traduçao(f"{'Cripythongrafia: Substituição simples (tradução)':^110}", 'Substituição simples')
-    layout_subst_traduc = organiza_layout_subst_simples(layout_subst_traduc)
-    tela_subst_traduc = sg.Window('Cripythongrafia: substituição simples', layout_subst_traduc)
-    while True:
-        evento, valores = tela_subst_traduc.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_subst_traduc)
-            break
-        verificar_eventos_gerais('Substituição simples', evento, tela_subst_traduc)
-        if evento == 'traduzir':
-            if valores['apenas letras']:
-                print(subst_simples.executar_modo_apenas_letras(valores['chave_2'], valores['chave_1'], valores['mensagem']))
-            else:
-                print(subst_simples.executar_modo_varios_caracteres(valores['chave_2'], valores['chave_1'], valores['mensagem']))
-
-
-def organiza_layout_subst_simples(layout):
-    # Trocará o nome do que era "chave" para "letras mensagem encriptada" e adicionará outro local para digitar chamado "letras mensagem comum".
-    del layout[4]
-    layout.insert(4, [sg.Text('Letras mensagem comum:    '), sg.Input('abcdefghijklmnopqrstuvwxyz', key='chave_1')])
-    layout.insert(5, [sg.Text('Letras mensagem encriptada:'), sg.Input(key='chave_2')])
-    return layout
-
-
-def menu_vigenere_encriptar(tela_anterior):
-    layout_vigenere_encript = retorna_layout_padrao_encriptaçao(f"{'Cripythongrafia: Cifra de Vigenère (encriptação)':^110}", 'Cifra de Vigenère')
-    tela_vigenere_encript = sg.Window('Cripythongrafia: Cifra de Vigenère', layout_vigenere_encript)
-    while True:
-        evento, valores = tela_vigenere_encript.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_vigenere_encript)
-            break
-        verificar_eventos_gerais('Cifra de Vigenère', evento, tela_vigenere_encript)
-        if evento == 'encriptar':
-            if valores['apenas letras']:
-                print(cifra_de_vigenere.encriptar_modo_apenas_letras(valores['chave'], valores['mensagem']))
-            else:
-                print(cifra_de_vigenere.encriptar_modo_varios_caracteres(valores['chave'], valores['mensagem']))
-
-
-def menu_vigenere_traduzir(tela_anterior):
-    layout_vigenere_traduc = retorna_layout_padrao_traduçao(f"{'Cripythongrafia: Cifra de Vigenère (tradução)':^110}", 'Cifra de Vigenère')
-    tela_vigenere_traduc = sg.Window('Cripythongrafia: Cifra de Vigenère', layout_vigenere_traduc)
-    while True:
-        evento, valores = tela_vigenere_traduc.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_vigenere_traduc)
-            break
-        verificar_eventos_gerais('Cifra de Vigenère', evento, tela_vigenere_traduc)
-        if evento == 'traduzir':
-            if valores['apenas letras']:
-                print(cifra_de_vigenere.traduzir_modo_apenas_letras(valores['chave'], valores['mensagem']))
-            else:
-                print(cifra_de_vigenere.traduzir_modo_varios_caracteres(valores['chave'], valores['mensagem']))
+            menus_cifras.menu_cifra_de_vigenere_tradução(tela_traduzir)
 
 
 def menu_testes(tela_anterior):

@@ -1,8 +1,8 @@
 import Cifras.utilidades_cifras as utilidades
 
 
-def encriptar_modo_apenas_letras(chave, mensagem):  # Função que traduz/encripta a mensagem pela cifra de Vigenère.
-    chave = testa_chave_vigenere_apenas_letras(chave)
+def encriptar_modo_apenas_letras(lista_chaves, mensagem):  # Função que traduz/encripta a mensagem pela cifra de Vigenère.
+    chave = testa_chave_vigenere_apenas_letras(lista_chaves[0])
     return mensagem_nova_modo_apenas_letras(chave, mensagem)  
 
 
@@ -15,8 +15,8 @@ def testa_chave_vigenere_apenas_letras(chave):
     return chave
 
 
-def traduzir_modo_apenas_letras(chave, mensagem):
-    chave = adaptar_chave_para_traducao_apenas_letras(chave)
+def traduzir_modo_apenas_letras(lista_chaves, mensagem):
+    chave = adaptar_chave_para_traducao_apenas_letras(lista_chaves[0])
     return mensagem_nova_modo_apenas_letras(chave, mensagem)
 
 
@@ -69,9 +69,9 @@ def vigenere_troca_apenas_letras(chave, mensagem):
     return mensagem_nova
 
 
-def encriptar_modo_varios_caracteres(chave, mensagem):
+def encriptar_modo_varios_caracteres(lista_chaves, mensagem):
     dic_unicode = utilidades.criar_dicionario_caracteres_imprimiveis(utilidades.FINAL_UNICODE)
-    chave = testa_chave_vigenere_varios_caracteres(chave)
+    chave = testa_chave_vigenere_varios_caracteres(lista_chaves[0])
     return mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode)
 
 
@@ -82,9 +82,9 @@ def testa_chave_vigenere_varios_caracteres(chave):
     return chave
 
 
-def traduzir_modo_varios_caracteres(chave, mensagem):
+def traduzir_modo_varios_caracteres(lista_chaves, mensagem):
     dic_unicode = utilidades.criar_dicionario_caracteres_imprimiveis(utilidades.FINAL_UNICODE)
-    chave = adaptar_chave_para_traducao_varios_caracteres(chave, dic_unicode)
+    chave = adaptar_chave_para_traducao_varios_caracteres(lista_chaves[0], dic_unicode)
     return mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode)
 
 

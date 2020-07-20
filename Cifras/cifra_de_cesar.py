@@ -7,13 +7,13 @@ def retorna_chave_se_for_valida(chave):  # Função validadora da chave.
     return False
 
 
-def encriptar_modo_apenas_letras(chave, mensagem):
-    chave = retorna_chave_se_for_valida(chave)
+def encriptar_modo_apenas_letras(lista_chaves, mensagem):
+    chave = retorna_chave_se_for_valida(lista_chaves[0])
     return mensagem_nova_modo_apenas_letras(chave, mensagem)
 
 
-def traduzir_modo_apenas_letras(chave, mensagem):
-    chave = adaptar_chave_para_traduçao_apenas_letras(chave)
+def traduzir_modo_apenas_letras(lista_chaves, mensagem):
+    chave = adaptar_chave_para_traduçao_apenas_letras(lista_chaves[0])
     return mensagem_nova_modo_apenas_letras(chave, mensagem)
 
 
@@ -53,15 +53,15 @@ def cesar_troca_apenas_letras(chave, mensagem):
     return mensagem_nova
 
 
-def encriptar_modo_varios_caracteres(chave, mensagem):
+def encriptar_modo_varios_caracteres(lista_chaves, mensagem):
     dic_unicode = utilidades.criar_dicionario_caracteres_imprimiveis(utilidades.FINAL_UNICODE)
-    chave = retorna_chave_se_for_valida(chave)
+    chave = retorna_chave_se_for_valida(lista_chaves[0])
     return mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode)
 
 
-def traduzir_modo_varios_caracteres(chave, mensagem):
+def traduzir_modo_varios_caracteres(lista_chaves, mensagem):
     dic_unicode = utilidades.criar_dicionario_caracteres_imprimiveis(utilidades.FINAL_UNICODE) 
-    chave = adaptar_chave_para_traduçao_varios_caracteres(chave, dic_unicode)
+    chave = adaptar_chave_para_traduçao_varios_caracteres(lista_chaves[0], dic_unicode)
     return mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode)
 
 

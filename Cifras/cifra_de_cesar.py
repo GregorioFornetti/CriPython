@@ -23,7 +23,7 @@ def mensagem_nova_modo_apenas_letras(chave, mensagem):
     if chave:
         return cesar_troca_apenas_letras(chave, mensagem)
     else:
-        return 'Chave Invalida !'
+        return 'Chave inválida !'
 
 
 def adaptar_chave_para_traduçao_apenas_letras(chave):  # Adaptar a chave para a tradução, caso ela seja válida.
@@ -71,7 +71,7 @@ def mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode):
     if chave:
         return cesar_troca_varios_caracteres(chave, mensagem, dic_unicode)
     else:
-        return "Chave inválida !"
+        return 'Chave inválida !'
 
 
 def cesar_troca_varios_caracteres(chave, mensagem, dic_unicode):
@@ -79,10 +79,13 @@ def cesar_troca_varios_caracteres(chave, mensagem, dic_unicode):
     chave = int(chave) % tot_caracteres_imprimiveis
     nova_mensagem = ''
     for letra in mensagem:
-        valor_unicode_nova_letra = dic_unicode[letra] + chave
-        if valor_unicode_nova_letra >= tot_caracteres_imprimiveis:
-            valor_unicode_nova_letra -= tot_caracteres_imprimiveis
-        nova_mensagem += dic_unicode[valor_unicode_nova_letra]
+        if ord(letra) <= utilidades.FINAL_UNICODE:  # Caractere está dentro do limite.
+            valor_unicode_nova_letra = dic_unicode[letra] + chave
+            if valor_unicode_nova_letra >= tot_caracteres_imprimiveis:
+                valor_unicode_nova_letra -= tot_caracteres_imprimiveis
+            nova_mensagem += dic_unicode[valor_unicode_nova_letra]
+        else:  # Caractere está fora do limite, colocar ele sem mudanças.
+            nova_mensagem += letra
     return nova_mensagem
 
 

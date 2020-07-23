@@ -42,7 +42,7 @@ def mensagem_nova_modo_apenas_letras(chave, mensagem):
     if chave:
         return vigenere_troca_apenas_letras(chave, mensagem)
     else:
-        return 'Chave Invalida !'
+        return "Chave inválida !"
 
 
 def vigenere_troca_apenas_letras(chave, mensagem):
@@ -114,7 +114,7 @@ def mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode):
     if chave:
         return vigenere_troca_varios_caracteres(chave, mensagem, dic_unicode)
     else:
-        return "Chave Inválida !"
+        return "Chave inválida !"
 
 
 def vigenere_troca_varios_caracteres(chave, mensagem, dic_unicode):
@@ -123,11 +123,14 @@ def vigenere_troca_varios_caracteres(chave, mensagem, dic_unicode):
     tamanho_chave = len(chave)
     nova_mensagem = ''
     for caractere in mensagem:
-        valor_caractere_atual = dic_unicode[caractere] + dic_unicode[chave[indice_atual_chave]]
-        if valor_caractere_atual >= tot_caracteres_imprimiveis:
-            valor_caractere_atual -= tot_caracteres_imprimiveis
-        indice_atual_chave += 1
-        if indice_atual_chave == tamanho_chave:
-            indice_atual_chave = 0
-        nova_mensagem += dic_unicode[valor_caractere_atual]
+        try:
+            valor_caractere_atual = dic_unicode[caractere] + dic_unicode[chave[indice_atual_chave]]
+            if valor_caractere_atual >= tot_caracteres_imprimiveis:
+                valor_caractere_atual -= tot_caracteres_imprimiveis
+            indice_atual_chave += 1
+            if indice_atual_chave == tamanho_chave:
+                indice_atual_chave = 0
+            nova_mensagem += dic_unicode[valor_caractere_atual]
+        except:  # Caractere atual está acima do limite unicode declarado.
+            nova_mensagem += caractere
     return nova_mensagem

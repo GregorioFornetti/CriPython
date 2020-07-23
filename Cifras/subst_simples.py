@@ -32,25 +32,48 @@ def mensagem_nova(chave, mensagem):
         return 'Chave inválida !'
 
 def adaptar_chave_modo_varios_caracteres(chave_1, chave_2):  # Criará um dicionário relacionando a chave_1 com a chave_2
-    if chave_1 and chave_2 and verifica_caracteres_duplicados(chave_1, chave_2) and len(chave_1) == len(chave_2):
-        return cria_chaves_dicionarios(chave_1, chave_2)
+    if chave_1 and chave_2:
+        if verifica_caracteres_duplicados_chave_normal(chave_1, chave_2) and sorted(chave_1) == sorted(chave_2):
+            # Chave valida: chave_1 e chave_2 possuem os mesmos caracteres (sem duplicações)
+            return cria_dicionario_chave_normal(chave_1, chave_2)
+        if verifica_caracteres_duplicados_chave_composta(chave_1, chave_2) and len(chave_1) == len(chave_2):
+            # Chave valida: chave_1 e chave_2 não possuem nenhum caractere em comum (sem duplicações)
+            return cria_dicionario_chave_ida_e_volta(chave_1, chave_2)
     return False
 
 
 def adaptar_chave_modo_apenas_letras(chave_1, chave_2):  # Criar conversões para caixa baixa e alta.
-    if verifica_caracteres_duplicados(chave_1.lower(), chave_2.lower()) and len(chave_1) == len(chave_2) and chave_1.isalpha() and chave_2.isalpha():
-        chave_dics = cria_chaves_dicionarios(chave_1.lower(), chave_2.lower())
-        chave_dics.update(cria_chaves_dicionarios(chave_1.upper(), chave_2.upper()))
-        return chave_dics
+    if chave_1.isalpha() and chave_2.isalpha():
+        chave_1 = chave_1.lower()
+        chave_2 = chave_2.lower()
+        if verifica_caracteres_duplicados_chave_normal(chave_1, chave_2) and sorted(chave_1) == sorted(chave_2):
+            # Chave valida: chave_1 e chave_2 possuem os mesmos caracteres (sem duplicações)
+            chave_dics = cria_dicionario_chave_normal(chave_1, chave_2)
+            chave_dics.update(cria_dicionario_chave_normal(chave_1.upper(), chave_2.upper()))
+            return chave_dics
+        if verifica_caracteres_duplicados_chave_composta(chave_1, chave_2) and len(chave_1) == len(chave_2):
+            # Chave valida: chave_1 e chave_2 não possuem nenhum caractere em comum (sem duplicações)
+            chave_dics = cria_dicionario_chave_ida_e_volta(chave_1, chave_2)
+            chave_dics.update(cria_dicionario_chave_ida_e_volta(chave_1.upper(), chave_2.upper()))
+            return chave_dics
     return False
 
 
-def verifica_caracteres_duplicados(chave_1, chave_2):  
-    # Recebe como parâmetro uma lista de chaves, e retorna verdadeiro se nenhuma das chaves contém caracteres repetidos.
+def verifica_caracteres_duplicados_chave_composta(chave_1, chave_2):  
+    # Juntará as duas chaves e verificará se essa nova chave composta não existe repetição.
     chave_composta = chave_1 + chave_2
     for letra in chave_composta:
         if chave_composta.count(letra) >= 2:
             return False
+    return True
+
+
+def verifica_caracteres_duplicados_chave_normal(chave_1, chave_2):
+    # Verificará se existem repetições nas duas chaves fornecidas (não ocorre a junção).
+    for chave in (chave_1, chave_2):
+        for letra in chave:
+            if chave.count(letra) >= 2:
+                return False
     return True
 
 
@@ -64,7 +87,7 @@ def criar_mensagem_com_caracteres_trocados(chave_dics, mensagem):
     return nova_mensagem
 
 
-def cria_chaves_dicionarios(chave_1, chave_2):
+def cria_dicionario_chave_ida_e_volta(chave_1, chave_2):
     '''
     OBS: É preciso criar duas chaves, pois ocorrerá erros quando um caractere trocado pela chave_2 não é trocado pela chave_1
     Ex com o erro:  chave_1 = a | chave_2 = b | mensagem = ab | mensagem_encriptada = bb | mensagem_traduzida = a
@@ -75,4 +98,11 @@ def cria_chaves_dicionarios(chave_1, chave_2):
     for index in range(len(chave_1)):
         dicionario_chave[chave_1[index]] = chave_2[index]
         dicionario_chave[chave_2[index]] = chave_1[index]
+    return dicionario_chave
+
+
+def cria_dicionario_chave_normal(chave_1, chave_2):
+    dicionario_chave = dict()
+    for index in range(len(chave_1)):
+        dicionario_chave[chave_1[index]] = chave_2[index]
     return dicionario_chave

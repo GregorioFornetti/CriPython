@@ -6,7 +6,7 @@ def adivinhar_cesar_apenas_letras(mensagem):
     lista_mensagens = []
     lista_pontuacoes = []
     for chave in range(1, 27):
-        nova_mensagem = cifra_de_cesar.traduzir_modo_apenas_letras(str(chave), mensagem)
+        nova_mensagem = cifra_de_cesar.traduzir_modo_apenas_letras([str(chave)], mensagem)
         lista_mensagens.append(nova_mensagem)
         lista_pontuacoes.append(calcula_pontuacao(nova_mensagem.lower()))
     imprimir_resultados(lista_mensagens, lista_pontuacoes)
@@ -16,7 +16,7 @@ def adivinhar_cesar_varios_caracteres(mensagem):
     lista_mensagens = []
     lista_pontuacoes = []
     for chave in range(1, 668):
-        nova_mensagem = cifra_de_cesar.traduzir_modo_varios_caracteres(str(chave), mensagem)
+        nova_mensagem = cifra_de_cesar.traduzir_modo_varios_caracteres([str(chave)], mensagem)
         lista_mensagens.append(nova_mensagem)
         lista_pontuacoes.append(calcula_pontuacao(nova_mensagem))
     imprimir_resultados(lista_mensagens, lista_pontuacoes)

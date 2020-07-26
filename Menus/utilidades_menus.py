@@ -7,13 +7,6 @@ dic_link_cifras = {'Cifra de César':'https://github.com/GregorioFornetti/Progra
                    'Força bruta César': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/For%C3%A7a-bruta-C%C3%A9sar',
                    'Adivinhador César': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Adivinhador-C%C3%A9sar'}
 
-# Dicionário utilizado para o funcionamento dos botões de opções. Chave = titulo do utilitario ou cifra - Valor = opções disponíveis.
-dic_opcoes = {'Cifra de César': ['Apenas letras', 'Vários caracteres'],
-              'Substituição simples': ['Apenas letras', 'Vários caracteres'],
-              'Cifra de Vigenère': ['Apenas letras', 'Vários caracteres'],
-              'Força bruta César': ['Apenas letras', 'Vários caracteres'],
-              'Adivinhador César': ['Apenas letras', 'Vários caracteres']}
-
 
 def voltar_para_tela_anterior(tela_anterior, tela_atual):  # Volta para a tela anterior se usuário escolheu botão "retornar".
     tela_anterior.UnHide()
@@ -27,11 +20,12 @@ def verificar_eventos_gerais(nome_cifra, evento, tela_atual):  # Verifica e exec
         tela_atual.element('output').update('')
 
 
-def retorna_layout_opçoes(nome_implementacao):
+def retorna_layout_opçoes(lista_opcoes):  
+    # Cria um layout com opções selecionaveis (do tipo "radio", só pode escolher uma). As opções serão os elementos da lista fornecida.
     layout_opçoes = []
-    for opçao in dic_opcoes[nome_implementacao]:
+    for opcao in lista_opcoes:
         if not layout_opçoes:  # Definir a primeira opção como "default".
-            layout_opçoes.append(sg.Radio(opçao, nome_implementacao, key=opçao, default=True))
+            layout_opçoes.append(sg.Radio(opcao, 'radio', key=opcao, default=True))
         else:
-            layout_opçoes.append(sg.Radio(opçao, nome_implementacao, key=opçao, default=False))
+            layout_opçoes.append(sg.Radio(opcao, 'radio', key=opcao, default=False))
     return layout_opçoes

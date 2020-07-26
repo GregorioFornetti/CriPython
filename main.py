@@ -28,7 +28,7 @@ def main():
                         [sg.Button('6- Finalizar programa', key='6')]]
     # Criar a interface principal do programa, utilizando o layout a cima.
     tela_principal = sg.Window('Cripythongrafia: Tela principal',layout_principal)
-    while True:  # Loop que verifica cada interação do usuário com o programa.
+    while True:  # Loop que verifica as interações do usuários com o menu principal.
         evento, valores = tela_principal.read()
         if evento in ('6', None):
             # Fechar o programa
@@ -107,7 +107,7 @@ def menu_traducao(tela_anterior):
 
 def menu_utilitarios(tela_anterior):
     titulo = "Cripythongrafia: Utilitários"
-    layout_utilitarios = retorna_layout_botoes_enumerados(titulo, lista_criptografias_disponiveis)
+    layout_utilitarios = retorna_layout_botoes_enumerados(titulo, lista_utilitarios_disponiveis)
     dic_funcoes_utilitarios = {
         'Força bruta César':menus_utilitarios.menu_forca_bruta_cesar,
         'Adivinhador César':menus_utilitarios.menu_adivinhador_cesar

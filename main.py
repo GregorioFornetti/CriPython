@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
 import webbrowser
-import testes_simples
 import Cifras.cifra_de_cesar as cifra_de_cesar
 import Cifras.cifra_de_vigenere as cifra_de_vigenere
 import Cifras.subst_simples as subst_simples
@@ -25,7 +24,6 @@ def main():
                         [sg.Button('1- Criar mensagem criptografada', key='1')],
                         [sg.Button('2- Traduzir mensagem criptografada', key='2')],
                         [sg.Button('3- Utilitários', key='3')],
-                        [sg.Button('4- Exemplos de funcionalidades e testes', key='4')],
                         [sg.Button('5- Ajuda', key='5')],
                         [sg.Button('6- Finalizar programa', key='6')]]
     # Criar a interface principal do programa, utilizando o layout a cima.
@@ -48,16 +46,12 @@ def main():
             # Inicar interface "utilitários"
             tela_principal.Hide()
             menu_utilitarios(tela_principal)
-        if evento == '4':
-            # Iniciar a interface "testes automatizados".
-            tela_principal.Hide()
-            menu_testes(tela_principal)
         if evento == '5':
             # Abrir wiki ajuda
             webbrowser.open(dic_links['Wiki'])
 
 
-def cria_layout_opcoes_enumeradas(titulo, lista_opcoes):
+def retorna_layout_botoes_enumerados(titulo, lista_opcoes):
     layout = [[sg.Text(titulo)]]
     for n, opcao in enumerate(lista_opcoes):
         layout.append([sg.Button(f'{n + 1} - {opcao}', key=opcao)])
@@ -65,7 +59,7 @@ def cria_layout_opcoes_enumeradas(titulo, lista_opcoes):
     return layout
 
 
-def retorna_layout_opçoes(criptografia):
+def retorna_layout_opcoes(criptografia):
     layout_opçoes = []
     for opçao in dic_opçoes_disponiveis[criptografia]:
         if not layout_opçoes:  # Definir a primeira opção como "default".
@@ -75,99 +69,51 @@ def retorna_layout_opçoes(criptografia):
     return layout_opçoes
 
 
-def retorna_layout_padrao_traduçao(titulo, criptografia):
-    layout = [[sg.Text(titulo)],
-             [sg.Text('Opções:')],
-             retorna_layout_opçoes(criptografia),
-             [sg.Text('Mensagem encriptada:'), sg.InputText(key='mensagem')],
-             [sg.Text('Chave:'), sg.InputText(key='chave')],
-             [sg.Text('Mensagem traduzida:')],
-             [sg.Output(size=(75,25), key='output')],
-             [sg.Button('Traduzir', key='traduzir'), sg.Button('Abrir guia da cifra', key='link'),
-              sg.Button('Limpar tela', key='limpar') ,sg.Button('Retornar', key='retornar')]]
-    return layout
-
-
-def retorna_layout_padrao_encriptaçao(titulo, criptografia):
-    layout = [[sg.Text(titulo)],
-             [sg.Text('Opções:')],
-             retorna_layout_opçoes(criptografia),
-             [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
-             [sg.Text('Chave:'), sg.InputText(key='chave')],
-             [sg.Text('Mensagem encriptada:')],
-             [sg.Output(size=(75,25), key='output')],
-             [sg.Button('Encriptar', key='encriptar'), sg.Button('Abrir guia da cifra', key='link'),
-              sg.Button('Limpar tela', key='limpar'), sg.Button('Retornar', key='retornar')]]
-    return layout
+def executar_menu(titulo, dicionario_funcoes, tela_anterior, layout):
+    tela_atual = sg.Window(titulo, layout)
+    while True:
+        evento, valores = tela_atual.read()
+        if evento in ('retornar', None):
+            voltar_para_tela_anterior(tela_anterior, tela_atual)
+            break
+        tela_atual.Hide()
+        for opcao, funcao in dicionario_funcoes.items():
+            if evento == opcao:
+                funcao(tela_atual)
 
 
 def menu_encriptar(tela_anterior):
-    layout_encriptar = cria_layout_opcoes_enumeradas('Cripythografia: Menu encriptação', lista_criptografias_disponiveis)
-    tela_encriptar = sg.Window('Cripythongrafia: Menu encriptação', layout_encriptar)
-    while True:
-        evento, valores = tela_encriptar.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_encriptar)
-            break
-        tela_encriptar.Hide()
-        if evento == 'Cifra de César':
-            menus_cifras.menu_cifra_de_cesar_encriptação(tela_encriptar)
-        elif evento == 'Substituição simples':
-            menus_cifras.menu_subst_simples_encriptação(tela_encriptar)
-        else:
-            menus_cifras.menu_cifra_de_vigenere_encriptação(tela_encriptar)
+    titulo = 'Cripythongrafia: Encriptação'
+    layout_encriptar = retorna_layout_botoes_enumerados(titulo, lista_criptografias_disponiveis)
+    dic_funcoes_menus_cifras_encript = {
+        'Cifra de César':menus_cifras.menu_cifra_de_cesar_encriptação,
+        'Substituição simples':menus_cifras.menu_subst_simples_encriptação,
+        'Cifra de Vigenère':menus_cifras.menu_cifra_de_vigenere_encriptação
+    }
+
+    executar_menu(titulo, dic_funcoes_menus_cifras_encript, tela_anterior, layout_encriptar)
 
 
 def menu_traducao(tela_anterior):
-    layout_traduzir = cria_layout_opcoes_enumeradas('Cripythongrafia: Menu tradução', lista_criptografias_disponiveis)
-    tela_traduzir = sg.Window('Cripythongrafia: Menu tradução', layout_traduzir)
-    while True:
-        evento, valores = tela_traduzir.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_traduzir)
-            break
-        tela_traduzir.Hide()
-        if evento == 'Cifra de César':
-            menus_cifras.menu_cifra_de_cesar_tradução(tela_traduzir)
-        elif evento == 'Substituição simples':
-            menus_cifras.menu_subst_simples_tradução(tela_traduzir)
-        else:
-            menus_cifras.menu_cifra_de_vigenere_tradução(tela_traduzir)
+    titulo = "Cripythongrafia: Tradução"
+    layout_traducao = retorna_layout_botoes_enumerados(titulo, lista_criptografias_disponiveis)
+    dic_funcoes_menus_cifras_traduc = {
+        'Cifra de César':menus_cifras.menu_cifra_de_cesar_tradução,
+        'Substituição simples':menus_cifras.menu_subst_simples_tradução,
+        'Cifra de Vigenère':menus_cifras.menu_cifra_de_vigenere_tradução
+    }
 
-
-def menu_testes(tela_anterior):
-    layout_testes = [[sg.Text(f"{'Cripythongrafia: Testes automatizados':^110}")],
-                    [sg.Text('Clique em "testar" para iniciar alguns testes nas cifras disponíveis no programa.')],
-                    [sg.Text('Além disso, você pode utilizar esses testes como exemplos para entender melhor\nsobre o funcionamento das cifras.')],
-                    [sg.Output(size=(75,25), key='output')],
-                    [sg.Button('Testar',key='testar'), sg.Button('Limpar tela', key='limpar'),
-                     sg.Button('Acessar guia', key='link'), sg.Button('Retornar',key='retornar')]]
-
-    tela_testes = sg.Window('Cripythongrafia: Testes automatizados', layout_testes)
-    while True:
-        evento, valores = tela_testes.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_testes)
-            break
-        verificar_eventos_gerais('Testes', evento, tela_testes)
-        if evento == 'testar':
-            # O usuário clicou em "testar".
-            testes_simples.testar()
-
+    executar_menu(titulo, dic_funcoes_menus_cifras_traduc, tela_anterior, layout_traducao)
 
 def menu_utilitarios(tela_anterior):
-    layout_utilitarios = cria_layout_opcoes_enumeradas('Cripythongrafia: Menu utilitários', lista_utilitarios_disponiveis)
-    tela_utilitarios = sg.Window('Cripythongrafia: Menu utilitários', layout_utilitarios)
-    while True:
-        evento, valores = tela_utilitarios.read()
-        if evento in ('retornar', None):
-            voltar_para_tela_anterior(tela_anterior, tela_utilitarios)
-            break
-        tela_utilitarios.Hide()
-        if evento == 'Força bruta César':
-            menus_utilitarios.menu_forca_bruta_cesar(tela_utilitarios)
-        if evento == 'Adivinhador César':
-            menus_utilitarios.menu_adivinhador_cesar(tela_utilitarios)
+    titulo = "Cripythongrafia: Utilitários"
+    layout_utilitarios = retorna_layout_botoes_enumerados(titulo, lista_criptografias_disponiveis)
+    dic_funcoes_utilitarios = {
+        'Força bruta César':menus_utilitarios.menu_forca_bruta_cesar,
+        'Adivinhador César':menus_utilitarios.menu_adivinhador_cesar
+    }
+
+    executar_menu(titulo, dic_funcoes_utilitarios, tela_anterior, layout_utilitarios)
 
 
 def voltar_para_tela_anterior(tela_anterior, tela_atual):  # Volta para a tela anterior se usuário escolheu botão "retornar".

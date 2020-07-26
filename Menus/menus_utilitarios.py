@@ -1,8 +1,10 @@
 import PySimpleGUI as sg
-import Menus
+import Menus.utilidades_menus
 import Adivinhadores.forca_bruta_cesar as forca_bruta_cesar
 import Adivinhadores.adivinhador_cesar as adivinhador_cesar
 
+
+# TODO TODO TODO GREG faz um executar para o utilitarios
 
 def criar_layout_padrao_advinhador(titulo, nome_adivinhador):
     return [[sg.Text(titulo)],

@@ -8,7 +8,7 @@ import Menus.utilidades_menus as utilidades_menus
 def retorna_layout_padrao_tradução(titulo, opcoes):
     layout = [[sg.Text(f"{f'Cripythongrafia: {titulo} (tradução)':^110}")],
              [sg.Text('Opções:')],
-             utilidades_menus.retorna_layout_opçoes(opcoes),
+             utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
              [sg.Text('Mensagem encriptada:'), sg.InputText(key='mensagem')],
              [sg.Text('Chave:'), sg.InputText(key='chave')],
              [sg.Text('Mensagem traduzida:')],
@@ -21,7 +21,7 @@ def retorna_layout_padrao_tradução(titulo, opcoes):
 def retorna_layout_padrao_encriptação(titulo, opcoes):
     layout = [[sg.Text(f"{f'Cripythongrafia: {titulo} (encriptação)':^110}")],
              [sg.Text('Opções:')],
-             utilidades_menus.retorna_layout_opçoes(opcoes),
+             utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
              [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
              [sg.Text('Chave:'), sg.InputText(key='chave')],
              [sg.Text('Mensagem encriptada:')],

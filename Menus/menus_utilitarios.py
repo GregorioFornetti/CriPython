@@ -7,7 +7,7 @@ import Adivinhadores.adivinhador_cesar as adivinhador_cesar
 def retorna_layout_padrao_advinhador(titulo, nome_adivinhador):
     return [[sg.Text(titulo)],
             [sg.Text('Opções')],
-            utilidades_menus.retorna_layout_opçoes(nome_adivinhador),
+            utilidades_menus.retorna_layout_opçoes_em_radio(nome_adivinhador),
             [sg.Text('Mensagem encriptada:'), sg.Input(key='mensagem')],
             [sg.Output(key='output', size=(75,25))],
             [sg.Button('Executar', key='executar'), sg.Button('Abrir guia', key='link'),

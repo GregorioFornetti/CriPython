@@ -1,19 +1,19 @@
 import Cifras.utilidades_cifras as utilidades
 
 
-def retorna_chave_se_for_valida(chave):  # Função validadora da chave.
-    if chave.isnumeric():
-        return chave
+def retorna_chave_se_for_valida(lista_chaves):  # Função validadora da chave.
+    if lista_chaves[0].isnumeric():
+        return lista_chaves[0]
     return False
 
 
 def encriptar_modo_apenas_letras(lista_chaves, mensagem):
-    chave = retorna_chave_se_for_valida(lista_chaves[0])
+    chave = retorna_chave_se_for_valida(lista_chaves)
     return mensagem_nova_modo_apenas_letras(chave, mensagem)
 
 
 def traduzir_modo_apenas_letras(lista_chaves, mensagem):
-    chave = adaptar_chave_para_traduçao_apenas_letras(lista_chaves[0])
+    chave = adaptar_chave_para_traduçao_apenas_letras(lista_chaves)
     return mensagem_nova_modo_apenas_letras(chave, mensagem)
 
 
@@ -26,8 +26,8 @@ def mensagem_nova_modo_apenas_letras(chave, mensagem):
         return 'Chave inválida !'
 
 
-def adaptar_chave_para_traduçao_apenas_letras(chave):  # Adaptar a chave para a tradução, caso ela seja válida.
-    chave = retorna_chave_se_for_valida(chave)
+def adaptar_chave_para_traduçao_apenas_letras(lista_chaves):  # Adaptar a chave para a tradução, caso ela seja válida.
+    chave = retorna_chave_se_for_valida(lista_chaves)
     if chave:
         chave = utilidades.TAMANHO_ALFABETO - (int(chave) % utilidades.TAMANHO_ALFABETO)
     return chave
@@ -55,13 +55,13 @@ def cesar_troca_apenas_letras(chave, mensagem):
 
 def encriptar_modo_varios_caracteres(lista_chaves, mensagem):
     dic_unicode = utilidades.criar_dicionario_caracteres_imprimiveis(utilidades.FINAL_UNICODE)
-    chave = retorna_chave_se_for_valida(lista_chaves[0])
+    chave = retorna_chave_se_for_valida(lista_chaves)
     return mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode)
 
 
 def traduzir_modo_varios_caracteres(lista_chaves, mensagem):
     dic_unicode = utilidades.criar_dicionario_caracteres_imprimiveis(utilidades.FINAL_UNICODE) 
-    chave = adaptar_chave_para_traduçao_varios_caracteres(lista_chaves[0], dic_unicode)
+    chave = adaptar_chave_para_traduçao_varios_caracteres(lista_chaves, dic_unicode)
     return mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode)
 
 
@@ -89,9 +89,9 @@ def cesar_troca_varios_caracteres(chave, mensagem, dic_unicode):
     return nova_mensagem
 
 
-def adaptar_chave_para_traduçao_varios_caracteres(chave, dic_unicode):
+def adaptar_chave_para_traduçao_varios_caracteres(lista_chaves, dic_unicode):
     tot_utilidades_imprimiveis = len(dic_unicode) // 2
-    chave = retorna_chave_se_for_valida(chave)
+    chave = retorna_chave_se_for_valida(lista_chaves)
     if chave:
         chave = tot_utilidades_imprimiveis - (int(chave) % tot_utilidades_imprimiveis)
     return chave

@@ -8,15 +8,16 @@ import Menus.menus_cifras as menus_cifras
 import Menus.utilidades_menus as utilidades_menu
 import sqlite3
 
-sg.theme('DarkGrey5')
 dic_criptografias_disponiveis = {'Cifra de César': ['Apenas letras', 'Vários caracteres'],
-                                  'Substituição simples': ['Apenas letras', 'Vários caracteres'], 
+                                  'Substituição simples': ['Apenas letras (letras mensagem comum)      ', 'Apenas letras (letras mensagem encriptada)     ',
+                                                           'Vários caracteres (letras mensagem comum)', 'Vários caracteres (letras mensagem encriptada)'], 
                                   'Cifra de Vigenère': ['Apenas letras', 'Vários caracteres']}
 lista_utilitarios_disponiveis = ['Força bruta César', 'Adivinhador César']
 
 def main():
     # Layout da interface principal do programa.
     criar_banco_de_dados_se_ainda_nao_existir()
+    sg.theme(retornar_tema_configurado())
     tela_principal = sg.Window('Cripythongrafia: Tela principal', retorna_layout_principal())  # Aplicar layout anterior e criar a janela.)
     while True:  # Loop que verifica as interações do usuários com o menu principal.
         evento, valores = tela_principal.read()
@@ -68,13 +69,19 @@ def retorna_layout_botoes_enumerados(titulo, lista_opcoes):
 def retorna_layout_opcoes():
     layout_opcoes = [[sg.Text('     Cripythongrafia: Opções')],
                      [sg.Text('Tema:')],
-                     [sg.Listbox(sg.theme_list(), select_mode='LISTBOX_SELECT_MODE_SINGLE', size=(20, 5), enable_events=True, key="tema")],
+                     [sg.Listbox(sg.theme_list(), select_mode='LISTBOX_SELECT_MODE_SINGLE', size=(20, 5), enable_events=True,
+                      key="tema", default_values=[retornar_tema_configurado()])],
                      [sg.Text('Chaves padrões:')]]
     for cifra, modos in dic_criptografias_disponiveis.items():
-        subdivisao_layout_atual = []
+        subdivisao_layout = []
+        lista_elementos_atuais = []
         for modo in modos:
-            subdivisao_layout_atual += [sg.Text(f'{modo}'), sg.Input(key=f'{cifra}-{modo}')]
-        layout_opcoes.append([sg.Frame(cifra, layout=[subdivisao_layout_atual])])
+            if len(lista_elementos_atuais) == 4:  # Sempre pular para a próxima linha após colocar 4 elementos.
+                subdivisao_layout.append(lista_elementos_atuais[:])
+                lista_elementos_atuais = []
+            lista_elementos_atuais += [sg.Text(f'{modo}'), sg.Input(key=f'{cifra}-{modo.strip()}')]
+        subdivisao_layout.append(lista_elementos_atuais)
+        layout_opcoes.append([sg.Frame(cifra, layout=subdivisao_layout)])
     layout_opcoes.append([sg.Button('Retornar', key='retornar'), sg.Button('Aplicar', key='aplicar')])
     return layout_opcoes
 
@@ -146,20 +153,39 @@ def aplicar_novas_configuracoes(dic_opcoes):
 
     db = sqlite3.connect('configs.db')
     banco_de_dados = db.cursor()
-    tentar_salvar_chave_padrao('Cifra de César-Apenas letras', dic_opcoes, banco_de_dados, cifra_de_cesar.retorna_chave_se_for_valida)
-    tentar_salvar_chave_padrao('Cifra de César-Vários caracteres', dic_opcoes, banco_de_dados, cifra_de_cesar.retorna_chave_se_for_valida)
-    tentar_salvar_chave_padrao('Cifra de Vigenère-Apenas letras', dic_opcoes, banco_de_dados, cifra_de_vigenere.testa_chave_vigenere_apenas_letras)
-    tentar_salvar_chave_padrao('Cifra de Vigenère-Vários caracteres', dic_opcoes, banco_de_dados, cifra_de_vigenere.testa_chave_vigenere_varios_caracteres)
+
+    banco_de_dados.execute('UPDATE opcoes_de_video SET escolha = ? WHERE opcao = "tema"', dic_opcoes['tema'])
+    tentar_salvar_chave_padrao(['Cifra de César-Apenas letras'], dic_opcoes, 
+                               banco_de_dados, cifra_de_cesar.retorna_chave_se_for_valida)
+    tentar_salvar_chave_padrao(['Cifra de César-Vários caracteres'], dic_opcoes,
+                                banco_de_dados, cifra_de_cesar.retorna_chave_se_for_valida)
+    tentar_salvar_chave_padrao(['Substituição simples-Apenas letras (letras mensagem comum)','Substituição simples-Apenas letras (letras mensagem encriptada)'],
+                                dic_opcoes, banco_de_dados, subst_simples.retorna_chaves_se_for_valida)
+    tentar_salvar_chave_padrao(['Substituição simples-Vários caracteres (letras mensagem comum)','Substituição simples-Vários caracteres (letras mensagem encriptada)'],
+                                dic_opcoes, banco_de_dados, subst_simples.retorna_chaves_se_for_valida)
+    tentar_salvar_chave_padrao(['Cifra de Vigenère-Apenas letras'], dic_opcoes, 
+                                banco_de_dados, cifra_de_vigenere.testa_chave_vigenere_apenas_letras)
+    tentar_salvar_chave_padrao(['Cifra de Vigenère-Vários caracteres'], dic_opcoes, 
+                                banco_de_dados, cifra_de_vigenere.testa_chave_vigenere_varios_caracteres)
+    
     db.commit()
     db.close()
 
-# TODO Adaptar essa função para aceitar mais chaves (para funcionar com o modo subst. simples).
-def tentar_salvar_chave_padrao(titulo_cifra, dic_opcoes, banco_de_dados, funcao_verificadora_de_chave):
-    if dic_opcoes[titulo_cifra]:
-        chave = funcao_verificadora_de_chave(dic_opcoes[titulo_cifra])
-        if chave:
-            lista_valores_db = [chave] + titulo_cifra.split('-')  # Criar lista com elementos a serem colocados no banco de dados (cifra, modo e chave)
-            banco_de_dados.execute('UPDATE chaves_padroes SET chave = ? WHERE cifra = ? AND modo = ?', lista_valores_db)
+
+def tentar_salvar_chave_padrao(titulos_cifras, dic_opcoes, banco_de_dados, funcao_verificadora_de_chave):
+    if dic_opcoes[titulos_cifras[0]]:
+        lista_chaves = []
+        for titulo in titulos_cifras:
+            lista_chaves.append(dic_opcoes[titulo])
+        chaves_verificadas = funcao_verificadora_de_chave(lista_chaves)
+        if chaves_verificadas:
+            if type(chaves_verificadas) == list:  # Caso existam mais do que uma chave na cifra, executar um loop de "update".
+                for indice_titulo, chave in enumerate(chaves_verificadas):
+                    lista_valores_db = [chave] + titulos_cifras[indice_titulo].split('-')
+                    banco_de_dados.execute('UPDATE chaves_padroes SET chave = ? WHERE cifra = ? AND modo = ?', lista_valores_db)
+            else:  # Caso tenha apenas uma chave, realizar apenas um update.
+                lista_valores_db = [chaves_verificadas] + titulos_cifras[0].split('-')  # Criar lista com elementos a serem colocados no banco de dados (cifra, modo e chave)
+                banco_de_dados.execute('UPDATE chaves_padroes SET chave = ? WHERE cifra = ? AND modo = ?', lista_valores_db)
         else:
             print(f'Não foi possível salvar a chave {titulo_cifra}')
 
@@ -167,7 +193,6 @@ def tentar_salvar_chave_padrao(titulo_cifra, dic_opcoes, banco_de_dados, funcao_
 def criar_banco_de_dados_se_ainda_nao_existir():
     try:  # Verificar se banco de dados existe.
         open('configs.db', 'r')
-        print('verificou que existe')
     except:  # Se não existir, criar o banco de dados e suas tabelas.
         db = sqlite3.connect('configs.db')
         banco_de_dados = db.cursor()
@@ -180,7 +205,7 @@ def criar_banco_de_dados_se_ainda_nao_existir():
         # Colocar valores "place holder" na tabela chaves padrões
         for cifra, modos in dic_criptografias_disponiveis.items():
             for modo in modos:
-                banco_de_dados.execute('INSERT INTO chaves_padroes VALUES (?, ?, ?)', [cifra, modo, ''])
+                banco_de_dados.execute('INSERT INTO chaves_padroes VALUES (?, ?, ?)', [cifra, modo.strip(), ''])
         db.commit()
         db.close()
 
@@ -193,7 +218,6 @@ def retornar_tema_configurado():  # Retornar o tema armazenado no banco de dados
     return tema
 
 db = sqlite3.connect('configs.db')
-banco = db.cursor()
-print(banco.execute('SELECT * FROM chaves_padroes').fetchall())
-db.close()
+banco_de_dados = db.cursor()
+print(banco_de_dados.execute("SELECT * FROM chaves_padroes").fetchall())
 main()

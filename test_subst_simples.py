@@ -33,6 +33,14 @@ def test_subst_simples_apenas_letras_chave_invalida_duplicada_2():
     assert subst_simples.encriptar_modo_apenas_letras(['bed', 'aAb'], 'abcde') == 'Chave inválida !'
     assert subst_simples.traduzir_modo_apenas_letras(['bed', 'aAb'], 'abcde') == 'Chave inválida !'
 
+def test_subst_simples_apenas_letras_chave_invalida_duplicada_3():
+    assert subst_simples.encriptar_modo_apenas_letras(['aA', 'bc'], 'abcde') == 'Chave inválida !'
+    assert subst_simples.traduzir_modo_apenas_letras(['aA', 'bc'], 'abcde') == 'Chave inválida !'
+
+def test_subst_simples_apenas_letras_chave_invalida_duplicada_4():
+    assert subst_simples.encriptar_modo_apenas_letras(['bc', 'aA'], 'abcde') == 'Chave inválida !'
+    assert subst_simples.traduzir_modo_apenas_letras(['bc', 'aA'], 'abcde') == 'Chave inválida !'
+
 def test_subst_simples_apenas_letras_chave_invalida_tamanho_diferentes_1():
     assert subst_simples.encriptar_modo_apenas_letras(['abc', 'tg'], 'abcde') == 'Chave inválida !'
     assert subst_simples.traduzir_modo_apenas_letras(['abc', 'tg'], 'abcde') == 'Chave inválida !'
@@ -94,6 +102,14 @@ def test_subst_simples_varios_caracteres_chave_invalida_duplicada_1():
 def test_subst_simples_varios_caracteres_chave_invalida_duplicada_2():
     assert subst_simples.encriptar_modo_varios_caracteres(['bed', 'aAb'], 'abcde') == 'Chave inválida !'
     assert subst_simples.traduzir_modo_varios_caracteres(['bed', 'aAb'], 'bacbA') == 'Chave inválida !'
+
+def test_subst_simples_varios_caracteres_duplicada_3():
+    assert subst_simples.encriptar_modo_varios_caracteres(['aA', 'bc'], 'aAbc') == 'bcaA'
+    assert subst_simples.traduzir_modo_varios_caracteres(['aA', 'bc'], 'bcaA') == 'aAbc'
+
+def test_subst_simples_varios_caracteres_duplicada_4():
+    assert subst_simples.encriptar_modo_varios_caracteres(['bc', 'aA'], 'aAbc') == 'bcaA'
+    assert subst_simples.traduzir_modo_varios_caracteres(['bc', 'aA'], 'bcaA') == 'aAbc'
 
 def test_subst_simples_varios_caracteres_chave_invalida_tamanho_diferentes_1():
     assert subst_simples.encriptar_modo_varios_caracteres(['abc', 'tg'], 'abcde') == 'Chave inválida !'

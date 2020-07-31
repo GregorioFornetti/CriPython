@@ -1,11 +1,11 @@
 
 def encriptar_modo_apenas_letras(lista_chaves, mensagem):
-    chave = adaptar_chave_modo_apenas_letras(lista_chaves[0], lista_chaves[1])
+    chave = adaptar_chave_modo_apenas_letras(lista_chaves)
     return mensagem_nova(chave, mensagem)
 
 
 def encriptar_modo_varios_caracteres(lista_chaves, mensagem):
-    chave = adaptar_chave_modo_varios_caracteres(lista_chaves[0], lista_chaves[1])
+    chave = adaptar_chave_modo_varios_caracteres(lista_chaves)
     return mensagem_nova(chave, mensagem)
 
 
@@ -14,12 +14,12 @@ def traduzir_modo_apenas_letras(lista_chaves, mensagem):
     Para fazer a tradução, basta apenas trocar a ordem das chaves. Isso fará com que as letras 
     da mensagem encriptada sejam trocadas pelas letras mensagem comum.
     '''
-    chave = adaptar_chave_modo_apenas_letras(lista_chaves[1], lista_chaves[0])
+    chave = adaptar_chave_modo_apenas_letras(lista_chaves[::-1])
     return mensagem_nova(chave, mensagem)
 
 
 def traduzir_modo_varios_caracteres(lista_chaves, mensagem):
-    chave = adaptar_chave_modo_varios_caracteres(lista_chaves[1], lista_chaves[0])
+    chave = adaptar_chave_modo_varios_caracteres(lista_chaves[::-1])
     return mensagem_nova(chave, mensagem)
 
 
@@ -31,21 +31,21 @@ def mensagem_nova(chave, mensagem):
     else:
         return 'Chave inválida !'
 
-def adaptar_chave_modo_varios_caracteres(chave_1, chave_2):  # Criará um dicionário relacionando a chave_1 com a chave_2
-    if chave_1 and chave_2:
-        if verifica_caracteres_duplicados_chave_normal(chave_1, chave_2) and sorted(chave_1) == sorted(chave_2):
+def adaptar_chave_modo_varios_caracteres(lista_chaves):  # Criará um dicionário relacionando a chave_1 com a chave_2
+    if lista_chaves[0] and lista_chaves[1]:
+        if verifica_caracteres_duplicados_chave_normal(lista_chaves[0], lista_chaves[1]) and sorted(lista_chaves[0]) == sorted(lista_chaves[1]):
             # Chave valida: chave_1 e chave_2 possuem os mesmos caracteres (sem duplicações)
-            return cria_dicionario_chave_normal(chave_1, chave_2)
-        if verifica_caracteres_duplicados_chave_composta(chave_1, chave_2) and len(chave_1) == len(chave_2):
+            return cria_dicionario_chave_normal(lista_chaves[0], lista_chaves[1])
+        if verifica_caracteres_duplicados_chave_composta(lista_chaves[0], lista_chaves[1]) and len(lista_chaves[0]) == len(lista_chaves[1]):
             # Chave valida: chave_1 e chave_2 não possuem nenhum caractere em comum (sem duplicações)
-            return cria_dicionario_chave_ida_e_volta(chave_1, chave_2)
+            return cria_dicionario_chave_ida_e_volta(lista_chaves[0], lista_chaves[1])
     return False
 
 
-def adaptar_chave_modo_apenas_letras(chave_1, chave_2):  # Criar conversões para caixa baixa e alta.
-    if chave_1.isalpha() and chave_2.isalpha():
-        chave_1 = chave_1.lower()
-        chave_2 = chave_2.lower()
+def adaptar_chave_modo_apenas_letras(lista_chaves):  # Criar conversões para caixa baixa e alta.
+    if lista_chaves[0].isalpha() and lista_chaves[1].isalpha():
+        chave_1 = lista_chaves[0].lower()
+        chave_2 = lista_chaves[1].lower()
         if verifica_caracteres_duplicados_chave_normal(chave_1, chave_2) and sorted(chave_1) == sorted(chave_2):
             # Chave valida: chave_1 e chave_2 possuem os mesmos caracteres (sem duplicações)
             chave_dics = cria_dicionario_chave_normal(chave_1, chave_2)
@@ -106,3 +106,9 @@ def cria_dicionario_chave_normal(chave_1, chave_2):
     for index in range(len(chave_1)):
         dicionario_chave[chave_1[index]] = chave_2[index]
     return dicionario_chave
+
+
+def retorna_chaves_se_for_valida(lista_chaves):  # Utilizado no menu opções...
+    if adaptar_chave_modo_apenas_letras(lista_chaves) or adaptar_chave_modo_varios_caracteres(lista_chaves):
+        return lista_chaves
+    return False

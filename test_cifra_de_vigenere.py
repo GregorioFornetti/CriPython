@@ -18,16 +18,16 @@ def test_cifra_de_vigenere_apenas_letras_chave_2():
     assert cifra_de_vigenere.traduzir_modo_apenas_letras(['bca'], 'bdcegf') == 'abcdef'
 
 def test_cifra_de_vigenere_apenas_letras_chave_invalida_vazia():
-    assert cifra_de_vigenere.encriptar_modo_apenas_letras([''], 'abc') == 'Chave inválida !'
-    assert cifra_de_vigenere.traduzir_modo_apenas_letras([''], 'abc') == 'Chave inválida !'
+    assert cifra_de_vigenere.encriptar_modo_apenas_letras([''], 'abc') == cifra_de_vigenere.erro_chave_apenas_letras
+    assert cifra_de_vigenere.traduzir_modo_apenas_letras([''], 'abc') == cifra_de_vigenere.erro_chave_apenas_letras
 
 def test_cifra_de_vigenere_apenas_letras_chave_invalida_caractere_especial():
-    assert cifra_de_vigenere.encriptar_modo_apenas_letras(['abcé'], 'abc') == 'Chave inválida !'
-    assert cifra_de_vigenere.traduzir_modo_apenas_letras(['abcé'], 'abc') == 'Chave inválida !'
+    assert cifra_de_vigenere.encriptar_modo_apenas_letras(['abcé'], 'abc') == cifra_de_vigenere.erro_chave_apenas_letras
+    assert cifra_de_vigenere.traduzir_modo_apenas_letras(['abcé'], 'abc') == cifra_de_vigenere.erro_chave_apenas_letras
 
 def test_cifra_de_vigenere_apenas_letras_mensagem_invalida():
-    assert cifra_de_vigenere.encriptar_modo_apenas_letras(['abc'], '') == 'Mensagem inválida !'
-    assert cifra_de_vigenere.traduzir_modo_apenas_letras(['abc'], '') == 'Mensagem inválida !'
+    assert cifra_de_vigenere.encriptar_modo_apenas_letras(['abc'], '') == cifra_de_vigenere.erro_mensagem
+    assert cifra_de_vigenere.traduzir_modo_apenas_letras(['abc'], '') == cifra_de_vigenere.erro_mensagem
 
 def test_cifra_de_vigenere_apenas_letras_maiusc_minusc():
     assert cifra_de_vigenere.encriptar_modo_apenas_letras(['AbCdE'], 'aBcDe') == 'aCeGi'
@@ -72,16 +72,16 @@ def test_cifra_de_vigenere_varios_caracteres_chave_2():
     assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['!"#'], 'bdfeg') == 'abcde'
 
 def test_cifra_de_vigenere_varios_caracteres_chave_invalida_vazia():
-    assert cifra_de_vigenere.encriptar_modo_varios_caracteres([''], 'abc') == 'Chave inválida !'
-    assert cifra_de_vigenere.traduzir_modo_varios_caracteres([''], 'abc') == 'Chave inválida !'
+    assert cifra_de_vigenere.encriptar_modo_varios_caracteres([''], 'abc') == cifra_de_vigenere.erro_chave_varios_caracteres
+    assert cifra_de_vigenere.traduzir_modo_varios_caracteres([''], 'abc') == cifra_de_vigenere.erro_chave_varios_caracteres
 
 def test_cifra_de_vigenere_varios_caracteres_chave_invalida_acima_do_limite():
-    assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['˟'], 'abc') == 'Chave inválida !'
-    assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['˟'], 'abc') == 'Chave inválida !'
+    assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['˟'], 'abc') == cifra_de_vigenere.erro_chave_varios_caracteres
+    assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['˟'], 'abc') == cifra_de_vigenere.erro_chave_varios_caracteres
 
 def test_cifra_de_vigenere_varios_caracteres_mensagem_invalida():
-    assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['abc'], '') == 'Mensagem inválida !'
-    assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['abc'], '') == 'Mensagem inválida !'
+    assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['abc'], '') == cifra_de_vigenere.erro_mensagem
+    assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['abc'], '') == cifra_de_vigenere.erro_mensagem
 
 def test_cifra_de_vigenere_varios_caracteres_mensagem_acima_do_limite():
     assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['abc'], '˟˟˟˟') == '˟˟˟˟'

@@ -1,9 +1,11 @@
 import PySimpleGUI as sg
+import sqlite3
 import Cifras.cifra_de_cesar as cifra_de_cesar
 import Cifras.subst_simples as subst_simples
 import Cifras.cifra_de_vigenere as cifra_de_vigenere
 import Menus.utilidades_menus as utilidades_menus
 
+mensagem_chave_padrao = "Você ainda não definiu uma chave padrão para essa cifra !\nVá para o menu principal e depois em opções e defina uma !\n"
 
 def retorna_layout_padrao_tradução(titulo, opcoes):
     layout = [[sg.Text(f"{f'Cripythongrafia: {titulo} (tradução)':^110}")],
@@ -13,8 +15,8 @@ def retorna_layout_padrao_tradução(titulo, opcoes):
              [sg.Text('Chave:'), sg.InputText(key='chave')],
              [sg.Text('Mensagem traduzida:')],
              [sg.Output(size=(75,25), key='output')],
-             [sg.Button('Traduzir', key='traduzir'), sg.Button('Abrir guia da cifra', key='link'),
-              sg.Button('Limpar tela', key='limpar') ,sg.Button('Retornar', key='retornar')]]
+             [sg.Button('Traduzir', key='traduzir'), sg.Button('Traduzir com chave padrão', key="utilizar_chave_padrao"),
+              sg.Button('Abrir guia da cifra', key='link'), sg.Button('Limpar tela', key='limpar') ,sg.Button('Retornar', key='retornar')]]
     return layout
 
 
@@ -26,8 +28,8 @@ def retorna_layout_padrao_encriptação(titulo, opcoes):
              [sg.Text('Chave:'), sg.InputText(key='chave')],
              [sg.Text('Mensagem encriptada:')],
              [sg.Output(size=(75,25), key='output')],
-             [sg.Button('Encriptar', key='encriptar'), sg.Button('Abrir guia da cifra', key='link'),
-              sg.Button('Limpar tela', key='limpar'), sg.Button('Retornar', key='retornar')]]
+             [sg.Button('Encriptar', key='encriptar'), sg.Button('Encriptar com chave padrão', key="utilizar_chave_padrao"),
+             sg.Button('Abrir guia da cifra', key='link'), sg.Button('Limpar tela', key='limpar'), sg.Button('Retornar', key='retornar')]]
     return layout
 
 
@@ -51,13 +53,19 @@ def executar_menu_cifra(titulo_cifra, tela_anterior, dicionario_funcoes_cifras, 
             utilidades_menus.voltar_para_tela_anterior(tela_anterior, tela_cifra)
             break
         utilidades_menus.verificar_eventos_gerais(titulo_cifra, evento, tela_cifra)
-        if evento == 'encriptar' or evento == 'traduzir':
+        if evento == 'encriptar' or evento == 'traduzir' or evento == "utilizar_chave_padrao":
             for opção, criptografar in dicionario_funcoes_cifras.items():
                 if valores[opção]:  # Verificar a opção escolhida pelo usuário e executar a função referente a ela (armazenada no dicionário).
-                    lista_chaves = []
-                    for nome_item, chave in valores.items():  # Loop para procurar as chaves utilizadas (já que alguns modos utilizam mais que 1)
-                        if 'chave' in nome_item:
-                            lista_chaves.append(chave)
+                    if evento == "utilizar_chave_padrao":
+                        lista_chaves = retorna_chaves_padroes(titulo_cifra, opção)
+                        if not lista_chaves:
+                            print(mensagem_chave_padrao)
+                            break
+                    else:
+                        lista_chaves = []
+                        for nome_item, chave in valores.items():  # Loop para procurar as chaves utilizadas (já que alguns modos utilizam mais que 1)
+                            if 'chave' in nome_item:
+                                lista_chaves.append(chave)
                     print(criptografar(lista_chaves, valores['mensagem']))
 
 
@@ -113,3 +121,17 @@ def menu_cifra_de_vigenere_tradução(tela_anterior):
     layout_cifra_de_vigenere_traduc = retorna_layout_padrao_tradução(titulo_da_cifra, dicionario_funções_vigenere_traduc.keys())
     
     executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_vigenere_traduc, layout_cifra_de_vigenere_traduc)
+
+
+def retorna_chaves_padroes(cifra, modo):
+    lista_chaves = []
+    modo += '%'
+    db = sqlite3.connect('configs.db')
+    banco_de_dados = db.cursor()
+    chaves = banco_de_dados.execute('SELECT chave FROM chaves_padroes WHERE cifra = ? AND modo LIKE ?', [cifra, modo]).fetchall()
+    for chave in chaves:
+        if chave[0]:
+            lista_chaves.append(chave[0])
+        else:
+            return False
+    return lista_chaves

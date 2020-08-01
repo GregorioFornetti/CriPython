@@ -14,24 +14,24 @@ def test_cifra_de_cesar_apenas_letras_chave_1():
     assert cifra_de_cesar.traduzir_modo_apenas_letras(['1'], 'bcd') == 'abc'
 
 def test_cifra_de_cesar_apenas_letras_chave_invalida_vazia():
-    assert cifra_de_cesar.encriptar_modo_apenas_letras([''], 'abc') == 'Chave inválida !'
-    assert cifra_de_cesar.encriptar_modo_apenas_letras([''], 'abc') == 'Chave inválida !'
+    assert cifra_de_cesar.encriptar_modo_apenas_letras([''], 'abc') == cifra_de_cesar.erro_chave
+    assert cifra_de_cesar.encriptar_modo_apenas_letras([''], 'abc') == cifra_de_cesar.erro_chave
 
 def test_cifra_de_cesar_apenas_letras_chave_invalida_negativa():
-    assert cifra_de_cesar.encriptar_modo_apenas_letras(['-1'], 'a') == 'Chave inválida !'
-    assert cifra_de_cesar.traduzir_modo_apenas_letras(['-1'], 'a') == 'Chave inválida !'
+    assert cifra_de_cesar.encriptar_modo_apenas_letras(['-1'], 'a') == cifra_de_cesar.erro_chave
+    assert cifra_de_cesar.traduzir_modo_apenas_letras(['-1'], 'a') == cifra_de_cesar.erro_chave
 
 def test_cifra_de_cesar_apenas_letras_chave_invalida_texto():
-    assert cifra_de_cesar.encriptar_modo_apenas_letras(['texto'], 'a') == 'Chave inválida !'
-    assert cifra_de_cesar.traduzir_modo_apenas_letras(['texto'], 'a') == 'Chave inválida !'
+    assert cifra_de_cesar.encriptar_modo_apenas_letras(['texto'], 'a') == cifra_de_cesar.erro_chave
+    assert cifra_de_cesar.traduzir_modo_apenas_letras(['texto'], 'a') == cifra_de_cesar.erro_chave
 
 def test_cifra_de_cesar_apenas_letras_chave_invalida_naointeiro():
-    assert cifra_de_cesar.encriptar_modo_apenas_letras(['1.2'], 'a') == 'Chave inválida !'
-    assert cifra_de_cesar.traduzir_modo_apenas_letras(['2.4'], 'a') == 'Chave inválida !'
+    assert cifra_de_cesar.encriptar_modo_apenas_letras(['1.2'], 'a') == cifra_de_cesar.erro_chave
+    assert cifra_de_cesar.traduzir_modo_apenas_letras(['2.4'], 'a') == cifra_de_cesar.erro_chave
 
 def test_cifra_de_cesar_apenas_letras_mensagem_invalida():
-    assert cifra_de_cesar.encriptar_modo_apenas_letras(['1'], '') == 'Mensagem inválida !'
-    assert cifra_de_cesar.traduzir_modo_apenas_letras(['1'], '') == 'Mensagem inválida !'
+    assert cifra_de_cesar.encriptar_modo_apenas_letras(['1'], '') == cifra_de_cesar.erro_mensagem
+    assert cifra_de_cesar.traduzir_modo_apenas_letras(['1'], '') == cifra_de_cesar.erro_mensagem
 
 def test_cifra_de_cesar_apenas_letras_volta_alfabeto():
     assert cifra_de_cesar.encriptar_modo_apenas_letras(['1'], 'z') == 'a'
@@ -68,24 +68,24 @@ def test_cifra_de_cesar_varios_caracteres_chave_1():
     assert cifra_de_cesar.traduzir_modo_varios_caracteres(['1'], 'b') == 'a'
 
 def test_cifra_de_cesar_varios_caracteres_chave_invalida_vazia():
-    assert cifra_de_cesar.encriptar_modo_varios_caracteres([''], 'abc') == 'Chave inválida !'
-    assert cifra_de_cesar.traduzir_modo_varios_caracteres([''], 'abc') == 'Chave inválida !'
+    assert cifra_de_cesar.encriptar_modo_varios_caracteres([''], 'abc') == cifra_de_cesar.erro_chave
+    assert cifra_de_cesar.traduzir_modo_varios_caracteres([''], 'abc') == cifra_de_cesar.erro_chave
 
 def test_cifra_de_cesar_varios_caracteres_chave_invalida_negativa():
-    assert cifra_de_cesar.encriptar_modo_varios_caracteres(['-1'], 'a') == 'Chave inválida !'
-    assert cifra_de_cesar.traduzir_modo_varios_caracteres(['-1'], 'a') == 'Chave inválida !'
+    assert cifra_de_cesar.encriptar_modo_varios_caracteres(['-1'], 'a') == cifra_de_cesar.erro_chave
+    assert cifra_de_cesar.traduzir_modo_varios_caracteres(['-1'], 'a') == cifra_de_cesar.erro_chave
 
 def test_cifra_de_cesar_varios_caracteres_chave_invalida_texto():
-    assert cifra_de_cesar.encriptar_modo_varios_caracteres(['texto'], 'a') == 'Chave inválida !'
-    assert cifra_de_cesar.traduzir_modo_varios_caracteres(['texto'], 'a') == 'Chave inválida !'
+    assert cifra_de_cesar.encriptar_modo_varios_caracteres(['texto'], 'a') == cifra_de_cesar.erro_chave
+    assert cifra_de_cesar.traduzir_modo_varios_caracteres(['texto'], 'a') == cifra_de_cesar.erro_chave
 
 def test_cifra_de_cesar_varios_caracteres_chave_invalida_naointeiro():
-    assert cifra_de_cesar.encriptar_modo_varios_caracteres(['1.2'], 'a') == 'Chave inválida !'
-    assert cifra_de_cesar.traduzir_modo_varios_caracteres(['1.2'], 'a') == 'Chave inválida !'
+    assert cifra_de_cesar.encriptar_modo_varios_caracteres(['1.2'], 'a') == cifra_de_cesar.erro_chave
+    assert cifra_de_cesar.traduzir_modo_varios_caracteres(['1.2'], 'a') == cifra_de_cesar.erro_chave
 
 def test_cifra_de_cesar_varios_caracteres_mensagem_invalida():
-    assert cifra_de_cesar.encriptar_modo_varios_caracteres(['1'], '') == 'Mensagem inválida !'
-    assert cifra_de_cesar.traduzir_modo_varios_caracteres(['1'], '') == 'Mensagem inválida !'
+    assert cifra_de_cesar.encriptar_modo_varios_caracteres(['1'], '') == cifra_de_cesar.erro_mensagem
+    assert cifra_de_cesar.traduzir_modo_varios_caracteres(['1'], '') == cifra_de_cesar.erro_mensagem
 
 def test_cifra_de_cesar_varios_caracteres_volta():
     assert cifra_de_cesar.encriptar_modo_varios_caracteres(['1'], '˞˝') == ' ˞'

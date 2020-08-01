@@ -1,5 +1,7 @@
 import Cifras.utilidades_cifras as utilidades
 
+erro_chave = 'Chave inválida !\nA chave precisa ser um número inteiro positivo !\nCaso tenha alguma dúvida, clique em "Abrir guia da cifra"'
+erro_mensagem = "Erro: Mensagem inexistente !"
 
 def retorna_chave_se_for_valida(lista_chaves):  # Função validadora da chave.
     if lista_chaves[0].isnumeric():
@@ -19,11 +21,11 @@ def traduzir_modo_apenas_letras(lista_chaves, mensagem):
 
 def mensagem_nova_modo_apenas_letras(chave, mensagem):
     if not mensagem:
-        return 'Mensagem inválida !'
+        return erro_mensagem
     if chave:
         return cesar_troca_apenas_letras(chave, mensagem)
     else:
-        return 'Chave inválida !'
+        return erro_chave
 
 
 def adaptar_chave_para_traduçao_apenas_letras(lista_chaves):  # Adaptar a chave para a tradução, caso ela seja válida.
@@ -67,11 +69,11 @@ def traduzir_modo_varios_caracteres(lista_chaves, mensagem):
 
 def mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode):
     if not mensagem:
-        return "Mensagem inválida !"
+        return erro_mensagem
     if chave:
         return cesar_troca_varios_caracteres(chave, mensagem, dic_unicode)
     else:
-        return 'Chave inválida !'
+        return erro_chave
 
 
 def cesar_troca_varios_caracteres(chave, mensagem, dic_unicode):

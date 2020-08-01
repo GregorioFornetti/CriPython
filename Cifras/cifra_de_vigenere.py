@@ -1,5 +1,8 @@
 import Cifras.utilidades_cifras as utilidades
 
+erro_mensagem = "Erro: Mensagem inexistente !"
+erro_chave_apenas_letras = 'Chave inválida !\nA chave precisa ser um texto sem caracteres especiais !\nCaso tenha alguma duvida, clique em "Abrir guia da cifra"'
+erro_chave_varios_caracteres = 'Chave inválida !\nA chave não pode possuir caracteres acima de 773 da tabela unicode !\nCaso tenha alguma duvida, clique em "Abrir guia da cifra"'
 
 def encriptar_modo_apenas_letras(lista_chaves, mensagem):  # Função que traduz/encripta a mensagem pela cifra de Vigenère.
     chave = testa_chave_vigenere_apenas_letras(lista_chaves)
@@ -38,11 +41,11 @@ def adaptar_chave_para_traducao_apenas_letras(lista_chaves):  # Função que ada
 
 def mensagem_nova_modo_apenas_letras(chave, mensagem):
     if not mensagem:
-        return 'Mensagem inválida !'
+        return erro_mensagem
     if chave:
         return vigenere_troca_apenas_letras(chave, mensagem)
     else:
-        return "Chave inválida !"
+        return erro_chave_apenas_letras
 
 
 def vigenere_troca_apenas_letras(chave, mensagem):
@@ -110,11 +113,11 @@ def adaptar_chave_para_traducao_varios_caracteres(lista_chaves, dic_unicode):
 
 def mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode):
     if not mensagem:
-        return "Mensagem inválida !"
+        return erro_mensagem
     if chave:
         return vigenere_troca_varios_caracteres(chave, mensagem, dic_unicode)
     else:
-        return "Chave inválida !"
+        return erro_chave_varios_caracteres
 
 
 def vigenere_troca_varios_caracteres(chave, mensagem, dic_unicode):

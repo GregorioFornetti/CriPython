@@ -10,9 +10,10 @@ import sqlite3
 
 # Dicionário utilizado para a criação do layout opções e banco de dados.
 dic_criptografias_disponiveis = {'Cifra de César': ['Apenas letras', 'Vários caracteres'],
-                                  'Substituição simples': ['Apenas letras (letras mensagem comum)      ', 'Apenas letras (letras mensagem encriptada)     ',
-                                                           'Vários caracteres (letras mensagem comum)', 'Vários caracteres (letras mensagem encriptada)'], 
-                                  'Cifra de Vigenère': ['Apenas letras', 'Vários caracteres']}
+                                 'Substituição simples': ['Apenas letras (letras mensagem comum)      ', 'Apenas letras (letras mensagem encriptada)     ',
+                                                          'Vários caracteres (letras mensagem comum)', 'Vários caracteres (letras mensagem encriptada)'], 
+                                 'Cifra de Vigenère': ['Apenas letras', 'Vários caracteres']}
+opcoes_cifras = [cifra for cifra in dic_criptografias_disponiveis.keys()]  # Colocar as opcoes de cifras dentro de uma lista.
 lista_utilitarios_disponiveis = ['Força bruta César', 'Adivinhador César']
 
 def main():
@@ -71,8 +72,8 @@ def retorna_layout_opcoes():
     layout_opcoes = [[sg.Text('     Cripythongrafia: Opções')],
                      [sg.Text('Tema:')],
                      [sg.Listbox(sg.theme_list(), select_mode='LISTBOX_SELECT_MODE_SINGLE', size=(20, 5), enable_events=True,
-                      key="tema", default_values=[retornar_tema_configurado()])],
-                     [sg.Text('Chaves padrões:')]]
+                      key="tema", default_values=[retornar_tema_configurado()])]]
+    subdivisao_chaves_padroes_cifras = [[sg.Text('Cifras:'), sg.Combo(opcoes_cifras, enable_events=True, key="nova_opcao")]]
     for cifra, modos in dic_criptografias_disponiveis.items():
         subdivisao_layout = []
         lista_elementos_atuais = []
@@ -82,7 +83,8 @@ def retorna_layout_opcoes():
                 lista_elementos_atuais = []
             lista_elementos_atuais += [sg.Text(f'{modo}'), sg.Input(key=f'{cifra}-{modo.strip()}')]
         subdivisao_layout.append(lista_elementos_atuais)
-        layout_opcoes.append([sg.Frame(cifra, layout=subdivisao_layout)])
+        subdivisao_chaves_padroes_cifras.append([sg.Frame(cifra, layout=subdivisao_layout, visible=False, key=cifra)])
+    layout_opcoes.append([sg.Frame('Chaves padrões cifras', layout=subdivisao_chaves_padroes_cifras)])
     layout_opcoes.append([sg.Output(size=(100,10))])
     layout_opcoes.append([sg.Button('Retornar', key='retornar'), sg.Button('Aplicar', key='aplicar')])
     return layout_opcoes
@@ -145,6 +147,13 @@ def menu_opcoes():
         if evento in ('retornar', None):
             tela_opcoes.close()
             break
+        if evento == 'nova_opcao':
+            for cifra in opcoes_cifras:
+                if valores["nova_opcao"] == cifra:
+                    tela_opcoes.Element(cifra).update(visible=True)
+                    tela_opcoes.Element(cifra).unhide_row()
+                else:
+                    tela_opcoes.Element(cifra).hide_row()
         if evento == 'aplicar':
             resposta = aplicar_novas_configuracoes(valores)
             tela_opcoes.close()

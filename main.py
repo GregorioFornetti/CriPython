@@ -6,8 +6,8 @@ import Menus.utilidades_menus as utilidades_menu
 import banco_de_dados
 
 # Dicionário utilizado para a criação do layout opções e banco de dados.
-opcoes_cifras = [cifra for cifra in banco_de_dados.dic_criptografias_disponiveis.keys()]  # Colocar as opcoes de cifras dentro de uma lista.
 lista_utilitarios_disponiveis = ['Força bruta César', 'Adivinhador César']
+opcoes_cifras_port = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
 
 def main():
     # Layout da interface principal do programa.
@@ -62,27 +62,62 @@ def retorna_layout_botoes_enumerados(titulo, lista_opcoes):
 
 
 def retorna_layout_opcoes():
-    layout_opcoes = [[sg.Text('     Cripythongrafia: Opções')],
-                     [sg.Text('Tema:' + ' ' * 40), sg.Text('Idioma:')],
+    dic_textos = retorna_dicionario_textos_menu_opcoes()
+    opcoes_cifras = retorna_opcoes_cifra()
+    layout_opcoes = [[sg.Text(dic_textos['titulo'])],
+                     [sg.Text(dic_textos['opcao temas'] + ' ' * 40), sg.Text(dic_textos['opcao idiomas'])],
                      [sg.Listbox(sg.theme_list(), select_mode='LISTBOX_SELECT_MODE_SINGLE', size=(20, 5),
                       key="tema", default_values=[banco_de_dados.retornar_tema_configurado()]),
-                      sg.Listbox(['Portugues', 'Ingles'], select_mode='LISTBOX_SELECT_MODE_SINGLE', size=(20, 5),
-                      key="idioma", default_values=['Portugues'])]]
-    subdivisao_chaves_padroes_cifras = [[sg.Text('Cifras:'), sg.Combo(opcoes_cifras, enable_events=True, key="nova_opcao")]]
-    for cifra, modos in banco_de_dados.dic_criptografias_disponiveis.items():
+                      sg.Listbox(['Portugues', 'English'], select_mode='LISTBOX_SELECT_MODE_SINGLE', size=(20, 5),
+                      key="idioma", default_values=[banco_de_dados.retornar_idioma_configurado()])]]
+    subdivisao_chaves_padroes_cifras = [[sg.Text(dic_textos['cifras']), sg.Combo(opcoes_cifras, enable_events=True, key="nova_opcao")]]
+
+    indice_cifra = 0
+    for cifra, modos in banco_de_dados.dic_criptografias_disponiveis.items():  # Criando opcoes de chaves padroes...
         subdivisao_layout = []
         lista_elementos_atuais = []
-        for modo in modos:
+        for indice_modo, modo in enumerate(modos):
             if len(lista_elementos_atuais) == 4:  # Sempre pular para a próxima linha após colocar 4 elementos.
                 subdivisao_layout.append(lista_elementos_atuais[:])
                 lista_elementos_atuais = []
-            lista_elementos_atuais += [sg.Text(f'{modo}'), sg.Input(key=f'{cifra}-{modo.strip()}')]
+            lista_elementos_atuais += [sg.Text(f'{dic_textos["modos"][cifra][indice_modo]}'), sg.Input(key=f'{cifra}-{modo.strip()}')]
         subdivisao_layout.append(lista_elementos_atuais)
-        subdivisao_chaves_padroes_cifras.append([sg.Frame(cifra, layout=subdivisao_layout, visible=False, key=cifra)])
-    layout_opcoes.append([sg.Frame('Chaves padrões cifras', layout=subdivisao_chaves_padroes_cifras)])
+        subdivisao_chaves_padroes_cifras.append([sg.Frame(opcoes_cifras[indice_cifra], layout=subdivisao_layout, visible=False, key=cifra)])
+        indice_cifra += 1
+
+    layout_opcoes.append([sg.Frame(dic_textos['chaves padroes'], layout=subdivisao_chaves_padroes_cifras)])
     layout_opcoes.append([sg.Output(size=(100,10))])
-    layout_opcoes.append([sg.Button('Retornar', key='retornar'), sg.Button('Aplicar', key='aplicar')])
+    layout_opcoes.append([sg.Button(dic_textos['retornar'], key='retornar'), sg.Button(dic_textos['aplicar'], key='aplicar')])
     return layout_opcoes
+
+
+def retorna_dicionario_textos_menu_opcoes():
+    idioma = banco_de_dados.retornar_idioma_configurado()
+    if idioma == 'Portugues':
+        return {'titulo': 'Crypythongraphy: Opções',
+                'opcao temas': 'Temas:',
+                'opcao idiomas': 'Idiomas:',
+                'cifras': 'Cifras:',
+                'modos': banco_de_dados.dic_criptografias_disponiveis,
+                'chaves padroes': 'Chaves padrões cifras',
+                'retornar': 'Retornar',
+                'aplicar': 'Aplicar'}
+    else:
+        return {'titulo': 'Crypythongraphy: Options',
+                'opcao temas': 'Themes:',
+                'opcao idiomas': 'Languages:',
+                'cifras': 'Ciphers:',
+                'modos': banco_de_dados.dic_crips_eng,
+                'chaves padroes': 'Default keys',
+                'retornar': 'Returne',
+                'aplicar': 'Apply'}
+
+
+def retorna_opcoes_cifra():
+    if banco_de_dados.retornar_idioma_configurado() == 'Portugues':
+        return [cifra for cifra in banco_de_dados.dic_criptografias_disponiveis.keys()]  # Colocar as opcoes de cifras dentro de uma lista.
+    else:
+        return banco_de_dados.opcoes_cifras_eng
 
 
 def executar_menu(titulo, dicionario_funcoes, tela_anterior, layout):
@@ -136,6 +171,7 @@ def menu_utilitarios(tela_anterior):
 def menu_opcoes():
     # Criação do layout do menu opções.
     tela_opcoes = sg.Window('Cripythongrafia: Opções', retorna_layout_opcoes())
+    opcoes_cifras = retorna_opcoes_cifra()
     resposta = ''
     while True:
         evento, valores = tela_opcoes.read(timeout=1000)
@@ -143,12 +179,12 @@ def menu_opcoes():
             tela_opcoes.close()
             break
         if evento == 'nova_opcao':
-            for cifra in opcoes_cifras:
+            for indice_cifra, cifra in enumerate(opcoes_cifras):
                 if valores["nova_opcao"] == cifra:
-                    tela_opcoes.Element(cifra).update(visible=True)
-                    tela_opcoes.Element(cifra).unhide_row()
+                    tela_opcoes.Element(opcoes_cifras_port[indice_cifra]).update(visible=True)
+                    tela_opcoes.Element(opcoes_cifras_port[indice_cifra]).unhide_row()
                 else:
-                    tela_opcoes.Element(cifra).hide_row()
+                    tela_opcoes.Element(opcoes_cifras_port[indice_cifra]).hide_row()
         if evento == 'aplicar':
             resposta = banco_de_dados.aplicar_novas_configuracoes(valores)
             tela_opcoes.close()
@@ -157,8 +193,5 @@ def menu_opcoes():
             print(resposta)
             resposta = ''
 
-#db = sqlite3.connect('configs.db')
-#banco_de_dados = db.cursor()
-#print(banco_de_dados.execute("SELECT * FROM chaves_padroes").fetchall())
-#print(banco_de_dados.execute('SELECT chave FROM chaves_padroes WHERE cifra = "Substituição simples" AND modo LIKE "Apenas letras%"').fetchall())
+
 main()

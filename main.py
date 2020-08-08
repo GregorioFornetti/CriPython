@@ -4,10 +4,11 @@ import Menus.menus_utilitarios as menus_utilitarios
 import Menus.menus_cifras as menus_cifras
 import Menus.utilidades_menus as utilidades_menu
 import banco_de_dados
+import dicionarios
 
 # Dicionário utilizado para a criação do layout opções e banco de dados.
 lista_utilitarios_disponiveis = ['Força bruta César', 'Adivinhador César']
-opcoes_cifras_port = ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
+opcoes_cifras_port = dicionarios.lista_cifras_port
 
 def main():
     # Layout da interface principal do programa.
@@ -62,7 +63,7 @@ def retorna_layout_botoes_enumerados(titulo, lista_opcoes):
 
 
 def retorna_layout_opcoes():
-    dic_textos = retorna_dicionario_textos_menu_opcoes()
+    dic_textos = dicionarios.retorna_menu_opcoes(banco_de_dados.retornar_idioma_configurado())
     opcoes_cifras = retorna_opcoes_cifra()
     layout_opcoes = [[sg.Text(dic_textos['titulo'])],
                      [sg.Text(dic_textos['opcao temas'] + ' ' * 40), sg.Text(dic_textos['opcao idiomas'])],
@@ -73,7 +74,7 @@ def retorna_layout_opcoes():
     subdivisao_chaves_padroes_cifras = [[sg.Text(dic_textos['cifras']), sg.Combo(opcoes_cifras, enable_events=True, key="nova_opcao")]]
 
     indice_cifra = 0
-    for cifra, modos in banco_de_dados.dic_criptografias_disponiveis.items():  # Criando opcoes de chaves padroes...
+    for cifra, modos in dicionarios.criptografias_disponiveis.items():  # Criando opcoes de chaves padroes...
         subdivisao_layout = []
         lista_elementos_atuais = []
         for indice_modo, modo in enumerate(modos):
@@ -91,33 +92,11 @@ def retorna_layout_opcoes():
     return layout_opcoes
 
 
-def retorna_dicionario_textos_menu_opcoes():
-    idioma = banco_de_dados.retornar_idioma_configurado()
-    if idioma == 'Portugues':
-        return {'titulo': 'Crypythongraphy: Opções',
-                'opcao temas': 'Temas:',
-                'opcao idiomas': 'Idiomas:',
-                'cifras': 'Cifras:',
-                'modos': banco_de_dados.dic_criptografias_disponiveis,
-                'chaves padroes': 'Chaves padrões cifras',
-                'retornar': 'Retornar',
-                'aplicar': 'Aplicar'}
-    else:
-        return {'titulo': 'Crypythongraphy: Options',
-                'opcao temas': 'Themes:',
-                'opcao idiomas': 'Languages:',
-                'cifras': 'Ciphers:',
-                'modos': banco_de_dados.dic_crips_eng,
-                'chaves padroes': 'Default keys',
-                'retornar': 'Returne',
-                'aplicar': 'Apply'}
-
-
 def retorna_opcoes_cifra():
     if banco_de_dados.retornar_idioma_configurado() == 'Portugues':
-        return [cifra for cifra in banco_de_dados.dic_criptografias_disponiveis.keys()]  # Colocar as opcoes de cifras dentro de uma lista.
+        return [cifra for cifra in dicionarios.criptografias_disponiveis.keys()]  # Colocar as opcoes de cifras dentro de uma lista.
     else:
-        return banco_de_dados.opcoes_cifras_eng
+        return dicionarios.lista_cifras_ingles
 
 
 def executar_menu(titulo, dicionario_funcoes, tela_anterior, layout):
@@ -135,7 +114,7 @@ def executar_menu(titulo, dicionario_funcoes, tela_anterior, layout):
 
 def menu_encriptar(tela_anterior):
     titulo = 'Cripythongrafia: Encriptação'
-    layout_encriptar = retorna_layout_botoes_enumerados(titulo, dic_criptografias_disponiveis.keys())
+    layout_encriptar = retorna_layout_botoes_enumerados(titulo, dicionarios.criptografias_disponiveis.keys())
     dic_funcoes_menus_cifras_encript = {
         'Cifra de César':menus_cifras.menu_cifra_de_cesar_encriptação,
         'Substituição simples':menus_cifras.menu_subst_simples_encriptação,
@@ -147,7 +126,7 @@ def menu_encriptar(tela_anterior):
 
 def menu_traducao(tela_anterior):
     titulo = "Cripythongrafia: Tradução"
-    layout_traducao = retorna_layout_botoes_enumerados(titulo, dic_criptografias_disponiveis.keys())
+    layout_traducao = retorna_layout_botoes_enumerados(titulo, dicionarios.criptografias_disponiveis.keys())
     dic_funcoes_menus_cifras_traduc = {
         'Cifra de César':menus_cifras.menu_cifra_de_cesar_tradução,
         'Substituição simples':menus_cifras.menu_subst_simples_tradução,
@@ -179,16 +158,17 @@ def menu_opcoes():
             tela_opcoes.close()
             break
         if evento == 'nova_opcao':
-            for indice_cifra, cifra in enumerate(opcoes_cifras):
-                if valores["nova_opcao"] == cifra:
+            for indice_cifra, cifra in enumerate(opcoes_cifras):  # Atualizar a tela para mostrar apenas as chaves da cifra escolhida atualmente.
+                if valores["nova_opcao"] == cifra:  # Revelar apenas a cifra escolhida
                     tela_opcoes.Element(opcoes_cifras_port[indice_cifra]).update(visible=True)
                     tela_opcoes.Element(opcoes_cifras_port[indice_cifra]).unhide_row()
-                else:
+                else:  # Esconder as outras
                     tela_opcoes.Element(opcoes_cifras_port[indice_cifra]).hide_row()
         if evento == 'aplicar':
             resposta = banco_de_dados.aplicar_novas_configuracoes(valores)
             tela_opcoes.close()
             tela_opcoes = sg.Window('Cripythongrafia: Opções', retorna_layout_opcoes())
+            opcoes_cifras = retorna_opcoes_cifra()  # Atualizar os nomes de opções de cifras caso mude o idioma.
         elif resposta:  # Imprimir respostas (é preciso esperar um pouco para imprimi-las, por isso é utilizado o timeout).
             print(resposta)
             resposta = ''

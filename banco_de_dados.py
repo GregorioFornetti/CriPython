@@ -18,11 +18,11 @@ def criar_banco_de_dados_se_ainda_nao_existir():
         banco_de_dados.execute('CREATE TABLE opcoes (opcao TEXT, escolha TEXT)')
         # Adicionando os valores padrões da tabela "opções"
         banco_de_dados.execute('INSERT INTO opcoes VALUES ("tema", "DarkGrey5")')
-        banco_de_dados.execute('INSERT INTO opcoes VALUES ("idioma", "portugues")')
+        banco_de_dados.execute('INSERT INTO opcoes VALUES ("idioma", "Portugues")')
         # Criar tabela "chave_padroes", onde ficarão as chaves salvas pelos usuário.
         banco_de_dados.execute('CREATE TABLE chaves_padroes (cifra TEXT, modo TEXT, chave TEXT)')
         # Colocar valores "place holder" na tabela chaves padrões
-        for cifra, modos in dic_criptografias_disponiveis.items():
+        for cifra, modos in dicionarios.criptografias_disponiveis.items():
             for modo in modos:
                 banco_de_dados.execute('INSERT INTO chaves_padroes VALUES (?, ?, ?)', [cifra, modo.strip(), ''])
         db.commit()
@@ -113,12 +113,12 @@ def retorna_idioma_configurado():
         db = sqlite3.connect('configs.db')
         banco_de_dados = db.cursor()
         idioma = banco_de_dados.execute('SELECT escolha FROM opcoes WHERE opcao = "idioma"').fetchone()[0]
-        print('uma vez')
         db.close()
     return idioma
 
-
+'''
 db = sqlite3.connect('configs.db')
 bd = db.cursor()
 print(bd.execute('SELECT * FROM opcoes').fetchall())
 print(bd.execute('SELECT * FROM chaves_padroes').fetchall())
+'''

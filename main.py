@@ -105,7 +105,6 @@ def executar_menu(titulo, dicionario_funcoes, tela_anterior, layout):
         tela_atual.Hide()
         for opcao, funcao in dicionario_funcoes.items():
             if evento == opcao:
-                print('executar')
                 funcao(tela_atual)
 
 

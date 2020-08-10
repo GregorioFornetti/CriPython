@@ -7,7 +7,6 @@ import Menus.utilidades_menus as utilidades_menus
 import dicionarios
 import banco_de_dados
 
-mensagem_chave_padrao = "Você ainda não definiu uma chave padrão para essa cifra !\nVá para o menu principal e depois em opções e defina uma !\n"
 
 def retorna_layout_padrao_tradução(titulo, opcoes):
     dic_textos = dicionarios.retorna_menus_cifras(banco_de_dados.retorna_idioma_configurado())
@@ -66,7 +65,7 @@ def executar_menu_cifra(titulo_cifra, tela_anterior, dicionario_funcoes_cifras, 
                     if evento == "utilizar_chave_padrao":
                         lista_chaves = retorna_chaves_padroes(titulo_cifra, opção)
                         if not lista_chaves:
-                            print(mensagem_chave_padrao)
+                            print(dicionarios.retorna_erro_chave_padrao(banco_de_dados.retorna_idioma_configurado()))
                             break
                     else:
                         lista_chaves = []

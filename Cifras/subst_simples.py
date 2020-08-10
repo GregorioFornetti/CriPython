@@ -1,6 +1,5 @@
-
-erro_mensagem = "Erro: Mensagem inexistente !"
-erro_chave = 'Chave inválida !\nClique em "Abrir guia da cifra" e verifique quais chaves são válidas para o modo Substituição simples'
+import banco_de_dados
+import dicionarios
 
 def encriptar_modo_apenas_letras(lista_chaves, mensagem):
     chave = adaptar_chave_modo_apenas_letras(lista_chaves)
@@ -28,11 +27,12 @@ def traduzir_modo_varios_caracteres(lista_chaves, mensagem):
 
 def mensagem_nova(chave, mensagem):
     if not mensagem:
-        return erro_mensagem
+        return dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
     if chave:
         return criar_mensagem_com_caracteres_trocados(chave, mensagem)
     else:
-        return erro_chave
+        return dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+
 
 def adaptar_chave_modo_varios_caracteres(lista_chaves):  # Criará um dicionário relacionando a chave_1 com a chave_2
     if lista_chaves[0] and lista_chaves[1]:

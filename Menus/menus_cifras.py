@@ -4,43 +4,50 @@ import Cifras.cifra_de_cesar as cifra_de_cesar
 import Cifras.subst_simples as subst_simples
 import Cifras.cifra_de_vigenere as cifra_de_vigenere
 import Menus.utilidades_menus as utilidades_menus
+import dicionarios
+import banco_de_dados
 
 mensagem_chave_padrao = "Você ainda não definiu uma chave padrão para essa cifra !\nVá para o menu principal e depois em opções e defina uma !\n"
 
 def retorna_layout_padrao_tradução(titulo, opcoes):
-    layout = [[sg.Text(f"{f'Cripythongrafia: {titulo} (tradução)':^110}")],
-             [sg.Text('Opções:')],
-             utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
-             [sg.Text('Mensagem encriptada:'), sg.InputText(key='mensagem')],
-             [sg.Text('Chave:'), sg.InputText(key='chave')],
-             [sg.Text('Mensagem traduzida:')],
+    dic_textos = dicionarios.retorna_menus_cifras(banco_de_dados.retorna_idioma_configurado())
+    layout = [[sg.Text(f"{dic_textos[f'{titulo} (tradução)']:^110}")],
+             [sg.Text(dic_textos['Opções'])],
+              utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
+             [sg.Text(dic_textos['Mensagem encriptada']), sg.InputText(key='mensagem')],
+             [sg.Text(dic_textos['Chave']), sg.InputText(key='chave')],
+             [sg.Text(dic_textos['Mensagem traduzida'])],
              [sg.Output(size=(75,25), key='output')],
-             [sg.Button('Traduzir', key='traduzir'), sg.Button('Traduzir com chave padrão', key="utilizar_chave_padrao"),
-              sg.Button('Abrir guia da cifra', key='link'), sg.Button('Limpar tela', key='limpar') ,sg.Button('Retornar', key='retornar')]]
+             [sg.Button(dic_textos['Traduzir'], key='traduzir'), sg.Button(dic_textos['Traduzir com chave padrão'], key="utilizar_chave_padrao"),
+              sg.Button(dic_textos['Abrir guia cifra'], key='link'), sg.Button(dic_textos['Limpar tela'], key='limpar'),
+              sg.Button(dic_textos['Retornar'], key='retornar')]]
     return layout
 
 
 def retorna_layout_padrao_encriptação(titulo, opcoes):
-    layout = [[sg.Text(f"{f'Cripythongrafia: {titulo} (encriptação)':^110}")],
-             [sg.Text('Opções:')],
-             utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
-             [sg.Text('Mensagem:'), sg.InputText(key='mensagem')],
-             [sg.Text('Chave:'), sg.InputText(key='chave')],
-             [sg.Text('Mensagem encriptada:')],
+    dic_textos = dicionarios.retorna_menus_cifras(banco_de_dados.retorna_idioma_configurado())
+    layout = [[sg.Text(f"{dic_textos[f'{titulo} (encriptação)']:^110}")],
+             [sg.Text(dic_textos['Opções'])],
+              utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
+             [sg.Text(dic_textos['Mensagem']), sg.InputText(key='mensagem')],
+             [sg.Text(dic_textos['Chave']), sg.InputText(key='chave')],
+             [sg.Text(dic_textos['Mensagem encriptada'])],
              [sg.Output(size=(75,25), key='output')],
-             [sg.Button('Encriptar', key='encriptar'), sg.Button('Encriptar com chave padrão', key="utilizar_chave_padrao"),
-             sg.Button('Abrir guia da cifra', key='link'), sg.Button('Limpar tela', key='limpar'), sg.Button('Retornar', key='retornar')]]
+             [sg.Button(dic_textos['Encriptar'], key='encriptar'), sg.Button(dic_textos['Encriptar com chave padrão'], key="utilizar_chave_padrao"),
+              sg.Button(dic_textos['Abrir guia cifra'], key='link'), sg.Button(dic_textos['Limpar tela'], key='limpar'),
+              sg.Button(dic_textos['Retornar'], key='retornar')]]
     return layout
 
 
 def retorna_layout_subst_simples(titulo, opcoes, modo='encriptação'):
     # Trocará o nome do que era "chave" para "letras mensagem encriptada" e adicionará outro local para digitar chamado "letras mensagem comum".
+    lista_textos = dicionarios.retorna_lista_subst_simples(banco_de_dados.retorna_idioma_configurado())
     layout_subst_simples = retorna_layout_padrao_encriptação(titulo, opcoes)
     if modo == 'tradução':
         layout_subst_simples = retorna_layout_padrao_tradução(titulo, opcoes)
     del layout_subst_simples[4]
-    layout_subst_simples.insert(4, [sg.Text('Letras mensagem comum:    '), sg.Input('abcdefghijklmnopqrstuvwxyz', key='chave_1')])
-    layout_subst_simples.insert(5, [sg.Text('Letras mensagem encriptada:'), sg.Input(key='chave_2')])
+    layout_subst_simples.insert(4, [sg.Text(lista_textos[0]), sg.Input('abcdefghijklmnopqrstuvwxyz', key='chave_1')])
+    layout_subst_simples.insert(5, [sg.Text(lista_textos[1]), sg.Input(key='chave_2')])
     return layout_subst_simples
 
 

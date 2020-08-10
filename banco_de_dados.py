@@ -56,12 +56,12 @@ def tentar_salvar_chave_padrao(titulos_cifras, dic_opcoes, banco_de_dados, funca
 def aplicar_novas_configuracoes(dic_opcoes):
     global idioma
     global tema
-    idioma = retornar_idioma_configurado()
+    idioma = retorna_idioma_configurado()
     mensagem = ''
     db = sqlite3.connect('configs.db')
     banco_de_dados = db.cursor()
 
-    if dic_opcoes['tema'][0] != retornar_tema_configurado():  # Definindo o novo tema escrito pelo usuario
+    if dic_opcoes['tema'][0] != retorna_tema_configurado():  # Definindo o novo tema escrito pelo usuario
         tema = dic_opcoes['tema'][0]
         sg.theme(dic_opcoes['tema'][0])  # Aplicar novo tema.
         banco_de_dados.execute('UPDATE opcoes SET escolha = ? WHERE opcao = "tema"', dic_opcoes['tema'])
@@ -69,7 +69,7 @@ def aplicar_novas_configuracoes(dic_opcoes):
             mensagem += f'Novo tema: "{dic_opcoes["tema"][0]}" definido com sucesso !'
         else:
             mensagem += f'New theme: "{dic_opcoes["tema"][0]}" successfully applied !'
-    if dic_opcoes['idioma'][0] != retornar_idioma_configurado():
+    if dic_opcoes['idioma'][0] != retorna_idioma_configurado():
         idioma = dic_opcoes['idioma'][0]
         banco_de_dados.execute('UPDATE opcoes SET escolha = ? WHERE opcao = "idioma"', dic_opcoes['idioma'])
         if idioma == 'Portugues':
@@ -97,7 +97,7 @@ def aplicar_novas_configuracoes(dic_opcoes):
     return mensagem
 
 
-def retornar_tema_configurado():  # Retornar o tema armazenado no banco de dados.
+def retorna_tema_configurado():  # Retornar o tema armazenado no banco de dados.
     global tema
     if not tema:  # Evitar que o tema seja sempre procurado no DB. (apenas procurar quando executar o programa)
         db = sqlite3.connect('configs.db')
@@ -107,7 +107,7 @@ def retornar_tema_configurado():  # Retornar o tema armazenado no banco de dados
     return tema
 
 
-def retornar_idioma_configurado():
+def retorna_idioma_configurado():
     global idioma
     if not idioma:  # Evitar que o idioma seja sempre procurado no DB. (apenas procurar quando executar o programa)
         db = sqlite3.connect('configs.db')

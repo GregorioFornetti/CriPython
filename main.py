@@ -5,16 +5,17 @@ import Menus.menus_cifras as menus_cifras
 import Menus.utilidades_menus as utilidades_menu
 import banco_de_dados
 import dicionarios
+# Todos os textos do programa estão no arquivo "dicionarios.py" (textos para cada opcão de idioma).
 
 # Dicionário utilizado para a criação do layout opções e banco de dados.
 lista_utilitarios_disponiveis = ['Força bruta César', 'Adivinhador César']
-opcoes_cifras_port = dicionarios.lista_cifras_port
+opcoes_cifras_port = dicionarios.retorna_lista_cifras('Portugues')
 
 def main():
     # Layout da interface principal do programa.
     banco_de_dados.criar_banco_de_dados_se_ainda_nao_existir()
-    sg.theme(banco_de_dados.retornar_tema_configurado())
-    tela_principal = sg.Window('Cripythongrafia: Tela principal', retorna_layout_principal())  # Aplicar layout anterior e criar a janela.)
+    sg.theme(banco_de_dados.retorna_tema_configurado())
+    tela_principal = sg.Window('Cripythongraphy: Tela principal', retorna_layout_principal())  # Aplicar layout anterior e criar a janela.)
     while True:  # Loop que verifica as interações do usuários com o menu principal.
         evento, valores = tela_principal.read()
         if evento in ('6', None):
@@ -37,40 +38,42 @@ def main():
             # Iniciar interface "opções"
             tela_principal.Close()
             menu_opcoes()
-            tela_principal = sg.Window('Cripythongrafia: Tela principal', retorna_layout_principal())
+            tela_principal = sg.Window('Cripythongraphy: Tela principal', retorna_layout_principal())
         if evento == '5':
             # Abrir wiki ajuda
             webbrowser.open(utilidades_menu.dic_links['Wiki'])
 
 
 def retorna_layout_principal():
-    layout_principal =  [[sg.Text('       Cripythongrafia: Tela principal')],
-                        [sg.Button('1- Criar mensagem criptografada', key='1')],
-                        [sg.Button('2- Traduzir mensagem criptografada', key='2')],
-                        [sg.Button('3- Utilitários', key='3')],
-                        [sg.Button('4- Opções', key='4')],
-                        [sg.Button('5- Ajuda', key='5')],
-                        [sg.Button('6- Finalizar programa', key='6')]]
+    dic_textos = dicionarios.retorna_menu_principal(banco_de_dados.retorna_idioma_configurado())
+    layout_principal =  [[sg.Text(' ' * 7 + dic_textos['titulo'])],
+                        [sg.Button(dic_textos['opcao 1'], key='1')],
+                        [sg.Button(dic_textos['opcao 2'], key='2')],
+                        [sg.Button(dic_textos['opcao 3'], key='3')],
+                        [sg.Button(dic_textos['opcao 4'], key='4')],
+                        [sg.Button(dic_textos['opcao 5'], key='5')],
+                        [sg.Button(dic_textos['opcao 6'], key='6')]]
     return layout_principal
 
 
-def retorna_layout_botoes_enumerados(titulo, lista_opcoes):
-    layout = [[sg.Text(titulo)]]
+def retorna_layout_botoes_enumerados(titulo, dic_textos, lista_opcoes, lista_chaves):  # Por padrao, a lista de chaves será as opcoes em portugues
+    layout = [[sg.Text(dic_textos[titulo])]]
     for n, opcao in enumerate(lista_opcoes):
-        layout.append([sg.Button(f'{n + 1} - {opcao}', key=opcao)])
-    layout.append([sg.Button('Retornar', key='retornar')])
+        layout.append([sg.Button(f'{n + 1} - {opcao}', key=lista_chaves[n])])
+    layout.append([sg.Button(dic_textos['Retornar'], key='retornar')])
     return layout
 
 
 def retorna_layout_opcoes():
-    dic_textos = dicionarios.retorna_menu_opcoes(banco_de_dados.retornar_idioma_configurado())
-    opcoes_cifras = retorna_opcoes_cifra()
+    idioma = banco_de_dados.retorna_idioma_configurado()
+    dic_textos = dicionarios.retorna_menu_opcoes(idioma)
+    opcoes_cifras = dicionarios.retorna_lista_cifras(idioma)
     layout_opcoes = [[sg.Text(dic_textos['titulo'])],
                      [sg.Text(dic_textos['opcao temas'] + ' ' * 40), sg.Text(dic_textos['opcao idiomas'])],
                      [sg.Listbox(sg.theme_list(), select_mode='LISTBOX_SELECT_MODE_SINGLE', size=(20, 5),
-                      key="tema", default_values=[banco_de_dados.retornar_tema_configurado()]),
+                      key="tema", default_values=[banco_de_dados.retorna_tema_configurado()]),
                       sg.Listbox(['Portugues', 'English'], select_mode='LISTBOX_SELECT_MODE_SINGLE', size=(20, 5),
-                      key="idioma", default_values=[banco_de_dados.retornar_idioma_configurado()])]]
+                      key="idioma", default_values=[idioma])]]
     subdivisao_chaves_padroes_cifras = [[sg.Text(dic_textos['cifras']), sg.Combo(opcoes_cifras, enable_events=True, key="nova_opcao")]]
 
     indice_cifra = 0
@@ -92,13 +95,6 @@ def retorna_layout_opcoes():
     return layout_opcoes
 
 
-def retorna_opcoes_cifra():
-    if banco_de_dados.retornar_idioma_configurado() == 'Portugues':
-        return [cifra for cifra in dicionarios.criptografias_disponiveis.keys()]  # Colocar as opcoes de cifras dentro de uma lista.
-    else:
-        return dicionarios.lista_cifras_ingles
-
-
 def executar_menu(titulo, dicionario_funcoes, tela_anterior, layout):
     tela_atual = sg.Window(titulo, layout)
     while True:
@@ -109,12 +105,16 @@ def executar_menu(titulo, dicionario_funcoes, tela_anterior, layout):
         tela_atual.Hide()
         for opcao, funcao in dicionario_funcoes.items():
             if evento == opcao:
+                print('executar')
                 funcao(tela_atual)
 
 
 def menu_encriptar(tela_anterior):
-    titulo = 'Cripythongrafia: Encriptação'
-    layout_encriptar = retorna_layout_botoes_enumerados(titulo, dicionarios.criptografias_disponiveis.keys())
+    titulo = 'Cripythongraphy: Encriptação'
+    layout_encriptar = retorna_layout_botoes_enumerados(titulo, 
+                                                        dicionarios.retorna_menu_encript_traduc_utilitarios(banco_de_dados.retorna_idioma_configurado()),
+                                                        dicionarios.retorna_lista_cifras(banco_de_dados.retorna_idioma_configurado()),
+                                                        dicionarios.retorna_lista_cifras('Portugues'))
     dic_funcoes_menus_cifras_encript = {
         'Cifra de César':menus_cifras.menu_cifra_de_cesar_encriptação,
         'Substituição simples':menus_cifras.menu_subst_simples_encriptação,
@@ -125,8 +125,11 @@ def menu_encriptar(tela_anterior):
 
 
 def menu_traducao(tela_anterior):
-    titulo = "Cripythongrafia: Tradução"
-    layout_traducao = retorna_layout_botoes_enumerados(titulo, dicionarios.criptografias_disponiveis.keys())
+    titulo = 'Cripythongraphy: Tradução'
+    layout_traducao = retorna_layout_botoes_enumerados(titulo, 
+                                                       dicionarios.retorna_menu_encript_traduc_utilitarios(banco_de_dados.retorna_idioma_configurado()),
+                                                       dicionarios.retorna_lista_cifras(banco_de_dados.retorna_idioma_configurado()),
+                                                       dicionarios.retorna_lista_cifras('Portugues'))
     dic_funcoes_menus_cifras_traduc = {
         'Cifra de César':menus_cifras.menu_cifra_de_cesar_tradução,
         'Substituição simples':menus_cifras.menu_subst_simples_tradução,
@@ -137,8 +140,11 @@ def menu_traducao(tela_anterior):
 
 
 def menu_utilitarios(tela_anterior):
-    titulo = "Cripythongrafia: Utilitários"
-    layout_utilitarios = retorna_layout_botoes_enumerados(titulo, lista_utilitarios_disponiveis)
+    titulo = "Cripythongraphy: Utilitários"
+    layout_utilitarios = retorna_layout_botoes_enumerados(titulo,
+                                                          dicionarios.retorna_menu_encript_traduc_utilitarios(banco_de_dados.retorna_idioma_configurado()),
+                                                          dicionarios.retorna_lista_utilitarios(banco_de_dados.retorna_idioma_configurado()),
+                                                          dicionarios.retorna_lista_utilitarios('Portugues'))
     dic_funcoes_utilitarios = {
         'Força bruta César':menus_utilitarios.menu_forca_bruta_cesar,
         'Adivinhador César':menus_utilitarios.menu_adivinhador_cesar
@@ -149,8 +155,8 @@ def menu_utilitarios(tela_anterior):
 
 def menu_opcoes():
     # Criação do layout do menu opções.
-    tela_opcoes = sg.Window('Cripythongrafia: Opções', retorna_layout_opcoes())
-    opcoes_cifras = retorna_opcoes_cifra()
+    tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes())
+    opcoes_cifras = dicionarios.retorna_lista_cifras(banco_de_dados.retorna_idioma_configurado())
     resposta = ''
     while True:
         evento, valores = tela_opcoes.read(timeout=1000)
@@ -167,8 +173,8 @@ def menu_opcoes():
         if evento == 'aplicar':
             resposta = banco_de_dados.aplicar_novas_configuracoes(valores)
             tela_opcoes.close()
-            tela_opcoes = sg.Window('Cripythongrafia: Opções', retorna_layout_opcoes())
-            opcoes_cifras = retorna_opcoes_cifra()  # Atualizar os nomes de opções de cifras caso mude o idioma.
+            tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes())
+            opcoes_cifras = dicionarios.retorna_lista_cifras(banco_de_dados.retorna_idioma_configurado())  # Atualizar os nomes de opções de cifras caso mude o idioma.
         elif resposta:  # Imprimir respostas (é preciso esperar um pouco para imprimi-las, por isso é utilizado o timeout).
             print(resposta)
             resposta = ''

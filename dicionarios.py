@@ -208,9 +208,9 @@ def retorna_menu_utilitario(idioma):
 
 def retorna_erro_mensagem(idioma):
     if idioma == 'Portugues':
-        return 'Erro: Mensagem inexistente !'
+        return 'Erro: Mensagem inválida !'
     else:
-        return 'Error: Null message'
+        return 'Error: Invalid message !'
 
 
 def retorna_erro_chave(idioma):
@@ -225,3 +225,4 @@ def retorna_erro_chave_padrao(idioma):
         return "Você ainda não definiu uma chave padrão para essa cifra !\nVá para o menu principal e depois em opções e defina uma !\n"
     else:
         return "You havent defined a default key for this cipher yet !\nGo to the options menu and define one !\n"
+

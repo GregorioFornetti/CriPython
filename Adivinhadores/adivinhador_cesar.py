@@ -1,5 +1,7 @@
 import Cifras.cifra_de_cesar as cifra_de_cesar
 import Cifras.utilidades_cifras as utilidades
+import dicionarios
+import banco_de_dados
 
 
 def adivinhar_cesar_apenas_letras(mensagem):
@@ -23,6 +25,7 @@ def adivinhar_cesar_varios_caracteres(mensagem):
 
 
 def calcula_pontuacao(mensagem):
+    freq_perc_geral = dicionarios.retorna_frequencia_letras(banco_de_dados.retorna_idioma_configurado())
     dicionario_pontuacao_letras = {'a':0, 'b':0, 'c':0, 'd':0, 'e':0, 'f':0, 'g':0, 'h':0, 'i':0, 'j':0, 'k':0,
                                    'l':0, 'm':0, 'n':0, 'o':0, 'p':0, 'q':0, 'r':0, 's':0, 't':0, 'u':0, 'v':0,
                                    'w':0, 'x':0, 'y':0, 'z':0}
@@ -34,7 +37,7 @@ def calcula_pontuacao(mensagem):
             total_letras_validas += 1
     for letra, frequencia in dicionario_pontuacao_letras.items():
         frequencia_perc_atual = dicionario_pontuacao_letras[letra] / total_letras_validas * 100
-        pontuacao_mensagem += abs(frequencia_perc_atual - utilidades.frequencia_alfabeto_pt[letra])
+        pontuacao_mensagem += abs(frequencia_perc_atual - freq_perc_geral[letra])
     return pontuacao_mensagem
 
 

@@ -216,6 +216,19 @@ def retorna_menu_utilitario(idioma):
                 'Retornar': 'Return'}
 
 
+def retorna_frequencia_letras(idioma):
+    if idioma == 'Portugues':
+        return {'a':14.63, 'e':12.57, 'o':10.73, 's':7.81, 'r':6.53, 'i':6.18, 'n':5.05, 'd':4.99,
+                'm':4.74, 'u':4.63, 't':4.34, 'c':3.88, 'l':2.78, 'p':2.52, 'v':1.67, 'g':1.3,
+                'h':1.28, 'q':1.20, 'b':1.04, 'f':1.02, 'z':0.47, 'j':0.4, 'x':0.21, 'k':0.02,
+                'y':0.01, 'w':0.01}
+    else:
+        return {'a':8.16, 'b':1.49, 'c':2.78, 'd':4.25, 'e':12.72, 'f':2.22, 'g':2.01, 'h': 6.09,
+                'i':6.96, 'j':0.15, 'k':0.77, 'l':4.02, 'm':2.40, 'n':6.74, 'o':7.50, 'p':1.92,
+                'q':0.09, 'r':5.98, 's':6.32, 't':9.05, 'u':2.75, 'v':0.97, 'w':2.36, 'x':0.15,
+                'y':1.97, 'z':0.07}
+
+
 def retorna_erro_mensagem(idioma):
     if idioma == 'Portugues':
         return 'Erro: Mensagem inválida !'

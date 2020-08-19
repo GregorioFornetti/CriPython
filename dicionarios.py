@@ -83,9 +83,9 @@ def retorna_menu_principal(idioma):
 
 def retorna_lista_cifras(idioma):
     if idioma == 'Portugues':
-        return ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
+        return ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère', 'Bases numéricas']
     else:
-        return ['Caesar Cipher', 'Substitution cipher', 'Vigenère Cipher']
+        return ['Caesar Cipher', 'Substitution cipher', 'Vigenère Cipher', 'Numeral systems']
 
 
 def retorna_lista_utilitarios(idioma):
@@ -116,6 +116,8 @@ def retorna_menus_cifras(idioma):
                 'Substituição simples (tradução)': 'Substituição simples (tradução)',
                 'Cifra de Vigenère (encriptação)': 'Cifra de Vigenère (encriptação)',
                 'Cifra de Vigenère (tradução)': 'Cifra de Vigenère (tradução)',
+                'Bases numéricas (encriptação)': 'Bases numéricas (encriptação)',
+                'Bases numéricas (tradução)': 'Bases numéricas (tradução)',
                 'Opções': 'Opções:',
                 'Chave': 'Chave:',
                 'Mensagem encriptada': 'Mensagem encriptada:',
@@ -135,6 +137,8 @@ def retorna_menus_cifras(idioma):
                 'Substituição simples (tradução)': 'Substitution cipher (translation)',
                 'Cifra de Vigenère (encriptação)': 'Vigenère Cipher (encrypt)',
                 'Cifra de Vigenère (tradução)': 'Vigenère Cipher (translation)',
+                'Bases numéricas (encriptação)': 'Numeral systems (encrypt)',
+                'Bases numéricas (tradução)': 'Numeral systems (translation)',
                 'Opções': 'Options:',
                 'Chave': 'Key:',
                 'Mensagem encriptada': 'Ciphertext:',
@@ -152,10 +156,16 @@ def retorna_menus_cifras(idioma):
 def retorna_opcoes_cifras(idioma):
     if idioma == 'Portugues':
         return {'Apenas letras': 'Apenas letras',
-                'Vários caracteres': 'Vários caracteres'}
+                'Vários caracteres': 'Vários caracteres',
+                'Binário': 'Binário',
+                'Octal': 'Octal',
+                'Hexadecimal': 'Hexadecimal'}
     else:
         return {'Apenas letras': 'Only letters',
-                'Vários caracteres': 'Several characters'}
+                'Vários caracteres': 'Several characters',
+                'Binário': 'Binary',
+                'Octal': 'Octal',
+                'Hexadecimal': 'Hexadecimal'}
 
 
 def retorna_lista_subst_simples(idioma):

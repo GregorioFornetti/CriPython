@@ -116,6 +116,19 @@ def retorna_idioma_configurado():
         db.close()
     return idioma
 
+
+def retorna_chaves_padroes(cifra, modo):
+    lista_chaves = []
+    modo += '%'
+    db = sqlite3.connect('configs.db')
+    banco_de_dados = db.cursor()
+    chaves = banco_de_dados.execute('SELECT chave FROM chaves_padroes WHERE cifra = ? AND modo LIKE ?', [cifra, modo]).fetchall()
+    for chave in chaves:
+        if chave[0]:
+            lista_chaves.append(chave[0])
+        else:
+            return False
+    return lista_chaves
 '''
 db = sqlite3.connect('configs.db')
 bd = db.cursor()

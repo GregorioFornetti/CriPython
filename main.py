@@ -115,9 +115,10 @@ def menu_encriptar(tela_anterior):
                                                         dicionarios.retorna_lista_cifras(banco_de_dados.retorna_idioma_configurado()),
                                                         dicionarios.retorna_lista_cifras('Portugues'))
     dic_funcoes_menus_cifras_encript = {
-        'Cifra de César':menus_cifras.menu_cifra_de_cesar_encriptação,
-        'Substituição simples':menus_cifras.menu_subst_simples_encriptação,
-        'Cifra de Vigenère':menus_cifras.menu_cifra_de_vigenere_encriptação
+        'Cifra de César': menus_cifras.menu_cifra_de_cesar_encriptação,
+        'Substituição simples': menus_cifras.menu_subst_simples_encriptação,
+        'Cifra de Vigenère': menus_cifras.menu_cifra_de_vigenere_encriptação,
+        'Bases numéricas': menus_cifras.menu_bases_numericas_encriptação,
     }
 
     executar_menu(titulo, dic_funcoes_menus_cifras_encript, tela_anterior, layout_encriptar)
@@ -130,9 +131,10 @@ def menu_traducao(tela_anterior):
                                                        dicionarios.retorna_lista_cifras(banco_de_dados.retorna_idioma_configurado()),
                                                        dicionarios.retorna_lista_cifras('Portugues'))
     dic_funcoes_menus_cifras_traduc = {
-        'Cifra de César':menus_cifras.menu_cifra_de_cesar_tradução,
-        'Substituição simples':menus_cifras.menu_subst_simples_tradução,
-        'Cifra de Vigenère':menus_cifras.menu_cifra_de_vigenere_tradução
+        'Cifra de César': menus_cifras.menu_cifra_de_cesar_tradução,
+        'Substituição simples': menus_cifras.menu_subst_simples_tradução,
+        'Cifra de Vigenère': menus_cifras.menu_cifra_de_vigenere_tradução,
+        'Bases numéricas': menus_cifras.menu_bases_numericas_tradução
     }
 
     executar_menu(titulo, dic_funcoes_menus_cifras_traduc, tela_anterior, layout_traducao)

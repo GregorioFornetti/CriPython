@@ -3,6 +3,7 @@ import sqlite3
 import Cifras.cifra_de_cesar as cifra_de_cesar
 import Cifras.subst_simples as subst_simples
 import Cifras.cifra_de_vigenere as cifra_de_vigenere
+import Cifras.bases_numericas as bases_numericas
 import Menus.utilidades_menus as utilidades_menus
 import dicionarios
 import banco_de_dados
@@ -38,16 +39,28 @@ def retorna_layout_padrao_encriptação(titulo, opcoes):
     return layout
 
 
-def retorna_layout_subst_simples(titulo, opcoes, modo='encriptação'):
+def retorna_layout_subst_simples(titulo, opcoes, modo='encriptacao'):
     # Trocará o nome do que era "chave" para "letras mensagem encriptada" e adicionará outro local para digitar chamado "letras mensagem comum".
     lista_textos = dicionarios.retorna_lista_subst_simples(banco_de_dados.retorna_idioma_configurado())
-    layout_subst_simples = retorna_layout_padrao_encriptação(titulo, opcoes)
-    if modo == 'tradução':
+    if modo == 'encriptacao':
+        layout_subst_simples = retorna_layout_padrao_encriptação(titulo, opcoes)
+    else:
         layout_subst_simples = retorna_layout_padrao_tradução(titulo, opcoes)
-    del layout_subst_simples[4]
+    del layout_subst_simples[4]  # Retirar o input "chave"
     layout_subst_simples.insert(4, [sg.Text(lista_textos[0]), sg.Input('abcdefghijklmnopqrstuvwxyz', key='chave_1')])
     layout_subst_simples.insert(5, [sg.Text(lista_textos[1]), sg.Input(key='chave_2')])
     return layout_subst_simples
+
+
+def retorna_layout_bases_numericas(titulo, opcoes, modo='encriptacao'):
+    # O layout das bases numéricas é o layout padrão sem input "chave" e sem botão "chave padrão"
+    if modo == 'encriptacao':
+        layout_bases_numericas = retorna_layout_padrao_encriptação(titulo, opcoes)
+    else:
+        layout_bases_numericas = retorna_layout_padrao_tradução(titulo, opcoes)
+    del layout_bases_numericas[4]  # Retirar o input "chave"
+    del layout_bases_numericas[6][1]  # Retirar botão "chave padrão"
+    return layout_bases_numericas
 
 
 def executar_menu_cifra(titulo_cifra, tela_anterior, dicionario_funcoes_cifras, layout_cifra):
@@ -63,7 +76,7 @@ def executar_menu_cifra(titulo_cifra, tela_anterior, dicionario_funcoes_cifras, 
             for opção, criptografar in dicionario_funcoes_cifras.items():
                 if valores[opção]:  # Verificar a opção escolhida pelo usuário e executar a função referente a ela (armazenada no dicionário).
                     if evento == "utilizar_chave_padrao":
-                        lista_chaves = retorna_chaves_padroes(titulo_cifra, opção)
+                        lista_chaves = banco_de_dados.retorna_chaves_padroes(titulo_cifra, opção)
                         if not lista_chaves:
                             print(dicionarios.retorna_erro_chave_padrao(banco_de_dados.retorna_idioma_configurado()))
                             break
@@ -72,7 +85,10 @@ def executar_menu_cifra(titulo_cifra, tela_anterior, dicionario_funcoes_cifras, 
                         for nome_item, chave in valores.items():  # Loop para procurar as chaves utilizadas (já que alguns modos utilizam mais que 1)
                             if 'chave' in nome_item:
                                 lista_chaves.append(chave)
-                    print(criptografar(lista_chaves, valores['mensagem']))
+                    if lista_chaves:  # Caso seja encontrado alguma chave, a cifra atual precisa de uma chave para funcionar.
+                        print(criptografar(lista_chaves, valores['mensagem']))
+                    else:  # Caso nenhuma chave tenha sido encontrada, a cifra atual não necessita de chave.
+                        print(criptografar(valores['mensagem']))
 
 
 def menu_cifra_de_cesar_encriptação(tela_anterior):
@@ -129,15 +145,20 @@ def menu_cifra_de_vigenere_tradução(tela_anterior):
     executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_vigenere_traduc, layout_cifra_de_vigenere_traduc)
 
 
-def retorna_chaves_padroes(cifra, modo):
-    lista_chaves = []
-    modo += '%'
-    db = sqlite3.connect('configs.db')
-    banco_de_dados = db.cursor()
-    chaves = banco_de_dados.execute('SELECT chave FROM chaves_padroes WHERE cifra = ? AND modo LIKE ?', [cifra, modo]).fetchall()
-    for chave in chaves:
-        if chave[0]:
-            lista_chaves.append(chave[0])
-        else:
-            return False
-    return lista_chaves
+def menu_bases_numericas_encriptação(tela_anterior):
+    titulo_da_cifra = 'Bases numéricas'
+    dicionario_funções_bases_num_encript = {'Binário': bases_numericas.transformar_texto_para_binario,
+                                            'Octal': bases_numericas.transformar_texto_para_octal,
+                                            'Hexadecimal': bases_numericas.transformar_texto_para_hexadecimal}   
+    layout_bases_numericas_encript = retorna_layout_bases_numericas(titulo_da_cifra, dicionario_funções_bases_num_encript.keys()) 
+
+    executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_bases_num_encript, layout_bases_numericas_encript)
+
+def menu_bases_numericas_tradução(tela_anterior):
+    titulo_da_cifra = 'Bases numéricas'
+    dicionario_funções_bases_num_traduc = {'Binário': bases_numericas.transformar_binario_para_texto,
+                                            'Octal': bases_numericas.transformar_octal_para_texto,
+                                            'Hexadecimal': bases_numericas.transformar_hexadecimal_para_texto}
+    layout_bases_numericas_traduc = retorna_layout_bases_numericas(titulo_da_cifra, dicionario_funções_bases_num_traduc, modo='traducao')
+
+    executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_bases_num_traduc, layout_bases_numericas_traduc)

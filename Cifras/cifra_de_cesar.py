@@ -42,15 +42,14 @@ def cesar_troca_apenas_letras(chave, mensagem):
         ascii_soma = ascii_letra + chave
         if ascii_letra >= utilidades.MIN_MINUSCULA and ascii_letra <= utilidades.MAX_MINUSCULA:
             if ascii_soma > utilidades.MAX_MINUSCULA:
-                ascii_soma = 96 + (ascii_soma - utilidades.MAX_MINUSCULA)  # O codigo ascii passou de 'z', então deve voltar ao inicio.
+                ascii_soma -= utilidades.TAMANHO_ALFABETO  # O codigo ascii passou de 'z', então deve voltar ao inicio.
             mensagem_nova += chr(ascii_soma)
-            continue
-        if ascii_letra >= utilidades.MIN_MAIUSCULA and ascii_letra <= utilidades.MAX_MAIUSCULA:  # Criptografia para letras maiusculas.
+        elif ascii_letra >= utilidades.MIN_MAIUSCULA and ascii_letra <= utilidades.MAX_MAIUSCULA:  # Criptografia para letras maiusculas.
             if ascii_soma > utilidades.MAX_MAIUSCULA:
-                ascii_soma = 64 + (ascii_soma - utilidades.MAX_MAIUSCULA)  # O codigo ascii passou de 'Z', então deve voltar ao inicio.
+                ascii_soma -= utilidades.TAMANHO_ALFABETO  # O codigo ascii passou de 'Z', então deve voltar ao inicio.
             mensagem_nova += chr(ascii_soma)
-            continue
-        mensagem_nova += letra  # Caso a mensagem tenha caracteres especiais ou caracteres com acentos, eles serão adicionados sem mudanças.
+        else:
+            mensagem_nova += letra  # Caso a mensagem tenha caracteres especiais ou caracteres com acentos, eles serão adicionados sem mudanças.
     return mensagem_nova
 
 

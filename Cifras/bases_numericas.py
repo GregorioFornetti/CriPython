@@ -26,6 +26,8 @@ def transformar_hexadecimal_para_texto(mensagem):
     return retornar_texto_traduzido(mensagem, converter_hexadecimal_para_decimal)
 
 def retornar_texto_encriptado(mensagem, funcao_encriptadora):
+    if not mensagem:
+        return dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
     mensagem_encriptada = ''
     for caractere in mensagem:
         mensagem_encriptada += funcao_encriptadora(ord(caractere)) + ' '
@@ -33,6 +35,8 @@ def retornar_texto_encriptado(mensagem, funcao_encriptadora):
 
 
 def retornar_texto_traduzido(mensagem, funcao_tradutora):
+    if not mensagem:
+        return dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
     mensagem_traduzida = ''
     for numero in mensagem.split():
         try:

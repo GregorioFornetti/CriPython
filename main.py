@@ -64,10 +64,9 @@ def retorna_layout_botoes_enumerados(titulo, dic_textos, lista_opcoes, lista_cha
     return layout
 
 
-def retorna_layout_opcoes():
+def retorna_layout_opcoes(opcoes_cifras):
     idioma = banco_de_dados.retorna_idioma_configurado()
     dic_textos = dicionarios.retorna_menu_opcoes(idioma)
-    opcoes_cifras = dicionarios.retorna_lista_cifras(idioma)
     layout_opcoes = [[sg.Text(dic_textos['titulo'])],
                      [sg.Text(dic_textos['opcao temas'] + ' ' * 40), sg.Text(dic_textos['opcao idiomas'])],
                      [sg.Listbox(sg.theme_list(), select_mode='LISTBOX_SELECT_MODE_SINGLE', size=(20, 5),
@@ -156,8 +155,9 @@ def menu_utilitarios(tela_anterior):
 
 def menu_opcoes():
     # Criação do layout do menu opções.
-    tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes())
     opcoes_cifras = dicionarios.retorna_lista_cifras(banco_de_dados.retorna_idioma_configurado())
+    opcoes_cifras.remove('Bases numéricas')  # É preciso retirar as bases numéricas como opção, pois essa cifra não possuem chaves
+    tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes(opcoes_cifras))
     resposta = ''
     while True:
         evento, valores = tela_opcoes.read(timeout=1000)
@@ -166,6 +166,10 @@ def menu_opcoes():
             break
         if evento == 'nova_opcao':
             for indice_cifra, cifra in enumerate(opcoes_cifras):  # Atualizar a tela para mostrar apenas as chaves da cifra escolhida atualmente.
+                '''
+                OBS: São utilizadas duas listas de opções. Uma no idioma padrão português e outra no idioma selecionado pelo usuario.
+                Isso é necessário pois todas as chaves que estão conectadas na interface dos botões e inputs estão em português.
+                '''
                 if valores["nova_opcao"] == cifra:  # Revelar apenas a cifra escolhida
                     tela_opcoes.Element(opcoes_cifras_port[indice_cifra]).update(visible=True)
                     tela_opcoes.Element(opcoes_cifras_port[indice_cifra]).unhide_row()
@@ -174,8 +178,9 @@ def menu_opcoes():
         if evento == 'aplicar':
             resposta = banco_de_dados.aplicar_novas_configuracoes(valores)
             tela_opcoes.close()
-            tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes())
             opcoes_cifras = dicionarios.retorna_lista_cifras(banco_de_dados.retorna_idioma_configurado())  # Atualizar os nomes de opções de cifras caso mude o idioma.
+            opcoes_cifras.remove('Bases numéricas')
+            tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes(opcoes_cifras))
         elif resposta:  # Imprimir respostas (é preciso esperar um pouco para imprimi-las, por isso é utilizado o timeout).
             print(resposta)
             resposta = ''

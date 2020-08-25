@@ -23,7 +23,8 @@ def retorna_menu_opcoes():
                 'modos': criptografias_disponiveis,
                 'chaves padroes': 'Chaves padrões cifras',
                 'retornar': 'Retornar',
-                'aplicar': 'Aplicar'}
+                'aplicar': 'Aplicar',
+                'ajuda': 'Ajuda'}
     else:
         return {'titulo': 'Crypythongraphy: Options',
                 'opcao temas': 'Themes:',
@@ -32,7 +33,8 @@ def retorna_menu_opcoes():
                 'modos': dic_criptografias_eng ,
                 'chaves padroes': 'Default keys',
                 'retornar': 'Return',
-                'aplicar': 'Apply'}
+                'aplicar': 'Apply',
+                'ajuda': 'Help'}
 
 
 def retorna_mensagem_temas(tema):

@@ -90,7 +90,8 @@ def retorna_layout_opcoes(opcoes_cifras):
 
     layout_opcoes.append([sg.Frame(dic_textos['chaves padroes'], layout=subdivisao_chaves_padroes_cifras)])
     layout_opcoes.append([sg.Output(size=(100,10))])
-    layout_opcoes.append([sg.Button(dic_textos['retornar'], key='retornar'), sg.Button(dic_textos['aplicar'], key='aplicar')])
+    layout_opcoes.append([sg.Button(dic_textos['retornar'], key='retornar'), sg.Button(dic_textos['aplicar'], key='aplicar'),
+                          sg.Button(dic_textos['ajuda'], key='link')])
     return layout_opcoes
 
 
@@ -163,6 +164,7 @@ def menu_opcoes():
         if evento in ('retornar', None):
             tela_opcoes.close()
             break
+        utilidades_menu.verificar_eventos_gerais('Opcoes', evento, tela_opcoes)
         if evento == 'nova_opcao':
             for indice_cifra, cifra in enumerate(opcoes_cifras):  # Atualizar a tela para mostrar apenas as chaves da cifra escolhida atualmente.
                 '''

@@ -8,7 +8,8 @@ dic_links = {'Cifra de César':'https://github.com/GregorioFornetti/Programa-cri
              'Bases numéricas': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Bases-num%C3%A9ricas',
              'Força bruta César': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/For%C3%A7a-bruta-C%C3%A9sar',
              'Adivinhador César': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Adivinhador-C%C3%A9sar',
-             'Wiki':'https://github.com/GregorioFornetti/Cripythongrafia/wiki'}
+             'Wiki':'https://github.com/GregorioFornetti/Cripythongrafia/wiki',
+             'Opcoes':'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Op%C3%A7%C3%B5es-do-menu#4--op%C3%A7%C3%B5es'}
 
 
 def voltar_para_tela_anterior(tela_anterior, tela_atual):  # Volta para a tela anterior se usuário escolheu botão "retornar".
@@ -16,9 +17,9 @@ def voltar_para_tela_anterior(tela_anterior, tela_atual):  # Volta para a tela a
     tela_atual.Close()
 
 
-def verificar_eventos_gerais(nome_cifra, evento, tela_atual):  # Verifica e executa eventos disponiveis nos menus das cifras.
+def verificar_eventos_gerais(nome_menu, evento, tela_atual):  # Verifica e executa eventos disponiveis nos menus das cifras.
     if evento == 'link':
-        webbrowser.open(dic_links[nome_cifra])
+        webbrowser.open(dic_links[nome_menu])
     elif evento == 'limpar':
         tela_atual.element('output').update('')
 

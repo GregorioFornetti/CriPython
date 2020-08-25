@@ -1,5 +1,4 @@
 import Cifras.subst_simples as subst_simples
-import banco_de_dados
 import dicionarios
 '''
 Arquivo de testes automatizados !
@@ -16,44 +15,44 @@ def test_subst_simples_apenas_letras_troca_1_letra():
     assert subst_simples.traduzir_modo_apenas_letras(['a', 'b'], 'bacdef') == 'abcdef'
 
 def test_subst_simples_apenas_letras_chave_invalida_vazia():
-    assert subst_simples.encriptar_modo_apenas_letras(['', ''], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['', ''], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['', ''], 'abc') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_apenas_letras(['', ''], 'abc') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_apenas_letras_chave_invalida_caractere_especial_1():
-    assert subst_simples.encriptar_modo_apenas_letras(['!?1', 'abc'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['!?1', 'abc'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['!?1', 'abc'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_apenas_letras(['!?1', 'abc'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_apenas_letras_chave_invalida_caractere_especial_2():
-    assert subst_simples.encriptar_modo_apenas_letras(['abc', '!?1'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['abc', '!?1'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['abc', '!?1'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_apenas_letras(['abc', '!?1'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_apenas_letras_chave_invalida_duplicada_1():
-    assert subst_simples.encriptar_modo_apenas_letras(['aAb', 'bed'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['aAb', 'bed'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['aAb', 'bed'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_apenas_letras(['aAb', 'bed'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_apenas_letras_chave_invalida_duplicada_2():
-    assert subst_simples.encriptar_modo_apenas_letras(['bed', 'aAb'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['bed', 'aAb'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['bed', 'aAb'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_apenas_letras(['bed', 'aAb'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_apenas_letras_chave_invalida_duplicada_3():
-    assert subst_simples.encriptar_modo_apenas_letras(['aA', 'bc'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['aA', 'bc'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['aA', 'bc'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_apenas_letras(['aA', 'bc'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_apenas_letras_chave_invalida_duplicada_4():
-    assert subst_simples.encriptar_modo_apenas_letras(['bc', 'aA'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['bc', 'aA'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['bc', 'aA'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_apenas_letras(['bc', 'aA'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_apenas_letras_chave_invalida_tamanho_diferentes_1():
-    assert subst_simples.encriptar_modo_apenas_letras(['abc', 'tg'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['abc', 'tg'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['abc', 'tg'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_apenas_letras(['abc', 'tg'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_apenas_letras_chave_invalida_tamanho_diferente_2():
-    assert subst_simples.encriptar_modo_apenas_letras(['tg', 'abc'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['tg', 'abc'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['tg', 'abc'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_apenas_letras(['tg', 'abc'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_apenas_letras_mensagem_invalida():
-    assert subst_simples.encriptar_modo_apenas_letras(['ab', 'tg'], '') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_apenas_letras(['ab', 'tg'], '') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_apenas_letras(['ab', 'tg'], '') == dicionarios.retorna_erro_mensagem()
+    assert subst_simples.traduzir_modo_apenas_letras(['ab', 'tg'], '') == dicionarios.retorna_erro_mensagem()
 
 def test_subst_simples_apenas_letras_maiusc_minusc():
     assert subst_simples.encriptar_modo_apenas_letras(['a', 'b'], 'aA') == 'bB'
@@ -86,8 +85,8 @@ def test_subst_simples_varios_caracteres_troca_1_letra():
     assert subst_simples.traduzir_modo_varios_caracteres(['a', 'b'], 'bacdef') == 'abcdef'
 
 def test_subst_simples_varios_caracteres_chave_invalida_vazia():
-    assert subst_simples.encriptar_modo_varios_caracteres(['', ''], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_varios_caracteres(['', ''], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_varios_caracteres(['', ''], 'abc') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_varios_caracteres(['', ''], 'abc') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_varios_caracteres_chave_invalida_caractere_especial_1():
     assert subst_simples.encriptar_modo_varios_caracteres(['!?1', 'abc'], 'abcde!?1') == '!?1deabc'
@@ -98,12 +97,12 @@ def test_subst_simples_varios_caracteres_chave_invalida_caractere_especial_2():
     assert subst_simples.traduzir_modo_varios_caracteres(['abc', '!?1'], '!?1deabc') == 'abcde!?1'
 
 def test_subst_simples_varios_caracteres_chave_invalida_duplicada_1():
-    assert subst_simples.encriptar_modo_varios_caracteres(['aAb', 'bed'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_varios_caracteres(['aAb', 'bed'], 'bdcbA') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_varios_caracteres(['aAb', 'bed'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_varios_caracteres(['aAb', 'bed'], 'bdcbA') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_varios_caracteres_chave_invalida_duplicada_2():
-    assert subst_simples.encriptar_modo_varios_caracteres(['bed', 'aAb'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_varios_caracteres(['bed', 'aAb'], 'bacbA') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_varios_caracteres(['bed', 'aAb'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_varios_caracteres(['bed', 'aAb'], 'bacbA') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_varios_caracteres_duplicada_3():
     assert subst_simples.encriptar_modo_varios_caracteres(['aA', 'bc'], 'aAbc') == 'bcaA'
@@ -114,16 +113,16 @@ def test_subst_simples_varios_caracteres_duplicada_4():
     assert subst_simples.traduzir_modo_varios_caracteres(['bc', 'aA'], 'bcaA') == 'aAbc'
 
 def test_subst_simples_varios_caracteres_chave_invalida_tamanho_diferentes_1():
-    assert subst_simples.encriptar_modo_varios_caracteres(['abc', 'tg'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_varios_caracteres(['abc', 'tg'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_varios_caracteres(['abc', 'tg'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_varios_caracteres(['abc', 'tg'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_varios_caracteres_chave_invalida_tamanho_diferente_2():
-    assert subst_simples.encriptar_modo_varios_caracteres(['tg', 'abc'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_varios_caracteres(['tg', 'abc'], 'abcde') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_varios_caracteres(['tg', 'abc'], 'abcde') == dicionarios.retorna_erro_chave()
+    assert subst_simples.traduzir_modo_varios_caracteres(['tg', 'abc'], 'abcde') == dicionarios.retorna_erro_chave()
 
 def test_subst_simples_varios_caracteres_mensagem_invalida():
-    assert subst_simples.encriptar_modo_varios_caracteres(['ab', 'tg'], '') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
-    assert subst_simples.traduzir_modo_varios_caracteres(['abc', 'tg'], '') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert subst_simples.encriptar_modo_varios_caracteres(['ab', 'tg'], '') == dicionarios.retorna_erro_mensagem()
+    assert subst_simples.traduzir_modo_varios_caracteres(['abc', 'tg'], '') == dicionarios.retorna_erro_mensagem()
 
 def test_subst_simples_varios_caracteres_maiusc_minusc():
     assert subst_simples.encriptar_modo_varios_caracteres(['a', 'b'], 'aA') == 'bA'

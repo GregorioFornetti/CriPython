@@ -10,7 +10,7 @@ import banco_de_dados
 
 
 def retorna_layout_padrao_tradução(titulo, opcoes):
-    dic_textos = dicionarios.retorna_menus_cifras(banco_de_dados.retorna_idioma_configurado())
+    dic_textos = dicionarios.retorna_menus_cifras()
     layout = [[sg.Text(f"{dic_textos[f'{titulo} (tradução)']:^110}")],
              [sg.Text(dic_textos['Opções'])],
               utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
@@ -25,7 +25,7 @@ def retorna_layout_padrao_tradução(titulo, opcoes):
 
 
 def retorna_layout_padrao_encriptação(titulo, opcoes):
-    dic_textos = dicionarios.retorna_menus_cifras(banco_de_dados.retorna_idioma_configurado())
+    dic_textos = dicionarios.retorna_menus_cifras()
     layout = [[sg.Text(f"{dic_textos[f'{titulo} (encriptação)']:^110}")],
              [sg.Text(dic_textos['Opções'])],
               utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
@@ -41,7 +41,7 @@ def retorna_layout_padrao_encriptação(titulo, opcoes):
 
 def retorna_layout_subst_simples(titulo, opcoes, modo='encriptacao'):
     # Trocará o nome do que era "chave" para "letras mensagem encriptada" e adicionará outro local para digitar chamado "letras mensagem comum".
-    lista_textos = dicionarios.retorna_lista_subst_simples(banco_de_dados.retorna_idioma_configurado())
+    lista_textos = dicionarios.retorna_lista_subst_simples()
     if modo == 'encriptacao':
         layout_subst_simples = retorna_layout_padrao_encriptação(titulo, opcoes)
     else:
@@ -78,7 +78,7 @@ def executar_menu_cifra(titulo_cifra, tela_anterior, dicionario_funcoes_cifras, 
                     if evento == "utilizar_chave_padrao":
                         lista_chaves = banco_de_dados.retorna_chaves_padroes(titulo_cifra, opção)
                         if not lista_chaves:
-                            print(dicionarios.retorna_erro_chave_padrao(banco_de_dados.retorna_idioma_configurado()))
+                            print(dicionarios.retorna_mensagem_com_bordas(dicionarios.retorna_erro_chave_padrao(), 127))
                             break
                     else:
                         lista_chaves = []
@@ -86,9 +86,9 @@ def executar_menu_cifra(titulo_cifra, tela_anterior, dicionario_funcoes_cifras, 
                             if 'chave' in nome_item:
                                 lista_chaves.append(chave)
                     if lista_chaves:  # Caso seja encontrado alguma chave, a cifra atual precisa de uma chave para funcionar.
-                        print(criptografar(lista_chaves, valores['mensagem']))
+                        print(dicionarios.retorna_mensagem_com_bordas(criptografar(lista_chaves, valores['mensagem']), 127))
                     else:  # Caso nenhuma chave tenha sido encontrada, a cifra atual não necessita de chave.
-                        print(criptografar(valores['mensagem']))
+                        print(dicionarios.retorna_mensagem_com_bordas(criptografar(valores['mensagem']), 127))
 
 
 def menu_cifra_de_cesar_encriptação(tela_anterior):

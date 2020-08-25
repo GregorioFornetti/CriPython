@@ -1,20 +1,20 @@
 '''
-Esse arquivo terá todos os textos necessários para os titulos dos menus. Além disso,
+Esse arquivo terá todos os textos necessários para os titulos/textos dos menus. Além disso,
 terá as versões do programa em outros idiomas.
 '''
-
 criptografias_disponiveis = {'Cifra de César': ['Apenas letras', 'Vários caracteres'],
                              'Substituição simples': ['Apenas letras (letras mensagem comum)      ', 'Apenas letras (letras mensagem encriptada)     ',
                                                       'Vários caracteres (letras mensagem comum)', 'Vários caracteres (letras mensagem encriptada)'], 
                              'Cifra de Vigenère': ['Apenas letras', 'Vários caracteres']}
-
 dic_criptografias_eng = {'Cifra de César': ['Letters only', 'Several characters'],
                          'Substituição simples': ['Letters only (plaintext letters)      ', 'Letters only (ciphertext letters)     ',
                                                   'Several characters (plaintext letters)', 'Several characters (ciphertext letters)'], 
-                         'Cifra de Vigenère': ['Letters only', 'Several characters']}              
+                         'Cifra de Vigenère': ['Letters only', 'Several characters']}
+import banco_de_dados
+idioma = banco_de_dados.idioma_configurado
 
 
-def retorna_menu_opcoes(idioma):
+def retorna_menu_opcoes():
     if idioma == 'Portugues':
         return {'titulo': 'Crypythongraphy: Opções',
                 'opcao temas': 'Temas:',
@@ -35,11 +35,25 @@ def retorna_menu_opcoes(idioma):
                 'aplicar': 'Apply'}
 
 
-def retorna_mensagem_menu_opcoes(idioma, erro=False):  # Texto mostrado ao mudar alguma config. Deve mudar o idioma dessas mensagem também...
+def retorna_mensagem_temas(tema):
     if idioma == 'Portugues':
-        mensagem = 'Chave padrão "{}" salva com sucesso !\n\n'
+        return retorna_mensagem_com_bordas(f'Novo tema: "{tema}" definido com sucesso !', 127) + '\n'
+    else:
+        return retorna_mensagem_com_bordas(f'New theme: "{tema}" successfully applied !', 127) + '\n'
+
+
+def retorna_mensagem_idioma(novo_idioma):
+    if idioma == 'Portugues':
+        return retorna_mensagem_com_bordas(f'Novo idioma: "{novo_idioma}" definido com sucesso !', 127) + '\n'
+    else:
+        return retorna_mensagem_com_bordas(f'New language: "{novo_idioma}" successfully applied !', 127) + '\n'
+
+
+def retorna_mensagem_menu_opcoes(erro=False):  # Texto mostrado ao mudar alguma config. Deve mudar o idioma dessas mensagem também...
+    if idioma == 'Portugues':
+        mensagem = retorna_mensagem_com_bordas('Chave padrão "{}" salva com sucesso !', 127) + '\n'
         if erro:
-            mensagem = 'Erro: não foi possível salvar a chave padrão: {}.\nA chave digitada não é válida !\nPara verificar as chaves possiveis, clique em "ajuda".\n\n'
+            mensagem = retorna_mensagem_com_bordas('Erro: não foi possível salvar a chave padrão: {}.\nA chave digitada não é válida !\nPara verificar as chaves possiveis, clique em "ajuda".', 127) + '\n'
         return {'Cifra de César-Apenas letras': mensagem.format('Cifra de César-Apenas letras'),
                 'Cifra de César-Vários caracteres': mensagem.format('Cifra de César-Vários caracteres'),
                 'Substituição simples-Apenas letras (letras mensagem comum)': mensagem.format('Substituição simples-Apenas letras (letras mensagem comum)'),
@@ -49,9 +63,9 @@ def retorna_mensagem_menu_opcoes(idioma, erro=False):  # Texto mostrado ao mudar
                 'Cifra de Vigenère-Apenas letras': mensagem.format('Cifra de Vigenère-Apenas letras'),
                 'Cifra de Vigenère-Vários caracteres':mensagem.format('Cifra de Vigenère-Vários caracteres')}
     else:
-        mensagem = 'Default key "{}" successfully saved !\n\n'
+        mensagem = retorna_mensagem_com_bordas('Default key "{}" successfully saved !', 127) + '\n'
         if erro:
-            mensagem = 'Error: it was not possible to save the key: {}.\nThe key is not valid !\n\n'
+            mensagem = retorna_mensagem_com_bordas('Error: it was not possible to save the key: {}.\nThe key is not valid !', 127) + '\n'
         return {'Cifra de César-Apenas letras': mensagem.format('Caesar Cipher-Letters only'),
                 'Cifra de César-Vários caracteres': mensagem.format('Caesar Cipher-Several characters'),
                 'Substituição simples-Apenas letras (letras mensagem comum)': mensagem.format('Substituição simples-Letters only (plaintext)'),
@@ -62,7 +76,7 @@ def retorna_mensagem_menu_opcoes(idioma, erro=False):  # Texto mostrado ao mudar
                 'Cifra de Vigenère-Vários caracteres':mensagem.format('Vigenère Cipher-Several characters')}
 
 
-def retorna_menu_principal(idioma):
+def retorna_menu_principal():
     if idioma == 'Portugues':
         return {'titulo': 'Cripythongraphy: Tela principal',
                 'opcao 1': '1- Criar mensagem criptografada',
@@ -81,21 +95,28 @@ def retorna_menu_principal(idioma):
                 'opcao 6': '6- Close program'}
 
 
-def retorna_lista_cifras(idioma):
-    if idioma == 'Portugues':
+def retorna_lista_cifras(coletar_port=False):  # As vezes vai ser necessário coletar essa lista em port independente do idioma configurado.
+    if idioma == 'Portugues' or coletar_port:
         return ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère', 'Bases numéricas']
     else:
         return ['Caesar Cipher', 'Substitution cipher', 'Vigenère Cipher', 'Numeral systems']
 
 
-def retorna_lista_utilitarios(idioma):
+def retorna_lista_cifras_sem_chaves():
     if idioma == 'Portugues':
+        return ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
+    else:
+        return ['Caesar Cipher', 'Substitution cipher', 'Vigenère Cipher']
+
+
+def retorna_lista_utilitarios(coletar_port=False):
+    if idioma == 'Portugues' or coletar_port:
         return ['Força bruta César', 'Adivinhador César']
     else:
         return ['Brute force Caesar', 'Caesar guess']
 
 
-def retorna_menu_encript_traduc_utilitarios(idioma):
+def retorna_menu_encript_traduc_utilitarios():
     if idioma == 'Portugues':
         return {'Cripythongraphy: Encriptação': 'Cripythongraphy: Encriptação',
                 'Cripythongraphy: Tradução': 'Cripythongraphy: Tradução',
@@ -108,7 +129,7 @@ def retorna_menu_encript_traduc_utilitarios(idioma):
                 'Retornar': 'Return'}
 
 
-def retorna_menus_cifras(idioma):
+def retorna_menus_cifras():
     if idioma == 'Portugues':
         return {'Cifra de César (encriptação)': 'Cifra de César (encriptação)',
                 'Cifra de César (tradução)': 'Cifra de César (tradução)',
@@ -153,7 +174,7 @@ def retorna_menus_cifras(idioma):
                 'Retornar': 'Return'}
 
 
-def retorna_opcoes_cifras(idioma):
+def retorna_opcoes_cifras():
     if idioma == 'Portugues':
         return {'Apenas letras': 'Apenas letras',
                 'Vários caracteres': 'Vários caracteres',
@@ -168,14 +189,14 @@ def retorna_opcoes_cifras(idioma):
                 'Hexadecimal': 'Hexadecimal'}
 
 
-def retorna_lista_subst_simples(idioma):
+def retorna_lista_subst_simples():
     if idioma == 'Portugues':
         return ['Letras mensagem comum:    ', 'Letras mensagem encriptada:']
     else:
         return ['Plaintext letters:  ', 'Ciphertext letters:']
 
 
-def retorna_menu_utilitario(idioma):
+def retorna_menu_utilitario():
     if idioma == 'Portugues':
         return {'Força bruta César': 'Força bruta César',
                 'Adivinhador César': 'Adivinhador César',
@@ -216,7 +237,7 @@ def retorna_menu_utilitario(idioma):
                 'Retornar': 'Return'}
 
 
-def retorna_frequencia_letras(idioma):
+def retorna_frequencia_letras():
     if idioma == 'Portugues':
         return {'a':14.63, 'e':12.57, 'o':10.73, 's':7.81, 'r':6.53, 'i':6.18, 'n':5.05, 'd':4.99,
                 'm':4.74, 'u':4.63, 't':4.34, 'c':3.88, 'l':2.78, 'p':2.52, 'v':1.67, 'g':1.3,
@@ -229,23 +250,54 @@ def retorna_frequencia_letras(idioma):
                 'y':1.97, 'z':0.07}
 
 
-def retorna_erro_mensagem(idioma):
+def retorna_erro_mensagem():
     if idioma == 'Portugues':
         return 'Erro: Mensagem inválida !'
     else:
         return 'Error: Invalid message !'
 
 
-def retorna_erro_chave(idioma):
+def retorna_erro_chave():
     if idioma == 'Portugues':
         return 'Erro: Chave inválida !\nPara verificar as chaves válidas, clique em "abrir guia cifra"\ne procure o tópico "chaves válidas" da sua opção de cifra'
     else:
         return 'Error: Invalid key !\nTo verify the available keys, click on "open wiki"\nand search for the topic "chaves válidas" of your cipher option'
 
 
-def retorna_erro_chave_padrao(idioma):
+def retorna_erro_chave_padrao():
     if idioma == 'Portugues':
-        return "Você ainda não definiu uma chave padrão para essa cifra !\nVá para o menu principal e depois em opções e defina uma !\n"
+        return "Você ainda não definiu uma chave padrão para essa cifra !\nVá para o menu principal e depois em opções e defina uma !"
     else:
-        return "You havent defined a default key for this cipher yet !\nGo to the options menu and define one !\n"
+        return "You havent defined a default key for this cipher yet !\nGo to the options menu and define one !"
 
+
+def retorna_mensagens_forca_bruta_cesar(chave, mensagem_traduzida):
+    if idioma == 'Portugues':
+        return  retorna_mensagem_com_bordas(f'''
+Testando chave: {chave}
+Mensagem traduzida: {mensagem_traduzida}
+''', 127)
+    else:
+        return  retorna_mensagem_com_bordas(f'''
+Testing key: {chave}
+Translated message: {mensagem_traduzida}
+''', 127)
+
+def retorna_mensagens_adivinhador_cesar(melhor_mensagem, chave_mensagem):
+    if idioma == 'Portugues':
+        return  retorna_mensagem_com_bordas(f'''
+Após alguns cálculos, a mensagem traduzida com maior probabilidade de ser correta é: {melhor_mensagem}\n
+E a chave utilizada para essa tradução foi: {chave_mensagem}                                      
+''', 127)
+    else:
+        return retorna_mensagem_com_bordas(f'''
+After some calculations, the translated message with the best probability of being correct is: {melhor_mensagem}\n
+And the utilized key was: {chave_mensagem}
+''', 127)
+
+def retorna_mensagem_com_bordas(mensagem, tamanho):
+    return '#' + '-' * tamanho + '#\n' + mensagem + '\n#' + '-' * tamanho + '#\n'
+
+def atualizar_idioma(idioma_configurado):
+    global idioma
+    idioma = idioma_configurado

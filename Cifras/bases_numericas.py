@@ -1,5 +1,4 @@
 import dicionarios
-import banco_de_dados
 
 # Dicionário necessário para realizar as conversões na base hexadecimal.
 dicionario_hexa = {0:'0', 1:'1', 2:'2', 3:'3', 4:'4', 5:'5', 6:'6', 7:'7', 8:'8',
@@ -27,7 +26,7 @@ def transformar_hexadecimal_para_texto(mensagem):
 
 def retornar_texto_encriptado(mensagem, funcao_encriptadora):
     if not mensagem:
-        return dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+        return dicionarios.retorna_erro_mensagem()
     mensagem_encriptada = ''
     for caractere in mensagem:
         mensagem_encriptada += funcao_encriptadora(ord(caractere)) + ' '
@@ -36,13 +35,13 @@ def retornar_texto_encriptado(mensagem, funcao_encriptadora):
 
 def retornar_texto_traduzido(mensagem, funcao_tradutora):
     if not mensagem:
-        return dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+        return dicionarios.retorna_erro_mensagem()
     mensagem_traduzida = ''
     for numero in mensagem.split():
         try:
             mensagem_traduzida += chr(funcao_tradutora(numero))
         except:
-            return dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+            return dicionarios.retorna_erro_mensagem()
     return mensagem_traduzida
 
 

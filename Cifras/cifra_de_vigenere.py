@@ -1,5 +1,4 @@
 import Cifras.utilidades_cifras as utilidades
-import banco_de_dados
 import dicionarios
 
 
@@ -40,11 +39,11 @@ def adaptar_chave_para_traducao_apenas_letras(lista_chaves):  # Função que ada
 
 def mensagem_nova_modo_apenas_letras(chave, mensagem):
     if not mensagem:
-        return dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+        return dicionarios.retorna_erro_mensagem()
     if chave:
         return vigenere_troca_apenas_letras(chave, mensagem)
     else:
-        return dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+        return dicionarios.retorna_erro_chave()
 
 
 def vigenere_troca_apenas_letras(chave, mensagem):
@@ -112,11 +111,11 @@ def adaptar_chave_para_traducao_varios_caracteres(lista_chaves, dic_unicode):
 
 def mensagem_nova_modo_varios_caracteres(chave, mensagem, dic_unicode):
     if not mensagem:
-        return dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+        return dicionarios.retorna_erro_mensagem()
     if chave:
         return vigenere_troca_varios_caracteres(chave, mensagem, dic_unicode)
     else:
-        return dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+        return dicionarios.retorna_erro_chave()
 
 
 def vigenere_troca_varios_caracteres(chave, mensagem, dic_unicode):

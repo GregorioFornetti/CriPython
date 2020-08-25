@@ -1,5 +1,4 @@
 import Cifras.cifra_de_vigenere as cifra_de_vigenere
-import banco_de_dados
 import dicionarios
 '''
 Arquivo de testes automatizados !
@@ -19,16 +18,16 @@ def test_cifra_de_vigenere_apenas_letras_chave_2():
     assert cifra_de_vigenere.traduzir_modo_apenas_letras(['bca'], 'bdcegf') == 'abcdef'
 
 def test_cifra_de_vigenere_apenas_letras_chave_invalida_vazia():
-    assert cifra_de_vigenere.encriptar_modo_apenas_letras([''], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert cifra_de_vigenere.traduzir_modo_apenas_letras([''], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert cifra_de_vigenere.encriptar_modo_apenas_letras([''], 'abc') == dicionarios.retorna_erro_chave()
+    assert cifra_de_vigenere.traduzir_modo_apenas_letras([''], 'abc') == dicionarios.retorna_erro_chave()
 
 def test_cifra_de_vigenere_apenas_letras_chave_invalida_caractere_especial():
-    assert cifra_de_vigenere.encriptar_modo_apenas_letras(['abcé'], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert cifra_de_vigenere.traduzir_modo_apenas_letras(['abcé'], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert cifra_de_vigenere.encriptar_modo_apenas_letras(['abcé'], 'abc') == dicionarios.retorna_erro_chave()
+    assert cifra_de_vigenere.traduzir_modo_apenas_letras(['abcé'], 'abc') == dicionarios.retorna_erro_chave()
 
 def test_cifra_de_vigenere_apenas_letras_mensagem_invalida():
-    assert cifra_de_vigenere.encriptar_modo_apenas_letras(['abc'], '') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
-    assert cifra_de_vigenere.traduzir_modo_apenas_letras(['abc'], '') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert cifra_de_vigenere.encriptar_modo_apenas_letras(['abc'], '') == dicionarios.retorna_erro_mensagem()
+    assert cifra_de_vigenere.traduzir_modo_apenas_letras(['abc'], '') == dicionarios.retorna_erro_mensagem()
 
 def test_cifra_de_vigenere_apenas_letras_maiusc_minusc():
     assert cifra_de_vigenere.encriptar_modo_apenas_letras(['AbCdE'], 'aBcDe') == 'aCeGi'
@@ -73,16 +72,16 @@ def test_cifra_de_vigenere_varios_caracteres_chave_2():
     assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['!"#'], 'bdfeg') == 'abcde'
 
 def test_cifra_de_vigenere_varios_caracteres_chave_invalida_vazia():
-    assert cifra_de_vigenere.encriptar_modo_varios_caracteres([''], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert cifra_de_vigenere.traduzir_modo_varios_caracteres([''], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert cifra_de_vigenere.encriptar_modo_varios_caracteres([''], 'abc') == dicionarios.retorna_erro_chave()
+    assert cifra_de_vigenere.traduzir_modo_varios_caracteres([''], 'abc') == dicionarios.retorna_erro_chave()
 
 def test_cifra_de_vigenere_varios_caracteres_chave_invalida_acima_do_limite():
-    assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['˟'], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
-    assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['˟'], 'abc') == dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+    assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['˟'], 'abc') == dicionarios.retorna_erro_chave()
+    assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['˟'], 'abc') == dicionarios.retorna_erro_chave()
 
 def test_cifra_de_vigenere_varios_caracteres_mensagem_invalida():
-    assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['abc'], '') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
-    assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['abc'], '') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['abc'], '') == dicionarios.retorna_erro_mensagem()
+    assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['abc'], '') == dicionarios.retorna_erro_mensagem()
 
 def test_cifra_de_vigenere_varios_caracteres_mensagem_acima_do_limite():
     assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['abc'], '˟˟˟˟') == '˟˟˟˟'

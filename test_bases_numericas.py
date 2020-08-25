@@ -1,5 +1,4 @@
 import Cifras.bases_numericas as bases_numericas
-import banco_de_dados
 import dicionarios
 '''
 Arquivo de testes automatizados !
@@ -23,10 +22,14 @@ def test_binario_trocar_um_caractere_especial():
     assert bases_numericas.transformar_binario_para_texto('11100001') == 'á'
 
 def test_binario_traducao_invalido_1():
-    assert bases_numericas.transformar_binario_para_texto('1111210') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert bases_numericas.transformar_binario_para_texto('1111210') == dicionarios.retorna_erro_mensagem()
 
 def test_binario_traducao_invalido_2():
-    assert bases_numericas.transformar_binario_para_texto('1111111111111111111111111') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert bases_numericas.transformar_binario_para_texto('1111111111111111111111111') == dicionarios.retorna_erro_mensagem()
+
+def test_binario_mensagem_invalida():
+    assert bases_numericas.transformar_texto_para_binario('') == dicionarios.retorna_erro_mensagem()
+    assert bases_numericas.transformar_binario_para_texto('') == dicionarios.retorna_erro_mensagem()
 
 def test_binario_texto_grande_1():
     assert bases_numericas.transformar_texto_para_binario('Primeiro texto em binário'
@@ -43,6 +46,8 @@ def test_binario_texto_grande_2():
     assert bases_numericas.transformar_binario_para_texto(
     '1000011 1100001 1110010 1100001 1100011 1110100 1100101 1110010 1100101 1110011 100000 1100101 1110011 1110000 1100101 1100011 1101001 1100001 1101001 1110011 111010 101010 11011100 10100001 1011011111 1001101110'
     ) == 'Caracteres especiais:*Ü¡˟ɮ'
+
+
 # OCTAL
 def test_octal_trocar_um_caractere_minusculo():
     assert bases_numericas.transformar_texto_para_octal('a') == '141'
@@ -57,10 +62,14 @@ def test_octal_trocar_um_caractere_especial():
     assert bases_numericas.transformar_octal_para_texto('341') == 'á'
 
 def test_octal_traducao_invalido_1():
-    assert bases_numericas.transformar_octal_para_texto('1238') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert bases_numericas.transformar_octal_para_texto('1238') == dicionarios.retorna_erro_mensagem()
 
 def test_octal_traducao_invalido_2():
-    assert bases_numericas.transformar_octal_para_texto('77777777777') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert bases_numericas.transformar_octal_para_texto('77777777777') == dicionarios.retorna_erro_mensagem()
+
+def test_octal_mensagem_invalida():
+    assert bases_numericas.transformar_texto_para_octal('') == dicionarios.retorna_erro_mensagem()
+    assert bases_numericas.transformar_octal_para_texto('') == dicionarios.retorna_erro_mensagem()
 
 def test_octal_texto_grande_1():
     assert bases_numericas.transformar_texto_para_octal('Primeiro texto em octal'
@@ -77,6 +86,8 @@ def test_octal_texto_grande_2():
     assert bases_numericas.transformar_octal_para_texto(
     '103 141 162 141 143 164 145 162 145 163 40 145 163 160 145 143 151 141 151 163 72 52 334 241 1337 1156'
     ) == 'Caracteres especiais:*Ü¡˟ɮ'
+
+
 # HEXADECIMAL
 def test_hexadecimal_trocar_um_caractere_minusculo():
     assert bases_numericas.transformar_texto_para_hexadecimal('a') == '61'
@@ -91,10 +102,14 @@ def test_hexadecimal_trocar_um_caractere_especial():
     assert bases_numericas.transformar_hexadecimal_para_texto('E1') == 'á'
 
 def test_hexadecimal_traducao_invalido_1():
-    assert bases_numericas.transformar_hexadecimal_para_texto('1ABCDEFG') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert bases_numericas.transformar_hexadecimal_para_texto('1ABCDEFG') == dicionarios.retorna_erro_mensagem()
 
 def test_hexadecimal_traducao_invalido_2():
-    assert bases_numericas.transformar_hexadecimal_para_texto('FFFFFFFFF') == dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+    assert bases_numericas.transformar_hexadecimal_para_texto('FFFFFFFFF') == dicionarios.retorna_erro_mensagem()
+
+def test_hexadecimal_mensagem_invalida():
+    assert bases_numericas.transformar_texto_para_hexadecimal('') == dicionarios.retorna_erro_mensagem()
+    assert bases_numericas.transformar_hexadecimal_para_texto('') == dicionarios.retorna_erro_mensagem()
 
 def test_hexadecimal_texto_grande_1():
     assert bases_numericas.transformar_texto_para_hexadecimal('Primeiro texto em hexadecimal'

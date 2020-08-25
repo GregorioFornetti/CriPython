@@ -2,12 +2,11 @@ import PySimpleGUI as sg
 import Menus.utilidades_menus as utilidades_menus
 import Adivinhadores.forca_bruta_cesar as forca_bruta_cesar
 import Adivinhadores.adivinhador_cesar as adivinhador_cesar
-import banco_de_dados
 import dicionarios
 
 
 def retorna_layout_padrao_advinhador(titulo, nome_adivinhador):
-    dic_textos = dicionarios.retorna_menu_utilitario(banco_de_dados.retorna_idioma_configurado())
+    dic_textos = dicionarios.retorna_menu_utilitario()
     return [[sg.Text(dic_textos[titulo])],
             [sg.Text(dic_textos[f'Mensagem {titulo}'])],
             [sg.Text(dic_textos['Opções'])],

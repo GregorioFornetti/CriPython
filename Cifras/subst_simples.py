@@ -1,4 +1,3 @@
-import banco_de_dados
 import dicionarios
 
 def encriptar_modo_apenas_letras(lista_chaves, mensagem):
@@ -27,11 +26,11 @@ def traduzir_modo_varios_caracteres(lista_chaves, mensagem):
 
 def mensagem_nova(chave, mensagem):
     if not mensagem:
-        return dicionarios.retorna_erro_mensagem(banco_de_dados.retorna_idioma_configurado())
+        return dicionarios.retorna_erro_mensagem()
     if chave:
         return criar_mensagem_com_caracteres_trocados(chave, mensagem)
     else:
-        return dicionarios.retorna_erro_chave(banco_de_dados.retorna_idioma_configurado())
+        return dicionarios.retorna_erro_chave()
 
 
 def adaptar_chave_modo_varios_caracteres(lista_chaves):  # Criará um dicionário relacionando a chave_1 com a chave_2

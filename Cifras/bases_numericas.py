@@ -1,4 +1,4 @@
-import dicionarios
+#import dicionarios  LEMBRA DE TIRAR ESSE COMENTARIO !
 
 # Dicionário necessário para realizar as conversões na base hexadecimal.
 dicionario_hexa = {0:'0', 1:'1', 2:'2', 3:'3', 4:'4', 5:'5', 6:'6', 7:'7', 8:'8',

@@ -186,12 +186,14 @@ def retorna_opcoes_cifras():
                 'Vários caracteres': 'Vários caracteres',
                 'Binário': 'Binário',
                 'Octal': 'Octal',
+                'Decimal': 'Decimal',
                 'Hexadecimal': 'Hexadecimal'}
     else:
         return {'Apenas letras': 'Only letters',
                 'Vários caracteres': 'Several characters',
                 'Binário': 'Binary',
                 'Octal': 'Octal',
+                'Decimal': 'Decimal',
                 'Hexadecimal': 'Hexadecimal'}
 
 

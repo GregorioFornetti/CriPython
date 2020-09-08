@@ -87,6 +87,44 @@ def test_octal_texto_grande_2():
     '103 141 162 141 143 164 145 162 145 163 40 145 163 160 145 143 151 141 151 163 72 52 334 241 1337 1156'
     ) == 'Caracteres especiais:*Ü¡˟ɮ'
 
+# DECIMAL
+def test_decimal_trocar_um_caractere_minusculo():
+    assert bases_numericas.transformar_texto_para_decimal('a') == '97'
+    assert bases_numericas.transformar_decimal_para_texto('97') == 'a'
+
+def test_decimal_trocar_um_caractere_maiusculo():
+    assert bases_numericas.transformar_texto_para_decimal('A') == '65'
+    assert bases_numericas.transformar_decimal_para_texto('65') == 'A'
+
+def test_decimal_trocar_um_caractere_especial():
+    assert bases_numericas.transformar_texto_para_decimal('á') == '225'
+    assert bases_numericas.transformar_decimal_para_texto('225') == 'á'
+
+def test_decimal_traducao_invalido_1():
+    assert bases_numericas.transformar_decimal_para_texto('1238a') == dicionarios.retorna_erro_mensagem()
+
+def test_decimal_traducao_invalido_2():
+    assert bases_numericas.transformar_decimal_para_texto('99999999999999') == dicionarios.retorna_erro_mensagem()
+
+def test_decimal_mensagem_invalida():
+    assert bases_numericas.transformar_texto_para_decimal('') == dicionarios.retorna_erro_mensagem()
+    assert bases_numericas.transformar_decimal_para_texto('') == dicionarios.retorna_erro_mensagem()
+
+def test_decimal_texto_grande_1():
+    assert bases_numericas.transformar_texto_para_decimal('Primeiro texto em decimal'
+    ) == '80 114 105 109 101 105 114 111 32 116 101 120 116 111 32 101 109 32 100 101 99 105 109 97 108'
+
+    assert bases_numericas.transformar_decimal_para_texto(
+    '80 114 105 109 101 105 114 111 32 116 101 120 116 111 32 101 109 32 100 101 99 105 109 97 108'
+    ) == 'Primeiro texto em decimal'
+
+def test_decimal_texto_grande_2():
+    assert bases_numericas.transformar_texto_para_decimal('Caracteres especiais:*Ü¡˟ɮ'
+    ) == '67 97 114 97 99 116 101 114 101 115 32 101 115 112 101 99 105 97 105 115 58 42 220 161 735 622'
+
+    assert bases_numericas.transformar_decimal_para_texto(
+    '67 97 114 97 99 116 101 114 101 115 32 101 115 112 101 99 105 97 105 115 58 42 220 161 735 622'
+    ) == 'Caracteres especiais:*Ü¡˟ɮ'
 
 # HEXADECIMAL
 def test_hexadecimal_trocar_um_caractere_minusculo():

@@ -162,6 +162,7 @@ def menu_bases_numericas_encriptação(tela_anterior):
     titulo_da_cifra = 'Bases numéricas'
     dicionario_funções_bases_num_encript = {'Binário': bases_numericas.transformar_texto_para_binario,
                                             'Octal': bases_numericas.transformar_texto_para_octal,
+                                            'Decimal': bases_numericas.transformar_texto_para_decimal,
                                             'Hexadecimal': bases_numericas.transformar_texto_para_hexadecimal}   
     layout_bases_numericas_encript = retorna_layout_bases_numericas(titulo_da_cifra, dicionario_funções_bases_num_encript.keys()) 
 
@@ -171,6 +172,7 @@ def menu_bases_numericas_tradução(tela_anterior):
     titulo_da_cifra = 'Bases numéricas'
     dicionario_funções_bases_num_traduc = {'Binário': bases_numericas.transformar_binario_para_texto,
                                            'Octal': bases_numericas.transformar_octal_para_texto,
+                                           'Decimal': bases_numericas.transformar_decimal_para_texto,
                                            'Hexadecimal': bases_numericas.transformar_hexadecimal_para_texto}
     layout_bases_numericas_traduc = retorna_layout_bases_numericas(titulo_da_cifra, dicionario_funções_bases_num_traduc, modo='traducao')
 

@@ -12,6 +12,9 @@ def transformar_texto_para_binario(mensagem):
 def transformar_texto_para_octal(mensagem):
     return retornar_texto_encriptado(mensagem, converter_decimal_para_octal)
 
+def transformar_texto_para_decimal(mensagem):
+    return retornar_texto_encriptado(mensagem, converter_para_decimal)
+
 def transformar_texto_para_hexadecimal(mensagem):
     return retornar_texto_encriptado(mensagem, converter_decimal_para_hexadecimal)
 
@@ -20,6 +23,9 @@ def transformar_binario_para_texto(mensagem):
 
 def transformar_octal_para_texto(mensagem):
     return retornar_texto_traduzido(mensagem, converter_octal_para_decimal)
+
+def transformar_decimal_para_texto(mensagem):
+    return retornar_texto_traduzido(mensagem, verificar_num_decimal)
 
 def transformar_hexadecimal_para_texto(mensagem):
     return retornar_texto_traduzido(mensagem, converter_hexadecimal_para_decimal)
@@ -40,10 +46,13 @@ def retornar_texto_traduzido(mensagem, funcao_tradutora):
     for numero in mensagem.split():
         try:
             mensagem_traduzida += chr(funcao_tradutora(numero))
-        except:
+        except:  # Caractere inválido foi colocado para a tradução...
             return dicionarios.retorna_erro_mensagem()
     return mensagem_traduzida
 
+
+def converter_para_decimal(numero_decimal):
+    return str(numero_decimal)
 
 def converter_decimal_para_binario(numero_decimal):
     valor_binario = ''
@@ -98,3 +107,7 @@ def converter_hexadecimal_para_decimal(numero_hexadecimal):
         except:
             return 'Erro'
     return numero_decimal
+
+
+def verificar_num_decimal(numero_decimal):
+    return int(numero_decimal)

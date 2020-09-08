@@ -99,12 +99,12 @@ def retorna_menu_principal():
 
 def retorna_lista_cifras(coletar_port=False):  # As vezes vai ser necessário coletar essa lista em port independente do idioma configurado.
     if idioma == 'Portugues' or coletar_port:
-        return ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère', 'Bases numéricas']
+        return ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère', 'Bases numéricas', 'Base 64']
     else:
-        return ['Caesar Cipher', 'Substitution cipher', 'Vigenère Cipher', 'Numeral systems']
+        return ['Caesar Cipher', 'Substitution cipher', 'Vigenère Cipher', 'Numeral systems', 'Base 64']
 
 
-def retorna_lista_cifras_sem_chaves():
+def retorna_lista_cifras_com_chaves():
     if idioma == 'Portugues':
         return ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère']
     else:
@@ -141,6 +141,8 @@ def retorna_menus_cifras():
                 'Cifra de Vigenère (tradução)': 'Cifra de Vigenère (tradução)',
                 'Bases numéricas (encriptação)': 'Bases numéricas (encriptação)',
                 'Bases numéricas (tradução)': 'Bases numéricas (tradução)',
+                'Base 64 (encriptação)': 'Base 64 (encriptação)',
+                'Base 64 (tradução)': 'Base 64 (tradução)',
                 'Opções': 'Opções:',
                 'Chave': 'Chave:',
                 'Mensagem encriptada': 'Mensagem encriptada:',
@@ -162,6 +164,8 @@ def retorna_menus_cifras():
                 'Cifra de Vigenère (tradução)': 'Vigenère Cipher (translation)',
                 'Bases numéricas (encriptação)': 'Numeral systems (encrypt)',
                 'Bases numéricas (tradução)': 'Numeral systems (translation)',
+                'Base 64 (encriptação)': 'Base 64 (encrypt)',
+                'Base 64 (tradução)': 'Base 64 (translation)',
                 'Opções': 'Options:',
                 'Chave': 'Key:',
                 'Mensagem encriptada': 'Ciphertext:',

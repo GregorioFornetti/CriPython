@@ -1,4 +1,5 @@
 import Cifras.bases_numericas as bases_numericas
+import dicionarios
 
 dicionario_base_64 = {'000000': 'A', '000001': 'B', '000010': 'C', '000011': 'D', '000100': 'E',
                       '000101': 'F', '000110': 'G', '000111': 'H', '001000': 'I', '001001': 'J',
@@ -59,9 +60,9 @@ def traduzir_base_64(texto):
     codigo_binario = transformar_texto_para_binario_6bits(texto)
     tamanho_codigo_bin = len(codigo_binario)
     if quant_de_iguais == 1:
-        codigo_binario = codigo_binario[:tamanho_codigo_bin - 4]
-    elif quant_de_iguais == 2:
         codigo_binario = codigo_binario[:tamanho_codigo_bin - 2]
+    elif quant_de_iguais == 2:
+        codigo_binario = codigo_binario[:tamanho_codigo_bin - 4]
     while i <= tamanho_codigo_bin:
         if codigo_binario[i:i+5] == '11110':
             bin_atual = codigo_binario[i+5:i+8] + codigo_binario[i+10:i+16] + codigo_binario[i+18:i+24] + codigo_binario[i+26:i+32]
@@ -70,13 +71,13 @@ def traduzir_base_64(texto):
             bin_atual = codigo_binario[i+4:i+8] + codigo_binario[i+10:i+16] + codigo_binario[i+18:i+24]
             i += 24
         elif codigo_binario[i:i+3] == '110':
-            bin_atual = codigo_binario[i+3:i+8] + codigo_binario[i+10:1+16]
+            bin_atual = codigo_binario[i+3:i+8] + codigo_binario[i+10:i+16]
             i += 16
         else:
             bin_atual = codigo_binario[i+1:i+8]
             i += 8
         texto_traduzido += chr(bases_numericas.converter_binario_para_decimal(bin_atual))
-    texto_traduzido = texto_traduzido.rstrip('\x00')  
+    texto_traduzido = texto_traduzido.rstrip('\x00')
     return texto_traduzido
 
 def codificar_texto_para_UTF8(texto):

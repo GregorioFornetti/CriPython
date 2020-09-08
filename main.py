@@ -119,6 +119,7 @@ def menu_encriptar(tela_anterior):
         'Substituição simples': menus_cifras.menu_subst_simples_encriptação,
         'Cifra de Vigenère': menus_cifras.menu_cifra_de_vigenere_encriptação,
         'Bases numéricas': menus_cifras.menu_bases_numericas_encriptação,
+        'Base 64': menus_cifras.menu_base_64_encriptação
     }
 
     executar_menu(titulo, dic_funcoes_menus_cifras_encript, tela_anterior, layout_encriptar)
@@ -134,7 +135,8 @@ def menu_traducao(tela_anterior):
         'Cifra de César': menus_cifras.menu_cifra_de_cesar_tradução,
         'Substituição simples': menus_cifras.menu_subst_simples_tradução,
         'Cifra de Vigenère': menus_cifras.menu_cifra_de_vigenere_tradução,
-        'Bases numéricas': menus_cifras.menu_bases_numericas_tradução
+        'Bases numéricas': menus_cifras.menu_bases_numericas_tradução,
+        'Base 64': menus_cifras.menu_base_64_tradução
     }
 
     executar_menu(titulo, dic_funcoes_menus_cifras_traduc, tela_anterior, layout_traducao)
@@ -156,7 +158,7 @@ def menu_utilitarios(tela_anterior):
 
 def menu_opcoes():
     # Criação do layout do menu opções.
-    opcoes_cifras = dicionarios.retorna_lista_cifras_sem_chaves()
+    opcoes_cifras = dicionarios.retorna_lista_cifras_com_chaves()
     tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes(opcoes_cifras))
     resposta = ''
     while True:
@@ -179,7 +181,7 @@ def menu_opcoes():
         if evento == 'aplicar':
             resposta = banco_de_dados.aplicar_novas_configuracoes(valores)
             tela_opcoes.close()
-            opcoes_cifras = dicionarios.retorna_lista_cifras_sem_chaves()  # Atualizar os nomes de opções de cifras caso mude o idioma.
+            opcoes_cifras = dicionarios.retorna_lista_cifras_com_chaves()  # Atualizar os nomes de opções de cifras caso mude o idioma.
             tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes(opcoes_cifras))
         elif resposta:  # Imprimir respostas (é preciso esperar um pouco para imprimi-las, por isso é utilizado o timeout).
             print(resposta)

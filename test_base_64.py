@@ -25,8 +25,11 @@ def test_base64_21bits():
     assert base_64.codificar_base_64('𐓉') == '8JCTiQ=='
     assert base_64.traduzir_base_64('8JCTiQ==') == '𐓉'
 
-def test_base64_mensagem_invalida():
+def test_base64_mensagem_invalida_1():
     assert base_64.codificar_base_64('') == dicionarios.retorna_erro_mensagem()
+
+def test_base64_mensagem_invalida_2():
+    assert base_64.traduzir_base_64('!??!') == dicionarios.retorna_erro_mensagem()
 
 def test_base64_texto_grande_1():
     assert base_64.codificar_base_64(

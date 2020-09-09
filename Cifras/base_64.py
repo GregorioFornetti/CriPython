@@ -58,6 +58,8 @@ def traduzir_base_64(texto):
     i = 0
     quant_de_iguais = texto.count('=')
     codigo_binario = transformar_texto_para_binario_6bits(texto)
+    if not codigo_binario:  # Um caractere fora da tabela da base 64 foi encontrado.
+        return dicionarios.retorna_erro_mensagem()
     tamanho_codigo_bin = len(codigo_binario)
     if quant_de_iguais == 1:
         codigo_binario = codigo_binario[:tamanho_codigo_bin - 2]
@@ -101,7 +103,10 @@ def transformar_texto_para_binario_6bits(texto):
     string_binario = ''
     for caractere in texto:
         if caractere != '=':
-            string_binario += dicionario_base_64[caractere]
+            try:
+                string_binario += dicionario_base_64[caractere]
+            except:
+                return False
     return string_binario
 
 def transformar_7bits_UTF8(num_binario):

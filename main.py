@@ -6,7 +6,6 @@ import Menus.utilidades_menus as utilidades_menu
 import dicionarios
 import banco_de_dados
 # Todos os textos do programa estão no arquivo "dicionarios.py" (textos para cada opcão de idioma).
-
 # Dicionário utilizado para a criação do layout opções e banco de dados.
 lista_utilitarios_disponiveis = ['Força bruta César', 'Adivinhador César']
 opcoes_cifras_port = dicionarios.retorna_lista_cifras(coletar_port=True)

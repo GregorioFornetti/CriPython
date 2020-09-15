@@ -23,3 +23,11 @@ def criar_dicionario_caracteres_imprimiveis(limite):
             dicionario_unicode[valor_atual] = chr(valor_unicode)
             valor_atual += 1
     return dicionario_unicode
+
+
+def verificar_se_string_possui_apenas_letras(texto):
+    for caractere in texto:
+        valor_UNICODE = ord(caractere)
+        if valor_UNICODE < MIN_MAIUSCULA or (valor_UNICODE > MAX_MAIUSCULA and valor_UNICODE < MIN_MINUSCULA) or valor_UNICODE > MAX_MINUSCULA:
+            return False
+    return True

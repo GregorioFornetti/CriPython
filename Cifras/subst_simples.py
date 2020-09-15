@@ -1,4 +1,5 @@
 import dicionarios
+import Cifras.utilidades_cifras as utilidades
 
 def encriptar_modo_apenas_letras(lista_chaves, mensagem):
     chave = adaptar_chave_modo_apenas_letras(lista_chaves)
@@ -45,7 +46,7 @@ def adaptar_chave_modo_varios_caracteres(lista_chaves):  # Criará um dicionári
 
 
 def adaptar_chave_modo_apenas_letras(lista_chaves):  # Criar conversões para caixa baixa e alta.
-    if lista_chaves[0].isalpha() and lista_chaves[1].isalpha():
+    if utilidades.verificar_se_string_possui_apenas_letras(lista_chaves[0]) and utilidades.verificar_se_string_possui_apenas_letras(lista_chaves[1]):
         chave_1 = lista_chaves[0].lower()
         chave_2 = lista_chaves[1].lower()
         if verifica_caracteres_duplicados_chave_normal(chave_1, chave_2) and sorted(chave_1) == sorted(chave_2):

@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 import Menus.utilidades_menus as utilidades_menus
-import Adivinhadores.forca_bruta_cesar as forca_bruta_cesar
-import Adivinhadores.adivinhador_cesar as adivinhador_cesar
+import Utilitarios.forca_bruta_cesar as forca_bruta_cesar
+import Utilitarios.adivinhador_cesar as adivinhador_cesar
 import dicionarios
 
 

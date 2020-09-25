@@ -15,7 +15,7 @@ def test_cifra_de_cesar_apenas_letras_chave_1():
 
 def test_cifra_de_cesar_apenas_letras_chave_invalida_vazia():
     assert cifra_de_cesar.encriptar_modo_apenas_letras([''], 'abc') == dicionarios.retorna_erro_chave()
-    assert cifra_de_cesar.encriptar_modo_apenas_letras([''], 'abc') == dicionarios.retorna_erro_chave()
+    assert cifra_de_cesar.traduzir_modo_apenas_letras([''], 'abc') == dicionarios.retorna_erro_chave()
 
 def test_cifra_de_cesar_apenas_letras_chave_invalida_negativa():
     assert cifra_de_cesar.encriptar_modo_apenas_letras(['-1'], 'a') == dicionarios.retorna_erro_chave()
@@ -25,7 +25,7 @@ def test_cifra_de_cesar_apenas_letras_chave_invalida_texto():
     assert cifra_de_cesar.encriptar_modo_apenas_letras(['texto'], 'a') == dicionarios.retorna_erro_chave()
     assert cifra_de_cesar.traduzir_modo_apenas_letras(['texto'], 'a') == dicionarios.retorna_erro_chave()
 
-def test_cifra_de_cesar_apenas_letras_chave_invalida_naointeiro():
+def test_cifra_de_cesar_apenas_letras_chave_invalida_float():
     assert cifra_de_cesar.encriptar_modo_apenas_letras(['1.2'], 'a') == dicionarios.retorna_erro_chave()
     assert cifra_de_cesar.traduzir_modo_apenas_letras(['2.4'], 'a') == dicionarios.retorna_erro_chave()
 
@@ -79,7 +79,7 @@ def test_cifra_de_cesar_varios_caracteres_chave_invalida_texto():
     assert cifra_de_cesar.encriptar_modo_varios_caracteres(['texto'], 'a') == dicionarios.retorna_erro_chave()
     assert cifra_de_cesar.traduzir_modo_varios_caracteres(['texto'], 'a') == dicionarios.retorna_erro_chave()
 
-def test_cifra_de_cesar_varios_caracteres_chave_invalida_naointeiro():
+def test_cifra_de_cesar_varios_caracteres_chave_invalida_float():
     assert cifra_de_cesar.encriptar_modo_varios_caracteres(['1.2'], 'a') == dicionarios.retorna_erro_chave()
     assert cifra_de_cesar.traduzir_modo_varios_caracteres(['1.2'], 'a') == dicionarios.retorna_erro_chave()
 

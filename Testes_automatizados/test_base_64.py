@@ -1,12 +1,5 @@
-import Cifras.base_64 as base_64
+from Cifras import base_64
 import dicionarios
-'''
-Arquivo de testes automatizados !
-Para testar o programa, é preciso que a biblioteca PyTest esteja instalada em seu computador.
-Para instalar, execute no terminal: pip install -U pytest
-Depois disso, coloque o terminal para rodar na pasta principal do programa e execute
-o comando: pytest
-'''
 
 # BASE_64
 def test_base64_7bits():

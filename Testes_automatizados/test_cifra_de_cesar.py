@@ -1,12 +1,5 @@
-import Cifras.cifra_de_cesar as cifra_de_cesar
+from Cifras import cifra_de_cesar
 import dicionarios
-'''
-Arquivo de testes automatizados !
-Para testar o programa, é preciso que a biblioteca PyTest esteja instalada em seu computador.
-Para instalar, execute no terminal: pip install -U pytest
-Depois disso, coloque o terminal para rodar na pasta principal do programa e execute
-o comando: pytest
-'''
 
 # Opção: APENAS LETRAS
 def test_cifra_de_cesar_apenas_letras_chave_1():

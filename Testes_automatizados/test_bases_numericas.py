@@ -1,12 +1,5 @@
-import Cifras.bases_numericas as bases_numericas
+from Cifras import bases_numericas
 import dicionarios
-'''
-Arquivo de testes automatizados !
-Para testar o programa, é preciso que a biblioteca PyTest esteja instalada em seu computador.
-Para instalar, execute no terminal: pip install -U pytest
-Depois disso, coloque o terminal para rodar na pasta principal do programa e execute
-o comando: pytest
-'''
 
 # BINÁRIO
 def test_binario_trocar_um_caractere_minusculo():

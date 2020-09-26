@@ -88,6 +88,12 @@ def test_subst_simples_apenas_letras_texto_maior_3_com_chaves_totalmente_diferen
     assert subst_simples.traduzir_modo_varios_caracteres(['abcdefg', 'hijklmn'],
     'Oph, tlsthgko jof jahvls totheflgtl kbmlrlgtls') == 'Opa, testando com chaves totalmente diferentes'
 
+def test_subst_simples_apenas_letras_texto_maior_4_com_chaves_totalmente_diferentes():
+    assert subst_simples.encriptar_modo_apenas_letras(['bcdeuy', 'alnozm'],
+    'MAIS um TESTE para VERIFICAR com MAIUSC') == 'YBIS zy TOSTO pbrb VORIFILBR ley YBIZSL'
+    assert subst_simples.traduzir_modo_apenas_letras(['bcdeuy', 'alnozm'],
+    'YBIS zy TOSTO pbrb VORIFILBR ley YBIZSL') == 'MAIS um TESTE para VERIFICAR com MAIUSC'
+
 # OPÇÃO: VÁRIOS CARACTERES
 def test_subst_simples_varios_caracteres_troca_1_letra():
     assert subst_simples.encriptar_modo_varios_caracteres(['a', 'b'], 'abcdef') == 'bacdef'
@@ -178,3 +184,9 @@ def test_subst_simples_varios_caracteres_texto_maior_3_com_chaves_totalmente_dif
     'Opa, testando com chaves totalmente diferentes !?') == 'Kph,XtlsthgkoXjofXjahvlsXtotheflgtlXkbmlrlgtlsX[]'
     assert subst_simples.traduzir_modo_varios_caracteres(['abcdefg!?AO ', 'hijklmn[]TKX'],
     'Kph,XtlsthgkoXjofXjahvlsXtotheflgtlXkbmlrlgtlsX[]') == 'Opa, testando com chaves totalmente diferentes !?'
+
+def test_subst_simples_varios_caracteres_texto_maior_4_com_chaves_totalmente_diferentes():
+    assert subst_simples.encriptar_modo_varios_caracteres(['bcdeuy', 'alnozm'],
+    'MAIS um TESTE para VERIFICAR com MAIUSC') == 'MAIS zy TESTE pbrb VERIFICAR ley MAIUSC'
+    assert subst_simples.traduzir_modo_varios_caracteres(['bcdeuy', 'alnozm'],
+    'MAIS zy TESTE pbrb VERIFICAR ley MAIUSC') == 'MAIS um TESTE para VERIFICAR com MAIUSC'

@@ -92,6 +92,10 @@ def test_cifra_de_vigenere_varios_caracteres_volta():
     assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['!"'], '˞˝') == '  '
     assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['!"'], '  ') == '˞˝'
 
+def test_cifra_de_vigenere_varios_caracteres_chave_grande():
+    assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['˜˝'],  ' !"#') == '˜˞˞!'
+    assert cifra_de_vigenere.traduzir_modo_varios_caracteres(['˜˝'], '˜˞˞!') == ' !"#'
+
 def test_cifra_de_vigenere_varios_caracteres_texto_1():
     assert cifra_de_vigenere.encriptar_modo_varios_caracteres(['testando'],
     'Vamos ver como que essa cifra está funcionando ! Será que está trocando tudo ?'

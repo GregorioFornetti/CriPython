@@ -34,8 +34,8 @@ def executar_menu_utilitarios(titulo, dicionario_funcoes, tela_anterior, layout_
 def menu_forca_bruta_cesar(tela_anterior):
     titulo = 'Força bruta César'
     dic_funcoes_forca_bruta = {
-        'Apenas letras':forca_bruta_cesar.apenas_letras,
-        'Vários caracteres':forca_bruta_cesar.varios_caracteres
+        'Apenas letras':forca_bruta_cesar.imprimir_apenas_letras,
+        'Vários caracteres':forca_bruta_cesar.imprimir_varios_caracteres
     }
     layout_forca_bruta_cesar = retorna_layout_padrao_advinhador(titulo, dic_funcoes_forca_bruta.keys())
     
@@ -45,8 +45,8 @@ def menu_forca_bruta_cesar(tela_anterior):
 def menu_adivinhador_cesar(tela_anterior):
     titulo = 'Adivinhador César'
     dic_funcoes_adivhador_cesar = {
-        'Apenas letras':adivinhador_cesar.adivinhar_cesar_apenas_letras,
-        'Vários caracteres':adivinhador_cesar.adivinhar_cesar_varios_caracteres
+        'Apenas letras':adivinhador_cesar.imprimir_melhor_mensagem_adivinhada_apenas_letras,
+        'Vários caracteres':adivinhador_cesar.imprimir_melhor_mensagem_adivinhada_varios_caracteres
     }
     layout_adivinhador_cesar = retorna_layout_padrao_advinhador(titulo, dic_funcoes_adivhador_cesar.keys())
 

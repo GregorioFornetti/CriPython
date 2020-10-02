@@ -133,4 +133,28 @@ def transformar_21bits_UTF8(num_binario):
 
 def codif2_base_64(texto):
     codigo_hex_texto = bytes(texto, encoding='utf-8').hex()
-    i = 0
+    codigo_base64 = ''
+    tamanho_codigo_hex = len(codigo_hex_texto)
+    i = 5
+    while i < tamanho_codigo_hex:
+        bloco_bin_atual = ''
+        for j in range(5, -1, -1):
+            bloco_bin_atual += bases_numericas.converter_hexa_para_binario(codigo_hex_texto[i - j])
+        
+        for j in range(4):
+            codigo_base64 += dicionario_base_64[bloco_bin_atual[j * 6:(j + 1) * 6]]
+        i += 6
+    restante = i - tamanho_codigo_hex
+    if restante == 3:
+        codigo_bin_final = ''
+        for j in range(tamanho_codigo_hex - 2, tamanho_codigo_hex):
+            codigo_bin_final += bases_numericas.converter_hexa_para_binario(codigo_hex_texto[j])
+        codigo_bin_final += '0000'
+        codigo_base64 += dicionario_base_64[codigo_bin_final[:6]] + dicionario_base_64[codigo_bin_final[6:]] + '=='
+    elif restante == 1:
+        codigo_bin_final = ''
+        for j in range(tamanho_codigo_hex - 4, tamanho_codigo_hex):
+            codigo_bin_final += bases_numericas.converter_hexa_para_binario(codigo_hex_texto[j])
+        codigo_bin_final += '00'
+        codigo_base64 += dicionario_base_64[codigo_bin_final[:6]] + dicionario_base_64[codigo_bin_final[6:12]] + dicionario_base_64[codigo_bin_final[12:]] + '='
+    return codigo_base64

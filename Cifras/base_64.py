@@ -54,18 +54,23 @@ def codificar_base_64(texto):
 def traduzir_base_64(texto):
     if not texto:
         return dicionarios.retorna_erro_mensagem()
+    codigo_binario = transformar_textoBase64_em_codigo_binario(texto)
+    if not codigo_binario:  # Um caractere fora da tabela da base 64 foi encontrado.
+        return dicionarios.retorna_erro_mensagem()
+    
     texto_traduzido = ''
     i = 0
     quant_de_iguais = texto.count('=')
-    codigo_binario = transformar_texto_para_binario_6bits(texto)
-    if not codigo_binario:  # Um caractere fora da tabela da base 64 foi encontrado.
-        return dicionarios.retorna_erro_mensagem()
     tamanho_codigo_bin = len(codigo_binario)
+
     if quant_de_iguais == 1:
         codigo_binario = codigo_binario[:tamanho_codigo_bin - 2]
+        tamanho_codigo_bin -= 2
     elif quant_de_iguais == 2:
         codigo_binario = codigo_binario[:tamanho_codigo_bin - 4]
-    while i <= tamanho_codigo_bin:
+        tamanho_codigo_bin -= 4
+
+    while i < tamanho_codigo_bin:
         if codigo_binario[i:i+5] == '11110':
             bin_atual = codigo_binario[i+5:i+8] + codigo_binario[i+10:i+16] + codigo_binario[i+18:i+24] + codigo_binario[i+26:i+32]
             i += 32
@@ -79,7 +84,6 @@ def traduzir_base_64(texto):
             bin_atual = codigo_binario[i+1:i+8]
             i += 8
         texto_traduzido += chr(bases_numericas.converter_binario_para_decimal(bin_atual))
-    texto_traduzido = texto_traduzido.rstrip('\x00')
     return texto_traduzido
 
 def codificar_texto_para_UTF8(texto):
@@ -99,8 +103,11 @@ def codificar_texto_para_UTF8(texto):
     return codigo_final_utf8
         
 
-def transformar_texto_para_binario_6bits(texto):
+def transformar_textoBase64_em_codigo_binario(texto):
     string_binario = ''
+    if len(texto) % 4 != 0:
+        return False
+    
     for caractere in texto:
         if caractere != '=':
             try:
@@ -124,3 +131,6 @@ def transformar_21bits_UTF8(num_binario):
     num_binario = '0' * (21 - len(num_binario)) + num_binario
     return '11110' + num_binario[:3] + '10' + num_binario[3:9] + '10' + num_binario[9:15] + '10' + num_binario[15:]
 
+def codif2_base_64(texto):
+    codigo_hex_texto = bytes(texto, encoding='utf-8').hex()
+    i = 0

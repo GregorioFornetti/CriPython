@@ -6,6 +6,10 @@ dicionario_hexa = {0:'0', 1:'1', 2:'2', 3:'3', 4:'4', 5:'5', 6:'6', 7:'7', 8:'8'
                    '0':0, '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8,
                    '9':9, 'A':10, 'B':11, 'C':12, 'D':13, 'E':14, 'F':15}
 
+dicionario_hexa_bin = {'0':'0000', '1':'0001', '2':'0010', '3':'0011', '4':'0100', '5': '0101',
+                       '6': '0110', '7': '0111', '8': '1000', '9': '1001', 'A': '1010', 'B': '1011',
+                       'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'}
+
 def transformar_texto_para_binario(mensagem):
     return retornar_texto_encriptado(mensagem, converter_decimal_para_binario)
 
@@ -108,6 +112,8 @@ def converter_hexadecimal_para_decimal(numero_hexadecimal):
             return 'Erro'
     return numero_decimal
 
+def converter_hexa_para_binario(codigo_hexa):
+    return dicionario_hexa_bin[codigo_hexa]
 
 def verificar_num_decimal(numero_decimal):
     return int(numero_decimal)

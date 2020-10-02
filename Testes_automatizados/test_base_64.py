@@ -49,9 +49,10 @@ def test_base64_texto_grande_3():
     ) == 'Agórá cóm máis caractéres espécias !! Máx 16 bits - ౻óaU౻౻ႫaáoíႫჇჇaí'
 
 def test_base64_texto_grande_4():
-    assert base_64.codificar_base_64(
-    'Agórá sla, O MAXIMO: 21 bits: 𑇣sd౻Ⴧ𐐀áó౻adჇ𐐀á౻. Espero que funcione...'
-    ) == 'QWfDs3LDoSBzbGEsIE8gTUFYSU1POiAyMSBiaXRzOiDwkYejc2Tgsbvhg4fwkJCAw6HDs+Cxu2Fk4YOH8JCQgMOh4LG7LiBFc3Blcm8gcXVlIGZ1bmNpb25lLi4u'
-    assert base_64.traduzir_base_64(
-    'QWfDs3LDoSBzbGEsIE8gTUFYSU1POiAyMSBiaXRzOiDwkYejc2Tgsbvhg4fwkJCAw6HDs+Cxu2Fk4YOH8JCQgMOh4LG7LiBFc3Blcm8gcXVlIGZ1bmNpb25lLi4u'
-    ) == 'Agórá sla, O MAXIMO: 21 bits: 𑇣sd౻Ⴧ𐐀áó౻adჇ𐐀á౻. Espero que funcione...'
+    with open('teste.txt', 'r', encoding='utf-8') as arquivo_teste:
+        texto_teste = arquivo_teste.read().split('\n')
+        texto_normal = texto_teste[0]
+        texto_encriptado = texto_teste[1]
+    
+    assert base_64.codificar_base_64(texto_normal) == texto_encriptado
+    assert base_64.traduzir_base_64(texto_encriptado) == texto_normal

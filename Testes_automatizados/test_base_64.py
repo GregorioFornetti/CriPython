@@ -1,4 +1,5 @@
 from Cifras import base_64
+import base64
 import dicionarios
 
 # BASE_64
@@ -49,7 +50,7 @@ def test_base64_texto_grande_3():
     ) == 'Agórá cóm máis caractéres espécias !! Máx 16 bits - ౻óaU౻౻ႫaáoíႫჇჇaí'
 
 def test_base64_texto_grande_4():
-    with open('teste.txt', 'r', encoding='utf-8') as arquivo_teste:
+    with open('teste_longo_base_64.txt', 'r', encoding='utf-8') as arquivo_teste:
         texto_teste = arquivo_teste.read().split('\n')
         texto_normal = texto_teste[0]
         texto_encriptado = texto_teste[1]

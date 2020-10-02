@@ -1,4 +1,5 @@
 import Cifras.bases_numericas as bases_numericas
+import Cifras.utf8 as utf8
 import dicionarios
 
 dicionario_base_64 = {'000000': 'A', '000001': 'B', '000010': 'C', '000011': 'D', '000100': 'E',
@@ -27,7 +28,7 @@ def codificar_base_64(texto):
         return dicionarios.retorna_erro_mensagem()
     texto_codificado = ''
     indice_codigo = 24
-    texto_UTF8 = codificar_texto_para_UTF8(texto)
+    texto_UTF8 = utf8.codificar_texto_para_UTF8(texto)
     tamanho_codigo = len(texto_UTF8)
     while indice_codigo <= tamanho_codigo:  # Construindo o texto base 64... cada loop iterando sobre 24 digitos (4 blocos de 6).
         texto_codificado += dicionario_base_64[texto_UTF8[indice_codigo - 24: indice_codigo - 18]]
@@ -58,49 +59,13 @@ def traduzir_base_64(texto):
     if not codigo_binario:  # Um caractere fora da tabela da base 64 foi encontrado.
         return dicionarios.retorna_erro_mensagem()
     
-    texto_traduzido = ''
-    i = 0
     quant_de_iguais = texto.count('=')
-    tamanho_codigo_bin = len(codigo_binario)
-
     if quant_de_iguais == 1:
-        codigo_binario = codigo_binario[:tamanho_codigo_bin - 2]
-        tamanho_codigo_bin -= 2
+        codigo_binario = codigo_binario[:len(codigo_binario) - 2]
     elif quant_de_iguais == 2:
-        codigo_binario = codigo_binario[:tamanho_codigo_bin - 4]
-        tamanho_codigo_bin -= 4
+        codigo_binario = codigo_binario[:len(codigo_binario) - 4]
 
-    while i < tamanho_codigo_bin:
-        if codigo_binario[i:i+5] == '11110':
-            bin_atual = codigo_binario[i+5:i+8] + codigo_binario[i+10:i+16] + codigo_binario[i+18:i+24] + codigo_binario[i+26:i+32]
-            i += 32
-        elif codigo_binario[i:i+4] == '1110':
-            bin_atual = codigo_binario[i+4:i+8] + codigo_binario[i+10:i+16] + codigo_binario[i+18:i+24]
-            i += 24
-        elif codigo_binario[i:i+3] == '110':
-            bin_atual = codigo_binario[i+3:i+8] + codigo_binario[i+10:i+16]
-            i += 16
-        else:
-            bin_atual = codigo_binario[i+1:i+8]
-            i += 8
-        texto_traduzido += chr(bases_numericas.converter_binario_para_decimal(bin_atual))
-    return texto_traduzido
-
-def codificar_texto_para_UTF8(texto):
-    codigo_final_utf8 = ''
-    for caractere in texto:
-        num_binario = bases_numericas.converter_decimal_para_binario(ord(caractere))
-        if len(num_binario) <= 7:
-            codigo_final_utf8 += transformar_7bits_UTF8(num_binario)
-        elif len(num_binario) <= 11:
-            codigo_final_utf8 += transformar_11bits_UTF8(num_binario)
-        elif len(num_binario) <= 16:
-            codigo_final_utf8 += transformar_16bits_UTF8(num_binario)
-        elif len(num_binario) <= 21:
-            codigo_final_utf8 += transformar_21bits_UTF8(num_binario)
-        else:
-            pass  # ERRO AQUI (o valor digitado pelo usuário excedeu o números de bits possiveis)...
-    return codigo_final_utf8
+    return utf8.decodificar_UTF8_para_texto(codigo_binario)
         
 
 def transformar_textoBase64_em_codigo_binario(texto):
@@ -115,21 +80,6 @@ def transformar_textoBase64_em_codigo_binario(texto):
             except:
                 return False
     return string_binario
-
-def transformar_7bits_UTF8(num_binario):
-    return '0' * (8 - len(num_binario)) + num_binario
-
-def transformar_11bits_UTF8(num_binario):
-    num_binario = '0' * (11 - len(num_binario)) + num_binario
-    return '110' + num_binario[:5] + '10' + num_binario[5:]
-
-def transformar_16bits_UTF8(num_binario):
-    num_binario = '0' * (16 - len(num_binario)) + num_binario
-    return '1110' + num_binario[:4] + '10' + num_binario[4:10] + '10' + num_binario[10:]
-
-def transformar_21bits_UTF8(num_binario):
-    num_binario = '0' * (21 - len(num_binario)) + num_binario
-    return '11110' + num_binario[:3] + '10' + num_binario[3:9] + '10' + num_binario[9:15] + '10' + num_binario[15:]
 
 def codif2_base_64(texto):
     codigo_hex_texto = bytes(texto, encoding='utf-8').hex()
@@ -158,3 +108,4 @@ def codif2_base_64(texto):
         codigo_bin_final += '00'
         codigo_base64 += dicionario_base_64[codigo_bin_final[:6]] + dicionario_base_64[codigo_bin_final[6:12]] + dicionario_base_64[codigo_bin_final[12:]] + '='
     return codigo_base64
+

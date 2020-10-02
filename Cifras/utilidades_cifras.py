@@ -14,6 +14,8 @@ ALFABETO_MINUSCULO = 'abcdefghijklmnopqrstuvwxyz'
 
 FINAL_UNICODE = 734
 
+LIMITE_UNICODE_PYTHON = 1114112
+
 def criar_dicionario_caracteres_imprimiveis(limite):
     valor_atual = 0
     dicionario_unicode = {}

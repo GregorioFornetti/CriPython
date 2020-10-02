@@ -5,6 +5,7 @@ import Cifras.subst_simples as subst_simples
 import Cifras.cifra_de_vigenere as cifra_de_vigenere
 import Cifras.bases_numericas as bases_numericas
 import Cifras.base_64 as base_64
+import Cifras.utf8 as utf8
 import Menus.utilidades_menus as utilidades_menus
 import dicionarios
 import banco_de_dados
@@ -64,17 +65,16 @@ def retorna_layout_bases_numericas(titulo, opcoes, modo='encriptacao'):
     return layout_bases_numericas
 
 
-def retorna_layout_base_64(titulo,  modo='encriptacao'):
-    # O layout das base_64 é igual o da bases_numéricas sem as opções.
+def retorna_layout_sem_opcoes_e_chaves(titulo,  modo='encriptacao'):
     if modo == 'encriptacao':
-        layout_base_64 = retorna_layout_bases_numericas(titulo, [])
+        layout_sem_opcoes_e_chaves = retorna_layout_bases_numericas(titulo, [])
     else:
-        layout_base_64 = retorna_layout_bases_numericas(titulo, [], modo='traducao')
-    del layout_base_64[1]  # Tirar o titulo de "Opções"
-    del layout_base_64[1]  # Tirar o radio das opções...
-    # Colocar radio invisivel de opção "Base 64", pois a função "executar_menu_cifra" verificará a opção selecionada.
-    layout_base_64.append([sg.Radio(titulo, 'radio', key=titulo, default=True, visible=False)])
-    return layout_base_64
+        layout_sem_opcoes_e_chaves = retorna_layout_bases_numericas(titulo, [], modo='traducao')
+    del layout_sem_opcoes_e_chaves[1]  # Tirar o titulo de "Opções"
+    del layout_sem_opcoes_e_chaves[1]  # Tirar o radio das opções...
+    # Colocar radio invisivel do titulo selecionado, pois a função "executar_menu_cifra" verificará a opção selecionada.
+    layout_sem_opcoes_e_chaves.append([sg.Radio(titulo, 'radio', key=titulo, default=True, visible=False)])
+    return layout_sem_opcoes_e_chaves
 
 def executar_menu_cifra(titulo_cifra, tela_anterior, dicionario_funcoes_cifras, layout_cifra):
     # Criará a janela do menu da cifra e verificará os eventos ocorridos nela (ex: botões clicados, tela foi fechada, inputs,...)
@@ -182,12 +182,16 @@ def menu_bases_numericas_tradução(tela_anterior):
 def menu_base_64_encriptação(tela_anterior):
     titulo_da_cifra = 'Base 64'
     dicionario_funções_base_64_encript = {titulo_da_cifra: base_64.codificar_base_64}
-    layout_base_64 = retorna_layout_base_64(titulo_da_cifra)
+    layout_base_64 = retorna_layout_sem_opcoes_e_chaves(titulo_da_cifra)
     executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_base_64_encript, layout_base_64)
 
 
 def menu_base_64_tradução(tela_anterior):
     titulo_da_cifra = 'Base 64'
     dicionario_funções_base_64_traduc = {titulo_da_cifra: base_64.traduzir_base_64}
-    layout_base_64 = retorna_layout_base_64(titulo_da_cifra, modo='Traducao')
+    layout_base_64 = retorna_layout_sem_opcoes_e_chaves(titulo_da_cifra, modo='Traducao')
     executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_base_64_traduc, layout_base_64)
+
+
+def menu_encoding_utf8_encriptacao(tela_anterior):
+    titulo_da_cifra = 'Encoding UTF-8'

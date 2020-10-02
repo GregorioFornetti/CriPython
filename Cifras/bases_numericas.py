@@ -1,4 +1,5 @@
 import dicionarios
+import Cifras.utilidades_cifras as utilidades_cifras
 
 # Dicionário necessário para realizar as conversões na base hexadecimal.
 dicionario_hexa = {0:'0', 1:'1', 2:'2', 3:'3', 4:'4', 5:'5', 6:'6', 7:'7', 8:'8',
@@ -48,10 +49,11 @@ def retornar_texto_traduzido(mensagem, funcao_tradutora):
         return dicionarios.retorna_erro_mensagem()
     mensagem_traduzida = ''
     for numero in mensagem.split():
-        try:
-            mensagem_traduzida += chr(funcao_tradutora(numero))
-        except:  # Caractere inválido foi colocado para a tradução...
+        valor_UNICODE = funcao_tradutora(numero)
+        if not valor_UNICODE or valor_UNICODE >= utilidades_cifras.LIMITE_UNICODE_PYTHON: 
+            # Ocorreu um erro na troca da base númerica escolhida para a base decimal.
             return dicionarios.retorna_erro_mensagem()
+        mensagem_traduzida += chr(valor_UNICODE)
     return mensagem_traduzida
 
 
@@ -87,7 +89,7 @@ def converter_binario_para_decimal(numero_binario):
     numero_binario = reversed(numero_binario)  # Inverter o número para começar da direita para a esquerda (da menor base para a maior).
     for potencia, digito in enumerate(numero_binario):
         if int(digito) < 0 or int(digito) > 1:  # O numero lido não é um número binário.
-            return 'Erro'
+            return False
         numero_decimal += int(digito) * 2 ** potencia
     return numero_decimal
 
@@ -97,7 +99,7 @@ def converter_octal_para_decimal(numero_octal):
     numero_octal = reversed(numero_octal)
     for potencia, digito in enumerate(numero_octal):
         if int(digito) < 0 or int(digito) > 7:
-            return 'Erro'
+            return False
         numero_decimal += int(digito) * 8 ** potencia
     return numero_decimal
 
@@ -109,11 +111,14 @@ def converter_hexadecimal_para_decimal(numero_hexadecimal):
         try:
             numero_decimal += dicionario_hexa[digito] * 16 ** potencia
         except:
-            return 'Erro'
+            return False
     return numero_decimal
 
 def converter_hexa_para_binario(codigo_hexa):
     return dicionario_hexa_bin[codigo_hexa]
 
 def verificar_num_decimal(numero_decimal):
-    return int(numero_decimal)
+    try:
+        return int(numero_decimal)
+    except:
+        return False

@@ -13,7 +13,7 @@ import banco_de_dados
 
 def retorna_layout_padrao_tradução(titulo, opcoes):
     dic_textos = dicionarios.retorna_menus_cifras()
-    layout = [[sg.Text(f"{dic_textos[f'{titulo} (tradução)']:^110}")],
+    layout = [[sg.Text(f"{dic_textos[titulo] + ' ' + dic_textos['tradução']:^110}")],
              [sg.Text(dic_textos['Opções'])],
               utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
              [sg.Text(dic_textos['Mensagem encriptada']), sg.InputText(key='mensagem')],
@@ -28,7 +28,7 @@ def retorna_layout_padrao_tradução(titulo, opcoes):
 
 def retorna_layout_padrao_encriptação(titulo, opcoes):
     dic_textos = dicionarios.retorna_menus_cifras()
-    layout = [[sg.Text(f"{dic_textos[f'{titulo} (encriptação)']:^110}")],
+    layout = [[sg.Text(f"{dic_textos[titulo] + ' ' + dic_textos['encriptação']:^110}")],
              [sg.Text(dic_textos['Opções'])],
               utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
              [sg.Text(dic_textos['Mensagem']), sg.InputText(key='mensagem')],
@@ -112,7 +112,6 @@ def menu_cifra_de_cesar_encriptação(tela_anterior):
     
     executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_cesar_encript, layout_cifra_de_cesar_encript)
 
-
 def menu_cifra_de_cesar_tradução(tela_anterior):
     titulo_da_cifra = 'Cifra de César'
     dicionario_funções_cesar_traduc = {'Apenas letras':cifra_de_cesar.traduzir_modo_apenas_letras,
@@ -130,7 +129,6 @@ def menu_subst_simples_encriptação(tela_anterior):
     
     executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_subst_encript, layout_subst_simples_encript)
 
-
 def menu_subst_simples_tradução(tela_anterior):
     titulo_da_cifra = 'Substituição simples'
     dicionario_funções_subst_traduc = {'Apenas letras':subst_simples.traduzir_modo_apenas_letras,
@@ -147,7 +145,6 @@ def menu_cifra_de_vigenere_encriptação(tela_anterior):
     layout_cifra_de_vigenere_encript = retorna_layout_padrao_encriptação(titulo_da_cifra, dicionario_funções_vigenere_encript.keys())
     
     executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_vigenere_encript, layout_cifra_de_vigenere_encript)
-
 
 def menu_cifra_de_vigenere_tradução(tela_anterior):
     titulo_da_cifra = 'Cifra de Vigenère'
@@ -185,7 +182,6 @@ def menu_base_64_encriptação(tela_anterior):
     layout_base_64 = retorna_layout_sem_opcoes_e_chaves(titulo_da_cifra)
     executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_base_64_encript, layout_base_64)
 
-
 def menu_base_64_tradução(tela_anterior):
     titulo_da_cifra = 'Base 64'
     dicionario_funções_base_64_traduc = {titulo_da_cifra: base_64.traduzir_base_64}
@@ -193,5 +189,14 @@ def menu_base_64_tradução(tela_anterior):
     executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funções_base_64_traduc, layout_base_64)
 
 
-def menu_encoding_utf8_encriptacao(tela_anterior):
-    titulo_da_cifra = 'Encoding UTF-8'
+def menu_utf8_codificacao(tela_anterior):
+    titulo_da_cifra = 'UTF-8'
+    dicionario_funcao_utf8_encode = {titulo_da_cifra: utf8.codificar_texto_para_UTF8}
+    layout_utf8 = retorna_layout_sem_opcoes_e_chaves(titulo_da_cifra)
+    executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funcao_utf8_encode, layout_utf8)
+
+def menu_utf8_decodificacao(tela_anterior):
+    titulo_da_cifra = 'UTF-8'
+    dicionario_funcao_utf8_decode = {titulo_da_cifra: utf8.decodificar_UTF8_para_texto}
+    layout_utf8 = retorna_layout_sem_opcoes_e_chaves(titulo_da_cifra, modo="Traducao")
+    executar_menu_cifra(titulo_da_cifra, tela_anterior, dicionario_funcao_utf8_decode, layout_utf8)

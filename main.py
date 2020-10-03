@@ -118,6 +118,7 @@ def menu_encriptar(tela_anterior):
         'Substituição simples': menus_cifras.menu_subst_simples_encriptação,
         'Cifra de Vigenère': menus_cifras.menu_cifra_de_vigenere_encriptação,
         'Bases numéricas': menus_cifras.menu_bases_numericas_encriptação,
+        'UTF-8': menus_cifras.menu_utf8_codificacao,
         'Base 64': menus_cifras.menu_base_64_encriptação
     }
 
@@ -135,6 +136,7 @@ def menu_traducao(tela_anterior):
         'Substituição simples': menus_cifras.menu_subst_simples_tradução,
         'Cifra de Vigenère': menus_cifras.menu_cifra_de_vigenere_tradução,
         'Bases numéricas': menus_cifras.menu_bases_numericas_tradução,
+        'UTF-8': menus_cifras.menu_utf8_decodificacao,
         'Base 64': menus_cifras.menu_base_64_tradução
     }
 

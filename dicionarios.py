@@ -99,9 +99,9 @@ def retorna_menu_principal():
 
 def retorna_lista_cifras(coletar_port=False):  # As vezes vai ser necessário coletar essa lista em port independente do idioma configurado.
     if idioma == 'Portugues' or coletar_port:
-        return ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère', 'Bases numéricas', 'Base 64']
+        return ['Cifra de César', 'Substituição simples', 'Cifra de Vigenère', 'Bases numéricas', 'UTF-8', 'Base 64']
     else:
-        return ['Caesar Cipher', 'Substitution cipher', 'Vigenère Cipher', 'Numeral systems', 'Base 64']
+        return ['Caesar Cipher', 'Substitution cipher', 'Vigenère Cipher', 'Numeral systems', 'UTF-8', 'Base 64']
 
 
 def retorna_lista_cifras_com_chaves():
@@ -133,16 +133,14 @@ def retorna_menu_encript_traduc_utilitarios():
 
 def retorna_menus_cifras():
     if idioma == 'Portugues':
-        return {'Cifra de César (encriptação)': 'Cifra de César (encriptação)',
-                'Cifra de César (tradução)': 'Cifra de César (tradução)',
-                'Substituição simples (encriptação)': 'Substituição simples (encriptação)',
-                'Substituição simples (tradução)': 'Substituição simples (tradução)',
-                'Cifra de Vigenère (encriptação)': 'Cifra de Vigenère (encriptação)',
-                'Cifra de Vigenère (tradução)': 'Cifra de Vigenère (tradução)',
-                'Bases numéricas (encriptação)': 'Bases numéricas (encriptação)',
-                'Bases numéricas (tradução)': 'Bases numéricas (tradução)',
-                'Base 64 (encriptação)': 'Base 64 (encriptação)',
-                'Base 64 (tradução)': 'Base 64 (tradução)',
+        return {'Cifra de César': 'Cifra de César',
+                'Substituição simples': 'Substituição simples',
+                'Cifra de Vigenère': 'Cifra de Vigenère',
+                'Bases numéricas': 'Bases numéricas',
+                'UTF-8': 'UTF-8',
+                'Base 64': 'Base 64',
+                'encriptação': '(encriptação)',
+                'tradução': '(tradução)',
                 'Opções': 'Opções:',
                 'Chave': 'Chave:',
                 'Mensagem encriptada': 'Mensagem encriptada:',
@@ -156,16 +154,14 @@ def retorna_menus_cifras():
                 'Limpar tela': 'Limpar tela',
                 'Retornar': 'Retornar'}
     else:
-        return {'Cifra de César (encriptação)': 'Caesar Cipher (encrypt)',
-                'Cifra de César (tradução)': 'Caesar Cipher (translation)',
-                'Substituição simples (encriptação)': 'Substitution cipher (encrypt)',
-                'Substituição simples (tradução)': 'Substitution cipher (translation)',
-                'Cifra de Vigenère (encriptação)': 'Vigenère Cipher (encrypt)',
-                'Cifra de Vigenère (tradução)': 'Vigenère Cipher (translation)',
-                'Bases numéricas (encriptação)': 'Numeral systems (encrypt)',
-                'Bases numéricas (tradução)': 'Numeral systems (translation)',
-                'Base 64 (encriptação)': 'Base 64 (encrypt)',
-                'Base 64 (tradução)': 'Base 64 (translation)',
+        return {'Cifra de César': 'Caesar Cipher',
+                'Substituição simples': 'Substitution cipher',
+                'Cifra de Vigenère': 'Vigenère Cipher',
+                'Bases numéricas': 'Numeral systems',
+                'UTF-8': 'UTF-8',
+                'Base 64': 'Base 64',
+                'encriptação': '(encrypt)',
+                'tradução': '(translation)',
                 'Opções': 'Options:',
                 'Chave': 'Key:',
                 'Mensagem encriptada': 'Ciphertext:',

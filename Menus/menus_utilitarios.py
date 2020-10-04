@@ -102,7 +102,8 @@ def menu_conversor_bases_numericas(tela_anterior):
                 if selecionado:
                     if not primeira_base:  # Verificando se o numero digito pelo usuario bate com a primeira base numerica selecionada
                         primeira_base = base_numerica
-                        if not dict_funcoes[primeira_base](numero_digitado) and dict_funcoes[primeira_base](numero_digitado) != 0:  # Usuario digitou numero errado, mostrar mensagem de erro.
+                        verificacao_de_num = dict_funcoes[primeira_base](numero_digitado)
+                        if not verificacao_de_num and str(verificacao_de_num) != '0':  # Usuario digitou numero errado, mostrar mensagem de erro.
                             numero_convertido = dicionarios.retorna_erro_numero_invalido()
                             break
                     else:

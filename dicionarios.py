@@ -251,8 +251,9 @@ def retorna_menu_utilitario():
                 to another numeral system.''',
                 
                 'Opções': 'Options:',
-                'Converter de': '',
-                'Para': '',
+                'Converter de': 'Convert from',
+                'Para': 'To:',
+                'Numero': 'Number:',
                 'Mensagem encriptada': 'Ciphertext:',
                 'Executar': 'Execute',
                 'Abrir wiki': 'Open wiki',

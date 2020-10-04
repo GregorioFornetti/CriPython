@@ -16,6 +16,9 @@ def retorna_layout_padrao_advinhador(titulo, nome_adivinhador):
             [sg.Button(dic_textos['Executar'], key='executar'), sg.Button(dic_textos['Abrir wiki'], key='link'),
              sg.Button(dic_textos['Limpar tela'], key='limpar'), sg.Button(dic_textos['Retornar'], key='retornar')]]
 
+def retorna_layout_calculadora_bases_numericas():
+    pass
+
 
 def executar_menu_utilitarios(titulo, dicionario_funcoes, tela_anterior, layout_utilitario):
     tela_utilitario = sg.Window(titulo, layout_utilitario)

@@ -1,7 +1,7 @@
 from Cifras import bases_numericas
 import dicionarios
 
-# BINÁRIO
+# BINÁRIO - TEXTOS
 def test_binario_trocar_um_caractere_minusculo():
     assert bases_numericas.transformar_texto_para_binario('a') == '1100001'
     assert bases_numericas.transformar_binario_para_texto('1100001') == 'a'
@@ -40,8 +40,33 @@ def test_binario_texto_grande_2():
     '1000011 1100001 1110010 1100001 1100011 1110100 1100101 1110010 1100101 1110011 100000 1100101 1110011 1110000 1100101 1100011 1101001 1100001 1101001 1110011 111010 101010 11011100 10100001 1011011111 1001101110'
     ) == 'Caracteres especiais:*Ü¡˟ɮ'
 
+# BINÁRIO - CONVERSÕES DIRETAS
+def test_binario_para_octal_1():
+    assert bases_numericas.converter_binario_para_octal('101101') == '55'
 
-# OCTAL
+def test_binario_para_octal_2():
+    assert bases_numericas.converter_binario_para_octal('1111101110') == '1756'
+
+def test_binario_para_decimal_1():
+    assert bases_numericas.converter_binario_para_decimal('101001') == 41
+
+def test_binario_para_decimal_2():
+    assert bases_numericas.converter_binario_para_decimal('111011011') == 475
+
+def test_binario_para_hexadecimal_1():
+    assert bases_numericas.converter_binario_para_hexadecimal('11011010') == 'DA'
+
+def test_binario_para_hexadecimal_2():
+    assert bases_numericas.converter_binario_para_hexadecimal('11000110110') == '636'
+
+def test_verificacao_binario():
+    assert bases_numericas.verificar_num_bin('11101101 100111') == False
+    assert bases_numericas.verificar_num_bin('111011210110') == False
+    assert bases_numericas.verificar_num_bin('110111opa') == False
+    assert bases_numericas.verificar_num_bin('11101011\n') == False
+    assert bases_numericas.verificar_num_bin('1011011101101111') == True
+
+# OCTAL - TEXTOS
 def test_octal_trocar_um_caractere_minusculo():
     assert bases_numericas.transformar_texto_para_octal('a') == '141'
     assert bases_numericas.transformar_octal_para_texto('141') == 'a'
@@ -80,7 +105,34 @@ def test_octal_texto_grande_2():
     '103 141 162 141 143 164 145 162 145 163 40 145 163 160 145 143 151 141 151 163 72 52 334 241 1337 1156'
     ) == 'Caracteres especiais:*Ü¡˟ɮ'
 
-# DECIMAL
+def test_verificacao_octal():
+    assert bases_numericas.verificar_num_octal('15105 1341') == False
+    assert bases_numericas.verificar_num_octal('124101481304') == False
+    assert bases_numericas.verificar_num_octal('145a6167') == False
+    assert bases_numericas.verificar_num_octal('12461246\n') == False
+    assert bases_numericas.verificar_num_octal('1515302637142356412345670') == True
+
+# OCTAL - CONVERSÕES DIRETAS
+def test_octal_para_binario_1():
+    assert bases_numericas.converter_octal_para_binario('123') == '1010011'
+
+def test_octal_para_binario_2():
+    assert bases_numericas.converter_octal_para_binario('6141') == '110001100001'
+    assert bases_numericas.converter_octal_para_binario('0') == '0'
+
+def test_octal_para_decimal_1():
+    assert bases_numericas.converter_octal_para_decimal('12') == 10
+
+def test_octal_para_decimal_2():
+    assert bases_numericas.converter_octal_para_decimal('341') == 225
+
+def test_octal_para_hexadecimal_1():
+    assert bases_numericas.converter_octal_para_hexadecimal('142') == '62'
+
+def test_octal_para_hexadecimal_2():
+    assert bases_numericas.converter_octal_para_hexadecimal('1402') == '302'
+
+# DECIMAL - TEXTOS
 def test_decimal_trocar_um_caractere_minusculo():
     assert bases_numericas.transformar_texto_para_decimal('a') == '97'
     assert bases_numericas.transformar_decimal_para_texto('97') == 'a'
@@ -119,7 +171,32 @@ def test_decimal_texto_grande_2():
     '67 97 114 97 99 116 101 114 101 115 32 101 115 112 101 99 105 97 105 115 58 42 220 161 735 622'
     ) == 'Caracteres especiais:*Ü¡˟ɮ'
 
-# HEXADECIMAL
+# DECIMAL - CONVERSÕES DIRETAS
+def test_decimal_para_binario_1():
+    assert bases_numericas.converter_decimal_para_binario(24) == '11000'
+
+def test_decimal_para_binario_2():
+    assert bases_numericas.converter_decimal_para_binario(102) == '1100110'
+
+def test_decimal_para_octal_1():
+    assert bases_numericas.converter_decimal_para_octal(42) == '52'
+
+def test_decimal_para_octal_2():
+    assert bases_numericas.converter_decimal_para_octal(140) == '214'
+
+def test_decimal_para_hexadecimal_1():
+    assert bases_numericas.converter_decimal_para_hexadecimal(52) == '34'
+
+def test_decimal_para_hexadecimal_2():
+    assert bases_numericas.converter_decimal_para_hexadecimal(184) == 'B8'
+
+def test_verificacao_decimal():
+    assert bases_numericas.verificar_num_decimal('1210424 12') == False
+    assert bases_numericas.verificar_num_decimal('1924014a132') == False
+    assert bases_numericas.verificar_num_decimal('1032120\n') == False
+    assert bases_numericas.verificar_num_decimal('1234567890') == 1234567890
+
+# HEXADECIMAL - TEXTOS
 def test_hexadecimal_trocar_um_caractere_minusculo():
     assert bases_numericas.transformar_texto_para_hexadecimal('a') == '61'
     assert bases_numericas.transformar_hexadecimal_para_texto('61') == 'a'
@@ -157,3 +234,30 @@ def test_hexadecimal_texto_grande_2():
     assert bases_numericas.transformar_hexadecimal_para_texto(
     '43 61 72 61 63 74 65 72 65 73 20 65 73 70 65 63 69 61 69 73 3A 2A DC A1 2DF 26E'
     ) == 'Caracteres especiais:*Ü¡˟ɮ'
+
+# HEXADECIMAL - CONVERSÕES DIRETAS
+def test_hexadecimal_para_binario_1():
+    assert bases_numericas.converter_hexadecimal_para_binario('46') == '1000110'
+
+def test_hexadecimal_para_binario_2():
+    assert bases_numericas.converter_hexadecimal_para_binario('A1c') == '101000011100'
+    assert bases_numericas.converter_hexadecimal_para_binario('0') == '0'
+
+def test_hexadecimal_para_octal_1():
+    assert bases_numericas.converter_hexadecimal_para_octal('52') == '122'
+
+def test_hexadecimal_para_octal_2():
+    assert bases_numericas.converter_hexadecimal_para_octal('C4a') == '6112'
+
+def test_hexadecimal_para_decimal_1():
+    assert bases_numericas.converter_hexadecimal_para_decimal('62') == 98
+
+def test_hexadecimal_para_decimal_2():
+    assert bases_numericas.converter_hexadecimal_para_decimal('Fa1') == 4001
+
+def test_verificacao_hexadecimal():
+    assert bases_numericas.verificar_num_hexadecimal('14912AB 184AB') == False
+    assert bases_numericas.verificar_num_hexadecimal('1234401EFG') == False
+    assert bases_numericas.verificar_num_hexadecimal('1234561abc\n') == False
+    assert bases_numericas.verificar_num_hexadecimal('0123456789ABCDEF') == True
+    assert bases_numericas.verificar_num_hexadecimal('0123456789abcdef') == True

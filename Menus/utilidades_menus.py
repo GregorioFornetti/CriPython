@@ -24,13 +24,18 @@ def verificar_eventos_gerais(nome_menu, evento, tela_atual):  # Verifica e execu
         tela_atual.element('output').update('')
 
 
-def retorna_layout_opçoes_em_radio(lista_opcoes):  
+def retorna_layout_opçoes_em_radio(lista_opcoes, conexao='radio'):  
     # Cria um layout com opções selecionaveis (do tipo "radio", só pode escolher uma). As opções serão os elementos da lista fornecida.
     layout_opçoes = []
     dic_textos = dicionarios.retorna_opcoes_cifras()
     for opcao in lista_opcoes:
         if not layout_opçoes:  # Definir a primeira opção como "default".
-            layout_opçoes.append(sg.Radio(dic_textos[opcao], 'radio', key=opcao, default=True))
+            layout_opçoes.append(sg.Radio(dic_textos[opcao], conexao, key=opcao, default=True))
         else:
-            layout_opçoes.append(sg.Radio(dic_textos[opcao], 'radio', key=opcao, default=False))
+            layout_opçoes.append(sg.Radio(dic_textos[opcao], conexao, key=opcao, default=False))
     return layout_opçoes
+
+
+def retorna_layout_botoes_utilitarios_padrao(dic_textos):
+    return [sg.Button(dic_textos['Executar'], key='executar'), sg.Button(dic_textos['Abrir wiki'], key='link'),
+            sg.Button(dic_textos['Limpar tela'], key='limpar'), sg.Button(dic_textos['Retornar'], key='retornar')]

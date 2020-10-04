@@ -113,9 +113,9 @@ def retorna_lista_cifras_com_chaves():
 
 def retorna_lista_utilitarios(coletar_port=False):
     if idioma == 'Portugues' or coletar_port:
-        return ['Força bruta César', 'Adivinhador César']
+        return ['Força bruta César', 'Adivinhador César', 'Conversor bases numéricas']
     else:
-        return ['Brute force Caesar', 'Caesar guess']
+        return ['Brute force Caesar', 'Caesar guess',  'Numeral systems conversor']
 
 
 def retorna_menu_encript_traduc_utilitarios():
@@ -204,6 +204,8 @@ def retorna_menu_utilitario():
     if idioma == 'Portugues':
         return {'Força bruta César': 'Força bruta César',
                 'Adivinhador César': 'Adivinhador César',
+                'Conversor bases numéricas': 'Conversor bases numéricas',
+
                 'Mensagem Força bruta César':'''
                 Escolha uma opção e escreva uma mensagem encriptada pela cifra de César.
                 O programa testará todas as chaves possíveis!
@@ -214,16 +216,26 @@ def retorna_menu_utilitario():
                 O programa tentará adivinhar qual é a mensagem traduzida !
                 OBS: dependendo do texto, esse processo pode levar bastante tempo !''',
 
+                'Mensagem conversor bases numéricas':'''
+                Diferente da cifra de "bases numéricas", aqui você fará as conversões de uma
+                base númerica para outra (ao invés de converter o UNICODE de um texto para uma
+                base numérica).''',
+
                 'Opções': 'Opções:',
                 'Mensagem encriptada': 'Mensagem encriptada:',
                 'Executar': 'Executar',
+                'Converter de': 'Converter de',
+                'Para': 'Para:',
+                'Numero': 'Numero:',
                 'Abrir wiki': 'Abrir wiki',
                 'Limpar tela': 'Limpar tela',
                 'Retornar': 'Retornar'}
     else:
         return {'Força bruta César': 'Brute force Caesar',
                 'Adivinhador César': 'Caesar guess',
-                'Mensagem Força bruta César':'''
+                'Conversor bases numéricas': 'Numeral systems conversor',
+
+                'Mensagem Força bruta César': '''
                 Choose an option and write a text encrypted by the Caesar Cipher.
                 The program will test all the possible keys !
                 Depending on the text, this process can be slow''',
@@ -232,8 +244,15 @@ def retorna_menu_utilitario():
                 Choose an option and write a text encrypted by the Caesar Cipher.
                 The program will try to translate the text without the key !
                 Depending on the text, this process can be slow''',
+
+                'Mensagem conversor bases numéricas':'''
+                Unlike the "Numeral systems" cipher, here you will make the conversions
+                of a numeral system to another instead of converting the text UNICODE values
+                to another numeral system.''',
                 
                 'Opções': 'Options:',
+                'Converter de': '',
+                'Para': '',
                 'Mensagem encriptada': 'Ciphertext:',
                 'Executar': 'Execute',
                 'Abrir wiki': 'Open wiki',
@@ -283,6 +302,11 @@ def retorna_erro_chave_padrao():
     else:
         return "You havent defined a default key for this cipher yet !\nGo to the options menu and define one !"
 
+def retorna_erro_numero_invalido():
+    if idioma == 'Portugues':
+        return 'Número inválido'
+    else:
+        return 'Invalid number'
 
 def retorna_mensagens_forca_bruta_cesar(chave, mensagem_traduzida):
     if idioma == 'Portugues':

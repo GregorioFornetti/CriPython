@@ -45,10 +45,10 @@ def decodificar_UTF8_para_texto(codigo_UTF8):
         else:
             return dicionarios.retorna_erro_mensagem()
         
-        UNICODE_novo_caractere = bases_numericas.converter_binario_para_decimal(bin_atual)
+        UNICODE_novo_caractere = bases_numericas.converter_binario_para_decimal(bin_atual, tirar_zeros_esq=False)
         if not UNICODE_novo_caractere:
             return dicionarios.retorna_erro_mensagem()
-        texto_decodicado += chr(bases_numericas.converter_binario_para_decimal(bin_atual))
+        texto_decodicado += chr(bases_numericas.converter_binario_para_decimal(bin_atual, tirar_zeros_esq=False))
     return texto_decodicado
 
 def transformar_7bits_UTF8(num_binario):

@@ -151,7 +151,8 @@ def menu_utilitarios(tela_anterior):
                                                           opcoes_utilitarios_port)
     dic_funcoes_utilitarios = {
         'Força bruta César':menus_utilitarios.menu_forca_bruta_cesar,
-        'Adivinhador César':menus_utilitarios.menu_adivinhador_cesar
+        'Adivinhador César':menus_utilitarios.menu_adivinhador_cesar,
+        'Conversor bases numéricas':menus_utilitarios.menu_conversor_bases_numericas
     }
 
     executar_menu(titulo, dic_funcoes_utilitarios, tela_anterior, layout_utilitarios)

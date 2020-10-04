@@ -63,6 +63,13 @@ def retornar_texto_traduzido(mensagem, funcao_tradutora):
     return mensagem_traduzida
 
 
+def tirar_zeros_a_esquerda(numero):
+    numero = numero.lstrip('0')
+    if not numero:
+        numero = '0'
+    return numero
+
+
 def converter_para_decimal(numero_decimal):
     return str(numero_decimal)
 
@@ -76,25 +83,37 @@ def verificar_num_decimal(numero_decimal):
             return False
     return int(numero_decimal)
 
-def converter_decimal_para_binario(numero_decimal):
+def converter_decimal_para_binario(numero_decimal, tirar_zeros_esq=True):
+    numero_decimal = int(numero_decimal)
     valor_binario = ''
     while numero_decimal != 0:
         valor_binario = str(numero_decimal % 2) + valor_binario
         numero_decimal = int(numero_decimal / 2)
+    
+    if tirar_zeros_esq:
+        return tirar_zeros_a_esquerda(valor_binario)
     return valor_binario
 
-def converter_decimal_para_octal(numero_decimal):
+def converter_decimal_para_octal(numero_decimal, tirar_zeros_esq=True):
+    numero_decimal = int(numero_decimal)
     valor_octal = ''
     while numero_decimal != 0:
         valor_octal = str(numero_decimal % 8) + valor_octal
         numero_decimal = int(numero_decimal / 8)
+    
+    if tirar_zeros_esq:
+        valor_octal = tirar_zeros_a_esquerda(valor_octal)
     return valor_octal
 
-def converter_decimal_para_hexadecimal(numero_decimal):
+def converter_decimal_para_hexadecimal(numero_decimal, tirar_zeros_esq=True):
+    numero_decimal = int(numero_decimal)
     valor_hexadecimal = ''
     while numero_decimal != 0:
         valor_hexadecimal = dicionario_hexa_decimal[numero_decimal % 16] + valor_hexadecimal
         numero_decimal = int(numero_decimal / 16)
+    
+    if tirar_zeros_esq:
+        return tirar_zeros_a_esquerda(valor_hexadecimal)
     return valor_hexadecimal
 
 
@@ -108,27 +127,34 @@ def verificar_num_bin(numero_binario):
             return False
     return True
 
-def converter_binario_para_octal(numero_binario):
+def converter_binario_para_octal(numero_binario, tirar_zeros_esq=True):
     numero_octal = ''
     numero_binario = '0' * ((3 - len(numero_binario) % 3) % 3) + numero_binario
     for i in range(2, len(numero_binario), 3):
         numero_octal += dicionario_octal_bin[numero_binario[i-2] + numero_binario[i-1] + numero_binario[i]]
+    
+    if tirar_zeros_esq:
+        return tirar_zeros_a_esquerda(numero_octal)
     return numero_octal
 
-def converter_binario_para_decimal(numero_binario):
+def converter_binario_para_decimal(numero_binario, tirar_zeros_esq=True):
     numero_decimal = 0
     numero_binario = reversed(numero_binario)  # Inverter o número para começar da direita para a esquerda (da menor base para a maior).
     for potencia, digito in enumerate(numero_binario):
         if int(digito) < 0 or int(digito) > 1:  # O numero lido não é um número binário.
             return False
         numero_decimal += int(digito) * 2 ** potencia
+
     return numero_decimal
 
-def converter_binario_para_hexadecimal(numero_binario):
+def converter_binario_para_hexadecimal(numero_binario, tirar_zeros_esq=True):
     numero_hexadecimal = ''
     numero_binario = '0' * ((4 - len(numero_binario) % 4) % 4) + numero_binario
     for i in range(3, len(numero_binario), 4):
         numero_hexadecimal += dicionario_hexa_bin[numero_binario[i-3] + numero_binario[i-2] + numero_binario[i-1] + numero_binario[i]]
+    
+    if tirar_zeros_esq:
+        return tirar_zeros_a_esquerda(numero_hexadecimal.strip())
     return numero_hexadecimal
 
 
@@ -142,29 +168,33 @@ def verificar_num_octal(numero_octal):
             return False
     return True
 
-def converter_octal_para_binario(numero_octal, tirar_zeros_esquerda=True):
+def converter_octal_para_binario(numero_octal, tirar_zeros_esq=True):
     numero_binario = ''
     for digito_octal in numero_octal:
         numero_binario += dicionario_octal_bin[digito_octal]
     
-    if tirar_zeros_esquerda:
-        numero_binario = numero_binario.lstrip('0')
-        if not numero_binario:  # Tirou todos os 0 existentes (colocar apenas um para não retornar uma string vazia)
-            numero_binario = '0'
+    if tirar_zeros_esq:
+        return tirar_zeros_a_esquerda(numero_binario)
     return numero_binario
 
-def converter_octal_para_decimal(numero_octal):
+def converter_octal_para_decimal(numero_octal, tirar_zeros_esq=True):
     numero_decimal = 0
     numero_octal = reversed(numero_octal)
     for potencia, digito in enumerate(numero_octal):
         if int(digito) < 0 or int(digito) > 7:
             return False
         numero_decimal += int(digito) * 8 ** potencia
+    
+    if tirar_zeros_esq:
+        return int(tirar_zeros_a_esquerda(str(numero_decimal)))
     return numero_decimal
 
-def converter_octal_para_hexadecimal(numero_octal):
+def converter_octal_para_hexadecimal(numero_octal, tirar_zeros_esqa=True):
     numero_binario = converter_octal_para_binario(numero_octal)
-    return converter_binario_para_hexadecimal(numero_binario)
+    numero_octal = converter_binario_para_hexadecimal(numero_binario)
+    if tirar_zeros_esqa:
+        return tirar_zeros_a_esquerda(numero_octal)
+    return numero_octal
 
 
 def verificar_num_hexadecimal(numero_hexadecimal):
@@ -177,18 +207,16 @@ def verificar_num_hexadecimal(numero_hexadecimal):
             return False
     return True
 
-def converter_hexadecimal_para_binario(numero_hexadecimal, tirar_zeros_esquerda=True):
+def converter_hexadecimal_para_binario(numero_hexadecimal, tirar_zeros_esq=True):
     numero_binario = ''
     for digito_hexa in numero_hexadecimal.upper():
         numero_binario += dicionario_hexa_bin[digito_hexa]
     
-    if tirar_zeros_esquerda:
-        numero_binario = numero_binario.lstrip('0')
-        if not numero_binario:
-            numero_binario = '0'
+    if tirar_zeros_esq:
+        return tirar_zeros_a_esquerda(numero_binario)
     return numero_binario
 
-def converter_hexadecimal_para_decimal(numero_hexadecimal):
+def converter_hexadecimal_para_decimal(numero_hexadecimal, tirar_zeros_esq=True):
     numero_hexadecimal = numero_hexadecimal.upper()
     numero_decimal = 0
     numero_hexadecimal = reversed(numero_hexadecimal)
@@ -197,8 +225,15 @@ def converter_hexadecimal_para_decimal(numero_hexadecimal):
             numero_decimal += dicionario_hexa_decimal[digito] * 16 ** potencia
         except:
             return False
+    
+    if tirar_zeros_esq:
+        return int(tirar_zeros_a_esquerda(str(numero_decimal)))
     return numero_decimal
 
-def converter_hexadecimal_para_octal(numero_hexadecimal):
+def converter_hexadecimal_para_octal(numero_hexadecimal, tirar_zeros_esq=True):
     numero_binario = converter_hexadecimal_para_binario(numero_hexadecimal.upper())
-    return converter_binario_para_octal(numero_binario)
+    numero_hexa = converter_binario_para_octal(numero_binario)
+    
+    if tirar_zeros_esq:
+        return tirar_zeros_a_esquerda(numero_hexa)
+    return numero_hexa

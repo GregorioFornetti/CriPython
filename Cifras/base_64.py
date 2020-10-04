@@ -89,7 +89,7 @@ def codif2_base_64(texto):
     while i < tamanho_codigo_hex:
         bloco_bin_atual = ''
         for j in range(5, -1, -1):
-            bloco_bin_atual += bases_numericas.converter_hexadecimal_para_binario(codigo_hex_texto[i - j], tirar_zeros_esquerda=False)
+            bloco_bin_atual += bases_numericas.converter_hexadecimal_para_binario(codigo_hex_texto[i - j], tirar_zeros_esq=False)
         
         for j in range(4):
             codigo_base64 += dicionario_base_64[bloco_bin_atual[j * 6:(j + 1) * 6]]
@@ -98,13 +98,13 @@ def codif2_base_64(texto):
     if restante == 3:
         codigo_bin_final = ''
         for j in range(tamanho_codigo_hex - 2, tamanho_codigo_hex):
-            codigo_bin_final += bases_numericas.converter_hexadecimal_para_binario(codigo_hex_texto[j], tirar_zeros_esquerda=False)
+            codigo_bin_final += bases_numericas.converter_hexadecimal_para_binario(codigo_hex_texto[j], tirar_zeros_esq=False)
         codigo_bin_final += '0000'
         codigo_base64 += dicionario_base_64[codigo_bin_final[:6]] + dicionario_base_64[codigo_bin_final[6:]] + '=='
     elif restante == 1:
         codigo_bin_final = ''
         for j in range(tamanho_codigo_hex - 4, tamanho_codigo_hex):
-            codigo_bin_final += bases_numericas.converter_hexadecimal_para_binario(codigo_hex_texto[j], tirar_zeros_esquerda=False)
+            codigo_bin_final += bases_numericas.converter_hexadecimal_para_binario(codigo_hex_texto[j], tirar_zeros_esq=False)
         codigo_bin_final += '00'
         codigo_base64 += dicionario_base_64[codigo_bin_final[:6]] + dicionario_base_64[codigo_bin_final[6:12]] + dicionario_base_64[codigo_bin_final[12:]] + '='
     return codigo_base64

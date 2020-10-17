@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 import Menus.utilidades_menus as utilidades_menus
 import Utilitarios.forca_bruta_cesar as forca_bruta_cesar
 import Utilitarios.adivinhador_cesar as adivinhador_cesar
+import Utilitarios.base64_arquivos as base64_arquivos
 import Cifras.bases_numericas as bases_numericas
 import dicionarios
 
@@ -27,6 +28,14 @@ def retorna_layout_calculadora_bases_numericas():
             utilidades_menus.retorna_layout_opçoes_em_radio(lista_opcoes, conexao='radio2'),
             [sg.Text(dic_textos['Numero']), sg.Input(key='mensagem')],
             [sg.Output(key='output', size=(75,25))],
+            utilidades_menus.retorna_layout_botoes_utilitarios_padrao(dic_textos)]
+
+def retorna_layout_encoding_base64():
+    dic_textos = dicionarios.retorna_menu_utilitario()
+    return [[sg.Text(dic_textos['Encoding base64'])],
+            [sg.Text(dic_textos['Mensagem encoding base64'])],
+            [sg.Output(key='output', size=(75, 25))],
+            [sg.FileBrowse(dic_textos['pesquisar'], key='arquivo', target='texto'), sg.Text(dic_textos['sem arquivo'], key='texto')],
             utilidades_menus.retorna_layout_botoes_utilitarios_padrao(dic_textos)]
 
 def executar_menu_utilitarios(titulo, dicionario_funcoes, tela_anterior, layout_utilitario):
@@ -114,3 +123,18 @@ def menu_conversor_bases_numericas(tela_anterior):
                             numero_convertido = bases_numericas.tirar_zeros_a_esquerda(numero_digitado)
                         break
             print(dicionarios.retorna_mensagem_com_bordas(numero_convertido, 127))
+
+def menu_encoding_arquivos_base64(tela_anterior):
+    titulo = 'Encoding arquivos base64'
+    layout = retorna_layout_encoding_base64()
+    tela_encoding_base64 = sg.Window(titulo, layout)
+    while True:
+        evento, valores = tela_encoding_base64.read()
+        if evento in ('retornar', None):
+            utilidades_menus.voltar_para_tela_anterior(tela_anterior, tela_encoding_base64)
+            break
+        utilidades_menus.verificar_eventos_gerais(titulo, evento, tela_encoding_base64)
+
+        if evento == 'executar':
+            print(valores['arquivo'])
+            print(dicionarios.retorna_mensagem_com_bordas(base64_arquivos.encoding_base64_arquivos(valores['arquivo']),127))

@@ -113,9 +113,9 @@ def retorna_lista_cifras_com_chaves():
 
 def retorna_lista_utilitarios(coletar_port=False):
     if idioma == 'Portugues' or coletar_port:
-        return ['Força bruta César', 'Adivinhador César', 'Conversor bases numéricas']
+        return ['Força bruta César', 'Adivinhador César', 'Conversor bases numéricas', 'Codificador de arquivos para base64']
     else:
-        return ['Brute force Caesar', 'Caesar guess',  'Numeral systems conversor']
+        return ['Brute force Caesar', 'Caesar guess',  'Numeral systems conversor', 'File encoding to base64']
 
 
 def retorna_menu_encript_traduc_utilitarios():
@@ -205,6 +205,7 @@ def retorna_menu_utilitario():
         return {'Força bruta César': 'Força bruta César',
                 'Adivinhador César': 'Adivinhador César',
                 'Conversor bases numéricas': 'Conversor bases numéricas',
+                'Encoding base64': 'Codificador de arquivos para base64',
 
                 'Mensagem Força bruta César':'''
                 Escolha uma opção e escreva uma mensagem encriptada pela cifra de César.
@@ -220,6 +221,9 @@ def retorna_menu_utilitario():
                 Diferente da cifra de "bases numéricas", aqui você fará as conversões de uma
                 base númerica para outra (ao invés de converter o UNICODE de um texto para uma
                 base numérica).''',
+                'Mensagem encoding base64': '''
+                Clique em "selecionar arquivo" e escolha um arquivo para converter ele para
+                um texto codificado em base64 !''',
 
                 'Opções': 'Opções:',
                 'Mensagem encriptada': 'Mensagem encriptada:',
@@ -227,6 +231,8 @@ def retorna_menu_utilitario():
                 'Converter de': 'Converter de',
                 'Para': 'Para:',
                 'Numero': 'Numero:',
+                'pesquisar': 'Selecionar arquivo',
+                'sem arquivo': 'Nenhum arquivo foi selecionado ainda !',
                 'Abrir wiki': 'Abrir wiki',
                 'Limpar tela': 'Limpar tela',
                 'Retornar': 'Retornar'}
@@ -234,6 +240,7 @@ def retorna_menu_utilitario():
         return {'Força bruta César': 'Brute force Caesar',
                 'Adivinhador César': 'Caesar guess',
                 'Conversor bases numéricas': 'Numeral systems conversor',
+                'Encoding base64': 'File encoding to base64',
 
                 'Mensagem Força bruta César': '''
                 Choose an option and write a text encrypted by the Caesar Cipher.
@@ -249,11 +256,15 @@ def retorna_menu_utilitario():
                 Unlike the "Numeral systems" cipher, here you will make the conversions
                 of a numeral system to another instead of converting the text UNICODE values
                 to another numeral system.''',
+                'Mensagem encoding base64': '''
+                Click in "select file" and choose a file to convert to base64 !''',
                 
                 'Opções': 'Options:',
                 'Converter de': 'Convert from',
                 'Para': 'To:',
                 'Numero': 'Number:',
+                'pesquisar': 'Select file',
+                'sem arquivo': 'No file have been selected yet!',
                 'Mensagem encriptada': 'Ciphertext:',
                 'Executar': 'Execute',
                 'Abrir wiki': 'Open wiki',
@@ -308,6 +319,12 @@ def retorna_erro_numero_invalido():
         return 'Número inválido'
     else:
         return 'Invalid number'
+
+def retorna_erro_arquivo():
+    if idioma == 'Portugues':
+        return 'Arquivo não selecionado ou inválido !'
+    else:
+        return 'Not selected or invalid file !'
 
 def retorna_mensagens_forca_bruta_cesar(chave, mensagem_traduzida):
     if idioma == 'Portugues':

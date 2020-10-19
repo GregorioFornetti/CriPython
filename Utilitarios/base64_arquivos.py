@@ -2,7 +2,6 @@ import dicionarios
 import Cifras.base_64 as base_64
 import Cifras.bases_numericas as bases_numericas
 import os
-import base64
 
 def encoding_base64_arquivos(endereco_arquivo):
     try:
@@ -48,8 +47,7 @@ def decoding_base64_arquivos(endereco_arquivo, dados):
     with open(endereco_arquivo, 'wb') as arquivo:
         texto_bin = decoding_base64(dados)
         if not texto_bin:
+            os.remove(endereco_arquivo)
             return dicionarios.retorna_mensagem_erro_salvar()
         arquivo.write(texto_bin)
         return dicionarios.retorna_mensagem_sucesso_salvar()
-    return dicionarios.retorna_mensagem_erro_salvar()
-

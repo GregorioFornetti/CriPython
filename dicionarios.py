@@ -120,9 +120,6 @@ def retorna_lista_utilitarios(coletar_port=False):
     else:
         return ['Brute force Caesar', 'Caesar guess',  'Numeral systems conversor', 'File encoding to base64',
                 'Base64 text decoding to file']
-        return ['Força bruta César', 'Adivinhador César', 'Conversor bases numéricas', 'Codificador de arquivos para base64']
-    else:
-        return ['Brute force Caesar', 'Caesar guess',  'Numeral systems conversor', 'File encoding to base64']
 
 
 def retorna_menu_encript_traduc_utilitarios():

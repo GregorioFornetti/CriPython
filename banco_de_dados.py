@@ -33,6 +33,27 @@ def criar_banco_de_dados_se_ainda_nao_existir():
         db.close()
 
 
+def restaurar_padrao():
+    # Voltar o banco de dados para suas configurações iniciais
+    global idioma_configurado
+    global tema_configurado
+    db = sqlite3.connect('configs.db')
+    banco_de_dados = db.cursor()
+    banco_de_dados.execute('UPDATE opcoes SET escolha = "DarkGrey5" WHERE opcao = "tema"')
+    tema_configurado = 'DarkGrey5'
+    sg.theme('DarkGrey5')
+    banco_de_dados.execute('UPDATE opcoes SET escolha = "Portugues" WHERE opcao = "idioma"')
+    idioma_configurado = 'Portugues'
+    dicionarios.atualizar_idioma('Portugues')
+
+
+    for cifra, modos in dicionarios.criptografias_disponiveis.items():
+        for modo in modos:
+            banco_de_dados.execute('UPDATE chaves_padroes SET chave = ""')
+    db.commit()
+    db.close()
+    return 'Configurações restauradas !'
+
 def tentar_salvar_chave_padrao(titulos_cifras, dic_opcoes, banco_de_dados, funcao_verificadora_de_chave):
     if dic_opcoes[titulos_cifras[0]]:
         lista_chaves = []
@@ -71,7 +92,7 @@ def aplicar_novas_configuracoes(dic_opcoes):
 
     if dic_opcoes['tema'][0] != tema_configurado:  # Definindo o novo tema escrito pelo usuario
         tema_configurado = dic_opcoes['tema'][0]
-        sg.theme(dic_opcoes['tema'][0])  # Aplicar novo tema.
+        sg.theme(tema_configurado)  # Aplicar novo tema.
         banco_de_dados.execute('UPDATE opcoes SET escolha = ? WHERE opcao = "tema"', dic_opcoes['tema'])
         mensagem += dicionarios.retorna_mensagem_temas(tema_configurado)
     

@@ -29,6 +29,24 @@ def retorna_layout_calculadora_bases_numericas():
             [sg.Output(key='output', size=(75,25))],
             utilidades_menus.retorna_layout_botoes_utilitarios_padrao(dic_textos)]
 
+def retorna_layout_encoding_base64():
+    dic_textos = dicionarios.retorna_menu_utilitario()
+    return [[sg.Text(dic_textos['Encoding base64'])],
+            [sg.Text(dic_textos['Mensagem encoding base64'])],
+            [sg.Output(key='output', size=(75, 25))],
+            [sg.FileBrowse(dic_textos['pesquisar'], key='arquivo', target='texto'), sg.Text(dic_textos['sem arquivo'], key='texto')],
+            utilidades_menus.retorna_layout_botoes_utilitarios_padrao(dic_textos)]
+
+
+def retorna_layout_decoding_base64():
+    dic_textos = dicionarios.retorna_menu_utilitario()
+    return [[sg.Text(dic_textos['Decoding base64'])],
+            [sg.Text(dic_textos['Mensagem decoding base64'])],
+            [sg.Text(dic_textos['Codigo base64']), sg.Input(key='cod_base64')],
+            [sg.Output(key='output', size=(25, 25))],
+            [sg.SaveAs(dic_textos['salvar como'], key='arquivo', target='texto'), sg.Text(dic_textos['sem arquivo'], key='texto')],
+            utilidades_menus.retorna_layout_botoes_utilitarios_padrao(dic_textos)]
+
 def executar_menu_utilitarios(titulo, dicionario_funcoes, tela_anterior, layout_utilitario):
     tela_utilitario = sg.Window(titulo, layout_utilitario)
     while True:
@@ -114,3 +132,31 @@ def menu_conversor_bases_numericas(tela_anterior):
                             numero_convertido = bases_numericas.tirar_zeros_a_esquerda(numero_digitado)
                         break
             print(dicionarios.retorna_mensagem_com_bordas(numero_convertido, 127))
+
+def menu_encoding_arquivos_base64(tela_anterior):
+    titulo = 'Encoding arquivos base64'
+    layout = retorna_layout_encoding_base64()
+    tela_encoding_base64 = sg.Window(titulo, layout)
+    while True:
+        evento, valores = tela_encoding_base64.read()
+        if evento in ('retornar', None):
+            utilidades_menus.voltar_para_tela_anterior(tela_anterior, tela_encoding_base64)
+            break
+        utilidades_menus.verificar_eventos_gerais(titulo, evento, tela_encoding_base64)
+
+        if evento == 'executar':
+            print(dicionarios.retorna_mensagem_com_bordas(base64_arquivos.encoding_base64_arquivos(valores['arquivo']),127))
+
+def menu_decoding_arquivos_base64(tela_anterior):
+    titulo = 'Decoding arquivos base64'
+    layout = retorna_layout_decoding_base64()
+    tela_decoding_base64 = sg.Window(titulo, layout)
+    while True:
+        evento, valores = tela_decoding_base64.read()
+        if evento in ('retornar', None):
+            utilidades_menus.voltar_para_tela_anterior(tela_anterior, tela_decoding_base64)
+            break
+        utilidades_menus.verificar_eventos_gerais(titulo, evento, tela_decoding_base64)
+
+        if evento == 'executar':
+            print(dicionarios.retorna_mensagem_com_bordas(base64_arquivos.decoding_base64_arquivos(valores['arquivo'], valores['cod_base64']),127))

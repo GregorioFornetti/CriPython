@@ -5,9 +5,12 @@ import dicionarios
 dic_links = {'Cifra de César':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-C%C3%A9sar',
              'Substituição simples':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-substitui%C3%A7%C3%A3o-simples',
              'Cifra de Vigenère':'https://github.com/GregorioFornetti/Programa-criptografia/wiki/Cifra-de-Vigen%C3%A8re',
+             'UTF-8': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/UTF-8',
+             'Base 64': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Base64',
              'Bases numéricas': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Bases-num%C3%A9ricas',
              'Força bruta César': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/For%C3%A7a-bruta-C%C3%A9sar',
              'Adivinhador César': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Adivinhador-C%C3%A9sar',
+             'Conversor bases numéricas': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Conversor-bases-num%C3%A9ricas',
              'Wiki':'https://github.com/GregorioFornetti/Cripythongrafia/wiki',
              'Opcoes':'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Op%C3%A7%C3%B5es-do-menu#4--op%C3%A7%C3%B5es'}
 

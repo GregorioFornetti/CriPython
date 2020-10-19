@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 import Menus.utilidades_menus as utilidades_menus
 import Utilitarios.forca_bruta_cesar as forca_bruta_cesar
 import Utilitarios.adivinhador_cesar as adivinhador_cesar
+import Utilitarios.base64_arquivos as base64_arquivos
 import Cifras.bases_numericas as bases_numericas
 import Utilitarios.base64_arquivos as base64_arquivos
 import dicionarios

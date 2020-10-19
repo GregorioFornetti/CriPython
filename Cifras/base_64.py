@@ -81,8 +81,8 @@ def transformar_textoBase64_em_codigo_binario(texto):
                 return False
     return string_binario
 
-def codif2_base_64(texto):
-    codigo_hex_texto = bytes(texto, encoding='utf-8').hex().upper()
+def codificar_arquivo_base_64(arquivo_bin):
+    codigo_hex_texto = arquivo_bin.hex().upper()
     codigo_base64 = ''
     tamanho_codigo_hex = len(codigo_hex_texto)
     i = 5
@@ -108,4 +108,3 @@ def codif2_base_64(texto):
         codigo_bin_final += '00'
         codigo_base64 += dicionario_base_64[codigo_bin_final[:6]] + dicionario_base_64[codigo_bin_final[6:12]] + dicionario_base_64[codigo_bin_final[12:]] + '='
     return codigo_base64
-

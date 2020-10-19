@@ -120,6 +120,9 @@ def retorna_lista_utilitarios(coletar_port=False):
     else:
         return ['Brute force Caesar', 'Caesar guess',  'Numeral systems conversor', 'File encoding to base64',
                 'Base64 text decoding to file']
+        return ['Força bruta César', 'Adivinhador César', 'Conversor bases numéricas', 'Codificador de arquivos para base64']
+    else:
+        return ['Brute force Caesar', 'Caesar guess',  'Numeral systems conversor', 'File encoding to base64']
 
 
 def retorna_menu_encript_traduc_utilitarios():
@@ -226,6 +229,9 @@ def retorna_menu_utilitario():
                 Diferente da cifra de "bases numéricas", aqui você fará as conversões de uma
                 base númerica para outra (ao invés de converter o UNICODE de um texto para uma
                 base numérica).''',
+                'Mensagem encoding base64': '''
+                Clique em "selecionar arquivo" e escolha um arquivo para converter ele para
+                um texto codificado em base64 !''',
 
                 'Mensagem encoding base64': '''
                 Clique em "selecionar arquivo" e escolha um arquivo para converter ele para
@@ -280,6 +286,8 @@ def retorna_menu_utilitario():
                 Write a base64 text and click in "Save as" and choose a folder, name and extension
                 of the file. After clicking the "execute" button, the base64 text will be decoded to
                 a file.''',
+                'Mensagem encoding base64': '''
+                Click in "select file" and choose a file to convert to base64 !''',
                 
                 'Opções': 'Options:',
                 'Converter de': 'Convert from',
@@ -288,6 +296,7 @@ def retorna_menu_utilitario():
                 'Codigo base64': 'Base64 text:',
                 'pesquisar': 'Select file',
                 'salvar como': 'Save as...',
+                'pesquisar': 'Select file',
                 'sem arquivo': 'No file have been selected yet!',
                 'Mensagem encriptada': 'Ciphertext:',
                 'Executar': 'Execute',

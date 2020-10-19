@@ -4,7 +4,7 @@ import dicionarios
 
 # BASE_64
 def test_base64_7bits():
-    assert base_64.codif2_base_64('a') == 'YQ=='
+    assert base_64.codificar_base_64('a') == 'YQ=='
     assert base_64.traduzir_base_64('YQ==') == 'a'
 
 def test_base64_11bits():
@@ -42,7 +42,7 @@ def test_base64_texto_grande_2():
     ) == 'Agora cóm cáráctérés especiais. Bóra téstár... Máx 11 bits... ¥©Ȍɬ... Será que vai ?'
 
 def test_base64_texto_grande_3():
-    assert base_64.codif2_base_64(
+    assert base_64.codificar_base_64(
     'Agórá cóm máis caractéres espécias !! Máx 16 bits - ౻óaU౻౻ႫaáoíႫჇჇaí'
     ) == 'QWfDs3LDoSBjw7NtIG3DoWlzIGNhcmFjdMOpcmVzIGVzcMOpY2lhcyAhISBNw6F4IDE2IGJpdHMgLSDgsbvDs2FV4LG74LG74YKrYcOhb8Ot4YKr4YOH4YOHYcOt'
     assert base_64.traduzir_base_64(
@@ -50,10 +50,10 @@ def test_base64_texto_grande_3():
     ) == 'Agórá cóm máis caractéres espécias !! Máx 16 bits - ౻óaU౻౻ႫaáoíႫჇჇaí'
 
 def test_base64_texto_grande_4():
-    with open('teste_longo_base_64.txt', 'r', encoding='utf-8') as arquivo_teste:
+    with open('Arquivos_teste/teste_longo_base_64.txt', 'r', encoding='utf-8') as arquivo_teste:
         texto_teste = arquivo_teste.read().split('\n')
         texto_normal = texto_teste[0]
         texto_encriptado = texto_teste[1]
     
-    assert base_64.codif2_base_64(texto_normal) == texto_encriptado
+    assert base_64.codificar_base_64(texto_normal) == texto_encriptado
     assert base_64.traduzir_base_64(texto_encriptado) == texto_normal

@@ -31,23 +31,15 @@ def retorna_layout_calculadora_bases_numericas():
             [sg.Output(key='output', size=(75,25))],
             utilidades_menus.retorna_layout_botoes_utilitarios_padrao(dic_textos)]
 
-def retorna_layout_encoding_base64():
+def retorna_layout_padrao_base64_arquivos(titulo):
     dic_textos = dicionarios.retorna_menu_utilitario()
-    return [[sg.Text(dic_textos['Encoding base64'])],
-            [sg.Text(dic_textos['Mensagem encoding base64'])],
-            [sg.Output(key='output', size=(75, 25))],
-            [sg.FileBrowse(dic_textos['pesquisar'], key='arquivo', target='texto'), sg.Text(dic_textos['sem arquivo'], key='texto')],
+    return [[sg.Text(dic_textos[titulo])],
+            [sg.Text(dic_textos[f'Mensagem {titulo}'])],
+            [sg.Output(key='output', size=(75, 15))],
+            [sg.FileBrowse(dic_textos['pesquisar'], key='pesquisa', target='texto-pesq'), sg.Text(dic_textos['sem arquivo'], key='texto-pesq', size=(50, 3))],
+            [sg.SaveAs(dic_textos['salvar como'], key='salvar', target='texto-salvar'), sg.Text(dic_textos['sem arquivo'], key='texto-salvar', size=(50, 3))],
             utilidades_menus.retorna_layout_botoes_utilitarios_padrao(dic_textos)]
 
-
-def retorna_layout_decoding_base64():
-    dic_textos = dicionarios.retorna_menu_utilitario()
-    return [[sg.Text(dic_textos['Decoding base64'])],
-            [sg.Text(dic_textos['Mensagem decoding base64'])],
-            [sg.Text(dic_textos['Codigo base64']), sg.Input(key='cod_base64')],
-            [sg.Output(key='output', size=(25, 25))],
-            [sg.SaveAs(dic_textos['salvar como'], key='arquivo', target='texto'), sg.Text(dic_textos['sem arquivo'], key='texto')],
-            utilidades_menus.retorna_layout_botoes_utilitarios_padrao(dic_textos)]
 
 def executar_menu_utilitarios(titulo, dicionario_funcoes, tela_anterior, layout_utilitario):
     tela_utilitario = sg.Window(titulo, layout_utilitario)
@@ -136,8 +128,8 @@ def menu_conversor_bases_numericas(tela_anterior):
             print(dicionarios.retorna_mensagem_com_bordas(numero_convertido, 127))
 
 def menu_encoding_arquivos_base64(tela_anterior):
-    titulo = 'Encoding arquivos base64'
-    layout = retorna_layout_encoding_base64()
+    titulo = 'Encoding base64'
+    layout = retorna_layout_padrao_base64_arquivos(titulo)
     tela_encoding_base64 = sg.Window(titulo, layout)
     while True:
         evento, valores = tela_encoding_base64.read()
@@ -147,11 +139,20 @@ def menu_encoding_arquivos_base64(tela_anterior):
         utilidades_menus.verificar_eventos_gerais(titulo, evento, tela_encoding_base64)
 
         if evento == 'executar':
-            print(dicionarios.retorna_mensagem_com_bordas(base64_arquivos.encoding_base64_arquivos(valores['arquivo']),127))
+            resultado = base64_arquivos.encoding_base64_arquivos(valores['pesquisa'])
+            if not resultado:
+                print(dicionarios.retorna_erro_arquivo())
+                continue
+            try:
+                with open(valores['salvar'], 'w') as arquivo:
+                    arquivo.write(resultado)
+                print(dicionarios.retorna_mensagem_sucesso_salvar())
+            except:
+                print(dicionarios.retorna_mensagem_erro_salvar())
 
 def menu_decoding_arquivos_base64(tela_anterior):
-    titulo = 'Decoding arquivos base64'
-    layout = retorna_layout_decoding_base64()
+    titulo = 'Decoding base64'
+    layout = retorna_layout_padrao_base64_arquivos(titulo)
     tela_decoding_base64 = sg.Window(titulo, layout)
     while True:
         evento, valores = tela_decoding_base64.read()
@@ -161,4 +162,9 @@ def menu_decoding_arquivos_base64(tela_anterior):
         utilidades_menus.verificar_eventos_gerais(titulo, evento, tela_decoding_base64)
 
         if evento == 'executar':
-            print(dicionarios.retorna_mensagem_com_bordas(base64_arquivos.decoding_base64_arquivos(valores['arquivo'], valores['cod_base64']),127))
+            try:
+                with open(valores['pesquisa'], 'r') as arquivo:
+                    cod_base64 = arquivo.read()
+                print(base64_arquivos.decoding_base64_arquivos(valores['salvar'], cod_base64))
+            except:
+                print(dicionarios.retorna_erro_arquivo())

@@ -89,8 +89,8 @@ def retorna_layout_opcoes(opcoes_cifras):
 
     layout_opcoes.append([sg.Frame(dic_textos['chaves padroes'], layout=subdivisao_chaves_padroes_cifras)])
     layout_opcoes.append([sg.Output(size=(100,10))])
-    layout_opcoes.append([sg.Button(dic_textos['retornar'], key='retornar'), sg.Button(dic_textos['aplicar'], key='aplicar'),
-                          sg.Button(dic_textos['restaurar'], key='restaurar'), sg.Button(dic_textos['ajuda'], key='link')])
+    layout_opcoes.append([sg.Button(dic_textos['aplicar'], key='aplicar'), sg.Button(dic_textos['restaurar'], key='restaurar'),
+                          sg.Button(dic_textos['ajuda'], key='link'), sg.Button(dic_textos['retornar'], key='retornar')])
     return layout_opcoes
 
 

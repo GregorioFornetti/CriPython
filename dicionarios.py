@@ -22,7 +22,7 @@ def retorna_menu_opcoes():
                 'cifras': 'Cifras:',
                 'modos': criptografias_disponiveis,
                 'chaves padroes': 'Chaves padrões cifras',
-                'restaurar': 'Restaurar',
+                'restaurar': 'Restaurar configurações',
                 'retornar': 'Retornar',
                 'aplicar': 'Aplicar',
                 'ajuda': 'Ajuda'}
@@ -33,7 +33,7 @@ def retorna_menu_opcoes():
                 'cifras': 'Ciphers:',
                 'modos': dic_criptografias_eng ,
                 'chaves padroes': 'Default keys',
-                'restaurar': 'Restore',
+                'restaurar': 'Reset settings',
                 'retornar': 'Return',
                 'aplicar': 'Apply',
                 'ajuda': 'Help'}
@@ -226,17 +226,16 @@ def retorna_menu_utilitario():
                 Diferente da cifra de "bases numéricas", aqui você fará as conversões de uma
                 base númerica para outra (ao invés de converter o UNICODE de um texto para uma
                 base numérica).''',
-                'Mensagem encoding base64': '''
-                Clique em "selecionar arquivo" e escolha um arquivo para converter ele para
-                um texto codificado em base64 !''',
 
-                'Mensagem encoding base64': '''
-                Clique em "selecionar arquivo" e escolha um arquivo para converter ele para
-                um texto codificado em base64 !''',
+                'Mensagem Encoding base64': '''
+                Clique em "selecionar arquivo" e escolha um arquivo para converter, depois clique em
+                "Salvar como..." e escolha um nome e um local para salvar o arquivo com o código base
+                64. OBS: é recomendado a utilização da extensão ".txt" para salvar o arquivo.''',
 
-                'Mensagem decoding base64':'''
-                Digite um texto codificado em base64, escolha um local, nome e extensão do arquivo
-                clicando em "salvar como". Ao clicar em executar, o seu texto base64 será convertido
+                'Mensagem Decoding base64':'''
+                Clique em "selecionar arquivo" e escolha um arquivo com o código base 64 a ser convertido,
+                escolha um local, nome e extensão do arquivo clicando em "salvar como". 
+                Ao clicar em executar, o seu texto base64 será convertido
                 para um arquivo. OBS: se você digitar um código base64 inválido ou escolher um formato
                 inválido, isso resultará em um arquivo corrompido.
                 ''',
@@ -276,15 +275,17 @@ def retorna_menu_utilitario():
                 of a numeral system to another instead of converting the text UNICODE values
                 to another numeral system.''',
 
-                'Mensagem encoding base64': '''
-                Click in "select file" and choose a file to convert to base64 !''',
+                'Mensagem Encoding base64': '''
+                Click in "select file" and choose a file to convert and click in "Save as..."
+                to choose a name and place to save the base64 encoded text. NOTE: it's recomended
+                to use the ".txt" extension to save the file.''',
 
-                'Mensagem decoding base64': '''
-                Write a base64 text and click in "Save as" and choose a folder, name and extension
-                of the file. After clicking the "execute" button, the base64 text will be decoded to
-                a file.''',
-                'Mensagem encoding base64': '''
-                Click in "select file" and choose a file to convert to base64 !''',
+                'Mensagem Decoding base64': '''
+                Click in "Select file" and choose a base64 text file and click in "Save as" 
+                and choose a folder, name and extensionof the file. After clicking
+                the "execute" button, the base64 text will be decoded to
+                a file. NOTE: if you enter an invalid base64 code or choose a 
+                invalid format, this will result in a corrupted file.''',
                 
                 'Opções': 'Options:',
                 'Converter de': 'Convert from',

@@ -9,7 +9,7 @@ def encoding_base64_arquivos(endereco_arquivo):
             texto_bin = arquivo.read()
             return base_64.codificar_arquivo_base_64(texto_bin)
     except:
-        return dicionarios.retorna_erro_arquivo()
+        return False
 
 def decoding_base64(texto_base64):
     texto_final = []

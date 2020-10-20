@@ -11,6 +11,8 @@ dic_links = {'Cifra de César':'https://github.com/GregorioFornetti/Programa-cri
              'Força bruta César': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/For%C3%A7a-bruta-C%C3%A9sar',
              'Adivinhador César': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Adivinhador-C%C3%A9sar',
              'Conversor bases numéricas': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Conversor-bases-num%C3%A9ricas',
+             'Encoding base64': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Base64---Encoding-de-arquivos',
+             'Decoding base64': 'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Base64-Decoding-de-arquivos',
              'Wiki':'https://github.com/GregorioFornetti/Cripythongrafia/wiki',
              'Opcoes':'https://github.com/GregorioFornetti/Cripythongrafia/wiki/Op%C3%A7%C3%B5es-do-menu#4--op%C3%A7%C3%B5es'}
 

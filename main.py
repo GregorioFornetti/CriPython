@@ -11,10 +11,12 @@ lista_utilitarios_disponiveis = ['Força bruta César', 'Adivinhador César']
 opcoes_cifras_port = dicionarios.retorna_lista_cifras(coletar_port=True)
 opcoes_utilitarios_port = dicionarios.retorna_lista_utilitarios(coletar_port=True)
 
+sg.set_global_icon('icon.ico')
+
 def main():
     # Layout da interface principal do programa.
     sg.theme(banco_de_dados.tema_configurado)
-    tela_principal = sg.Window('Cripythongraphy: Tela principal', retorna_layout_principal())  # Aplicar layout anterior e criar a janela.)
+    tela_principal = sg.Window('CriPython: Tela principal', retorna_layout_principal())  # Aplicar layout anterior e criar a janela.)
     while True:  # Loop que verifica as interações do usuários com o menu principal.
         evento, valores = tela_principal.read()
         if evento in ('6', None):
@@ -37,7 +39,7 @@ def main():
             # Iniciar interface "opções"
             tela_principal.Close()
             menu_opcoes()
-            tela_principal = sg.Window('Cripythongraphy: Tela principal', retorna_layout_principal())
+            tela_principal = sg.Window('CriPython: Tela principal', retorna_layout_principal())
         if evento == '5':
             # Abrir wiki ajuda
             webbrowser.open(utilidades_menu.dic_links['Wiki'])
@@ -45,21 +47,21 @@ def main():
 
 def retorna_layout_principal():
     dic_textos = dicionarios.retorna_menu_principal()
-    layout_principal =  [[sg.Text(' ' * 7 + dic_textos['titulo'])],
-                        [sg.Button(dic_textos['opcao 1'], key='1')],
-                        [sg.Button(dic_textos['opcao 2'], key='2')],
-                        [sg.Button(dic_textos['opcao 3'], key='3')],
-                        [sg.Button(dic_textos['opcao 4'], key='4')],
-                        [sg.Button(dic_textos['opcao 5'], key='5')],
-                        [sg.Button(dic_textos['opcao 6'], key='6')]]
+    layout_principal =  [[sg.Image('LogoCriPython.png')],
+                        [sg.Button(dic_textos['opcao 1'], key='1', font=('Helvetica', 13), size=(36, 2))],
+                        [sg.Button(dic_textos['opcao 2'], key='2', font=('Helvetica', 13), size=(36, 2))],
+                        [sg.Button(dic_textos['opcao 3'], key='3', font=('Helvetica', 13), size=(36, 2))],
+                        [sg.Button(dic_textos['opcao 4'], key='4', font=('Helvetica', 13), size=(36, 2))],
+                        [sg.Button(dic_textos['opcao 5'], key='5', font=('Helvetica', 13), size=(36, 2))],
+                        [sg.Button(dic_textos['opcao 6'], key='6', font=('Helvetica', 13), size=(36, 2))]]
     return layout_principal
 
 
 def retorna_layout_botoes_enumerados(titulo, dic_textos, lista_opcoes, lista_chaves):  # Por padrao, a lista de chaves será as opcoes em portugues
-    layout = [[sg.Text(dic_textos[titulo])]]
+    layout = [[sg.Image('LogoCriPython.png')]]
     for n, opcao in enumerate(lista_opcoes):
-        layout.append([sg.Button(f'{n + 1} - {opcao}', key=lista_chaves[n])])
-    layout.append([sg.Button(dic_textos['Retornar'], key='retornar')])
+        layout.append([sg.Button(f'{opcao}', key=lista_chaves[n], font=('Helvetica', 13), size=(36, 2))])
+    layout.append([sg.Button(dic_textos['Retornar'], key='retornar', font=('Helvetica', 13), size=(36, 2))])
     return layout
 
 
@@ -108,7 +110,7 @@ def executar_menu(titulo, dicionario_funcoes, tela_anterior, layout):
 
 
 def menu_encriptar(tela_anterior):
-    titulo = 'Cripythongraphy: Encriptação'
+    titulo = 'CriPython: Encriptação'
     layout_encriptar = retorna_layout_botoes_enumerados(titulo, 
                                                         dicionarios.retorna_menu_encript_traduc_utilitarios(),
                                                         dicionarios.retorna_lista_cifras(),
@@ -126,7 +128,7 @@ def menu_encriptar(tela_anterior):
 
 
 def menu_traducao(tela_anterior):
-    titulo = 'Cripythongraphy: Tradução'
+    titulo = 'CriPython: Tradução'
     layout_traducao = retorna_layout_botoes_enumerados(titulo, 
                                                        dicionarios.retorna_menu_encript_traduc_utilitarios(),
                                                        dicionarios.retorna_lista_cifras(),
@@ -144,7 +146,7 @@ def menu_traducao(tela_anterior):
 
 
 def menu_utilitarios(tela_anterior):
-    titulo = "Cripythongraphy: Utilitários"
+    titulo = "CriPython: Utilitários"
     layout_utilitarios = retorna_layout_botoes_enumerados(titulo,
                                                           dicionarios.retorna_menu_encript_traduc_utilitarios(),
                                                           dicionarios.retorna_lista_utilitarios(),
@@ -163,7 +165,7 @@ def menu_utilitarios(tela_anterior):
 def menu_opcoes():
     # Criação do layout do menu opções.
     opcoes_cifras = dicionarios.retorna_lista_cifras_com_chaves()
-    tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes(opcoes_cifras))
+    tela_opcoes = sg.Window('CriPython: Opções', retorna_layout_opcoes(opcoes_cifras))
     resposta = ''
     while True:
         evento, valores = tela_opcoes.read(timeout=1000)
@@ -186,12 +188,12 @@ def menu_opcoes():
             resposta = banco_de_dados.aplicar_novas_configuracoes(valores)
             tela_opcoes.close()
             opcoes_cifras = dicionarios.retorna_lista_cifras_com_chaves()  # Atualizar os nomes de opções de cifras caso mude o idioma.
-            tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes(opcoes_cifras))
+            tela_opcoes = sg.Window('CriPython: Opções', retorna_layout_opcoes(opcoes_cifras))
         elif evento == 'restaurar':
             resposta = banco_de_dados.restaurar_padrao()
             tela_opcoes.close()
             opcoes_cifras = dicionarios.retorna_lista_cifras_com_chaves() 
-            tela_opcoes = sg.Window('Cripythongraphy: Opções', retorna_layout_opcoes(opcoes_cifras))
+            tela_opcoes = sg.Window('CriPython: Opções', retorna_layout_opcoes(opcoes_cifras))
         elif resposta:  # Imprimir respostas (é preciso esperar um pouco para imprimi-las, por isso é utilizado o timeout).
             print(resposta)
             resposta = ''

@@ -13,7 +13,7 @@ import banco_de_dados
 
 def retorna_layout_padrao_tradução(titulo, opcoes):
     dic_textos = dicionarios.retorna_menus_cifras()
-    layout = [[sg.Text(f"{dic_textos[titulo] + ' ' + dic_textos['tradução']:^110}")],
+    layout = [[sg.Text(f"{dic_textos[titulo] + ' ' + dic_textos['tradução']:^70}", font=('Helvetica', 16), size=(36, 2))],
              [sg.Text(dic_textos['Opções'])],
               utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
              [sg.Text(dic_textos['Mensagem encriptada']), sg.InputText(key='mensagem')],
@@ -28,7 +28,7 @@ def retorna_layout_padrao_tradução(titulo, opcoes):
 
 def retorna_layout_padrao_encriptação(titulo, opcoes):
     dic_textos = dicionarios.retorna_menus_cifras()
-    layout = [[sg.Text(f"{dic_textos[titulo] + ' ' + dic_textos['encriptação']:^110}")],
+    layout = [[sg.Text(f"{dic_textos[titulo] + ' ' + dic_textos['encriptação']:^70}", font=('Helvetica', 16), size=(36, 2))],
              [sg.Text(dic_textos['Opções'])],
               utilidades_menus.retorna_layout_opçoes_em_radio(opcoes),
              [sg.Text(dic_textos['Mensagem']), sg.InputText(key='mensagem')],

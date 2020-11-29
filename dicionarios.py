@@ -16,7 +16,7 @@ idioma = banco_de_dados.idioma_configurado
 
 def retorna_menu_opcoes():
     if idioma == 'Portugues':
-        return {'titulo': 'Crypythongraphy: Opções',
+        return {'titulo': 'CriPython: Opções',
                 'opcao temas': 'Temas:',
                 'opcao idiomas': 'Idiomas:',
                 'cifras': 'Cifras:',
@@ -27,7 +27,7 @@ def retorna_menu_opcoes():
                 'aplicar': 'Aplicar',
                 'ajuda': 'Ajuda'}
     else:
-        return {'titulo': 'Crypythongraphy: Options',
+        return {'titulo': 'CriPython: Options',
                 'opcao temas': 'Themes:',
                 'opcao idiomas': 'Languages:',
                 'cifras': 'Ciphers:',
@@ -82,21 +82,21 @@ def retorna_mensagem_menu_opcoes(erro=False):  # Texto mostrado ao mudar alguma 
 
 def retorna_menu_principal():
     if idioma == 'Portugues':
-        return {'titulo': 'Cripythongraphy: Tela principal',
-                'opcao 1': '1- Criar mensagem criptografada',
-                'opcao 2': '2- Traduzir mensagem criptografada',
-                'opcao 3': '3- Utilitários',
-                'opcao 4': '4- Opções',
-                'opcao 5': '5- Ajuda',
-                'opcao 6': '6- Finalizar programa'}
+        return {'titulo': 'CriPython: Tela principal',
+                'opcao 1': 'Criar mensagem criptografada',
+                'opcao 2': 'Traduzir mensagem criptografada',
+                'opcao 3': 'Utilitários',
+                'opcao 4': 'Opções',
+                'opcao 5': 'Ajuda',
+                'opcao 6': 'Finalizar programa'}
     else:
-        return {'titulo': 'Cripythongraphy: Main screen',
-                'opcao 1': '1- Create ciphertext',
-                'opcao 2': '2- Translate ciphertext',
-                'opcao 3': '3- Utilities',
-                'opcao 4': '4- Options',
-                'opcao 5': '5- Help',
-                'opcao 6': '6- Close program'}
+        return {'titulo': 'CriPython: Main screen',
+                'opcao 1': 'Create ciphertext',
+                'opcao 2': 'Translate ciphertext',
+                'opcao 3': 'Utilities',
+                'opcao 4': 'Options',
+                'opcao 5': 'Help',
+                'opcao 6': 'Close program'}
 
 
 def retorna_lista_cifras(coletar_port=False):  # As vezes vai ser necessário coletar essa lista em port independente do idioma configurado.
@@ -124,14 +124,14 @@ def retorna_lista_utilitarios(coletar_port=False):
 
 def retorna_menu_encript_traduc_utilitarios():
     if idioma == 'Portugues':
-        return {'Cripythongraphy: Encriptação': 'Cripythongraphy: Encriptação',
-                'Cripythongraphy: Tradução': 'Cripythongraphy: Tradução',
-                'Cripythongraphy: Utilitários': 'Cripythongraphy: Utilitários',
+        return {'CriPython: Encriptação': 'CriPython: Encriptação',
+                'CriPython: Tradução': 'CriPython: Tradução',
+                'CriPython: Utilitários': 'CriPython: Utilitários',
                 'Retornar': 'Retornar'}
     else:
-        return {'Cripythongraphy: Encriptação': 'Cripythongraphy: Encrypt',
-                'Cripythongraphy: Tradução': 'Cripythongraphy: Translation',
-                'Cripythongraphy: Utilitários': 'Cripythongraphy: Utilities',
+        return {'CriPython: Encriptação': 'CriPython: Encrypt',
+                'CriPython: Tradução': 'CriPython: Translation',
+                'CriPython: Utilitários': 'CriPython: Utilities',
                 'Retornar': 'Return'}
 
 
@@ -213,31 +213,31 @@ def retorna_menu_utilitario():
                 'Decoding base64': 'Decodificador de base64 para arquivos',
 
                 'Mensagem Força bruta César':'''
-                Escolha uma opção e escreva uma mensagem encriptada pela cifra de César.
-                O programa testará todas as chaves possíveis!
-                OBS: dependendo do texto colocado, esse processo pode ser demorado''',
+Escolha uma opção e escreva uma mensagem encriptada pela cifra de César.
+O programa testará todas as chaves possíveis!
+OBS: dependendo do texto colocado, esse processo pode ser demorado''',
 
                 'Mensagem Adivinhador César':'''
-                Escolha uma opção e escreva uma mensagem encriptada pela cifra de César.
-                O programa tentará adivinhar qual é a mensagem traduzida !
-                OBS: dependendo do texto, esse processo pode levar bastante tempo !''',
+Escolha uma opção e escreva uma mensagem encriptada pela cifra de César.
+O programa tentará adivinhar qual é a mensagem traduzida !
+OBS: dependendo do texto, esse processo pode levar bastante tempo !''',
 
                 'Mensagem conversor bases numéricas':'''
-                Diferente da cifra de "bases numéricas", aqui você fará as conversões de uma
-                base númerica para outra (ao invés de converter o UNICODE de um texto para uma
-                base numérica).''',
+Diferente da cifra de "bases numéricas", aqui você fará as conversões de uma
+base númerica para outra (ao invés de converter o UNICODE de um texto para uma
+base numérica).''',
 
                 'Mensagem Encoding base64': '''
-                Clique em "selecionar arquivo" e escolha um arquivo para converter, depois clique em
-                "Salvar como..." e escolha um nome e um local para salvar o arquivo com o código base
-                64. OBS: é recomendado a utilização da extensão ".txt" para salvar o arquivo.''',
+Clique em "selecionar arquivo" e escolha um arquivo para converter, depois clique em
+"Salvar como..." e escolha um nome e um local para salvar o arquivo com o código base
+64. OBS: é recomendado a utilização da extensão ".txt" para salvar o arquivo.''',
 
                 'Mensagem Decoding base64':'''
-                Clique em "selecionar arquivo" e escolha um arquivo com o código base 64 a ser convertido,
-                escolha um local, nome e extensão do arquivo clicando em "salvar como". 
-                Ao clicar em executar, o seu texto base64 será convertido
-                para um arquivo. OBS: se você digitar um código base64 inválido ou escolher um formato
-                inválido, isso resultará em um arquivo corrompido.
+Clique em "selecionar arquivo" e escolha um arquivo com o código base 64 a ser convertido,
+escolha um local, nome e extensão do arquivo clicando em "salvar como". 
+Ao clicar em executar, o seu texto base64 será convertido
+para um arquivo. OBS: se você digitar um código base64 inválido ou escolher um formato
+inválido, isso resultará em um arquivo corrompido.
                 ''',
 
                 'Opções': 'Opções:',
@@ -261,31 +261,31 @@ def retorna_menu_utilitario():
                 'Decoding base64': 'Base64 text decoding to file',
 
                 'Mensagem Força bruta César': '''
-                Choose an option and write a text encrypted by the Caesar Cipher.
-                The program will test all the possible keys !
-                Depending on the text, this process can be slow''',
+Choose an option and write a text encrypted by the Caesar Cipher.
+The program will test all the possible keys !
+Depending on the text, this process can be slow''',
 
                 'Mensagem Adivinhador César':'''
-                Choose an option and write a text encrypted by the Caesar Cipher.
-                The program will try to translate the text without the key !
-                Depending on the text, this process can be slow''',
+Choose an option and write a text encrypted by the Caesar Cipher.
+The program will try to translate the text without the key !
+Depending on the text, this process can be slow''',
 
                 'Mensagem conversor bases numéricas':'''
-                Unlike the "Numeral systems" cipher, here you will make the conversions
-                of a numeral system to another instead of converting the text UNICODE values
-                to another numeral system.''',
+Unlike the "Numeral systems" cipher, here you will make the conversions
+of a numeral system to another instead of converting the text UNICODE values
+to another numeral system.''',
 
                 'Mensagem Encoding base64': '''
-                Click in "select file" and choose a file to convert and click in "Save as..."
-                to choose a name and place to save the base64 encoded text. NOTE: it's recomended
-                to use the ".txt" extension to save the file.''',
+Click in "select file" and choose a file to convert and click in "Save as..."
+to choose a name and place to save the base64 encoded text. NOTE: it's recomended
+to use the ".txt" extension to save the file.''',
 
                 'Mensagem Decoding base64': '''
-                Click in "Select file" and choose a base64 text file and click in "Save as" 
-                and choose a folder, name and extensionof the file. After clicking
-                the "execute" button, the base64 text will be decoded to
-                a file. NOTE: if you enter an invalid base64 code or choose a 
-                invalid format, this will result in a corrupted file.''',
+Click in "Select file" and choose a base64 text file and click in "Save as" 
+and choose a folder, name and extensionof the file. After clicking
+the "execute" button, the base64 text will be decoded to
+a file. NOTE: if you enter an invalid base64 code or choose a 
+invalid format, this will result in a corrupted file.''',
                 
                 'Opções': 'Options:',
                 'Converter de': 'Convert from',

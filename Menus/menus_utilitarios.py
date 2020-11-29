@@ -10,7 +10,7 @@ import dicionarios
 
 def retorna_layout_padrao_advinhador(titulo, lista_opcoes):
     dic_textos = dicionarios.retorna_menu_utilitario()
-    return [[sg.Text(dic_textos[titulo])],
+    return [[sg.Text(dic_textos[titulo], font=('Helvetica', 16), size=(36, 2))],
             [sg.Text(dic_textos[f'Mensagem {titulo}'])],
             [sg.Text(dic_textos['Opções'])],
             utilidades_menus.retorna_layout_opçoes_em_radio(lista_opcoes),
@@ -21,7 +21,7 @@ def retorna_layout_padrao_advinhador(titulo, lista_opcoes):
 def retorna_layout_calculadora_bases_numericas():
     dic_textos = dicionarios.retorna_menu_utilitario()
     lista_opcoes = ['Binário', 'Octal', 'Decimal', 'Hexadecimal']
-    return [[sg.Text(dic_textos['Conversor bases numéricas'])],
+    return [[sg.Text(dic_textos['Conversor bases numéricas'], font=('Helvetica', 16), size=(36, 2))],
             [sg.Text(dic_textos['Mensagem conversor bases numéricas'])],
             [sg.Text(dic_textos['Converter de'])],
             utilidades_menus.retorna_layout_opçoes_em_radio(lista_opcoes),
@@ -33,7 +33,7 @@ def retorna_layout_calculadora_bases_numericas():
 
 def retorna_layout_padrao_base64_arquivos(titulo):
     dic_textos = dicionarios.retorna_menu_utilitario()
-    return [[sg.Text(dic_textos[titulo])],
+    return [[sg.Text(dic_textos[titulo], font=('Helvetica', 16), size=(36, 2))],
             [sg.Text(dic_textos[f'Mensagem {titulo}'])],
             [sg.Output(key='output', size=(75, 15))],
             [sg.FileBrowse(dic_textos['pesquisar'], key='pesquisa', target='texto-pesq'), sg.Text(dic_textos['sem arquivo'], key='texto-pesq', size=(50, 3))],

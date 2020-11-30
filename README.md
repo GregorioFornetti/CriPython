@@ -43,7 +43,7 @@ Tela do menu encriptar:
 
 Tela do menu César:
 
-![tela menu cesar](https://github.com/GregorioFornetti/Cripythongrafia/blob/master/Screenshots/Sem%20modifica%C3%A7%C3%A3o/Cesar.PNG)
+![tela menu cesar](https://raw.githubusercontent.com/GregorioFornetti/CriPython/master/Screenshots/Tela_cesar.PNG)
 
 
   

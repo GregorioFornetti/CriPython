@@ -1,7 +1,7 @@
-# Cripythongrafia
+# CriPython
 ## Conceito do projeto
 
-Cripythongrafia é um projeto sobre criptografia que tem o intuito de traduzir ou encriptar mensagens. O usuário que estiver usando o programa tem liberdade para escolher uma das cifras disponíveis e utiliza-la para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, nesse programa existem os utilitários, que são implementações que tentam desvendar uma mensagem encriptada sem a sua chave de tradução. E para finalizar, outro objetivo desse projeto é explicar um pouco sobre o assunto cifras de criptografia.
+CriPython é um projeto sobre criptografia que tem o intuito de traduzir ou encriptar mensagens. O usuário que estiver usando o programa tem liberdade para escolher uma das cifras disponíveis e utiliza-la para encriptar/traduzir um texto, podendo ver na prática como que funcionam algumas cifras. Além disso, nesse programa existem os utilitários, que são implementações que tentam desvendar uma mensagem encriptada sem a sua chave de tradução. E para finalizar, outro objetivo desse projeto é explicar um pouco sobre o assunto cifras de criptografia.
 
 ## Pré-requisitos e recursos utilizados
 Para o desenvolvimento desse projeto foi utilizado a linguagem __Python__ e algumas bibliotecas, citadas logo abaixo:

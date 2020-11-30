@@ -35,11 +35,11 @@ Nesse mesmo repositório há uma wiki que explica um pouco sobre as cifras disp�
 Abaixo terão algumas imagens da interface gráfica deste programa:
 Tela principal:
 
-![tela principal](https://github.com/GregorioFornetti/Cripythongrafia/blob/master/Screenshots/Sem%20modifica%C3%A7%C3%A3o/Menu_Principal.PNG)
+![tela principal](https://raw.githubusercontent.com/GregorioFornetti/CriPython/master/Screenshots/nova_tela_principal.png)
 
 Tela do menu encriptar:
 
-![tela menu encriptar](https://github.com/GregorioFornetti/Cripythongrafia/blob/master/Screenshots/Sem%20modifica%C3%A7%C3%A3o/Menu_Encriptar.PNG)
+![tela menu encriptar](https://raw.githubusercontent.com/GregorioFornetti/CriPython/master/Screenshots/nova_tela_cifras.png)
 
 Tela do menu César:
 
